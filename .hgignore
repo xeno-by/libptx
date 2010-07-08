@@ -1,0 +1,10 @@
+﻿glob:*.ncb
+glob:*.pidb
+glob:*.suo
+glob:*.user
+glob:*.userprefs
+glob:bin/
+glob:obj/
+glob:*/bin/
+glob:*/obj/
+glob:*/AssemblyInfo.cs
