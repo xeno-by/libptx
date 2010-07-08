@@ -15,7 +15,7 @@ using XenoGears.Versioning;
 [assembly: InternalsVisibleTo("Libptx.Playground")]
 
 [assembly: Guid("6272D158-34F7-4DE1-907F-AFFD8E1E28F8")]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("2.1.*")]
 [assembly: AssemblyBuiltFrom(Repository = "$"CODEBASE"$", Revision = "$REVISION$", CodebaseHash = "$CODEHASH$")]
 [assembly: AssemblyBuiltAt(Timestamp = "$TIMESTAMP$")]
 [assembly: AssemblyBuiltBy(UserHash = "$USERHASH$")]
