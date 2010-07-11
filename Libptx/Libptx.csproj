@@ -131,11 +131,14 @@
     <Compile Include="Instructions\ptxop.cs" />
     <Compile Include="Instructions\ptxopspec.cs" />
     <Compile Include="Instructions\ptxoptype.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\bar.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\bar_arrive.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\atom.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\bar_sync.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\vote_pred.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\red.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\membar.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\vote.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\vote_ballot.cs" />
     <Compile Include="Instructions\TextureAndSurface\suld.cs" />
     <Compile Include="Instructions\TextureAndSurface\suq.cs" />
     <Compile Include="Instructions\TextureAndSurface\sured.cs" />
