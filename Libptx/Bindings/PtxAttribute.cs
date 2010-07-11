@@ -7,6 +7,7 @@ namespace Libptx.Bindings
     // todo. also support the following scenarios:
     // 1) multiple instructions of PTX assembly
     // 2) linkage to pre-compiled binaries stored in native libs, e.g. within CUBLAS or CUFFT
+    // 3) linkage to PTX generator method
 
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
