@@ -138,17 +138,6 @@ namespace Libptx.Instructions
             throw new NotImplementedException();
         }
 
-        public override String ToString() { return to_string(); }
-        public static implicit operator String(ptxop opcode) { return opcode == null ? null : opcode.to_string(); }
-        protected virtual String to_string()
-        {
-            // todo. take the following into account:
-            // 1) GetType().Attr<Ptxop>().ISA
-            // 2) GetType().GetProps().Attr<Ptxfrag>() => whether it's suffix or endian
-            // 3) order of properties is important!!
-            throw new NotImplementedException();
-        }
-
         public int name
         {
             get
@@ -160,7 +149,16 @@ namespace Libptx.Instructions
             }
         }
 
-        private ptxopspec spec
+        public ptxoptype optype
+        {
+            get
+            {
+                // todo. first populate enumeration values
+                throw new NotImplementedException();
+            }
+        }
+
+        private ptxopspec opspec
         {
             get
             {
@@ -216,6 +214,17 @@ namespace Libptx.Instructions
             // todo. disallow f16 by default
             // todo. disallow preds by default
             // todo. verify that swisa and hwisa don't supercede targets
+            throw new NotImplementedException();
+        }
+
+        public override String ToString() { return to_string(); }
+        public static implicit operator String(ptxop opcode) { return opcode == null ? null : opcode.to_string(); }
+        protected virtual String to_string()
+        {
+            // todo. take the following into account:
+            // 1) GetType().Attr<Ptxop>().ISA
+            // 2) GetType().GetProps().Attr<Ptxfrag>() => whether it's suffix or endian
+            // 3) order of properties is important!!
             throw new NotImplementedException();
         }
     }

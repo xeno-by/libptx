@@ -10,6 +10,3 @@
 8) typization and type checks
 9) bidirectional transformation: [plain text] <=> [object model]
 10) stubs for bidirectional transformation: [binary] <=> [object model]
-11) mandatory SwIsa and HwIsa for all instructions
-12) optional SwIsa and HwIsa for PtxAttribute
-13) custom_swisa, custom_hwisa
