@@ -81,6 +81,10 @@ namespace Libptx.Instructions
         protected static op and { get { return op.and; } }
         protected static op or { get { return op.or; } }
         protected static op xor { get { return op.xor; } }
+        protected static op cas { get { return op.cas; } }
+        protected static op exch { get { return op.exch; } }
+        protected static op inc { get { return op.inc; } }
+        protected static op dec { get { return op.dec; } }
 
         protected static cop ca { get { return cop.ca; } }
         protected static cop cg { get { return cop.cg; } }
@@ -130,6 +134,10 @@ namespace Libptx.Instructions
         protected static squery surf_depth { get { return squery.depth; } }
         protected static squery surf_channel_datatype { get { return squery.channel_datatype; } }
         protected static squery surf_channel_order { get { return squery.channel_order; } }
+
+        protected static barlevel cta { get { return barlevel.cta; } }
+        protected static barlevel gl { get { return barlevel.gl; } }
+        protected static barlevel sys { get { return barlevel.sys; } }
 
         #endregion
 

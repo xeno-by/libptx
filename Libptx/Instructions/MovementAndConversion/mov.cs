@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 
-namespace Libptx.Instructions.DataMovementAndConversion
+namespace Libptx.Instructions.MovementAndConversion
 {
     [Ptxop("mov.type d, a;")]
     [Ptxop("mov.type d, sreg;")]

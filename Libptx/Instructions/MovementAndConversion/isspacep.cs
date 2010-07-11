@@ -4,22 +4,17 @@ using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
-namespace Libptx.Instructions.DataMovementAndConversion
+namespace Libptx.Instructions.MovementAndConversion
 {
-    [Ptxop20("cvta.space.size     p, a;")]
-    [Ptxop20("cvta.space.size     p, var;")]
-    [Ptxop20("cvta.to.space.size  p, a;")]
+    [Ptxop20("isspacep.space p, a;")]
     [DebuggerNonUserCode]
-    internal class cvta : ptxop
+    internal class isspacep : ptxop
     {
-        [Suffix] public bool to { get; set; }
         [Suffix] public ss space { get; set; }
-        [Suffix] public size size { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (space == local || space == shared || space == global).AssertTrue();
-            (size != null).AssertTrue();
         }
     }
 }

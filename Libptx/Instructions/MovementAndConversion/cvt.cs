@@ -4,7 +4,7 @@ using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
-namespace Libptx.Instructions.DataMovementAndConversion
+namespace Libptx.Instructions.MovementAndConversion
 {
     [Ptxop("cvt{.irnd}{.ftz}{.sat}.dtype.atype d, a;")]
     [Ptxop("cvt{.frnd}{.ftz}{.sat}.dtype.atype d, a;")]

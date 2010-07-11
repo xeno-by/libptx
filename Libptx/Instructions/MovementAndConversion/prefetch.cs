@@ -4,7 +4,7 @@ using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
-namespace Libptx.Instructions.DataMovementAndConversion
+namespace Libptx.Instructions.MovementAndConversion
 {
     [Ptxop20("prefetch{.space}.level  [a];")]
     [Ptxop20("prefetchu.L1            [a];")]

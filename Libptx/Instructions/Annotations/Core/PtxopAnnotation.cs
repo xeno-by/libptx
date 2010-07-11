@@ -15,7 +15,7 @@ namespace Libptx.Instructions.Annotations.Core
         }
 
         protected PtxopAnnotation(SoftwareIsa swisa)
-            : this(null, swisa, HardwareIsa.SM_10)
+            : this(null, swisa, swisa < SoftwareIsa.PTX_20 ? HardwareIsa.SM_10 : HardwareIsa.SM_20)
         {
         }
 
@@ -35,7 +35,7 @@ namespace Libptx.Instructions.Annotations.Core
         }
 
         protected PtxopAnnotation(String spec, SoftwareIsa swisa)
-            : this(spec, swisa, HardwareIsa.SM_10)
+            : this(spec, swisa, swisa < SoftwareIsa.PTX_20 ? HardwareIsa.SM_10 : HardwareIsa.SM_20)
         {
         }
 

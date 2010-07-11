@@ -12,6 +12,10 @@ namespace Libptx.Instructions.Enumerations
         public static op and { get { throw new NotImplementedException(); } }
         public static op or { get { throw new NotImplementedException(); } }
         public static op xor { get { throw new NotImplementedException(); } }
+        public static op cas { get { throw new NotImplementedException(); } }
+        public static op exch { get { throw new NotImplementedException(); } }
+        public static op inc { get { throw new NotImplementedException(); } }
+        public static op dec { get { throw new NotImplementedException(); } }
 
         public String name { get { throw new NotImplementedException(); } }
         public static bool operator ==(op m1, op m2) { throw new NotImplementedException(); }

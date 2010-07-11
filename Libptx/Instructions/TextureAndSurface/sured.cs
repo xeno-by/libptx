@@ -28,6 +28,7 @@ namespace Libptx.Instructions.TextureAndSurface
             (geom != null).AssertTrue();
             (b == true).AssertImplies(ctype == b32);
             (p == true).AssertImplies(ctype.is32());
+            (op == add || op == min || op == max || op == and || op == or || op == xor).AssertTrue();
         }
     }
 }

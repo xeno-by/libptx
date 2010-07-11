@@ -4,18 +4,15 @@ using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
-namespace Libptx.Instructions.DataMovementAndConversion
+namespace Libptx.Instructions.MovementAndConversion
 {
-    [Ptxop("ld{.ss}{.cop}.type          d, [a];")]
-    [Ptxop("ld{.ss}{.cop}.vec.type      d, [a];")]
-    [Ptxop("ld.volatile{.ss}.type       d, [a];")]
-    [Ptxop("ld.volatile{.ss}.vec.type   d, [a];")]
-    [Ptxop("ldu{.ss}.type               d, [a];")]
-    [Ptxop("ldu{.ss}.vec.type           d, [a];")]
+    [Ptxop("st{.ss}{.cop}.type          d, [a];")]
+    [Ptxop("st{.ss}{.cop}.vec.type      d, [a];")]
+    [Ptxop("st.volatile{.ss}.type       d, [a];")]
+    [Ptxop("st.volatile{.ss}.vec.type   d, [a];")]
     [DebuggerNonUserCode]
-    internal class ld : ptxop
+    internal class st : ptxop
     {
-        [Endian] public bool u { get; set; }
         [Suffix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
         [Suffix] public ss ss { get; set; }
         [Suffix] public cop cop { get; set; }
@@ -48,11 +45,8 @@ namespace Libptx.Instructions.DataMovementAndConversion
         protected override bool allow_bit64 { get { return true; } }
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (u == true).AssertImplies(ss == null || ss == global);
-            (u == true).AssertImplies(@volatile == false);
-            (u == true).AssertImplies(cop == null);
             (@volatile == true).AssertEquiv(cop == null);
-            (ss == null || ss == ca || ss == cg || ss == cs || ss == lu || ss == cv).AssertTrue();
+            (ss == null || ss == wb || ss == cg || ss == cs || ss == wt).AssertTrue();
         }
     }
 }
