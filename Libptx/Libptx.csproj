@@ -93,6 +93,9 @@
     <Compile Include="Instructions\Enumerations\vshm.cs" />
     <Compile Include="Instructions\Enumerations\sel.cs" />
     <Compile Include="Instructions\Enumerations\redm.cs" />
+    <Compile Include="Instructions\Miscellaneous\brkpt.cs" />
+    <Compile Include="Instructions\Miscellaneous\pmevent.cs" />
+    <Compile Include="Instructions\Miscellaneous\trap.cs" />
     <Compile Include="Instructions\MovementAndConversion\cvt.cs" />
     <Compile Include="Instructions\MovementAndConversion\cvta.cs" />
     <Compile Include="Instructions\MovementAndConversion\isspacep.cs" />
