@@ -22,6 +22,10 @@ namespace Libptx.Instructions.TextureAndSurface
             (vec == v4).AssertTrue();
             (dtype == u32 || dtype == s32 || dtype == f32).AssertTrue();
             (btype == s32 || btype == f32).AssertTrue();
+
+            // todo. implement this:
+            // Extension using opaque texref and samplerref types and independent mode texturing
+            // introduced in PTX ISA version 1.5 (an excerpt from PTX ISA 2.1 manual)
         }
     }
 }
