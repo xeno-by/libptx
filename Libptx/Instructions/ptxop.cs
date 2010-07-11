@@ -125,9 +125,9 @@ namespace Libptx.Instructions
         protected static tquerys tex_addr_mode_1 { get { return tquerys.addr_mode_1; } }
         protected static tquerys tex_addr_mode_2 { get { return tquerys.addr_mode_2; } }
 
-        protected static clampm trap { get { return clampm.trap; } }
-        protected static clampm clamp { get { return clampm.clamp; } }
-        protected static clampm zero { get { return clampm.zero; } }
+        protected static clampm clamp_trap { get { return clampm.trap; } }
+        protected static clampm clamp_clamp { get { return clampm.clamp; } }
+        protected static clampm clamp_zero { get { return clampm.zero; } }
 
         protected static squery surf_width { get { return squery.width; } }
         protected static squery surf_height { get { return squery.height; } }
@@ -138,6 +138,19 @@ namespace Libptx.Instructions
         protected static barlevel cta { get { return barlevel.cta; } }
         protected static barlevel gl { get { return barlevel.gl; } }
         protected static barlevel sys { get { return barlevel.sys; } }
+
+        protected static sel b0 { get { return sel.b0; } }
+        protected static sel b1 { get { return sel.b1; } }
+        protected static sel b2 { get { return sel.b2; } }
+        protected static sel b3 { get { return sel.b3; } }
+        protected static sel h0 { get { return sel.h0; } }
+        protected static sel h1 { get { return sel.h1; } }
+
+        protected static vshm vshm_clamp { get { return vshm.clamp; } }
+        protected static vshm vshm_wrap { get { return vshm.wrap; } }
+
+        protected static scale shr7 { get { return scale.shr7; } }
+        protected static scale shr15 { get { return scale.shr15; } }
 
         #endregion
 

@@ -26,7 +26,7 @@ namespace Libptx.Instructions.TextureAndSurface
                 var cache = cop != null;
                 var sust_p = p == true;
                 var sust_3d = geom == d3;
-                var non_trap = clampm != trap;
+                var non_trap = clampm != clamp_trap;
                 return cache || sust_p || sust_3d || non_trap ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_15;
             }
         }
@@ -38,7 +38,7 @@ namespace Libptx.Instructions.TextureAndSurface
                 var cache = cop != null;
                 var sust_p = p == true;
                 var sust_3d = geom == d3;
-                var non_trap = clampm != trap;
+                var non_trap = clampm != clamp_trap;
                 return cache || sust_p || sust_3d || non_trap ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
         }

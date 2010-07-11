@@ -89,6 +89,9 @@
     <Compile Include="Instructions\ComparisonAndSelection\set.cs" />
     <Compile Include="Instructions\ComparisonAndSelection\slct.cs" />
     <Compile Include="Instructions\Enumerations\barlevel.cs" />
+    <Compile Include="Instructions\Enumerations\scale.cs" />
+    <Compile Include="Instructions\Enumerations\vshm.cs" />
+    <Compile Include="Instructions\Enumerations\sel.cs" />
     <Compile Include="Instructions\Enumerations\redm.cs" />
     <Compile Include="Instructions\MovementAndConversion\cvt.cs" />
     <Compile Include="Instructions\MovementAndConversion\cvta.cs" />
@@ -136,6 +139,15 @@
     <Compile Include="Instructions\TextureAndSurface\sust.cs" />
     <Compile Include="Instructions\TextureAndSurface\tex.cs" />
     <Compile Include="Instructions\TextureAndSurface\txq.cs" />
+    <Compile Include="Instructions\Video\vmad.cs" />
+    <Compile Include="Instructions\Video\vset.cs" />
+    <Compile Include="Instructions\Video\vshr.cs" />
+    <Compile Include="Instructions\Video\vshl.cs" />
+    <Compile Include="Instructions\Video\vsub.cs" />
+    <Compile Include="Instructions\Video\vabsdiff.cs" />
+    <Compile Include="Instructions\Video\vmin.cs" />
+    <Compile Include="Instructions\Video\vmax.cs" />
+    <Compile Include="Instructions\Video\vadd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
