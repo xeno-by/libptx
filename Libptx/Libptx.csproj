@@ -51,7 +51,91 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\PtxAttribute.cs" />
+    <Compile Include="Instructions\Annotations\Core\Ptxop20Annotation.cs" />
+    <Compile Include="Instructions\Annotations\EndianAttribute.cs" />
+    <Compile Include="Instructions\Annotations\Core\PtxopAnnotation.cs" />
+    <Compile Include="Instructions\Annotations\Ptxop20Attribute.cs" />
+    <Compile Include="Instructions\Annotations\PtxopAttribute.cs" />
+    <Compile Include="Instructions\Annotations\SuffixAttribute.cs" />
+    <Compile Include="Instructions\Arithmetic\abs.cs" />
+    <Compile Include="Instructions\Arithmetic\add.cs" />
+    <Compile Include="Instructions\Arithmetic\bfe.cs" />
+    <Compile Include="Instructions\Arithmetic\bfi.cs" />
+    <Compile Include="Instructions\Arithmetic\bfind.cs" />
+    <Compile Include="Instructions\Arithmetic\brev.cs" />
+    <Compile Include="Instructions\Arithmetic\clz.cs" />
+    <Compile Include="Instructions\Arithmetic\copysign.cs" />
+    <Compile Include="Instructions\Arithmetic\cos.cs" />
+    <Compile Include="Instructions\Arithmetic\div.cs" />
+    <Compile Include="Instructions\Arithmetic\ex2.cs" />
+    <Compile Include="Instructions\Arithmetic\fma.cs" />
+    <Compile Include="Instructions\Arithmetic\lg2.cs" />
+    <Compile Include="Instructions\Arithmetic\mad.cs" />
+    <Compile Include="Instructions\Arithmetic\max.cs" />
+    <Compile Include="Instructions\Arithmetic\min.cs" />
+    <Compile Include="Instructions\Arithmetic\mul.cs" />
+    <Compile Include="Instructions\Arithmetic\neg.cs" />
+    <Compile Include="Instructions\Arithmetic\popc.cs" />
+    <Compile Include="Instructions\Arithmetic\prmt.cs" />
+    <Compile Include="Instructions\Arithmetic\rcp.cs" />
+    <Compile Include="Instructions\Arithmetic\rem.cs" />
+    <Compile Include="Instructions\Arithmetic\rsqrt.cs" />
+    <Compile Include="Instructions\Arithmetic\sad.cs" />
+    <Compile Include="Instructions\Arithmetic\sin.cs" />
+    <Compile Include="Instructions\Arithmetic\sqrt.cs" />
+    <Compile Include="Instructions\Arithmetic\sub.cs" />
+    <Compile Include="Instructions\Arithmetic\testp.cs" />
+    <Compile Include="Instructions\ComparisonAndSelection\selp.cs" />
+    <Compile Include="Instructions\ComparisonAndSelection\set.cs" />
+    <Compile Include="Instructions\ComparisonAndSelection\slct.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\cvt.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\cvta.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\isspacep.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\ld.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\mov.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\prefetch.cs" />
+    <Compile Include="Instructions\DataMovementAndConversion\st.cs" />
+    <Compile Include="Instructions\Enumerations\cachelevel.cs" />
+    <Compile Include="Instructions\Enumerations\clamp.cs" />
+    <Compile Include="Instructions\Enumerations\cmpop.cs" />
+    <Compile Include="Instructions\Enumerations\cop.cs" />
+    <Compile Include="Instructions\Enumerations\frnd.cs" />
+    <Compile Include="Instructions\Enumerations\geom.cs" />
+    <Compile Include="Instructions\Enumerations\irnd.cs" />
+    <Compile Include="Instructions\Enumerations\mulm.cs" />
+    <Compile Include="Instructions\Enumerations\op.cs" />
+    <Compile Include="Instructions\Enumerations\prmtm.cs" />
+    <Compile Include="Instructions\Enumerations\size.cs" />
+    <Compile Include="Instructions\Enumerations\squery.cs" />
+    <Compile Include="Instructions\Enumerations\ss.cs" />
+    <Compile Include="Instructions\Enumerations\testpop.cs" />
+    <Compile Include="Instructions\Enumerations\tquery.cs" />
+    <Compile Include="Instructions\Enumerations\tquerys.cs" />
+    <Compile Include="Instructions\Enumerations\type.cs" />
+    <Compile Include="Instructions\Enumerations\vec.cs" />
+    <Compile Include="Instructions\LogicAndShift\and.cs" />
+    <Compile Include="Instructions\LogicAndShift\cnot.cs" />
+    <Compile Include="Instructions\LogicAndShift\not.cs" />
+    <Compile Include="Instructions\LogicAndShift\or.cs" />
+    <Compile Include="Instructions\LogicAndShift\shl.cs" />
+    <Compile Include="Instructions\LogicAndShift\shr.cs" />
+    <Compile Include="Instructions\LogicAndShift\xor.cs" />
+    <Compile Include="Instructions\ptxop.cs" />
+    <Compile Include="Instructions\ptxopspec.cs" />
+    <Compile Include="Instructions\ptxoptype.cs" />
+    <Compile Include="Instructions\TextureAndSurface\suld.cs" />
+    <Compile Include="Instructions\TextureAndSurface\suq.cs" />
+    <Compile Include="Instructions\TextureAndSurface\sured.cs" />
+    <Compile Include="Instructions\TextureAndSurface\sust.cs" />
+    <Compile Include="Instructions\TextureAndSurface\tex.cs" />
+    <Compile Include="Instructions\TextureAndSurface\txq.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Instructions\ControlFlow\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

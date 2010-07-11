@@ -1,0 +1,15 @@
+﻿todo list for the Libptx library:
+
+1) blocks and locals
+2) funcs
+3) optional predicate for ptxop
+4) arguments for ptxops - in base class and in deriveds (so that they satisfy the sig!)
+5) labels and label arguments for branches
+6) implement validation for arguments
+7) different types of arguments: <read up the spec to find out all possible variants>
+8) typization and type checks
+9) bidirectional transformation: [plain text] <=> [object model]
+10) stubs for bidirectional transformation: [binary] <=> [object model]
+11) mandatory SwIsa and HwIsa for all instructions
+12) optional SwIsa and HwIsa for PtxAttribute
+13) custom_swisa, custom_hwisa
