@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Instructions.Annotations.Core;
+using Libptx.Common.Infrastructure;
 
 namespace Libptx.Instructions.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Ptxop20Attribute : Ptxop20Annotation
+    internal class Ptxop20Attribute : Atom20Attribute
     {
         public Ptxop20Attribute()
         {

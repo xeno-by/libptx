@@ -14,8 +14,8 @@ namespace Libptx.Bindings
     public class PtxAttribute : Attribute
     {
         public String Code { get; private set; }
-        public HardwareIsa HardwareIsa { get; set; }
-        public SoftwareIsa SoftwareIsa { get; set; }
+        public SoftwareIsa Version { get; set; }
+        public HardwareIsa Target { get; set; }
 
         public PtxAttribute(String code)
             : this(code, HardwareIsa.SM_10, SoftwareIsa.PTX_10)
@@ -30,8 +30,8 @@ namespace Libptx.Bindings
         public PtxAttribute(String code, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
         {
             Code = code;
-            HardwareIsa = hardwareIsa;
-            SoftwareIsa = softwareIsa;
+            Target = hardwareIsa;
+            Version = softwareIsa;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -9,12 +10,12 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vmad.dtype.atype.btype.po{.sat}{.scale} d, a{.asel}, b{.bsel}, c;")]
     internal class vmad : ptxop
     {
-        [Suffix] public type dtype { get; set; }
-        [Suffix] public type atype { get; set; }
-        [Suffix] public type btype { get; set; }
-        [Suffix] public bool po { get; set; }
-        [Suffix] public bool sat { get; set; }
-        [Suffix] public scale scale { get; set; }
+        [Infix] public type dtype { get; set; }
+        [Infix] public type atype { get; set; }
+        [Infix] public type btype { get; set; }
+        [Infix] public bool po { get; set; }
+        [Infix] public bool sat { get; set; }
+        [Infix] public scale scale { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

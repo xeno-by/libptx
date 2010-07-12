@@ -1,16 +1,17 @@
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    [Ptxop("red{.space}.op.type [a], b;", SoftwareIsa.PTX_12)]
+    [Ptxop10("red{.space}.op.type [a], b;", SoftwareIsa.PTX_12)]
     internal class red : ptxop
     {
-        [Suffix] public ss space { get; set; }
-        [Suffix] public op op { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix] public ss space { get; set; }
+        [Infix] public op op { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

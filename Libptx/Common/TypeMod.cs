@@ -1,11 +1,13 @@
+using Libptx.Common.Infrastructure;
+
 namespace Libptx.Common
 {
     public enum TypeMod
     {
-        Scalar = 0,
-        V1,
-        V2,
-        V4,
-        Array,
+        [Signature(null)] Scalar = 0,
+        [Signature(".v1")] V1,
+        [Signature(".v2")] V2,
+        [Signature(".v4")] V4,
+        [Signature(null)] Array,
     }
 }

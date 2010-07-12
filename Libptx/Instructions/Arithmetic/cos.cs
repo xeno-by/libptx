@@ -1,18 +1,19 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop("cos.approx{.ftz}.f32 d, a;")]
+    [Ptxop10("cos.approx{.ftz}.f32 d, a;")]
     [DebuggerNonUserCode]
     internal class cos : ptxop
     {
-        [Suffix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
-        [Suffix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

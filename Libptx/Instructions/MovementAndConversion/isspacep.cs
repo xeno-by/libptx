@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -10,7 +11,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [DebuggerNonUserCode]
     internal class isspacep : ptxop
     {
-        [Suffix] public ss space { get; set; }
+        [Infix] public ss space { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

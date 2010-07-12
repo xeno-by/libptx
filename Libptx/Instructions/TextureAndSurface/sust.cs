@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -6,18 +7,18 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("sust.b.geom{.cop}.vec.dtype.clampm   d, [a, b];", SoftwareIsa.PTX_15)]
-    [Ptxop("sust.p.geom{.cop}.v4.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
+    [Ptxop10("sust.b.geom{.cop}.vec.dtype.clampm   d, [a, b];", SoftwareIsa.PTX_15)]
+    [Ptxop10("sust.p.geom{.cop}.v4.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
     [DebuggerNonUserCode]
     internal class sust : ptxop
     {
-        [Suffix] public bool b { get; set; }
-        [Suffix] public bool p { get; set; }
-        [Suffix] public geom geom { get; set; }
-        [Suffix] public cop cop { get; set; }
-        [Suffix] public vec vec { get; set; }
-        [Suffix] public type ctype { get; set; }
-        [Suffix] public clampm clampm { get; set; }
+        [Infix] public bool b { get; set; }
+        [Infix] public bool p { get; set; }
+        [Infix] public geom geom { get; set; }
+        [Infix] public cop cop { get; set; }
+        [Infix] public vec vec { get; set; }
+        [Infix] public type ctype { get; set; }
+        [Infix] public clampm clampm { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

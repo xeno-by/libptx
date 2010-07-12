@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -6,19 +7,19 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop("div.type                d, a, b;")]
-    [Ptxop("div.approx{.ftz}.f32    d, a, b;")]
-    [Ptxop("div.full{.ftz}.f32      d, a, b;")]
-    [Ptxop("div.rnd{.ftz}.f32       d, a, b;")]
-    [Ptxop("div.rnd.f64             d, a, b;")]
+    [Ptxop10("div.type                d, a, b;")]
+    [Ptxop10("div.approx{.ftz}.f32    d, a, b;")]
+    [Ptxop10("div.full{.ftz}.f32      d, a, b;")]
+    [Ptxop10("div.rnd{.ftz}.f32       d, a, b;")]
+    [Ptxop10("div.rnd.f64             d, a, b;")]
     [DebuggerNonUserCode]
     internal class div : ptxop
     {
-        [Suffix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
-        [Suffix(SoftwareIsa.PTX_14)] public bool full { get; set; }
-        [Suffix(SoftwareIsa.PTX_14)] public frnd rnd { get; set; }
-        [Suffix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool full { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public frnd rnd { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

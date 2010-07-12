@@ -1,19 +1,20 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop("rsqrt.approx{.ftz}.f32  d, a;")]
-    [Ptxop("rsqrt.approx.f64        d, a;")]
+    [Ptxop10("rsqrt.approx{.ftz}.f32  d, a;")]
+    [Ptxop10("rsqrt.approx.f64        d, a;")]
     [DebuggerNonUserCode]
     internal class rsqrt : ptxop
     {
-        [Suffix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
-        [Suffix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
+        [Infix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

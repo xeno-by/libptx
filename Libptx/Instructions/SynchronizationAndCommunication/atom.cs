@@ -1,17 +1,18 @@
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    [Ptxop("atom{.space}.op.type d, [a], b;")]
-    [Ptxop("atom{.space}.op.type d, [a], b, c;")]
+    [Ptxop10("atom{.space}.op.type d, [a], b;")]
+    [Ptxop10("atom{.space}.op.type d, [a], b, c;")]
     internal class atom : ptxop
     {
-        [Suffix] public ss space { get; set; }
-        [Suffix] public op op { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix] public ss space { get; set; }
+        [Infix] public op op { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

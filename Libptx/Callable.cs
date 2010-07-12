@@ -5,7 +5,7 @@ namespace Libptx
 {
     public interface Callable : Addressable
     {
-        List<Var> Params { get; set; }
-        List<Var> Rets { get; set; }
+        IList<Var> Params { get; }
+        IList<Var> Rets { get; }
     }
 }

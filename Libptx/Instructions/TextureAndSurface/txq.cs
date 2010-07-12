@@ -1,19 +1,20 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("txq.tquery.b32 d, [a];", SoftwareIsa.PTX_15)]
-    [Ptxop("txq.squery.b32 d, [a];", SoftwareIsa.PTX_15)]
+    [Ptxop10("txq.tquery.b32 d, [a];", SoftwareIsa.PTX_15)]
+    [Ptxop10("txq.squery.b32 d, [a];", SoftwareIsa.PTX_15)]
     [DebuggerNonUserCode]
     internal class txq : ptxop
     {
-        [Suffix] public tquery tquery { get; set; }
-        [Suffix] public tquerys squery { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix] public tquery tquery { get; set; }
+        [Infix] public tquerys squery { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

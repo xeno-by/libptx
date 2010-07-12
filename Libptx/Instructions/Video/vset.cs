@@ -1,4 +1,5 @@
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -10,10 +11,10 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vset.atype.btype.cmp d.dsel, a{.asel}, b{.bsel}, c;")]
     internal class vset : ptxop
     {
-        [Suffix] public type atype { get; set; }
-        [Suffix] public type btype { get; set; }
-        [Suffix] public cmpop cmp { get; set; }
-        [Suffix] public op op2 { get; set; }
+        [Infix] public type atype { get; set; }
+        [Infix] public type btype { get; set; }
+        [Infix] public cmpop cmp { get; set; }
+        [Infix] public op op2 { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

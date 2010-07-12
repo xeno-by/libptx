@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -11,12 +12,12 @@ namespace Libptx.Instructions.TextureAndSurface
     [DebuggerNonUserCode]
     internal class sured : ptxop
     {
-        [Suffix] public bool b { get; set; }
-        [Suffix] public bool p { get; set; }
-        [Suffix] public op op { get; set; }
-        [Suffix] public geom geom { get; set; }
-        [Suffix] public type ctype { get; set; }
-        [Suffix] public clampm clampm { get; set; }
+        [Infix] public bool b { get; set; }
+        [Infix] public bool p { get; set; }
+        [Infix] public op op { get; set; }
+        [Infix] public geom geom { get; set; }
+        [Infix] public type ctype { get; set; }
+        [Infix] public clampm clampm { get; set; }
 
         protected override bool allow_bit8 { get { return true; } }
         protected override bool allow_bit16 { get { return true; } }

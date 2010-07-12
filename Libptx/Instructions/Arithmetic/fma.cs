@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -6,15 +7,15 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop("fma.rnd{.ftz}{.sat}.f32 d, a, b, c;")]
-    [Ptxop("fma.rnd.f64             d, a, b, c;")]
+    [Ptxop10("fma.rnd{.ftz}{.sat}.f32 d, a, b, c;")]
+    [Ptxop10("fma.rnd.f64             d, a, b, c;")]
     [DebuggerNonUserCode]
     internal class fma : ptxop
     {
-        [Suffix] public frnd rnd { get; set; }
-        [Suffix] public bool ftz { get; set; }
-        [Suffix] public bool sat { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix] public frnd rnd { get; set; }
+        [Infix] public bool ftz { get; set; }
+        [Infix] public bool sat { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

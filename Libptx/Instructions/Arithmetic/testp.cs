@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -10,8 +11,8 @@ namespace Libptx.Instructions.Arithmetic
     [DebuggerNonUserCode]
     internal class testp : ptxop
     {
-        [Suffix] public testpop op { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix] public testpop op { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

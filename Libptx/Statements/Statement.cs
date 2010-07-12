@@ -1,8 +1,6 @@
-using Libptx.Common;
-
 namespace Libptx.Statements
 {
-    public interface Statement : Validatable
+    public interface Statement
     {
     }
 }

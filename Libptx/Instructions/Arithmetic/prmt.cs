@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -10,8 +11,8 @@ namespace Libptx.Instructions.Arithmetic
     [DebuggerNonUserCode]
     internal class prmt : ptxop
     {
-        [Suffix] public type type { get; set; }
-        [Suffix] public prmtm mode { get; set; }
+        [Infix] public type type { get; set; }
+        [Infix] public prmtm mode { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

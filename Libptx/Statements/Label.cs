@@ -1,10 +1,11 @@
 using System;
+using Libptx.Common.Infrastructure;
 using Libptx.Expressions;
 
 namespace Libptx.Statements
 {
-    public class Label : Expression, Statement
+    public class Label : Atom, Expression, Statement
     {
-        public String Name { get; set; } // may be null
+        public virtual String Name { get; set; } // may be null
     }
 }

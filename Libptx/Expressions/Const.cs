@@ -1,8 +1,9 @@
 using System;
+using Libptx.Common.Infrastructure;
 
 namespace Libptx.Expressions
 {
-    public class Const : Expression
+    public class Const : Atom, Expression
     {
         public static implicit operator Const(bool value)
         {

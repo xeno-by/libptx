@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -7,21 +8,21 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop("mad{.mode}.type         d, a, b, c;")]
-    [Ptxop("mad.hi.sat.s32          d, a, b, c;")]
-    [Ptxop("mad24{.hi,.lo}.type     d, a, b, c;")]
-    [Ptxop("mad24.hi.sat.s32        d, a, b, c;")]
-    [Ptxop("mad{.ftz}{.sat}.f32     d, a, b, c;")]
-    [Ptxop("mad.rnd{.ftz}{.sat}.f32 d, a, b, c;")]
-    [Ptxop("mad.rnd.f64             d, a, b, c;")]
+    [Ptxop10("mad{.mode}.type         d, a, b, c;")]
+    [Ptxop10("mad.hi.sat.s32          d, a, b, c;")]
+    [Ptxop10("mad24{.hi,.lo}.type     d, a, b, c;")]
+    [Ptxop10("mad24.hi.sat.s32        d, a, b, c;")]
+    [Ptxop10("mad{.ftz}{.sat}.f32     d, a, b, c;")]
+    [Ptxop10("mad.rnd{.ftz}{.sat}.f32 d, a, b, c;")]
+    [Ptxop10("mad.rnd.f64             d, a, b, c;")]
     [DebuggerNonUserCode]
     internal class mad : ptxop
     {
-        [Suffix] public mulm mode { get; set; }
-        [Suffix] public frnd rnd { get; set; }
-        [Suffix] public bool ftz { get; set; }
-        [Suffix] public bool sat { get; set; }
-        [Suffix] public type type { get; set; }
+        [Infix] public mulm mode { get; set; }
+        [Infix] public frnd rnd { get; set; }
+        [Infix] public bool ftz { get; set; }
+        [Infix] public bool sat { get; set; }
+        [Infix] public type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

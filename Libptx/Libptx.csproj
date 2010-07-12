@@ -51,23 +51,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\PtxAttribute.cs" />
+    <Compile Include="Common\Enumerations\Comparison.cs" />
+    <Compile Include="Common\Infrastructure\AtomAttribute.cs" />
+    <Compile Include="Common\Infrastructure\SignatureAttribute.cs" />
+    <Compile Include="Common\Types\Bit16.cs" />
+    <Compile Include="Common\Types\Bit32.cs" />
+    <Compile Include="Common\Types\Bit64.cs" />
+    <Compile Include="Common\Types\Bit8.cs" />
+    <Compile Include="Common\Types\Sampler.cs" />
+    <Compile Include="Common\Types\Surf.cs" />
+    <Compile Include="Common\Types\Tex.cs" />
     <Compile Include="Expressions\Address.cs" />
     <Compile Include="Expressions\Addressable.cs" />
+    <Compile Include="Common\Infrastructure\Atom.cs" />
     <Compile Include="Expressions\Const.cs" />
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Common\Type.cs" />
     <Compile Include="Common\TypeName.cs" />
-    <Compile Include="Common\Space.cs" />
+    <Compile Include="Common\Enumerations\Space.cs" />
     <Compile Include="Expressions\Var.cs" />
     <Compile Include="Common\TypeMod.cs" />
     <Compile Include="Expressions\VarMod.cs" />
     <Compile Include="Expressions\Vector.cs" />
-    <Compile Include="Instructions\Annotations\Core\Ptxop20Annotation.cs" />
-    <Compile Include="Instructions\Annotations\EndianAttribute.cs" />
-    <Compile Include="Instructions\Annotations\Core\PtxopAnnotation.cs" />
+    <Compile Include="Common\Infrastructure\Atom20Attribute.cs" />
+    <Compile Include="Common\Infrastructure\ModAttribute.cs" />
+    <Compile Include="Common\Infrastructure\Atom10Attribute.cs" />
     <Compile Include="Instructions\Annotations\Ptxop20Attribute.cs" />
-    <Compile Include="Instructions\Annotations\PtxopAttribute.cs" />
-    <Compile Include="Instructions\Annotations\SuffixAttribute.cs" />
+    <Compile Include="Instructions\Annotations\Ptxop10Attribute.cs" />
+    <Compile Include="Common\Infrastructure\InfixAttribute.cs" />
     <Compile Include="Instructions\Arithmetic\abs.cs" />
     <Compile Include="Instructions\Arithmetic\add.cs" />
     <Compile Include="Instructions\Arithmetic\bfe.cs" />
@@ -165,6 +176,25 @@
     <Compile Include="Instructions\Video\vmin.cs" />
     <Compile Include="Instructions\Video\vmax.cs" />
     <Compile Include="Instructions\Video\vadd.cs" />
+    <Compile Include="Expressions\Special.cs" />
+    <Compile Include="Specials\Annotations\Special10Attribute.cs" />
+    <Compile Include="Specials\Annotations\Special20Attribute.cs" />
+    <Compile Include="Specials\Annotations\SpecialAttribute.cs" />
+    <Compile Include="Specials\Clock32.cs" />
+    <Compile Include="Specials\Clock64.cs" />
+    <Compile Include="Specials\Envreg.cs" />
+    <Compile Include="Specials\Gridid.cs" />
+    <Compile Include="Specials\Lanemask.cs" />
+    <Compile Include="Specials\Nsmid.cs" />
+    <Compile Include="Specials\Pm.cs" />
+    <Compile Include="Specials\Smid.cs" />
+    <Compile Include="Specials\Nwarpid.cs" />
+    <Compile Include="Specials\Warpid.cs" />
+    <Compile Include="Specials\Laneid.cs" />
+    <Compile Include="Specials\Nctaid.cs" />
+    <Compile Include="Specials\Ctaid.cs" />
+    <Compile Include="Specials\Ntid.cs" />
+    <Compile Include="Specials\Tid.cs" />
     <Compile Include="Statements\Block.cs" />
     <Compile Include="Callable.cs" />
     <Compile Include="Statements\Directive.cs" />
@@ -174,7 +204,6 @@
     <Compile Include="Statements\Label.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Statements\Statement.cs" />
-    <Compile Include="Common\Validatable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,7 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Directives\" />
-    <Folder Include="Specials\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

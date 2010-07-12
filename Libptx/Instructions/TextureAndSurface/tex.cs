@@ -1,20 +1,21 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Common.Infrastructure;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("tex.geom.v4.dtype.btype d, [a, c];")]
-    [Ptxop("tex.geom.v4.dtype.btype d, [a, b, c];")]
+    [Ptxop10("tex.geom.v4.dtype.btype d, [a, c];")]
+    [Ptxop10("tex.geom.v4.dtype.btype d, [a, b, c];")]
     [DebuggerNonUserCode]
     internal class tex : ptxop
     {
-        [Suffix] public geom geom { get; set; }
-        [Suffix] public vec vec { get; set; }
-        [Suffix] public type dtype { get; set; }
-        [Suffix] public type btype { get; set; }
+        [Infix] public geom geom { get; set; }
+        [Infix] public vec vec { get; set; }
+        [Infix] public type dtype { get; set; }
+        [Infix] public type btype { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
