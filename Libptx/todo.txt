@@ -10,3 +10,5 @@
 8) typization and type checks
 9) bidirectional transformation: [plain text] <=> [object model]
 10) stubs for bidirectional transformation: [binary] <=> [object model]
+
+11) todo: 2.0 ABI and indirect calls are unsupported
