@@ -13,4 +13,6 @@
  * shortcuts for specials, instructions, directives: ctors, static methods, extensions ala ILTrait, whatever
 12) implement tostrings for all
 13) add readme.txt (similarly as for Libcuda)
-14) todo for readme.txt: 2.0 ABI and indirect calls are unsupported
+14) todo for readme.txt: 2.0 ABI is not implemented
+15) todo for readme.txt: variadic functions are not implemented
+16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype)

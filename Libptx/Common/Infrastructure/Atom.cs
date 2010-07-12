@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Libcuda.Versions;
 using Libptx.Common.Enumerations;
 
@@ -7,7 +8,7 @@ namespace Libptx.Common.Infrastructure
     public abstract class Atom
     {
         public virtual Module Ctx { get; set; }
-        public abstract void Validate();
+        public IList<String> Pragmas { get; set; }
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
         protected SoftwareIsa CoreVersion { get { throw new NotImplementedException(); } }
@@ -17,6 +18,7 @@ namespace Libptx.Common.Infrastructure
         protected HardwareIsa CoreTarget { get { throw new NotImplementedException(); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
+        public abstract void Validate();
         public String Render() { Validate(); return DoRender(); }
         protected abstract String DoRender();
         public sealed override String ToString() { return Render(); }

@@ -1,6 +1,6 @@
 namespace Libptx.Common.Types
 {
-    public class Sampler
+    public struct Sampler
     {
     }
 }

@@ -1,6 +1,7 @@
 namespace Libptx.Common.Types
 {
-    public static class Bit32
+    public struct Bit32
     {
+        internal int _fillerForSizeof;
     }
 }

@@ -1,6 +1,6 @@
 namespace Libptx.Common.Types
 {
-    public class Surf
+    public struct Surf
     {
     }
 }

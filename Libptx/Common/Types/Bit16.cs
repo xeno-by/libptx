@@ -1,6 +1,7 @@
 namespace Libptx.Common.Types
 {
-    public static class Bit16
+    public struct Bit16
     {
+        internal short _fillerForSizeof;
     }
 }

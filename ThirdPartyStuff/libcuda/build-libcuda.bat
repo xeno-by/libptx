@@ -27,7 +27,7 @@ cd Sources
 
 echo.
 echo ^>^>^>^>^> Downloading Libcuda sources from https://libcuda.googlecode.com/hg/
-hg clone https://libcuda.googlecode.com/hg/ Libcuda -r ebc3af4a8a12
+hg clone https://libcuda.googlecode.com/hg/ Libcuda -r 770ab8c73cfb
 
 echo.
 echo ^>^>^>^>^> Downloading XenoGears sources from https://xenogears.googlecode.com/hg/
