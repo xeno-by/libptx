@@ -1,14 +1,15 @@
 ﻿todo list for the Libptx library:
 
-1) blocks and locals
-2) funcs
-3) optional predicate for ptxop
-4) arguments for ptxops - in base class and in deriveds (so that they satisfy the sig!)
-5) labels and label arguments for branches
-6) implement validation for arguments
-7) different types of arguments: <read up the spec to find out all possible variants>
-8) typization and type checks
 9) bidirectional transformation: [plain text] <=> [object model]
 10) stubs for bidirectional transformation: [binary] <=> [object model]
-
-11) todo: 2.0 ABI and indirect calls are unsupported
+11) e-DSL notions:
+ * state-modifying props for Var and Type (e.g. foo.h0)
+ * the latter includes also operators ! and - for Vars and, generally, where appropriate
+ * [] for Addressable
+ * Addressable -> Address shortcut, e.g. the "addr()" method or property
+ * + and - operators for Addressable and Address
+ * Ret prop for Callable (which is implemented as AssertSingle, of course)
+ * u/d casts where appropriate: T <-> Type, T <-> String and so on
+12) implement tostrings for all
+13) add readme.txt (similarly as for Libcuda)
+14) todo for readme.txt: 2.0 ABI and indirect calls are unsupported
