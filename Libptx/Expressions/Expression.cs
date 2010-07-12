@@ -1,6 +1,8 @@
+using Libptx.Common;
+
 namespace Libptx.Expressions
 {
-    public abstract class Expression
+    public interface Expression : Validatable
     {
     }
 }

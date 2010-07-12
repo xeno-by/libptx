@@ -10,5 +10,13 @@ namespace Libptx.Expressions
         B3,
         H0,
         H1,
+        X,
+        R = X,
+        Y,
+        G = Y,
+        Z,
+        B = Z,
+        W,
+        A = W,
     }
 }

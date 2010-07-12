@@ -1,4 +1,4 @@
-namespace Libptx.Expressions
+namespace Libptx.Common
 {
     public enum TypeName
     {

@@ -55,11 +55,11 @@
     <Compile Include="Expressions\Addressable.cs" />
     <Compile Include="Expressions\Const.cs" />
     <Compile Include="Expressions\Expression.cs" />
-    <Compile Include="Expressions\Type.cs" />
-    <Compile Include="Expressions\TypeName.cs" />
-    <Compile Include="Expressions\Space.cs" />
+    <Compile Include="Common\Type.cs" />
+    <Compile Include="Common\TypeName.cs" />
+    <Compile Include="Common\Space.cs" />
     <Compile Include="Expressions\Var.cs" />
-    <Compile Include="Expressions\TypeMod.cs" />
+    <Compile Include="Common\TypeMod.cs" />
     <Compile Include="Expressions\VarMod.cs" />
     <Compile Include="Expressions\Vector.cs" />
     <Compile Include="Instructions\Annotations\Core\Ptxop20Annotation.cs" />
@@ -165,14 +165,24 @@
     <Compile Include="Instructions\Video\vmin.cs" />
     <Compile Include="Instructions\Video\vmax.cs" />
     <Compile Include="Instructions\Video\vadd.cs" />
-    <Compile Include="ObjectModel\Entry.cs" />
-    <Compile Include="ObjectModel\Func.cs" />
-    <Compile Include="ObjectModel\Module.cs" />
-    <Compile Include="ObjectModel\Texmode.cs" />
+    <Compile Include="Statements\Block.cs" />
+    <Compile Include="Callable.cs" />
+    <Compile Include="Statements\Directive.cs" />
+    <Compile Include="Entry.cs" />
+    <Compile Include="Func.cs" />
+    <Compile Include="Statements\Instruction.cs" />
+    <Compile Include="Statements\Label.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Statements\Statement.cs" />
+    <Compile Include="Common\Validatable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Directives\" />
+    <Folder Include="Specials\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,14 +1,14 @@
-namespace Libptx.Expressions
+namespace Libptx.Common
 {
     public enum Space
     {
         Register = 0,
-        Local = 1,
-        Shared = 2,
-        Global = 3,
-        Param = 4,
-        Const = 5,
-        Const0 = 5,
+        Local,
+        Shared,
+        Global,
+        Param,
+        Const,
+        Const0 = Const,
         Const1,
         Const2,
         Const3,

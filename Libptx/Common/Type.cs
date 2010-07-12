@@ -1,7 +1,7 @@
 using System;
 using ClrType = System.Type;
 
-namespace Libptx.Expressions
+namespace Libptx.Common
 {
     public class Type
     {
@@ -14,11 +14,5 @@ namespace Libptx.Expressions
         public override bool Equals(Object obj) { throw new NotImplementedException(); }
         public override int GetHashCode() { throw new NotImplementedException(); }
         public override String ToString() { throw new NotImplementedException(); }
-
-        public static implicit operator Type(ClrType type) { throw new NotImplementedException(); }
-        public static implicit operator ClrType(Type type) { throw new NotImplementedException(); }
-
-        public static implicit operator String(Type type) { throw new NotImplementedException(); }
-        public static implicit operator Type(String type) { throw new NotImplementedException(); }
     }
 }
