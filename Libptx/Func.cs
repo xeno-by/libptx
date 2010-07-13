@@ -8,8 +8,8 @@ namespace Libptx
 {
     public class Func : Block, Callable
     {
-        public IList<Var> Params { get; private set; }
-        public IList<Var> Rets { get; private set; }
+        public virtual IList<Var> Params { get; private set; }
+        public virtual IList<Var> Rets { get; private set; }
 
         public override void Validate()
         {

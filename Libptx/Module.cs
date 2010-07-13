@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Libcuda.Versions;
 using Libptx.Common.Infrastructure;
 using XenoGears.Assertions;
@@ -8,15 +7,15 @@ namespace Libptx
 {
     public class Module : Atom
     {
-        public new SoftwareIsa Version { get; set; }
-        public new HardwareIsa Target { get; set; }
+        public virtual new SoftwareIsa Version { get; set; }
+        public virtual new HardwareIsa Target { get; set; }
 
-        public bool UnifiedTexturing { get; set; }
-        public bool EmulateDoubles { get; set; }
-        public Tuning Tuning { get; set; }
+        public virtual bool UnifiedTexturing { get; set; }
+        public virtual bool EmulateDoubles { get; set; }
+        public virtual Tuning Tuning { get; set; }
 
-        public IList<Entry> Entries { get; private set; }
-        public IList<Func> Funcs { get; private set; }
+        public virtual IList<Entry> Entries { get; private set; }
+        public virtual IList<Func> Funcs { get; private set; }
 
         public Module()
         {

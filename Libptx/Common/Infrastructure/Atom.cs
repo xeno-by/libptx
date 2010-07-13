@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using Libcuda.Versions;
 using Libptx.Common.Enumerations;
 
@@ -8,7 +10,8 @@ namespace Libptx.Common.Infrastructure
     public abstract class Atom
     {
         public virtual Module Ctx { get; set; }
-        public IList<String> Pragmas { get; set; }
+        public virtual IList<Location> Locations { get; private set; }
+        public virtual IList<String> Pragmas { get; private set; }
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
         protected SoftwareIsa CoreVersion { get { throw new NotImplementedException(); } }
@@ -19,8 +22,8 @@ namespace Libptx.Common.Infrastructure
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
         public abstract void Validate();
-        public String Render() { Validate(); return DoRender(); }
-        protected abstract String DoRender();
+        public String Render() { Validate(); var buf = new StringBuilder(); DoRender(new StringWriter(buf)); return buf.ToString(); }
+        protected abstract void DoRender(TextWriter writer);
         public sealed override String ToString() { return Render(); }
 
         #region Enumeration values => Static properties

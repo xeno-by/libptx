@@ -8,8 +8,8 @@ namespace Libptx.Statements
 {
     public class Block : Atom, Statement
     {
-        public IList<Var> Vars { get; private set; }
-        public IList<Statement> Stmts { get; private set; }
+        public virtual IList<Var> Vars { get; private set; }
+        public virtual IList<Statement> Stmts { get; private set; }
 
         public Block()
         {
