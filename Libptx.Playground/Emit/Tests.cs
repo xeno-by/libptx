@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
-using XenoGear.Playground.Framework;
+using XenoGears.Playground.Framework;
 
 namespace Libptx.Playground.Emit
 {
-    TestFixture
+    [TestFixture]
     public class Tests : BaseTests
     {
-        Test
+        [Test]
         public void MatMul()
         {
             // add various overloads for this ctor (same as for AtomAttribute)
