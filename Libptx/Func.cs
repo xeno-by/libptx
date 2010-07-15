@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Libcuda.Versions;
 using Libptx.Expressions;
@@ -8,6 +9,7 @@ namespace Libptx
 {
     public class Func : Block, Callable
     {
+        public virtual String Name { get; set; }
         public virtual IList<Var> Params { get; private set; }
         public virtual IList<Var> Rets { get; private set; }
 

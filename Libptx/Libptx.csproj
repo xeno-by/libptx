@@ -53,6 +53,7 @@
     <Compile Include="Bindings\PtxAttribute.cs" />
     <Compile Include="Common\Enumerations\Comparison.cs" />
     <Compile Include="Common\Infrastructure\AtomAttribute.cs" />
+    <Compile Include="Common\Infrastructure\Location.cs" />
     <Compile Include="Common\Infrastructure\SignatureAttribute.cs" />
     <Compile Include="Common\Types\Bit16.cs" />
     <Compile Include="Common\Types\Bit32.cs" />
