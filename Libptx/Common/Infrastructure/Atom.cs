@@ -22,9 +22,9 @@ namespace Libptx.Common.Infrastructure
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
         public abstract void Validate();
-        public String Render() { Validate(); var buf = new StringBuilder(); DoRender(new StringWriter(buf)); return buf.ToString(); }
-        protected abstract void DoRender(TextWriter writer);
-        public sealed override String ToString() { return Render(); }
+        public String RenderAsPtx() { Validate(); var buf = new StringBuilder(); DoRenderAsPtx(new StringWriter(buf)); return buf.ToString(); }
+        protected abstract void DoRenderAsPtx(TextWriter writer);
+        public sealed override String ToString() { return RenderAsPtx(); }
 
         #region Enumeration values => Static properties
 
