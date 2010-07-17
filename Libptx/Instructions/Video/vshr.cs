@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vshr.dtype.atype.btype{.sat}{.mode} d, a{.asel}, b{.bsel};")]
     [Ptxop20("vshr.dtype.atype.btype{.sat}{.mode}.op2 d, a{.asel}, b{.bsel}, c;")]
     [Ptxop20("vshr.dtype.atype.btype{.sat}{.mode} d.dsel, a{.asel}, b{.bsel}, c;")]
-    internal class vshr : ptxop
+    public class vshr : ptxop
     {
         [Affix] public type dtype { get; set; }
         [Affix] public type atype { get; set; }

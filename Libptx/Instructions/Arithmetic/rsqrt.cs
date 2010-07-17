@@ -10,7 +10,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("rsqrt.approx{.ftz}.f32  d, a;")]
     [Ptxop("rsqrt.approx.f64        d, a;")]
     [DebuggerNonUserCode]
-    internal class rsqrt : ptxop
+    public class rsqrt : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }

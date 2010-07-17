@@ -1,6 +1,6 @@
 namespace Libptx.Instructions
 {
-    internal enum ptxoptype
+    public enum ptxoptype
     {
         // todo. to be implemented
     }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions
 {
     [DebuggerNonUserCode]
-    internal class ptxopspec
+    public class ptxopspec
     {
         public static implicit operator ptxopspec(String spec)
         {

@@ -10,7 +10,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vadd.dtype.atype.btype{.sat} d, a{.asel}, b{.bsel};")]
     [Ptxop20("vadd.dtype.atype.btype{.sat}.op2 d, a{.asel}, b{.bsel}, c;")]
     [Ptxop20("vadd.dtype.atype.btype{.sat} d.dsel, a{.asel}, b{.bsel}, c;")]
-    internal class vadd : ptxop
+    public class vadd : ptxop
     {
         [Affix] public type dtype { get; set; }
         [Affix] public type atype { get; set; }

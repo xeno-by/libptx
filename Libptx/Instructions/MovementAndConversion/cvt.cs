@@ -10,7 +10,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop("cvt{.irnd}{.ftz}{.sat}.dtype.atype d, a;")]
     [Ptxop("cvt{.frnd}{.ftz}{.sat}.dtype.atype d, a;")]
     [DebuggerNonUserCode]
-    internal class cvt : ptxop
+    public class cvt : ptxop
     {
         [Affix] public irnd irnd { get; set; }
         [Affix] public frnd frnd { get; set; }

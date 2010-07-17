@@ -11,7 +11,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("max{.ftz}.f32   d, a, b;")]
     [Ptxop("max.f64         d, a, b;")]
     [DebuggerNonUserCode]
-    internal class max : ptxop
+    public class max : ptxop
     {
         [Affix] public bool ftz { get; set; }
         [Affix] public type type { get; set; }

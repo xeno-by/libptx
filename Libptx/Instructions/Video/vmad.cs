@@ -8,7 +8,7 @@ namespace Libptx.Instructions.Video
 {
     [Ptxop20("vmad.dtype.atype.btype{.sat}{.scale} d, {-}a{.asel}, {-}b{.bsel}, {-}c;")]
     [Ptxop20("vmad.dtype.atype.btype.po{.sat}{.scale} d, a{.asel}, b{.bsel}, c;")]
-    internal class vmad : ptxop
+    public class vmad : ptxop
     {
         [Affix] public type dtype { get; set; }
         [Affix] public type atype { get; set; }

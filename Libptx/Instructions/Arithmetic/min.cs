@@ -11,7 +11,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("min{.ftz}.f32   d, a, b;")]
     [Ptxop("min.f64         d, a, b;")]
     [DebuggerNonUserCode]
-    internal class min : ptxop
+    public class min : ptxop
     {
         [Affix] public bool ftz { get; set; }
         [Affix] public type type { get; set; }

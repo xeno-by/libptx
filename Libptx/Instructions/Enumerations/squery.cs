@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class squery
+    public class squery
     {
         public static squery width { get { throw new NotImplementedException(); } }
         public static squery height { get { throw new NotImplementedException(); } }
@@ -25,7 +25,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class squery_extensions
+    public static class squery_extensions
     {
         public static String name(this squery squery) { throw new NotImplementedException(); }
     }

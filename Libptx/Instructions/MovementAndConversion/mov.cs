@@ -10,7 +10,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop("mov.type d, avar;")]
     [Ptxop("mov.type d, label;")]
     [DebuggerNonUserCode]
-    internal class mov : ptxop
+    public class mov : ptxop
     {
         [Affix] public type type { get; set; }
 

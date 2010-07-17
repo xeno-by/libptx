@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop20("brev.type d, a;")]
     [DebuggerNonUserCode]
-    internal class brev : ptxop
+    public class brev : ptxop
     {
         [Affix] public type type { get; set; }
 

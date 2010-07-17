@@ -10,7 +10,7 @@ namespace Libptx.Instructions.TextureAndSurface
     [Ptxop("txq.tquery.b32 d, [a];", SoftwareIsa.PTX_15)]
     [Ptxop("txq.squery.b32 d, [a];", SoftwareIsa.PTX_15)]
     [DebuggerNonUserCode]
-    internal class txq : ptxop
+    public class txq : ptxop
     {
         [Affix] public tquery tquery { get; set; }
         [Affix] public tquerys squery { get; set; }

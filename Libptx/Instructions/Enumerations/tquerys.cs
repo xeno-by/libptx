@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class tquerys
+    public class tquerys
     {
         public static tquerys filter_mode { get { throw new NotImplementedException(); } }
         public static tquerys addr_mode_0 { get { throw new NotImplementedException(); } }
@@ -24,7 +24,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class tquerys_extensions
+    public static class tquerys_extensions
     {
         public static String name(this tquerys tquerys) { throw new NotImplementedException(); }
     }

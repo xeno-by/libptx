@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class type
+    public class type
     {
         public static type u8 { get { throw new NotImplementedException(); } }
         public static type s8 { get { throw new NotImplementedException(); } }
@@ -41,7 +41,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class type_extensions
+    public static class type_extensions
     {
         public static bool isint(this type type) { throw new NotImplementedException(); }
         public static bool issigned(this type type) { throw new NotImplementedException(); }

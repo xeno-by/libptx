@@ -14,7 +14,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("add{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
     [Ptxop("add{.rnd}.f64               d, a, b;")]
     [DebuggerNonUserCode]
-    internal class add : ptxop
+    public class add : ptxop
     {
         [Mod(SoftwareIsa.PTX_12)] public bool c { get; set; }
         [Affix(SoftwareIsa.PTX_12)] public bool cc { get; set; }

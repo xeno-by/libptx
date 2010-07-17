@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class mulm
+    public class mulm
     {
         public static mulm hi { get { throw new NotImplementedException(); } }
         public static mulm lo { get { throw new NotImplementedException(); } }
@@ -23,7 +23,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class mulm_extensions
+    public static class mulm_extensions
     {
         public static String name(this mulm mulm) { throw new NotImplementedException(); }
     }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class op
+    public class op
     {
         public static op add { get { throw new NotImplementedException(); } }
         public static op min { get { throw new NotImplementedException(); } }
@@ -30,7 +30,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class op_extensions
+    public static class op_extensions
     {
         public static String name(this op op) { throw new NotImplementedException(); }
     }

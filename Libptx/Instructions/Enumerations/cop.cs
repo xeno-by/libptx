@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class cop
+    public class cop
     {
         public static cop ca { get { throw new NotImplementedException(); } }
         public static cop cg { get { throw new NotImplementedException(); } }
@@ -27,7 +27,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class rcop_extensions
+    public static class rcop_extensions
     {
         public static String name(this cop cop) { throw new NotImplementedException(); }
     }

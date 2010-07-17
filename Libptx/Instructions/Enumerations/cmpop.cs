@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class cmpop
+    public class cmpop
     {
         public static cmpop eq { get { throw new NotImplementedException(); } }
         public static cmpop ne { get { throw new NotImplementedException(); } }
@@ -38,7 +38,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class cmpop_extensions
+    public static class cmpop_extensions
     {
         public static String name(this cmpop cmpop) { throw new NotImplementedException(); }
     }

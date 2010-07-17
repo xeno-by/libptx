@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class clampm
+    public class clampm
     {
         public static clampm trap { get { throw new NotImplementedException(); } }
         public static clampm clamp { get { throw new NotImplementedException(); } }
@@ -23,7 +23,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class clampm_extensions
+    public static class clampm_extensions
     {
         public static String name(this clampm clampm) { throw new NotImplementedException(); }
     }

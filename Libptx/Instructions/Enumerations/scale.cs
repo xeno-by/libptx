@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class scale
+    public class scale
     {
         public static scale shr7 { get { throw new NotImplementedException(); } }
         public static scale shr15 { get { throw new NotImplementedException(); } }
@@ -24,7 +24,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class scale_extensions
+    public static class scale_extensions
     {
         public static String name(this scale scale) { throw new NotImplementedException(); }
     }

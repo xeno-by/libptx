@@ -13,7 +13,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("div.rnd{.ftz}.f32       d, a, b;")]
     [Ptxop("div.rnd.f64             d, a, b;")]
     [DebuggerNonUserCode]
-    internal class div : ptxop
+    public class div : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public bool full { get; set; }

@@ -10,7 +10,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("fma.rnd{.ftz}{.sat}.f32 d, a, b, c;")]
     [Ptxop("fma.rnd.f64             d, a, b, c;")]
     [DebuggerNonUserCode]
-    internal class fma : ptxop
+    public class fma : ptxop
     {
         [Affix] public frnd rnd { get; set; }
         [Affix] public bool ftz { get; set; }

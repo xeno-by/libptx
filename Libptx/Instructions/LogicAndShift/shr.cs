@@ -9,7 +9,7 @@ namespace Libptx.Instructions.LogicAndShift
 {
     [Ptxop("shr.type d, a, b;")]
     [DebuggerNonUserCode]
-    internal class shr : ptxop
+    public class shr : ptxop
     {
         [Affix] public type type { get; set; }
 

@@ -6,7 +6,7 @@ using Libcuda.Versions;
 namespace Libptx.Instructions
 {
     [DebuggerNonUserCode]
-    internal abstract class ptxop
+    public abstract class ptxop
     {
         #region Enumeration values => Static properties
 

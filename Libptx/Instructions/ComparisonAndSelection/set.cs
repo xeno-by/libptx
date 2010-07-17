@@ -12,7 +12,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
     [Ptxop("setp.cmpop{.ftz}.stype              p[|q], a, b;")]
     [Ptxop("setp.cmpop.boolop{.ftz}.stype       p[|q], a, b, {!}c;")]
     [DebuggerNonUserCode]
-    internal class set : ptxop
+    public class set : ptxop
     {
         [Mod] public bool p { get; set; }
         [Affix] public cmpop cmpop { get; set; }

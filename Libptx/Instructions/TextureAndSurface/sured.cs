@@ -10,7 +10,7 @@ namespace Libptx.Instructions.TextureAndSurface
     [Ptxop20("sured.b.op.geom.ctype.clampm [a,b],c;")]
     [Ptxop20("sured.p.op.geom.ctype.clampm [a,b],c;")]
     [DebuggerNonUserCode]
-    internal class sured : ptxop
+    public class sured : ptxop
     {
         [Affix] public bool b { get; set; }
         [Affix] public bool p { get; set; }

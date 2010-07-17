@@ -12,7 +12,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop("st.volatile{.ss}.type       d, [a];")]
     [Ptxop("st.volatile{.ss}.vec.type   d, [a];")]
     [DebuggerNonUserCode]
-    internal class st : ptxop
+    public class st : ptxop
     {
         [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
         [Affix] public ss ss { get; set; }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class vshm
+    public class vshm
     {
         public static vshm clamp { get { throw new NotImplementedException(); } }
         public static vshm wrap { get { throw new NotImplementedException(); } }
@@ -22,7 +22,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class vshm_extensions
+    public static class vshm_extensions
     {
         public static String name(this vshm vshm) { throw new NotImplementedException(); }
     }

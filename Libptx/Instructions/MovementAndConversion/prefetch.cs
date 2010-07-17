@@ -10,7 +10,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop20("prefetch{.space}.level  [a];")]
     [Ptxop20("prefetchu.L1            [a];")]
     [DebuggerNonUserCode]
-    internal class prefetch : ptxop
+    public class prefetch : ptxop
     {
         [Mod] public bool u { get; set; }
         [Affix] public ss space { get; set; }

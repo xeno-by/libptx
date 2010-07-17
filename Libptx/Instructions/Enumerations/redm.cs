@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class redm
+    public class redm
     {
         public static redm all { get { throw new NotImplementedException(); } }
         public static redm any { get { throw new NotImplementedException(); } }
@@ -23,7 +23,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class redm_extensions
+    public static class redm_extensions
     {
         public static String name(this redm redm) { throw new NotImplementedException(); }
     }

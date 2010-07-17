@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class tquery
+    public class tquery
     {
         public static tquery width { get { throw new NotImplementedException(); } }
         public static tquery height { get { throw new NotImplementedException(); } }
@@ -26,7 +26,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class tquery_extensions
+    public static class tquery_extensions
     {
         public static String name(this tquery tquery) { throw new NotImplementedException(); }
     }

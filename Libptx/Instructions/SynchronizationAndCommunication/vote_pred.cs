@@ -7,7 +7,7 @@ using XenoGears.Assertions;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("vote.mode.pred d, {!}a;", SoftwareIsa.PTX_12)]
-    internal class vote_pred : ptxop
+    public class vote_pred : ptxop
     {
         [Affix] public redm mode { get; set; }
 

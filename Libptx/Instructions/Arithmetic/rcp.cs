@@ -12,7 +12,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("rcp.rnd{.ftz}.f32       d, a;")]
     [Ptxop("rcp.rnd.f64             d, a;")]
     [DebuggerNonUserCode]
-    internal class rcp : ptxop
+    public class rcp : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public frnd rnd { get; set; }

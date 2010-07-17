@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop("cos.approx{.ftz}.f32 d, a;")]
     [DebuggerNonUserCode]
-    internal class cos : ptxop
+    public class cos : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }

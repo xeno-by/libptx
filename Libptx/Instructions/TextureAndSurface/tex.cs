@@ -10,7 +10,7 @@ namespace Libptx.Instructions.TextureAndSurface
     [Ptxop("tex.geom.v4.dtype.btype d, [a, c];")]
     [Ptxop("tex.geom.v4.dtype.btype d, [a, b, c];")]
     [DebuggerNonUserCode]
-    internal class tex : ptxop
+    public class tex : ptxop
     {
         [Affix] public geom geom { get; set; }
         [Affix] public vec vec { get; set; }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class barlevel
+    public class barlevel
     {
         public static barlevel cta { get { throw new NotImplementedException(); } }
         public static barlevel gl { get { throw new NotImplementedException(); } }
@@ -23,7 +23,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class barlevel_extensions
+    public static class barlevel_extensions
     {
         public static String name(this barlevel barlevel) { throw new NotImplementedException(); }
     }

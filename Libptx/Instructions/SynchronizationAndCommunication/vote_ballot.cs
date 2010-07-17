@@ -7,7 +7,7 @@ using XenoGears.Assertions;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("vote.ballot.type d, {!}a;", SoftwareIsa.PTX_20)]
-    internal class vote_ballot : ptxop
+    public class vote_ballot : ptxop
     {
         [Affix] public type type { get; set; }
 

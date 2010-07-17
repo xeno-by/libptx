@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop("sin.approx{.ftz}.f32 d, a;")]
     [DebuggerNonUserCode]
-    internal class sin : ptxop
+    public class sin : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }

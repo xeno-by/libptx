@@ -9,7 +9,7 @@ namespace Libptx.Instructions.LogicAndShift
 {
     [Ptxop("or.type d, a, b;")]
     [DebuggerNonUserCode]
-    internal class or : ptxop
+    public class or : ptxop
     {
         [Affix] public type type { get; set; }
 

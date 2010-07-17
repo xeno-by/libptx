@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop20("prmt.b32{.mode} d, a, b, c;")]
     [DebuggerNonUserCode]
-    internal class prmt : ptxop
+    public class prmt : ptxop
     {
         [Affix] public type type { get; set; }
         [Affix] public prmtm mode { get; set; }

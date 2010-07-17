@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class geom
+    public class geom
     {
         public static geom d1 { get { throw new NotImplementedException(); } }
         public static geom d2 { get { throw new NotImplementedException(); } }
@@ -23,7 +23,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class geom_extensions
+    public static class geom_extensions
     {
         public static String name(this geom geom) { throw new NotImplementedException(); }
     }

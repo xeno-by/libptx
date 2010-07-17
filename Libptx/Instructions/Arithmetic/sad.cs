@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop("sad.type d, a, b, c;")]
     [DebuggerNonUserCode]
-    internal class sad : ptxop
+    public class sad : ptxop
     {
         [Affix] public type type { get; set; }
 

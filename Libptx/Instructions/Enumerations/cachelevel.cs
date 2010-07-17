@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class cachelevel
+    public class cachelevel
     {
         public static cachelevel L1 { get { throw new NotImplementedException(); } }
         public static cachelevel L2 { get { throw new NotImplementedException(); } }
@@ -22,7 +22,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class cachelevel_extensions
+    public static class cachelevel_extensions
     {
         public static String name(this cachelevel cachelevel) { throw new NotImplementedException(); }
     }

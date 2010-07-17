@@ -13,7 +13,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("mul{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
     [Ptxop("mul{.rnd}.f64               d, a, b;")]
     [DebuggerNonUserCode]
-    internal class mul : ptxop
+    public class mul : ptxop
     {
         [Affix] public mulm mode { get; set; }
         [Affix] public frnd rnd { get; set; }

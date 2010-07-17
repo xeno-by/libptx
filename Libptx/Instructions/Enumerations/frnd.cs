@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class frnd
+    public class frnd
     {
         public static frnd rn { get { throw new NotImplementedException(); } }
         public static frnd rz { get { throw new NotImplementedException(); } }
@@ -24,7 +24,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class frnd_extensions
+    public static class frnd_extensions
     {
         public static String name(this frnd frnd) { throw new NotImplementedException(); }
     }

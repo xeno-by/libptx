@@ -7,7 +7,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     [Ptxop("bar.sync a;")]
     [Ptxop20("bar.sync a, b;")]
     [DebuggerNonUserCode]
-    internal class bar_sync : ptxop
+    public class bar_sync : ptxop
     {
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Libptx.Instructions.Enumerations
 {
     [DebuggerNonUserCode]
-    internal class size
+    public class size
     {
         public static size sz32 { get { throw new NotImplementedException(); } }
         public static size sz64 { get { throw new NotImplementedException(); } }
@@ -24,7 +24,7 @@ namespace Libptx.Instructions.Enumerations
     // todo. implement those null-safely
 
     [DebuggerNonUserCode]
-    internal static class size_extensions
+    public static class size_extensions
     {
         public static String name(this size size) { throw new NotImplementedException(); }
     }

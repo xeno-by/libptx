@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop20("testp.op.type p, a;")]
     [DebuggerNonUserCode]
-    internal class testp : ptxop
+    public class testp : ptxop
     {
         [Affix] public testpop op { get; set; }
         [Affix] public type type { get; set; }

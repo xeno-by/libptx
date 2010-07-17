@@ -11,7 +11,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("neg{.ftz}.f32   d, a;")]
     [Ptxop("neg.f64         d, a;")]
     [DebuggerNonUserCode]
-    internal class neg : ptxop
+    public class neg : ptxop
     {
         [Affix] public bool ftz { get; set; }
         [Affix] public type type { get; set; }
