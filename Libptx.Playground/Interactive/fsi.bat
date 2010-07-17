@@ -1,0 +1,1 @@
+@"c:\Program Files\Microsoft F#\v4.0\fsi.exe" --debug:full -r:"%~dp0..\..\Libptx\bin\Debug\LibPtx.dll" -r:%~dp0..\..\Libptx\bin\Debug\Libcuda.dll -r:%~dp0..\..\Libptx\bin\Debug\XenoGears.dll -r:System.Core.dll --use:%~dp0\init.fsx
