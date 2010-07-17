@@ -6,7 +6,7 @@ namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class SuffixAttribute : AffixAttribute
+    public class SuffixAttribute : AffixAttribute
     {
         public SuffixAttribute()
             : this(null, SoftwareIsa.PTX_10, HardwareIsa.SM_10)

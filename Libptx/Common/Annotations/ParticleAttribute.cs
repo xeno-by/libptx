@@ -3,7 +3,7 @@ using Libcuda.Versions;
 
 namespace Libptx.Common.Annotations
 {
-    internal abstract class ParticleAttribute : Attribute
+    public abstract class ParticleAttribute : Attribute
     {
         public String Signature { get; set; }
         public SoftwareIsa Version { get; set; }

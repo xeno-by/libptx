@@ -6,7 +6,7 @@ namespace Libptx.Common.Annotations.Atoms
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal abstract class AtomAttribute : ParticleAttribute
+    public abstract class AtomAttribute : ParticleAttribute
     {
         protected AtomAttribute()
             : this(null, SoftwareIsa.PTX_10, HardwareIsa.SM_10)

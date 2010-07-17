@@ -7,7 +7,7 @@ namespace Libptx.Instructions.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Ptxop20Attribute : PtxopAttribute
+    public class Ptxop20Attribute : PtxopAttribute
     {
         public Ptxop20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)

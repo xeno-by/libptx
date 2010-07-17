@@ -7,7 +7,7 @@ namespace Libptx.Specials.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class SpecialAttribute : AtomAttribute
+    public class SpecialAttribute : AtomAttribute
     {
         public Type Type { get; set; }
 

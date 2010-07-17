@@ -7,7 +7,7 @@ namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Prefix20Attribute : PrefixAttribute
+    public class Prefix20Attribute : PrefixAttribute
     {
         public Prefix20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)

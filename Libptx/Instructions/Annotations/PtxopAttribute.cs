@@ -7,7 +7,7 @@ namespace Libptx.Instructions.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class PtxopAttribute : AtomAttribute
+    public class PtxopAttribute : AtomAttribute
     {
         public PtxopAttribute()
             : this(null, SoftwareIsa.PTX_10, HardwareIsa.SM_10)

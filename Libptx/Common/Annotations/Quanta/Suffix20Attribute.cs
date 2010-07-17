@@ -7,7 +7,7 @@ namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Suffix20Attribute : SuffixAttribute
+    public class Suffix20Attribute : SuffixAttribute
     {
         public Suffix20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)

@@ -7,7 +7,7 @@ namespace Libptx.Specials.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Special20Attribute : SpecialAttribute
+    public class Special20Attribute : SpecialAttribute
     {
         public Special20Attribute(Type type)
             : this(null, type, SoftwareIsa.PTX_20, HardwareIsa.SM_20)

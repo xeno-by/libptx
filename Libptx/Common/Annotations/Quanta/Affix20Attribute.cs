@@ -7,7 +7,7 @@ namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Affix20Attribute : AffixAttribute
+    public class Affix20Attribute : AffixAttribute
     {
         public Affix20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
