@@ -3,11 +3,11 @@ using System.Diagnostics;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
-namespace Libptx.Common.Infrastructure
+namespace Libptx.Common.Annotations.Atoms
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    public abstract class Atom20Attribute : AtomAttribute
+    internal abstract class Atom20Attribute : AtomAttribute
     {
         protected Atom20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
@@ -29,6 +29,11 @@ namespace Libptx.Common.Infrastructure
         {
         }
 
+        protected Atom20Attribute(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+            : this(null, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
+        {
+        }
+
         protected Atom20Attribute(String signature)
             : this(signature, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
         {
@@ -45,6 +50,11 @@ namespace Libptx.Common.Infrastructure
         }
 
         protected Atom20Attribute(String signature, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+            : base(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
+        {
+        }
+
+        protected Atom20Attribute(String signature, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
             : base(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
         }

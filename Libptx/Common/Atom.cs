@@ -1,17 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Libcuda.Versions;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Annotations.Atoms;
+using Libptx.Common.Types;
+using Type=Libptx.Common.Types.Type;
+using XenoGears.Assertions;
 
-namespace Libptx.Common.Infrastructure
+namespace Libptx.Common
 {
-    public abstract class Atom
+    public abstract class Atom : Validatable, Renderable
     {
-        public virtual Module Ctx { get; set; }
-        public virtual IList<Location> Locations { get; private set; }
-        public virtual IList<String> Pragmas { get; private set; }
+        private IList<Location> _locations = new List<Location>();
+        public IList<Location> Locations
+        {
+            get { return _locations; }
+            set { _locations = value ?? new List<Location>(); }
+        }
+
+        private IList<String> _pragmas = new List<String>();
+        public IList<String> Pragmas
+        {
+            get { return _pragmas; }
+            set { _pragmas = value ?? new List<String>(); }
+        }
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
         protected SoftwareIsa CoreVersion { get { throw new NotImplementedException(); } }
@@ -21,10 +34,12 @@ namespace Libptx.Common.Infrastructure
         protected HardwareIsa CoreTarget { get { throw new NotImplementedException(); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
-        public abstract void Validate();
-        public String RenderAsPtx() { Validate(); var buf = new StringBuilder(); DoRenderAsPtx(new StringWriter(buf)); return buf.ToString(); }
-        protected abstract void DoRenderAsPtx(TextWriter writer);
-        public sealed override String ToString() { return RenderAsPtx(); }
+        public void Validate(Module ctx) { (ctx.Version >= Version).AssertTrue(); (ctx.Target >= Target).AssertTrue(); CustomValidate(ctx); }
+        protected virtual void CustomValidate(Module ctx) { /* do nothing */ }
+
+        void Renderable.RenderAsPtx(TextWriter writer) { RenderAsPtx(writer); }
+        protected abstract void RenderAsPtx(TextWriter writer);
+        public sealed override String ToString() { return this.RenderAsPtx(); }
 
         #region Enumeration values => Static properties
 

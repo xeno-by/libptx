@@ -1,13 +1,13 @@
 using System;
 using ClrType = System.Type;
 
-namespace Libptx.Common
+namespace Libptx.Common.Types
 {
     public class Type
     {
-        public virtual TypeName Name { get; set; }
-        public virtual TypeMod Mod { get; set; }
-        public virtual int[] Dims { get; set; }
+        public TypeName Name { get; set; }
+        public TypeMod Mod { get; set; }
+        public int[] Dims { get; set; }
 
         public static bool operator ==(Type t1, Type t2) { throw new NotImplementedException(); }
         public static bool operator !=(Type t1, Type t2) { return !(t1 == t2); }

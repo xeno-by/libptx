@@ -1,17 +1,17 @@
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.LogicAndShift
 {
-    [Ptxop10("not.type d, a;")]
+    [Ptxop("not.type d, a;")]
     [DebuggerNonUserCode]
     internal class not : ptxop
     {
-        [Infix] public type type { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

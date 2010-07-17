@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -13,9 +13,9 @@ namespace Libptx.Instructions.MovementAndConversion
     [DebuggerNonUserCode]
     internal class cvta : ptxop
     {
-        [Infix] public bool to { get; set; }
-        [Infix] public ss space { get; set; }
-        [Infix] public size size { get; set; }
+        [Affix] public bool to { get; set; }
+        [Affix] public ss space { get; set; }
+        [Affix] public size size { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

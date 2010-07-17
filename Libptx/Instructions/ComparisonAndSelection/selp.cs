@@ -1,15 +1,15 @@
 using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 
 namespace Libptx.Instructions.ComparisonAndSelection
 {
-    [Ptxop10("selp.type d, a, b, c;")]
+    [Ptxop("selp.type d, a, b, c;")]
     [DebuggerNonUserCode]
     internal class selp : ptxop
     {
-        [Infix] public type type { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

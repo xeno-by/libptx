@@ -1,63 +1,62 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
-using Type = System.Type;
-using PtxType = Libptx.Common.Type;
+using XenoGears.Assertions;
 
 namespace Libptx.Specials.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    public class Special20Attribute : Atom20Attribute, SpecialAttribute
+    internal class Special20Attribute : SpecialAttribute
     {
-        public virtual PtxType Type { get; set; }
-
         public Special20Attribute(Type type)
+            : this(null, type, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
         {
-            Type = type;
         }
 
-        public Special20Attribute(Type type, SoftwareIsa swisa)
-            : base(swisa)
+        public Special20Attribute(Type type, SoftwareIsa softwareIsa)
+            : this(null, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_20)
         {
-            Type = type;
         }
 
-        public Special20Attribute(Type type, HardwareIsa hwisa)
-            : base(hwisa)
+        public Special20Attribute(Type type, HardwareIsa hardwareIsa)
+            : this(null, type, SoftwareIsa.PTX_20, hardwareIsa)
         {
-            Type = type;
         }
 
-        public Special20Attribute(Type type, SoftwareIsa swisa, HardwareIsa hwisa)
-            : base(swisa, hwisa)
+        public Special20Attribute(Type type, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+            : this(null, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
-            Type = type;
         }
 
-        public Special20Attribute(String spec, Type type)
-            : base(spec)
+        public Special20Attribute(Type type, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+            : this(null, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
-            Type = type;
         }
 
-        public Special20Attribute(String spec, Type type, SoftwareIsa swisa)
-            : base(spec, swisa)
+        public Special20Attribute(String signature, Type type)
+            : this(signature, type, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
         {
-            Type = type;
         }
 
-        public Special20Attribute(String spec, Type type, HardwareIsa hwisa)
-            : base(spec, hwisa)
+        public Special20Attribute(String signature, Type type, SoftwareIsa softwareIsa)
+            : this(signature, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_10)
         {
-            Type = type;
         }
 
-        public Special20Attribute(String spec, Type type, SoftwareIsa swisa, HardwareIsa hwisa)
-            : base(spec, swisa, hwisa)
+        public Special20Attribute(String signature, Type type, HardwareIsa hardwareIsa)
+            : this(signature, type, SoftwareIsa.PTX_20, hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
-            Type = type;
+        }
+
+        public Special20Attribute(String signature, Type type, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+            : base(signature, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
+        {
+        }
+
+        public Special20Attribute(String signature, Type type, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+            : base(signature, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
+        {
         }
     }
 }

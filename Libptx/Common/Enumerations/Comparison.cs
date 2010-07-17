@@ -1,26 +1,26 @@
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 
 namespace Libptx.Common.Enumerations
 {
     public enum Comparison
     {
-        [Signature("eq")] Equal = 1,
-        [Signature("ne")] NotEqual,
-        [Signature("lt")] LessThan,
-        [Signature("le")] LessThanOrEqual,
-        [Signature("gt")] GreaterThan,
-        [Signature("ge")] GreaterThanOrEqual,
-        [Signature("lo")] Lower,
-        [Signature("ls")] LowerOrSame,
-        [Signature("hi")] Higher,
-        [Signature("hs")] HigherOrSame,
-        [Signature("equ")] EqualUnordered,
-        [Signature("neu")] NotEqualUnordered,
-        [Signature("ltu")] LessThanUnordered,
-        [Signature("leu")] LessThanOrEqualUnordered,
-        [Signature("gtu")] GreaterThanUnordered,
-        [Signature("geu")] GreaterThanOrEqualUnordered,
-        [Signature("num")] BothNumbers,
-        [Signature("nan")] AnyNan,
+        [Affix("eq")] Equal = 1,
+        [Affix("ne")] NotEqual,
+        [Affix("lt")] LessThan,
+        [Affix("le")] LessThanOrEqual,
+        [Affix("gt")] GreaterThan,
+        [Affix("ge")] GreaterThanOrEqual,
+        [Affix("lo")] Lower,
+        [Affix("ls")] LowerOrSame,
+        [Affix("hi")] Higher,
+        [Affix("hs")] HigherOrSame,
+        [Affix("equ")] EqualUnordered,
+        [Affix("neu")] NotEqualUnordered,
+        [Affix("ltu")] LessThanUnordered,
+        [Affix("leu")] LessThanOrEqualUnordered,
+        [Affix("gtu")] GreaterThanUnordered,
+        [Affix("geu")] GreaterThanOrEqualUnordered,
+        [Affix("num")] BothNumbers,
+        [Affix("nan")] AnyNan,
     }
 }

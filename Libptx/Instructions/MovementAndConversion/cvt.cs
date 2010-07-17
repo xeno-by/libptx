@@ -1,23 +1,23 @@
 ﻿using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
-    [Ptxop10("cvt{.irnd}{.ftz}{.sat}.dtype.atype d, a;")]
-    [Ptxop10("cvt{.frnd}{.ftz}{.sat}.dtype.atype d, a;")]
+    [Ptxop("cvt{.irnd}{.ftz}{.sat}.dtype.atype d, a;")]
+    [Ptxop("cvt{.frnd}{.ftz}{.sat}.dtype.atype d, a;")]
     [DebuggerNonUserCode]
     internal class cvt : ptxop
     {
-        [Infix] public irnd irnd { get; set; }
-        [Infix] public frnd frnd { get; set; }
-        [Infix] public bool ftz { get; set; }
-        [Infix] public bool sat { get; set; }
-        [Infix] public type dtype { get; set; }
-        [Infix] public type atype { get; set; }
+        [Affix] public irnd irnd { get; set; }
+        [Affix] public frnd frnd { get; set; }
+        [Affix] public bool ftz { get; set; }
+        [Affix] public bool sat { get; set; }
+        [Affix] public type dtype { get; set; }
+        [Affix] public type atype { get; set; }
 
         protected override bool allow_int8 { get { return true; } }
         protected override bool allow_float16 { get { return true; } }

@@ -1,19 +1,19 @@
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop10("ex2.approx{.ftz}.f32 d, a;")]
+    [Ptxop("ex2.approx{.ftz}.f32 d, a;")]
     [DebuggerNonUserCode]
     internal class ex2 : ptxop
     {
-        [Infix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
-        [Infix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
-        [Infix] public type type { get; set; }
+        [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
+        [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

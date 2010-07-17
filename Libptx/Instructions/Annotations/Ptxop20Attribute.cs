@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Atoms;
 
 namespace Libptx.Instructions.Annotations
 {

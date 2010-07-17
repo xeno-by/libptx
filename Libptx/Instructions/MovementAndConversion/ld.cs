@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -7,21 +7,21 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
-    [Ptxop10("ld{.ss}{.cop}.type          d, [a];")]
-    [Ptxop10("ld{.ss}{.cop}.vec.type      d, [a];")]
-    [Ptxop10("ld.volatile{.ss}.type       d, [a];")]
-    [Ptxop10("ld.volatile{.ss}.vec.type   d, [a];")]
-    [Ptxop10("ldu{.ss}.type               d, [a];")]
-    [Ptxop10("ldu{.ss}.vec.type           d, [a];")]
+    [Ptxop("ld{.ss}{.cop}.type          d, [a];")]
+    [Ptxop("ld{.ss}{.cop}.vec.type      d, [a];")]
+    [Ptxop("ld.volatile{.ss}.type       d, [a];")]
+    [Ptxop("ld.volatile{.ss}.vec.type   d, [a];")]
+    [Ptxop("ldu{.ss}.type               d, [a];")]
+    [Ptxop("ldu{.ss}.vec.type           d, [a];")]
     [DebuggerNonUserCode]
     internal class ld : ptxop
     {
         [Mod] public bool u { get; set; }
-        [Infix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
-        [Infix] public ss ss { get; set; }
-        [Infix] public cop cop { get; set; }
-        [Infix] public vec vec { get; set; }
-        [Infix] public type type { get; set; }
+        [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
+        [Affix] public ss ss { get; set; }
+        [Affix] public cop cop { get; set; }
+        [Affix] public vec vec { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

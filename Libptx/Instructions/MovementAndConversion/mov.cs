@@ -1,18 +1,18 @@
 using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
-    [Ptxop10("mov.type d, a;")]
-    [Ptxop10("mov.type d, sreg;")]
-    [Ptxop10("mov.type d, avar;")]
-    [Ptxop10("mov.type d, label;")]
+    [Ptxop("mov.type d, a;")]
+    [Ptxop("mov.type d, sreg;")]
+    [Ptxop("mov.type d, avar;")]
+    [Ptxop("mov.type d, label;")]
     [DebuggerNonUserCode]
     internal class mov : ptxop
     {
-        [Infix] public type type { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

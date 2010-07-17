@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common;
 using XenoGears.Assertions;
+using System.Linq;
 
 namespace Libptx
 {
@@ -13,13 +17,30 @@ namespace Libptx
         public int Minnctapersm { get; set; }
         public int Maxnctapersm { get; set; }
 
-        public override void Validate()
+        protected override SoftwareIsa CustomVersion
         {
-            (Maxnreg.AssertThat(i => i >= 0) > 0).AssertImplies(Ctx.Version >= SoftwareIsa.PTX_13);
-            (Maxntid != null).AssertImplies(Ctx.Version >= SoftwareIsa.PTX_13);
-            (Reqntid != null).AssertImplies(Ctx.Version >= SoftwareIsa.PTX_21);
-            (Minnctapersm.AssertThat(i => i >= 0) > 0).AssertImplies(Ctx.Version >= SoftwareIsa.PTX_20);
-            (Maxnctapersm.AssertThat(i => i >= 0) > 0).AssertImplies(Ctx.Version >= SoftwareIsa.PTX_13);
+            get
+            {
+                var mods = new List<SoftwareIsa>();
+                if (Maxnreg > 0) mods.Add(SoftwareIsa.PTX_13);
+                if (Maxntid != null) mods.Add(SoftwareIsa.PTX_13);
+                if (Reqntid != null) mods.Add(SoftwareIsa.PTX_21);
+                if (Minnctapersm != 0) mods.Add(SoftwareIsa.PTX_20);
+                if (Maxnctapersm != 0) mods.Add(SoftwareIsa.PTX_13);
+                return mods.Max();
+            }
+        }
+
+        protected override void CustomValidate(Module ctx)
+        {
+            (Maxnreg >= 0).AssertTrue();
+            (Minnctapersm >= 0).AssertTrue();
+            (Maxnctapersm >= 0).AssertTrue();
+        }
+
+        protected override void RenderAsPtx(TextWriter writer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

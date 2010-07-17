@@ -1,14 +1,14 @@
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    [Ptxop10("membar.level;")]
+    [Ptxop("membar.level;")]
     internal class membar : ptxop
     {
-        [Infix] public barlevel level { get; set; }
+        [Affix] public barlevel level { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

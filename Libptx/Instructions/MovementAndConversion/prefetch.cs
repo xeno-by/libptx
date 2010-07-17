@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -13,8 +13,8 @@ namespace Libptx.Instructions.MovementAndConversion
     internal class prefetch : ptxop
     {
         [Mod] public bool u { get; set; }
-        [Infix] public ss space { get; set; }
-        [Infix] public cachelevel level { get; set; }
+        [Affix] public ss space { get; set; }
+        [Affix] public cachelevel level { get; set; }
 
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

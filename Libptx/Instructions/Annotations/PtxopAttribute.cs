@@ -1,50 +1,50 @@
 ﻿using System;
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Atoms;
 
 namespace Libptx.Instructions.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Ptxop10Attribute : Atom10Attribute
+    internal class PtxopAttribute : AtomAttribute
     {
-        public Ptxop10Attribute()
+        public PtxopAttribute()
             : base()
         {
         }
 
-        public Ptxop10Attribute(SoftwareIsa swisa)
+        public PtxopAttribute(SoftwareIsa swisa)
             : base(swisa)
         {
         }
 
-        public Ptxop10Attribute(HardwareIsa hwisa)
+        public PtxopAttribute(HardwareIsa hwisa)
             : base(hwisa)
         {
         }
 
-        public Ptxop10Attribute(SoftwareIsa swisa, HardwareIsa hwisa)
+        public PtxopAttribute(SoftwareIsa swisa, HardwareIsa hwisa)
             : base(swisa, hwisa)
         {
         }
 
-        public Ptxop10Attribute(String spec)
+        public PtxopAttribute(String spec)
             : base(spec)
         {
         }
 
-        public Ptxop10Attribute(String spec, SoftwareIsa swisa)
+        public PtxopAttribute(String spec, SoftwareIsa swisa)
             : base(spec, swisa)
         {
         }
 
-        public Ptxop10Attribute(String spec, HardwareIsa hwisa)
+        public PtxopAttribute(String spec, HardwareIsa hwisa)
             : base(spec, hwisa)
         {
         }
 
-        public Ptxop10Attribute(String spec, SoftwareIsa swisa, HardwareIsa hwisa)
+        public PtxopAttribute(String spec, SoftwareIsa swisa, HardwareIsa hwisa)
             : base(spec, swisa, hwisa)
         {
         }

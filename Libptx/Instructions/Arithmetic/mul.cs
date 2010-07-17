@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -8,18 +8,18 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop10("mul{.mode}.type             d, a, b;")]
-    [Ptxop10("mul24{.hi,.lo}.type         d, a, b;")]
-    [Ptxop10("mul{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
-    [Ptxop10("mul{.rnd}.f64               d, a, b;")]
+    [Ptxop("mul{.mode}.type             d, a, b;")]
+    [Ptxop("mul24{.hi,.lo}.type         d, a, b;")]
+    [Ptxop("mul{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
+    [Ptxop("mul{.rnd}.f64               d, a, b;")]
     [DebuggerNonUserCode]
     internal class mul : ptxop
     {
-        [Infix] public mulm mode { get; set; }
-        [Infix] public frnd rnd { get; set; }
-        [Infix] public bool ftz { get; set; }
-        [Infix] public bool sat { get; set; }
-        [Infix] public type type { get; set; }
+        [Affix] public mulm mode { get; set; }
+        [Affix] public frnd rnd { get; set; }
+        [Affix] public bool ftz { get; set; }
+        [Affix] public bool sat { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

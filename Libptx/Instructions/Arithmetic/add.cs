@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -7,21 +7,21 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop10("add.type                    d, a, b;")]
-    [Ptxop10("add{.sat}.s32               d, a, b;")]
-    [Ptxop10("add.cc.type                 d, a, b;")]
-    [Ptxop10("addc{.cc}.type              d, a, b;")]
-    [Ptxop10("add{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
-    [Ptxop10("add{.rnd}.f64               d, a, b;")]
+    [Ptxop("add.type                    d, a, b;")]
+    [Ptxop("add{.sat}.s32               d, a, b;")]
+    [Ptxop("add.cc.type                 d, a, b;")]
+    [Ptxop("addc{.cc}.type              d, a, b;")]
+    [Ptxop("add{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
+    [Ptxop("add{.rnd}.f64               d, a, b;")]
     [DebuggerNonUserCode]
     internal class add : ptxop
     {
         [Mod(SoftwareIsa.PTX_12)] public bool c { get; set; }
-        [Infix(SoftwareIsa.PTX_12)] public bool cc { get; set; }
-        [Infix] public frnd rnd { get; set; }
-        [Infix] public bool ftz { get; set; }
-        [Infix] public bool sat { get; set; }
-        [Infix] public type type { get; set; }
+        [Affix(SoftwareIsa.PTX_12)] public bool cc { get; set; }
+        [Affix] public frnd rnd { get; set; }
+        [Affix] public bool ftz { get; set; }
+        [Affix] public bool sat { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

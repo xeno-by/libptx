@@ -4,10 +4,12 @@ using Libcuda.Versions;
 
 namespace Libptx.Bindings
 {
-    // todo. also support the following scenarios:
-    // 1) multiple instructions of PTX assembly
-    // 2) linkage to pre-compiled binaries stored in native libs, e.g. within CUBLAS or CUFFT
+    // todo. support the following scenarios:
+    // 1) single instruction of PTX assembly
+    // 2) multiple instructions of PTX assembly
     // 3) linkage to PTX generator method
+    // 4) linkage to embedded text in resources
+    // 5) linkage to pre-compiled binaries stored in native libs, e.g. within CUBLAS or CUFFT
 
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]

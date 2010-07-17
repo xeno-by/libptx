@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -7,16 +7,16 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop10("sqrt.approx{.ftz}.f32    d, a;")]
-    [Ptxop10("sqrt.rnd{.ftz}.f32       d, a;")]
-    [Ptxop10("sqrt.rnd.f64             d, a;")]
+    [Ptxop("sqrt.approx{.ftz}.f32    d, a;")]
+    [Ptxop("sqrt.rnd{.ftz}.f32       d, a;")]
+    [Ptxop("sqrt.rnd.f64             d, a;")]
     [DebuggerNonUserCode]
     internal class sqrt : ptxop
     {
-        [Infix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
-        [Infix(SoftwareIsa.PTX_14)] public frnd rnd { get; set; }
-        [Infix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
-        [Infix] public type type { get; set; }
+        [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
+        [Affix(SoftwareIsa.PTX_14)] public frnd rnd { get; set; }
+        [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
+        [Affix] public type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

@@ -4,7 +4,7 @@ using Libptx.Instructions.Annotations;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    [Ptxop10("bar.sync a;")]
+    [Ptxop("bar.sync a;")]
     [Ptxop20("bar.sync a, b;")]
     [DebuggerNonUserCode]
     internal class bar_sync : ptxop

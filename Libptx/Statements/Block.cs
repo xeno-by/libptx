@@ -1,26 +1,37 @@
+using System;
 using System.Collections.Generic;
-using Libptx.Common.Infrastructure;
+using System.IO;
+using Libptx.Common;
 using Libptx.Expressions;
 using XenoGears.Functional;
-using XenoGears.Collections.Observable;
 
 namespace Libptx.Statements
 {
     public class Block : Atom, Statement
     {
-        public virtual IList<Var> Vars { get; private set; }
-        public virtual IList<Statement> Stmts { get; private set; }
-
-        public Block()
+        private IList<Var> _vars = new List<Var>();
+        public IList<Var> Vars
         {
-            Vars = new List<Var>().Observe();
-            Stmts = new List<Statement>().Observe();
+            get { return _vars; }
+            set { _vars = value ?? new List<Var>(); }
         }
 
-        public override void Validate()
+        private IList<Statement> _stmts = new List<Statement>();
+        public IList<Statement> Stmts
         {
-            Vars.ForEach(@var => @var.Validate());
-            Stmts.ForEach(stmt => stmt.Validate());
+            get { return _stmts; }
+            set { _stmts = value ?? new List<Statement>(); }
+        }
+
+        protected override void CustomValidate(Module ctx)
+        {
+            Vars.ForEach(@var => @var.Validate(ctx));
+            Stmts.ForEach(stmt => stmt.Validate(ctx));
+        }
+
+        protected override void RenderAsPtx(TextWriter writer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

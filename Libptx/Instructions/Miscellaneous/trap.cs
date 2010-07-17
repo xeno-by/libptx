@@ -2,7 +2,7 @@
 
 namespace Libptx.Instructions.Miscellaneous
 {
-    [Ptxop10("trap;")]
+    [Ptxop("trap;")]
     internal class trap : ptxop
     {
     }

@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Libptx.Common.Infrastructure;
+using Libptx.Common.Annotations.Quantas;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -8,18 +8,18 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop10("suld.b.geom{.cop}.vec.dtype.clampm   d, [a, b];", SoftwareIsa.PTX_15)]
-    [Ptxop10("suld.p.geom{.cop}.v4.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
+    [Ptxop("suld.b.geom{.cop}.vec.dtype.clampm   d, [a, b];", SoftwareIsa.PTX_15)]
+    [Ptxop("suld.p.geom{.cop}.v4.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
     [DebuggerNonUserCode]
     internal class suld : ptxop
     {
-        [Infix] public bool b { get; set; }
-        [Infix] public bool p { get; set; }
-        [Infix] public geom geom { get; set; }
-        [Infix] public cop cop { get; set; }
-        [Infix] public vec vec { get; set; }
-        [Infix] public type dtype { get; set; }
-        [Infix] public clampm clampm { get; set; }
+        [Affix] public bool b { get; set; }
+        [Affix] public bool p { get; set; }
+        [Affix] public geom geom { get; set; }
+        [Affix] public cop cop { get; set; }
+        [Affix] public vec vec { get; set; }
+        [Affix] public type dtype { get; set; }
+        [Affix] public clampm clampm { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

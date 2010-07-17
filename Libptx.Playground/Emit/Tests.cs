@@ -29,14 +29,16 @@ namespace Libptx.Playground.Emit
             // also we could provide a regioned copy/paste with default implementation of those symbols
             var kernel = new Entry("MatMulKernel", a => b8[12].align4, b => b8[12].align4, c => b8[12].align4);
 
-            // 64: __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C)
-            // 65: {
+            // __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C)
             var a = kernel.Params[0], b = kernel.Params[1], c = kernel.Params[2];
             Label loop_body, after_loop, exit;
             Var_S32 a_width, a_height, a_raw, b_width, b_height, b_raw, row, col, cvalue, dim;
             Var_S32 a_offset, a_offset_lo, a_offset_stride, a_offset_hi;
             Var_S32 b_offset, b_offset_lo, b_offset_stride, b_offset_hi;
             kernel.def(out loop_body, out after_loop, out exit) // out varargs? "def", but not "def_label" since here we can facilitate ad-hoc overloading
+            .def(out a_width, out a_height, out a_raw, out b_width, out b_height, out b_raw, out row, out col, out cvalue, out dim)
+            .def(out a_offset, out a_offset_lo, out a_offset_stride, out a_offset_hi)
+            .def(out b_offset, out b_offset_lo, out b_offset_stride, out b_offset_hi)
 
             // int row = blockIdx.y * blockDim.y + threadIdx.y;
             // int col = blockIdx.x * blockDim.x + threadIdx.x;
