@@ -1,5 +1,5 @@
 using Libptx.Common.Enumerations;
-using Libptx.Common.Annotations.Quantas;
+using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions;
 using Libptx.Specials.Annotations;
 using XenoGears.Assertions;

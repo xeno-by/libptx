@@ -1,5 +1,5 @@
 ﻿using Libcuda.Versions;
-using Libptx.Common.Annotations.Quantas;
+using Libptx.Common.Annotations.Quanta;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;

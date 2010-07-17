@@ -1,4 +1,4 @@
-using Libptx.Common.Annotations.Quantas;
+using Libptx.Common.Annotations.Quanta;
 
 namespace Libptx.Common.Types
 {

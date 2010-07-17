@@ -2,48 +2,58 @@ using System;
 using System.Diagnostics;
 using Libcuda.Versions;
 
-namespace Libptx.Common.Annotations.Quantas
+namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class ModAttribute : QuantumAttribute
+    internal class AffixAttribute : QuantumAttribute
     {
-        public ModAttribute()
+        public AffixAttribute()
             : this(null, SoftwareIsa.PTX_10, HardwareIsa.SM_10)
         {
         }
 
-        public ModAttribute(SoftwareIsa softwareIsa)
+        public AffixAttribute(SoftwareIsa softwareIsa)
             : this(null, softwareIsa, softwareIsa < SoftwareIsa.PTX_20 ? HardwareIsa.SM_10 : HardwareIsa.SM_20)
         {
         }
 
-        public ModAttribute(HardwareIsa hardwareIsa)
+        public AffixAttribute(HardwareIsa hardwareIsa)
             : this(null, hardwareIsa < HardwareIsa.SM_20 ? SoftwareIsa.PTX_10 : SoftwareIsa.PTX_20, hardwareIsa)
         {
         }
 
-        public ModAttribute(SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+        public AffixAttribute(SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
             : this(null, softwareIsa, hardwareIsa)
         {
         }
 
-        public ModAttribute(String signature)
+        public AffixAttribute(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+            : this(null, softwareIsa, hardwareIsa)
+        {
+        }
+
+        public AffixAttribute(String signature)
             : this(signature, SoftwareIsa.PTX_10, HardwareIsa.SM_10)
         {
         }
 
-        public ModAttribute(String signature, SoftwareIsa softwareIsa)
+        public AffixAttribute(String signature, SoftwareIsa softwareIsa)
             : this(signature, softwareIsa, softwareIsa < SoftwareIsa.PTX_20 ? HardwareIsa.SM_10 : HardwareIsa.SM_20)
         {
         }
 
-        public ModAttribute(String signature, HardwareIsa hardwareIsa)
+        public AffixAttribute(String signature, HardwareIsa hardwareIsa)
             : this(signature, hardwareIsa < HardwareIsa.SM_20 ? SoftwareIsa.PTX_10 : SoftwareIsa.PTX_20, hardwareIsa)
         {
         }
 
-        public ModAttribute(String signature, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+        public AffixAttribute(String signature, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+            : base(signature, softwareIsa, hardwareIsa)
+        {
+        }
+
+        public AffixAttribute(String signature, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
             : base(signature, softwareIsa, hardwareIsa)
         {
         }

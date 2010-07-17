@@ -3,58 +3,58 @@ using System.Diagnostics;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
-namespace Libptx.Common.Annotations.Quantas
+namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
-    internal class Affix20Attribute : AffixAttribute
+    internal class Infix20Attribute : InfixAttribute
     {
-        public Affix20Attribute()
+        public Infix20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
         {
         }
 
-        public Affix20Attribute(SoftwareIsa softwareIsa)
+        public Infix20Attribute(SoftwareIsa softwareIsa)
             : this(null, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_20)
         {
         }
 
-        public Affix20Attribute(HardwareIsa hardwareIsa)
+        public Infix20Attribute(HardwareIsa hardwareIsa)
             : this(null, SoftwareIsa.PTX_20, hardwareIsa)
         {
         }
 
-        public Affix20Attribute(SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+        public Infix20Attribute(SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
             : this(null, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
         }
 
-        public Affix20Attribute(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+        public Infix20Attribute(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
             : this(null, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
         }
 
-        public Affix20Attribute(String signature)
+        public Infix20Attribute(String signature)
             : this(signature, SoftwareIsa.PTX_20, HardwareIsa.SM_20)
         {
         }
 
-        public Affix20Attribute(String signature, SoftwareIsa softwareIsa)
+        public Infix20Attribute(String signature, SoftwareIsa softwareIsa)
             : this(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_10)
         {
         }
 
-        public Affix20Attribute(String signature, HardwareIsa hardwareIsa)
+        public Infix20Attribute(String signature, HardwareIsa hardwareIsa)
             : this(signature, SoftwareIsa.PTX_20, hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
         }
 
-        public Affix20Attribute(String signature, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+        public Infix20Attribute(String signature, SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
             : base(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
         }
 
-        public Affix20Attribute(String signature, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+        public Infix20Attribute(String signature, HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
             : base(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), hardwareIsa.AssertThat(isa => isa >= HardwareIsa.SM_20))
         {
         }
