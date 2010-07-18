@@ -8,6 +8,6 @@ namespace Libptx.Common.Types
         [Affix(".v1")] V1,
         [Affix(".v2")] V2,
         [Affix(".v4")] V4,
-        [Affix(null)] Array,
+        [Affix(null)] Array = 8,
     }
 }

@@ -1,14 +1,9 @@
-using System;
-using System.IO;
+﻿using System;
 using Libcuda.DataTypes;
-using Libptx.Common;
-using XenoGears.Assertions;
-using XenoGears.Functional;
-using System.Linq;
 
 namespace Libptx.Expressions
 {
-    public class Const : Atom, Expression
+    public partial class Const
     {
         public static implicit operator Const(bool value) { return new Const(value); }
         public static implicit operator Const(sbyte value) { return new Const(value); }
@@ -61,41 +56,8 @@ namespace Libptx.Expressions
         public static implicit operator Const(double1 value) { return new Const(value); }
         public static implicit operator Const(double2 value) { return new Const(value); }
 
-        // todo. also textgen strongly-typed implicit casts from T[], T[,] and T[][] where T is one of supported types
+        // todo. also textgen strongly-typed implicit casts from T[], T[,] and T[][], T[,,] and T[][][] where T is one of supported types
+        // after that is done, also update Var.Dsl since it basically copy/pastes this stuff
         public static implicit operator Const(Array value) { return new Const(value); }
-
-        public Const(Object value)
-        {
-            Value = value;
-        }
-
-        private Object _value;
-        public Object Value
-        {
-            get { return _value; }
-            set
-            {
-                ValidateValue(value);
-                _value = value;
-            }
-        }
-
-        private void ValidateValue(Object value)
-        {
-            value.AssertNotNull();
-
-            var elt = value.GetType().Unfold(t => t.IsArray ? t.GetElementType() : null, t => t != null).Last();
-            (elt.IsCudaPrimitive() || elt.IsCudaVector()).AssertTrue();
-        }
-
-        protected override void CustomValidate(Module ctx)
-        {
-            ValidateValue(Value);
-        }
-
-        protected override void RenderAsPtx(TextWriter writer)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -7,7 +7,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Statements
 {
-    public class Label : Atom, Expression, Statement
+    public class Label : Atom, Expression, Statement, Addressable
     {
         public String Name { get; set; } // may be null
 

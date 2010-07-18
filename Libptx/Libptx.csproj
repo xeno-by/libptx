@@ -54,6 +54,7 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\Comparison.cs" />
     <Compile Include="Common\Renderable.cs" />
+    <Compile Include="Common\Types\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />
     <Compile Include="Common\Annotations\ParticleAttribute.cs" />
     <Compile Include="Common\Annotations\Atoms\Location.cs" />
@@ -77,13 +78,16 @@
     <Compile Include="Expressions\Address.cs" />
     <Compile Include="Expressions\Addressable.cs" />
     <Compile Include="Common\Atom.cs" />
-    <Compile Include="Expressions\Const.cs" />
+    <Compile Include="Expressions\Const.Core.cs" />
+    <Compile Include="Expressions\Const.Dsl.cs" />
+    <Compile Include="Expressions\Couple.cs" />
     <Compile Include="Expressions\Expression.cs" />
-    <Compile Include="Common\Types\Type.cs" />
+    <Compile Include="Common\Types\Type.Core.cs" />
     <Compile Include="Common\Types\TypeName.cs" />
     <Compile Include="Common\Enumerations\Space.cs" />
-    <Compile Include="Expressions\Var.cs" />
+    <Compile Include="Expressions\Var.Core.cs" />
     <Compile Include="Common\Types\TypeMod.cs" />
+    <Compile Include="Expressions\Var.Dsl.cs" />
     <Compile Include="Expressions\VarMod.cs" />
     <Compile Include="Expressions\Vector.cs" />
     <Compile Include="Common\Annotations\Atoms\Atom20Attribute.cs" />

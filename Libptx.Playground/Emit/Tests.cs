@@ -54,8 +54,8 @@ namespace Libptx.Playground.Emit
            .add(row, r5, r2)
 
             // if (A.height <= row || B.width <= col) return;
-           .ld.param(b_width, ~b + 0) // or b.addr + 0
-           .ld.param(a_height, ~a + 4) // or a.addr + 4
+           .ld.param(b_width, b + 0)
+           .ld.param(a_height, a + 4)
            .set.le(p6, a_height.u32, row.u32) // notice the ".u32" qualifier
            .set.le(p7, b_width, col)
            .or(p1, p6, p7)
@@ -65,28 +65,28 @@ namespace Libptx.Playground.Emit
            .mov(cvalue, 0)
 
            // for (int dim = 0; dim < A.width; ++dim)
-           .ld.param(a_width, ~a + 0)
+           .ld.param(a_width, a + 0)
            .mov(dim, 0)
-           .set.le(p2, a_width, dim)
-           .@(p2).bra(after_loop)
+           .set.le(p2|p8, a_width, dim)
+           .@(!p8).bra(after_loop)
 
            // Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];
-           .ld.param(a_raw, ~a + 8)
+           .ld.param(a_raw, a + 8)
            .mul.lo(r18, a_width, row)
            .mul.lo(a_offset_lo, r18, 4)
            .add(a_offset, a_raw, a_offset_lo)
            .add(r21, r18, a_width)
            .mul.lo(r25, r21, 4)
            .add(a_offset_hi, r25, a_raw)
-           .ld.param(b_raw, ~b + 8)
+           .ld.param(b_raw, b + 8)
            .mul.lo(b_offset_lo, col, 4)
            .add(b_offset, b_raw, b_offset_lo)
            .mul(b_offset_stride, b_width, 4)
 
            // Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];
            .mark(loop_body)
-           .ld.global(f2, ~a_offset + 0)
-           .ld.global(f3, ~b_offset + 0)
+           .ld.global(f2, a_offset)
+           .ld.global(f3, b_offset)
            .mad(cvalue, f3, f2, cvalue)
            .add(a_offset, a_offset, 4)
            .add(b_offset, b_offset, b_offset_stride)
@@ -95,13 +95,13 @@ namespace Libptx.Playground.Emit
            .bra_uni(after_loop)
 
            // C.elements[row * C.width + col] = Cvalue;
-           .ld.param(c_raw, ~c + 8)
-           .ld.param(c_width, ~c + 0)
+           .ld.param(c_raw, c + 8)
+           .ld.param(c_width, c + 0)
            .mul.lo(r32, c_width, row)
            .add(r33, col, r32)
            .mul.lo(r34, r33, 4)
            .add(r35, c_raw, r34)
-           .st.global(~r35 + 0, cvalue)
+           .st.global(r35, cvalue)
            .exit();
         }
     }

@@ -3,7 +3,7 @@ using ClrType = System.Type;
 
 namespace Libptx.Common.Types
 {
-    public class Type
+    public partial class Type
     {
         public TypeName Name { get; set; }
         public TypeMod Mod { get; set; }
@@ -20,8 +20,5 @@ namespace Libptx.Common.Types
 
         public static implicit operator ClrType(Type t) { throw new NotImplementedException(); }
         public static implicit operator Type(ClrType t) { throw new NotImplementedException(); }
-
-        public static implicit operator String(Type t) { throw new NotImplementedException(); }
-        public static implicit operator Type(String t) { throw new NotImplementedException(); }
     }
 }
