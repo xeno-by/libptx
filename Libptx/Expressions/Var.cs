@@ -6,7 +6,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public partial class Var : Atom, Expression, Addressable
+    public class Var : Atom, Expression, Addressable
     {
         public String Name { get; set; } // may be null
         public Space Space { get; set; }
@@ -16,6 +16,8 @@ namespace Libptx.Expressions
         public VarMod Mod { get; set; }
         public bool IsVisible { get; set; }
         public bool IsExtern { get; set; }
+
+        // todo. inits are only allowed for <what> spaces?
 
         protected override void CustomValidate(Module ctx)
         {
