@@ -1,5 +1,5 @@
 ﻿This project requires XenoGears source code rather than binaries.
-Expected source location: ..\XenoGears (relative to the root of this checkout)
+Expected source location: must be set in the XENOGEARS environment variable.
 You can get source code as follows: hg clone https://xenogears.googlecode.com/hg/
 
 I'm using such a simple mechanism of referencing a 3rd-party codebase since at the moment XenoGears is still very much in flux.
