@@ -66,11 +66,11 @@
       <Project>{6272D158-34F7-4DE1-907F-AFFD8E1E28F8}</Project>
       <Name>Libptx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\XenoGears\XenoGears\XenoGears.csproj">
+    <ProjectReference Include="$(XENOGEARS)\XenoGears\XenoGears.csproj">
       <Project>{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}</Project>
       <Name>XenoGears</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\XenoGears\XenoGears.Playground\XenoGears.Playground.csproj">
+    <ProjectReference Include="$(XENOGEARS)\XenoGears.Playground\XenoGears.Playground.csproj">
       <Project>{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}</Project>
       <Name>XenoGears.Playground</Name>
     </ProjectReference>
