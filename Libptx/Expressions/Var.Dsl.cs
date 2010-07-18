@@ -108,8 +108,251 @@ namespace Libptx.Expressions
         protected Var init(double value) { return Clone(v => v.Init = value); }
         protected Var init(double1 value) { return Clone(v => v.Init = value); }
         protected Var init(double2 value) { return Clone(v => v.Init = value); }
-        // todo. also textgen strongly-typed initialization with arrays (see Const.Dsl for more info)
-        protected Var init(Array value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte[] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(sbyte4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte[] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(byte4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short[] value) { return Clone(v => v.Init = value); }
+        protected Var init(short[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(short1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(short2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(short3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(short4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(short4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(short4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ushort4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int[] value) { return Clone(v => v.Init = value); }
+        protected Var init(int[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(int1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(int2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(int3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(int4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(int4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(int4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint[] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(uint4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(long[] value) { return Clone(v => v.Init = value); }
+        protected Var init(long[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(long[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(long[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(long[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(long1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(long1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(long1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(long1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(long1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(long2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(long2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(long2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(long2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(long2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(ulong2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half[] value) { return Clone(v => v.Init = value); }
+        protected Var init(half[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(half1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(half2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(half3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(half4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(half4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(half4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float[] value) { return Clone(v => v.Init = value); }
+        protected Var init(float[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(float1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(float2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float2[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float3[] value) { return Clone(v => v.Init = value); }
+        protected Var init(float3[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float3[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float3[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float3[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float4[] value) { return Clone(v => v.Init = value); }
+        protected Var init(float4[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float4[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(float4[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(float4[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(double[] value) { return Clone(v => v.Init = value); }
+        protected Var init(double[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(double[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(double[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(double[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(double1[] value) { return Clone(v => v.Init = value); }
+        protected Var init(double1[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(double1[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(double1[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(double1[, ,] value) { return Clone(v => v.Init = value); }
+        protected Var init(double2[] value) { return Clone(v => v.Init = value); }
+        protected Var init(double2[][] value) { return Clone(v => v.Init = value); }
+        protected Var init(double2[,] value) { return Clone(v => v.Init = value); }
+        protected Var init(double2[][][] value) { return Clone(v => v.Init = value); }
+        protected Var init(double2[, ,] value) { return Clone(v => v.Init = value); }
 
         protected Var align(int alignment) { return Clone(v => v.Alignment = alignment.AssertThat(i => i > 0)); }
         protected Var align1 { get { return align(1); } }
