@@ -82,6 +82,42 @@
     <Compile Include="Common\Types\Sampler.cs" />
     <Compile Include="Common\Types\Surf.cs" />
     <Compile Include="Common\Types\Tex.cs" />
+    <Compile Include="Edsl\Types\b16.cs" />
+    <Compile Include="Edsl\Types\b32.cs" />
+    <Compile Include="Edsl\Types\b64.cs" />
+    <Compile Include="Edsl\Types\b8.cs" />
+    <Compile Include="Edsl\Types\f16.cs" />
+    <Compile Include="Edsl\Types\f32.cs" />
+    <Compile Include="Edsl\Types\f64.cs" />
+    <Compile Include="Edsl\Types\pred.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_b16.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_b32.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_b64.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_b8.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_f16.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_f32.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_f64.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_s16.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_s32.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_s64.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_s8.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_u16.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_u32.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_u64.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_u8.cs" />
+    <Compile Include="Edsl\Types\s16.cs" />
+    <Compile Include="Edsl\Types\s32.cs" />
+    <Compile Include="Edsl\Types\s64.cs" />
+    <Compile Include="Edsl\Types\s8.cs" />
+    <Compile Include="Edsl\Types\sampler.cs" />
+    <Compile Include="Edsl\Types\surf.cs" />
+    <Compile Include="Edsl\Types\tex.cs" />
+    <Compile Include="Edsl\Types\u16.cs" />
+    <Compile Include="Edsl\Types\u32.cs" />
+    <Compile Include="Edsl\Types\u64.cs" />
+    <Compile Include="Edsl\Types\u8.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type.cs" />
+    <Compile Include="Edsl\Types\Relaxed\relaxed_type.cs" />
     <Compile Include="Edsl\Vars\var_b16.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -391,10 +427,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Edsl\Types\" />
-    <Folder Include="Edsl\Vars\Types\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
