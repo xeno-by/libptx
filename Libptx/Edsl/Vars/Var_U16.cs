@@ -1,51 +1,55 @@
 using System;
+using System.Linq;
 using Libptx.Expressions;
+using Libptx.Common.Types;
+using Libcuda.DataTypes;
 using XenoGears.Assertions;
+using XenoGears.Functional;
 
 namespace Libptx.Edsl.Vars
 {
-    public class Var_U16 : Var
+    public class var_u16 : Var
     {
-        public Var_U16_V1 v1 { get { return Clone<Var_U16_V1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
-        public Var_U16_V2 v2 { get { return Clone<Var_U16_V2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
-        public Var_U16_V4 v4 { get { return Clone<Var_U16_V4>(v => v.Type = v.Type.v4, v => v.Init = null); } }
-        public Var_U16_A1 this[int dim] { get { return Clone<Var_U16_A1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
+        public var_u16_v1 v1 { get { return Clone<var_u16_v1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
+        public var_u16_v2 v2 { get { return Clone<var_u16_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
+        public var_u16_v4 v4 { get { return Clone<var_u16_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }
+        public var_u16_a1 this[int dim] { get { return Clone<var_u16_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
 
-        public new Var_U16 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
-        public new Var_U16 sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }
-        public new Var_U16 local { get { return Clone(v => v.Space = Common.Enumerations.Space.Local); } }
-        public new Var_U16 shared { get { return Clone(v => v.Space = Common.Enumerations.Space.Shared); } }
-        public new Var_U16 global { get { return Clone(v => v.Space = Common.Enumerations.Space.Global); } }
-        public new Var_U16 param { get { return Clone(v => v.Space = Common.Enumerations.Space.Param); } }
-        public new Var_U16 @const { get { return Clone(v => v.Space = Common.Enumerations.Space.Const); } }
-        public new Var_U16 const0 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const0); } }
-        public new Var_U16 const1 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const1); } }
-        public new Var_U16 const2 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const2); } }
-        public new Var_U16 const3 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const3); } }
-        public new Var_U16 const4 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const4); } }
-        public new Var_U16 const5 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const5); } }
-        public new Var_U16 const6 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const6); } }
-        public new Var_U16 const7 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const7); } }
-        public new Var_U16 const8 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const8); } }
-        public new Var_U16 const9 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const9); } }
-        public new Var_U16 const10 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const10); } }
+        public new var_u16 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
+        public new var_u16 sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }
+        public new var_u16 local { get { return Clone(v => v.Space = Common.Enumerations.Space.Local); } }
+        public new var_u16 shared { get { return Clone(v => v.Space = Common.Enumerations.Space.Shared); } }
+        public new var_u16 global { get { return Clone(v => v.Space = Common.Enumerations.Space.Global); } }
+        public new var_u16 param { get { return Clone(v => v.Space = Common.Enumerations.Space.Param); } }
+        public new var_u16 @const { get { return Clone(v => v.Space = Common.Enumerations.Space.Const); } }
+        public new var_u16 const0 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const0); } }
+        public new var_u16 const1 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const1); } }
+        public new var_u16 const2 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const2); } }
+        public new var_u16 const3 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const3); } }
+        public new var_u16 const4 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const4); } }
+        public new var_u16 const5 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const5); } }
+        public new var_u16 const6 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const6); } }
+        public new var_u16 const7 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const7); } }
+        public new var_u16 const8 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const8); } }
+        public new var_u16 const9 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const9); } }
+        public new var_u16 const10 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const10); } }
 
-        public Var_U16 init(short value) { return Clone(v => v.Init = value); }
+        public var_u16 init(ushort value) { return Clone(v => v.Init = value); }
 
-        public Var_U16() { Alignment = sizeof(short); }
-        public Var_U16 align(int alignment) { return Clone(v => v.Alignment = alignment.AssertThat(i => i > 0 && i % sizeof(short) == 0)); }
-        public Var_U16 align2 { get { return align(2); } }
-        public Var_U16 align4 { get { return align(4); } }
-        public Var_U16 align8 { get { return align(8); } }
-        public Var_U16 align16 { get { return align(16); } }
+        public var_u16() { Alignment = 2 /* sizeof(ushort) */; }
+        public var_u16 align(int alignment){ return Clone(v => v.Alignment = alignment.AssertThat(a => a.Unfoldi(i => i / 2, i => i > 1).All(mod => mod == 0))); }
+        public var_u16 align2{ get { return align(2); } }
+        public var_u16 align4{ get { return align(4); } }
+        public var_u16 align8{ get { return align(8); } }
+        public var_u16 align16{ get { return align(16); } }
 
-        public Var_U16 export { get { return Clone(v => v.IsVisible = true); } }
-        public Var_U16 import { get { return Clone(v => v.IsExtern = true); } }
-        public Var_U16 @extern { get { return Clone(v => v.IsExtern = true); } }
+        public var_u16 export { get { return Clone(v => v.IsVisible = true); } }
+        public var_u16 import { get { return Clone(v => v.IsExtern = true); } }
+        public var_u16 @extern { get { return Clone(v => v.IsExtern = true); } }
 
-        private Var_U16 Clone()
+        private var_u16 Clone()
         {
-            return Clone<Var_U16>();
+            return Clone<var_u16>();
         }
 
         private T Clone<T>()
@@ -63,9 +67,9 @@ namespace Libptx.Edsl.Vars
             return clone;
         }
 
-        protected Var_U16 Clone(params Action<Var_U16>[] mods)
+        protected var_u16 Clone(params Action<var_u16>[] mods)
         {
-            return Clone<Var_U16>(mods);
+            return Clone<var_u16>(mods);
         }
 
         protected T Clone<T>(params Action<T>[] mods)

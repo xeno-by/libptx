@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Libptx.Common.Types
 {
+    [DebuggerNonUserCode]
     public struct Bit16
     {
         internal short _fillerForSizeof;

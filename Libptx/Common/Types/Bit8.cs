@@ -7,9 +7,10 @@ using System.Runtime.InteropServices;
 
 namespace Libptx.Common.Types
 {
+    [DebuggerNonUserCode]
     public struct Bit8
     {
-        internal Bit8 _fillerForSizeof;
+        internal byte _fillerForSizeof;
     }
 
     [DebuggerNonUserCode]

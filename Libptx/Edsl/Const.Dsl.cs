@@ -1,4 +1,5 @@
 ﻿using Libcuda.DataTypes;
+using Libptx.Common.Types;
 
 namespace Libptx.Expressions
 {
@@ -38,9 +39,13 @@ namespace Libptx.Expressions
         public static implicit operator Const(long value) { return new Const(value); }
         public static implicit operator Const(long1 value) { return new Const(value); }
         public static implicit operator Const(long2 value) { return new Const(value); }
+        public static implicit operator Const(long3 value) { return new Const(value); }
+        public static implicit operator Const(long4 value) { return new Const(value); }
         public static implicit operator Const(ulong value) { return new Const(value); }
         public static implicit operator Const(ulong1 value) { return new Const(value); }
         public static implicit operator Const(ulong2 value) { return new Const(value); }
+        public static implicit operator Const(ulong3 value) { return new Const(value); }
+        public static implicit operator Const(ulong4 value) { return new Const(value); }
         public static implicit operator Const(half value) { return new Const(value); }
         public static implicit operator Const(half1 value) { return new Const(value); }
         public static implicit operator Const(half2 value) { return new Const(value); }
@@ -54,152 +59,105 @@ namespace Libptx.Expressions
         public static implicit operator Const(double value) { return new Const(value); }
         public static implicit operator Const(double1 value) { return new Const(value); }
         public static implicit operator Const(double2 value) { return new Const(value); }
+        public static implicit operator Const(double3 value) { return new Const(value); }
+        public static implicit operator Const(double4 value) { return new Const(value); }
+        public static implicit operator Const(Bit8 value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V1 value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V2 value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V3 value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V4 value) { return new Const(value); }
+        public static implicit operator Const(Bit16 value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V1 value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V2 value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V3 value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V4 value) { return new Const(value); }
+        public static implicit operator Const(Bit32 value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V1 value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V2 value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V3 value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V4 value) { return new Const(value); }
+        public static implicit operator Const(Bit64 value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V1 value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V2 value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V3 value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V4 value) { return new Const(value); }
+        public static implicit operator Const(Tex value) { return new Const(value); }
+        public static implicit operator Const(Sampler value) { return new Const(value); }
+        public static implicit operator Const(Surf value) { return new Const(value); }
         public static implicit operator Const(sbyte[] value) { return new Const(value); }
-        public static implicit operator Const(sbyte[][] value) { return new Const(value); }
-        public static implicit operator Const(sbyte[,] value) { return new Const(value); }
         public static implicit operator Const(sbyte1[] value) { return new Const(value); }
-        public static implicit operator Const(sbyte1[][] value) { return new Const(value); }
-        public static implicit operator Const(sbyte1[,] value) { return new Const(value); }
         public static implicit operator Const(sbyte2[] value) { return new Const(value); }
-        public static implicit operator Const(sbyte2[][] value) { return new Const(value); }
-        public static implicit operator Const(sbyte2[,] value) { return new Const(value); }
         public static implicit operator Const(sbyte3[] value) { return new Const(value); }
-        public static implicit operator Const(sbyte3[][] value) { return new Const(value); }
-        public static implicit operator Const(sbyte3[,] value) { return new Const(value); }
         public static implicit operator Const(sbyte4[] value) { return new Const(value); }
-        public static implicit operator Const(sbyte4[][] value) { return new Const(value); }
-        public static implicit operator Const(sbyte4[,] value) { return new Const(value); }
         public static implicit operator Const(byte[] value) { return new Const(value); }
-        public static implicit operator Const(byte[][] value) { return new Const(value); }
-        public static implicit operator Const(byte[,] value) { return new Const(value); }
         public static implicit operator Const(byte1[] value) { return new Const(value); }
-        public static implicit operator Const(byte1[][] value) { return new Const(value); }
-        public static implicit operator Const(byte1[,] value) { return new Const(value); }
         public static implicit operator Const(byte2[] value) { return new Const(value); }
-        public static implicit operator Const(byte2[][] value) { return new Const(value); }
-        public static implicit operator Const(byte2[,] value) { return new Const(value); }
         public static implicit operator Const(byte3[] value) { return new Const(value); }
-        public static implicit operator Const(byte3[][] value) { return new Const(value); }
-        public static implicit operator Const(byte3[,] value) { return new Const(value); }
         public static implicit operator Const(byte4[] value) { return new Const(value); }
-        public static implicit operator Const(byte4[][] value) { return new Const(value); }
-        public static implicit operator Const(byte4[,] value) { return new Const(value); }
         public static implicit operator Const(short[] value) { return new Const(value); }
-        public static implicit operator Const(short[][] value) { return new Const(value); }
-        public static implicit operator Const(short[,] value) { return new Const(value); }
         public static implicit operator Const(short1[] value) { return new Const(value); }
-        public static implicit operator Const(short1[][] value) { return new Const(value); }
-        public static implicit operator Const(short1[,] value) { return new Const(value); }
         public static implicit operator Const(short2[] value) { return new Const(value); }
-        public static implicit operator Const(short2[][] value) { return new Const(value); }
-        public static implicit operator Const(short2[,] value) { return new Const(value); }
         public static implicit operator Const(short3[] value) { return new Const(value); }
-        public static implicit operator Const(short3[][] value) { return new Const(value); }
-        public static implicit operator Const(short3[,] value) { return new Const(value); }
         public static implicit operator Const(short4[] value) { return new Const(value); }
-        public static implicit operator Const(short4[][] value) { return new Const(value); }
-        public static implicit operator Const(short4[,] value) { return new Const(value); }
         public static implicit operator Const(ushort[] value) { return new Const(value); }
-        public static implicit operator Const(ushort[][] value) { return new Const(value); }
-        public static implicit operator Const(ushort[,] value) { return new Const(value); }
         public static implicit operator Const(ushort1[] value) { return new Const(value); }
-        public static implicit operator Const(ushort1[][] value) { return new Const(value); }
-        public static implicit operator Const(ushort1[,] value) { return new Const(value); }
         public static implicit operator Const(ushort2[] value) { return new Const(value); }
-        public static implicit operator Const(ushort2[][] value) { return new Const(value); }
-        public static implicit operator Const(ushort2[,] value) { return new Const(value); }
         public static implicit operator Const(ushort3[] value) { return new Const(value); }
-        public static implicit operator Const(ushort3[][] value) { return new Const(value); }
-        public static implicit operator Const(ushort3[,] value) { return new Const(value); }
         public static implicit operator Const(ushort4[] value) { return new Const(value); }
-        public static implicit operator Const(ushort4[][] value) { return new Const(value); }
-        public static implicit operator Const(ushort4[,] value) { return new Const(value); }
         public static implicit operator Const(int[] value) { return new Const(value); }
-        public static implicit operator Const(int[][] value) { return new Const(value); }
-        public static implicit operator Const(int[,] value) { return new Const(value); }
         public static implicit operator Const(int1[] value) { return new Const(value); }
-        public static implicit operator Const(int1[][] value) { return new Const(value); }
-        public static implicit operator Const(int1[,] value) { return new Const(value); }
         public static implicit operator Const(int2[] value) { return new Const(value); }
-        public static implicit operator Const(int2[][] value) { return new Const(value); }
-        public static implicit operator Const(int2[,] value) { return new Const(value); }
         public static implicit operator Const(int3[] value) { return new Const(value); }
-        public static implicit operator Const(int3[][] value) { return new Const(value); }
-        public static implicit operator Const(int3[,] value) { return new Const(value); }
         public static implicit operator Const(int4[] value) { return new Const(value); }
-        public static implicit operator Const(int4[][] value) { return new Const(value); }
-        public static implicit operator Const(int4[,] value) { return new Const(value); }
         public static implicit operator Const(uint[] value) { return new Const(value); }
-        public static implicit operator Const(uint[][] value) { return new Const(value); }
-        public static implicit operator Const(uint[,] value) { return new Const(value); }
         public static implicit operator Const(uint1[] value) { return new Const(value); }
-        public static implicit operator Const(uint1[][] value) { return new Const(value); }
-        public static implicit operator Const(uint1[,] value) { return new Const(value); }
         public static implicit operator Const(uint2[] value) { return new Const(value); }
-        public static implicit operator Const(uint2[][] value) { return new Const(value); }
-        public static implicit operator Const(uint2[,] value) { return new Const(value); }
         public static implicit operator Const(uint3[] value) { return new Const(value); }
-        public static implicit operator Const(uint3[][] value) { return new Const(value); }
-        public static implicit operator Const(uint3[,] value) { return new Const(value); }
         public static implicit operator Const(uint4[] value) { return new Const(value); }
-        public static implicit operator Const(uint4[][] value) { return new Const(value); }
-        public static implicit operator Const(uint4[,] value) { return new Const(value); }
         public static implicit operator Const(long[] value) { return new Const(value); }
-        public static implicit operator Const(long[][] value) { return new Const(value); }
-        public static implicit operator Const(long[,] value) { return new Const(value); }
         public static implicit operator Const(long1[] value) { return new Const(value); }
-        public static implicit operator Const(long1[][] value) { return new Const(value); }
-        public static implicit operator Const(long1[,] value) { return new Const(value); }
         public static implicit operator Const(long2[] value) { return new Const(value); }
-        public static implicit operator Const(long2[][] value) { return new Const(value); }
-        public static implicit operator Const(long2[,] value) { return new Const(value); }
+        public static implicit operator Const(long3[] value) { return new Const(value); }
+        public static implicit operator Const(long4[] value) { return new Const(value); }
         public static implicit operator Const(ulong[] value) { return new Const(value); }
-        public static implicit operator Const(ulong[][] value) { return new Const(value); }
-        public static implicit operator Const(ulong[,] value) { return new Const(value); }
         public static implicit operator Const(ulong1[] value) { return new Const(value); }
-        public static implicit operator Const(ulong1[][] value) { return new Const(value); }
-        public static implicit operator Const(ulong1[,] value) { return new Const(value); }
         public static implicit operator Const(ulong2[] value) { return new Const(value); }
-        public static implicit operator Const(ulong2[][] value) { return new Const(value); }
-        public static implicit operator Const(ulong2[,] value) { return new Const(value); }
+        public static implicit operator Const(ulong3[] value) { return new Const(value); }
+        public static implicit operator Const(ulong4[] value) { return new Const(value); }
         public static implicit operator Const(half[] value) { return new Const(value); }
-        public static implicit operator Const(half[][] value) { return new Const(value); }
-        public static implicit operator Const(half[,] value) { return new Const(value); }
         public static implicit operator Const(half1[] value) { return new Const(value); }
-        public static implicit operator Const(half1[][] value) { return new Const(value); }
-        public static implicit operator Const(half1[,] value) { return new Const(value); }
         public static implicit operator Const(half2[] value) { return new Const(value); }
-        public static implicit operator Const(half2[][] value) { return new Const(value); }
-        public static implicit operator Const(half2[,] value) { return new Const(value); }
         public static implicit operator Const(half3[] value) { return new Const(value); }
-        public static implicit operator Const(half3[][] value) { return new Const(value); }
-        public static implicit operator Const(half3[,] value) { return new Const(value); }
         public static implicit operator Const(half4[] value) { return new Const(value); }
-        public static implicit operator Const(half4[][] value) { return new Const(value); }
-        public static implicit operator Const(half4[,] value) { return new Const(value); }
         public static implicit operator Const(float[] value) { return new Const(value); }
-        public static implicit operator Const(float[][] value) { return new Const(value); }
-        public static implicit operator Const(float[,] value) { return new Const(value); }
         public static implicit operator Const(float1[] value) { return new Const(value); }
-        public static implicit operator Const(float1[][] value) { return new Const(value); }
-        public static implicit operator Const(float1[,] value) { return new Const(value); }
         public static implicit operator Const(float2[] value) { return new Const(value); }
-        public static implicit operator Const(float2[][] value) { return new Const(value); }
-        public static implicit operator Const(float2[,] value) { return new Const(value); }
         public static implicit operator Const(float3[] value) { return new Const(value); }
-        public static implicit operator Const(float3[][] value) { return new Const(value); }
-        public static implicit operator Const(float3[,] value) { return new Const(value); }
         public static implicit operator Const(float4[] value) { return new Const(value); }
-        public static implicit operator Const(float4[][] value) { return new Const(value); }
-        public static implicit operator Const(float4[,] value) { return new Const(value); }
         public static implicit operator Const(double[] value) { return new Const(value); }
-        public static implicit operator Const(double[][] value) { return new Const(value); }
-        public static implicit operator Const(double[,] value) { return new Const(value); }
         public static implicit operator Const(double1[] value) { return new Const(value); }
-        public static implicit operator Const(double1[][] value) { return new Const(value); }
-        public static implicit operator Const(double1[,] value) { return new Const(value); }
         public static implicit operator Const(double2[] value) { return new Const(value); }
-        public static implicit operator Const(double2[][] value) { return new Const(value); }
-        public static implicit operator Const(double2[,] value) { return new Const(value); }
+        public static implicit operator Const(double3[] value) { return new Const(value); }
+        public static implicit operator Const(double4[] value) { return new Const(value); }
+        public static implicit operator Const(Bit8[] value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V1[] value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V2[] value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V3[] value) { return new Const(value); }
+        public static implicit operator Const(Bit8_V4[] value) { return new Const(value); }
+        public static implicit operator Const(Bit16[] value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V1[] value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V2[] value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V3[] value) { return new Const(value); }
+        public static implicit operator Const(Bit16_V4[] value) { return new Const(value); }
+        public static implicit operator Const(Bit32[] value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V1[] value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V2[] value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V3[] value) { return new Const(value); }
+        public static implicit operator Const(Bit32_V4[] value) { return new Const(value); }
+        public static implicit operator Const(Bit64[] value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V1[] value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V2[] value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V3[] value) { return new Const(value); }
+        public static implicit operator Const(Bit64_V4[] value) { return new Const(value); }
     }
 }
