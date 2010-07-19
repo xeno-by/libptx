@@ -17,3 +17,4 @@
 15) todo for readme.txt: variadic functions are not implemented
 16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype)
 17) todo for readme.txt: old-style texturing (kinda moot point, since new versions of PTX texturing support all hardware targets)
+18) extern funcs?
