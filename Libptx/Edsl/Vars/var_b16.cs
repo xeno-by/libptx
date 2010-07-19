@@ -47,12 +47,12 @@ namespace Libptx.Edsl.Vars
         public var_b16 import { get { return Clone(v => v.IsExtern = true); } }
         public var_b16 @extern { get { return Clone(v => v.IsExtern = true); } }
 
-        private var_b16 Clone()
+        internal var_b16 Clone()
         {
             return Clone<var_b16>();
         }
 
-        private T Clone<T>()
+        internal T Clone<T>()
             where T : var, new()
         {
             T clone = new T();
@@ -67,12 +67,12 @@ namespace Libptx.Edsl.Vars
             return clone;
         }
 
-        protected var_b16 Clone(params Action<var_b16>[] mods)
+        internal var_b16 Clone(params Action<var_b16>[] mods)
         {
             return Clone<var_b16>(mods);
         }
 
-        protected T Clone<T>(params Action<T>[] mods)
+        internal T Clone<T>(params Action<T>[] mods)
             where T : var, new()
         {
             T clone = Clone<T>();
