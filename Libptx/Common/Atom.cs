@@ -47,8 +47,6 @@ namespace Libptx.Common
         protected static Type s8 { get { return TypeName.S8; } }
         protected static Type u16 { get { return TypeName.U16; } }
         protected static Type s16 { get { return TypeName.S16; } }
-        protected static Type u24 { get { return TypeName.U24; } }
-        protected static Type s24 { get { return TypeName.S24; } }
         protected static Type u32 { get { return TypeName.U32; } }
         protected static Type s32 { get { return TypeName.S32; } }
         protected static Type u64 { get { return TypeName.U64; } }

@@ -10,8 +10,6 @@ namespace Libptx.Instructions.Enumerations
         public static type s8 { get { throw new NotImplementedException(); } }
         public static type u16 { get { throw new NotImplementedException(); } }
         public static type s16 { get { throw new NotImplementedException(); } }
-        public static type u24 { get { throw new NotImplementedException(); } }
-        public static type s24 { get { throw new NotImplementedException(); } }
         public static type u32 { get { throw new NotImplementedException(); } }
         public static type s32 { get { throw new NotImplementedException(); } }
         public static type u64 { get { throw new NotImplementedException(); } }
@@ -53,7 +51,6 @@ namespace Libptx.Instructions.Enumerations
         public static int bits(this type type) { throw new NotImplementedException(); }
         public static bool is8(this type type) { throw new NotImplementedException(); }
         public static bool is16(this type type) { throw new NotImplementedException(); }
-        public static bool is24(this type type) { throw new NotImplementedException(); }
         public static bool is32(this type type) { throw new NotImplementedException(); }
         public static bool is64(this type type) { throw new NotImplementedException(); }
 

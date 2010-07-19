@@ -15,6 +15,7 @@ namespace Libptx.Instructions.Arithmetic
     [DebuggerNonUserCode]
     public class mul : ptxop
     {
+        [Mod] public bool is24 { get; set; }
         [Affix] public mulm mode { get; set; }
         [Affix] public frnd rnd { get; set; }
         [Affix] public bool ftz { get; set; }
@@ -30,22 +31,14 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override bool allow_int24 { get { return true; } }
         protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
+            (is24 == true).AssertImplies(type == s32 || type == u32);
             (mode != null).AssertImplies(type.isint());
             (mode == wide).AssertImplies(type.is16() || type.is32());
             (rnd != null).AssertImplies(type.isfloat());
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == f32);
-        }
-
-        protected override String to_string()
-        {
-            var to_s = base.to_string();
-            if (type.is24()) to_s = to_s.Replace("24", "32");
-            if (type.is24()) to_s = to_s.Replace("mul", "mul24");
-            return to_s;
         }
     }
 }

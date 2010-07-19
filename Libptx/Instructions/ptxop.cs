@@ -14,8 +14,6 @@ namespace Libptx.Instructions
         protected static type s8 { get { return type.s8; } }
         protected static type u16 { get { return type.u16; } }
         protected static type s16 { get { return type.s16; } }
-        protected static type u24 { get { return type.u24; } }
-        protected static type s24 { get { return type.s24; } }
         protected static type u32 { get { return type.u32; } }
         protected static type s32 { get { return type.s32; } }
         protected static type u64 { get { return type.u64; } }
@@ -220,7 +218,6 @@ namespace Libptx.Instructions
         public void validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa) { default_validate(target_swisa, target_hwisa); custom_validate(target_swisa, target_hwisa); }
         protected virtual void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa) { /* do nothing by default */ }
         protected virtual bool allow_int8 { get { return false; } }
-        protected virtual bool allow_int24 { get { return false; } }
         protected virtual bool allow_float16 { get { return false; } }
         protected virtual bool allow_bit8 { get { return false; } }
         protected virtual bool allow_bit16 { get { return false; } }
@@ -230,7 +227,6 @@ namespace Libptx.Instructions
         private void default_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             // todo. verify that all types != null
-            // todo. disallow u24/s24 by default
             // todo. disallow bXX by default
             // todo. disallow f16 by default
             // todo. disallow preds by default

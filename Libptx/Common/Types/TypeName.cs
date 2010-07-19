@@ -9,8 +9,6 @@ namespace Libptx.Common.Types
         [Affix(".s8")] S8,
         [Affix(".u16")] U16,
         [Affix(".s16")] S16,
-        [Affix(".u24")] U24,
-        [Affix(".s24")] S24,
         [Affix(".u32")] U32,
         [Affix(".s32")] S32,
         [Affix(".u64")] U64,
