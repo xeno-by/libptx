@@ -18,3 +18,5 @@
 16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype)
 17) todo for readme.txt: old-style texturing (kinda moot point, since new versions of PTX texturing support all hardware targets)
 18) extern funcs?
+19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
+20) initializers for text, sampler and surf constants

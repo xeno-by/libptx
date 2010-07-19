@@ -1,8 +1,6 @@
-using Libptx.Common.Types;
-
 namespace Libptx.Edsl.Types
 {
-    public class pred : Type
+    public class pred : type
     {
     }
 }

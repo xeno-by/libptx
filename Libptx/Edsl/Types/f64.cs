@@ -1,8 +1,6 @@
-using Libptx.Common.Types;
-
 namespace Libptx.Edsl.Types
 {
-    public class f64 : Type
+    public class f64 : type
     {
     }
 }

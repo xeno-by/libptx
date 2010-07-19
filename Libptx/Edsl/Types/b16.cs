@@ -1,8 +1,6 @@
-using Libptx.Common.Types;
-
 namespace Libptx.Edsl.Types
 {
-    public class b16 : Type
+    public class b16 : type
     {
     }
 }

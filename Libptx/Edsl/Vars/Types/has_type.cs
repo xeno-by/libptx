@@ -1,10 +1,9 @@
-using Libptx.Common.Types;
-using Libptx.Expressions;
+using Libptx.Edsl.Types;
 
 namespace Libptx.Edsl.Vars.Types
 {
-    public class has_type<T> : Var
-        where T : Type
+    public class has_type<T> : var
+        where T : type
     {
     }
 }

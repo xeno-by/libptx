@@ -112,12 +112,33 @@
     <Compile Include="Edsl\Types\sampler.cs" />
     <Compile Include="Edsl\Types\surf.cs" />
     <Compile Include="Edsl\Types\tex.cs" />
+    <Compile Include="Edsl\Types\type.cs" />
     <Compile Include="Edsl\Types\u16.cs" />
     <Compile Include="Edsl\Types\u32.cs" />
     <Compile Include="Edsl\Types\u64.cs" />
     <Compile Include="Edsl\Types\u8.cs" />
     <Compile Include="Edsl\Vars\Types\has_type.cs" />
     <Compile Include="Edsl\Types\Relaxed\relaxed_type.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_b16.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_b32.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_b64.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_b8.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_f16.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_f32.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_f64.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_pred.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_s16.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_s32.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_s64.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_s8.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_sampler.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_surf.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_tex.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_u16.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_u32.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_u64.cs" />
+    <Compile Include="Edsl\Vars\Types\has_type_u8.cs" />
+    <Compile Include="Edsl\Vars\var.cs" />
     <Compile Include="Edsl\Vars\var_b16.cs">
       <SubType>Code</SubType>
     </Compile>

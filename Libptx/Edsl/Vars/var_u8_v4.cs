@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
-using Libptx.Expressions;
 using Libptx.Common.Types;
+using Libptx.Edsl.Vars.Types;
 using Libcuda.DataTypes;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 
 namespace Libptx.Edsl.Vars
 {
-    public class var_u8_v4 : Var
+    public class var_u8_v4 : var
     {
         public var_u8_v4_a1 this[int dim] { get { return Clone<var_u8_v4_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
 
@@ -51,9 +51,9 @@ namespace Libptx.Edsl.Vars
         }
 
         private T Clone<T>()
-            where T : Var, new()
+            where T : var, new()
         {
-            var clone = new T();
+            T clone = new T();
             clone.Name = this.Name;
             clone.Space = this.Space;
             clone.Type = this.Type;
@@ -71,10 +71,10 @@ namespace Libptx.Edsl.Vars
         }
 
         protected T Clone<T>(params Action<T>[] mods)
-            where T : Var, new()
+            where T : var, new()
         {
-            var clone = Clone<T>();
-            foreach (var mod in mods) mod(clone);
+            T clone = Clone<T>();
+            foreach (Action<T> mod in mods) mod(clone);
             return clone;
         }
     }

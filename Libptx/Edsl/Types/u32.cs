@@ -1,8 +1,6 @@
-using Libptx.Common.Types;
-
 namespace Libptx.Edsl.Types
 {
-    public class u32 : Type
+    public class u32 : type
     {
     }
 }
