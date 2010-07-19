@@ -10,6 +10,9 @@ namespace Libptx.Edsl.Vars
 {
     public class var_b32_v4 : Var
     {
+        public var_b32_v4_v1 v1 { get { return Clone<var_b32_v4_v1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
+        public var_b32_v4_v2 v2 { get { return Clone<var_b32_v4_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
+        public var_b32_v4_v4 v4 { get { return Clone<var_b32_v4_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }
         public var_b32_v4_a1 this[int dim] { get { return Clone<var_b32_v4_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
 
         public new var_b32_v4 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
@@ -32,6 +35,7 @@ namespace Libptx.Edsl.Vars
         public new var_b32_v4 const10 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const10); } }
 
         public var_b32_v4 init(Bit32_V4 value) { return Clone(v => v.Init = value); }
+        public var_b32_v4 init(Bit32_V3 value) { return Clone(v => v.Init = value); }
 
         public var_b32_v4() { Alignment = 16 /* sizeof(Bit32_V4) */; }
         public var_b32_v4 align(int alignment){ return Clone(v => v.Alignment = alignment.AssertThat(a => a.Unfoldi(i => i / 2, i => i > 1).All(mod => mod == 0))); }

@@ -32,6 +32,7 @@ namespace Libptx.Edsl.Vars
         public new var_s16_v4 const10 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const10); } }
 
         public var_s16_v4 init(short4 value) { return Clone(v => v.Init = value); }
+        public var_s16_v4 init(short3 value) { return Clone(v => v.Init = value); }
 
         public var_s16_v4() { Alignment = 8 /* sizeof(short4) */; }
         public var_s16_v4 align(int alignment){ return Clone(v => v.Alignment = alignment.AssertThat(a => a.Unfoldi(i => i / 2, i => i > 1).All(mod => mod == 0))); }
