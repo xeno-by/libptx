@@ -10,9 +10,6 @@ namespace Libptx.Edsl.Vars
 {
     public class var_b16_v1 : Var
     {
-        public var_b16_v1_v1 v1 { get { return Clone<var_b16_v1_v1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
-        public var_b16_v1_v2 v2 { get { return Clone<var_b16_v1_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
-        public var_b16_v1_v4 v4 { get { return Clone<var_b16_v1_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }
         public var_b16_v1_a1 this[int dim] { get { return Clone<var_b16_v1_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
 
         public new var_b16_v1 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
