@@ -34,6 +34,10 @@ namespace Libptx.Edsl.Vars
 
         public Var_U16() { Alignment = sizeof(short); }
         public Var_U16 align(int alignment) { return Clone(v => v.Alignment = alignment.AssertThat(i => i > 0 && i % sizeof(short) == 0)); }
+        public Var_U16 align2 { get { return align(2); } }
+        public Var_U16 align4 { get { return align(4); } }
+        public Var_U16 align8 { get { return align(8); } }
+        public Var_U16 align16 { get { return align(16); } }
 
         public Var_U16 export { get { return Clone(v => v.IsVisible = true); } }
         public Var_U16 import { get { return Clone(v => v.IsExtern = true); } }
