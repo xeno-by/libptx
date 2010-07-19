@@ -3,6 +3,7 @@ using System.Linq;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars.Types;
 using Libcuda.DataTypes;
+using Libptx.Expressions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 
@@ -10,6 +11,14 @@ namespace Libptx.Edsl.Vars
 {
     public class var_u32 : has_type_u32
     {
+        public static var_u32 operator -(var_u32 var_u32) { return var_u32.Clone(v => v.Mod |= VarMod.Neg); }
+        public var_u32 b0 { get { return Clone(v => v.Mod |= VarMod.B0); } }
+        public var_u32 b1 { get { return Clone(v => v.Mod |= VarMod.B1); } }
+        public var_u32 b2 { get { return Clone(v => v.Mod |= VarMod.B2); } }
+        public var_u32 b3 { get { return Clone(v => v.Mod |= VarMod.B3); } }
+        public var_u32 h0 { get { return Clone(v => v.Mod |= VarMod.H0); } }
+        public var_u32 h1 { get { return Clone(v => v.Mod |= VarMod.H1); } }
+
         public var_u32_v1 v1 { get { return Clone<var_u32_v1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
         public var_u32_v2 v2 { get { return Clone<var_u32_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
         public var_u32_v4 v4 { get { return Clone<var_u32_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }

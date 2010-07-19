@@ -3,6 +3,7 @@ using System.Linq;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars.Types;
 using Libcuda.DataTypes;
+using Libptx.Expressions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 
@@ -10,6 +11,9 @@ namespace Libptx.Edsl.Vars
 {
     public class var_pred : has_type_pred
     {
+        public static var_pred operator !(var_pred var_pred) { return var_pred.Clone(v => v.Mod |= VarMod.Not); }
+        public static var_couple operator |(var_pred var_pred1, var_pred var_pred2) { return new var_couple{fst = var_pred1, snd = var_pred2}; }
+
         public new var_pred reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
         public new var_pred sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }
         public new var_pred local { get { return Clone(v => v.Space = Common.Enumerations.Space.Local); } }

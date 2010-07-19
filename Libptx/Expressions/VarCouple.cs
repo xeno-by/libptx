@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Libptx.Expressions
 {
-    public class Couple : Var
+    public class VarCouple : Var
     {
         public Var Fst { get; set; }
         public Var Snd { get; set; }

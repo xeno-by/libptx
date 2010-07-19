@@ -179,6 +179,7 @@
     <Compile Include="Edsl\Vars\var_b8_v2_a1.cs" />
     <Compile Include="Edsl\Vars\var_b8_v4.cs" />
     <Compile Include="Edsl\Vars\var_b8_v4_a1.cs" />
+    <Compile Include="Edsl\Vars\var_couple.cs" />
     <Compile Include="Edsl\Vars\var_f16.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -306,7 +307,7 @@
     <Compile Include="Common\Atom.cs" />
     <Compile Include="Expressions\Const.cs" />
     <Compile Include="Edsl\Const.Dsl.cs" />
-    <Compile Include="Expressions\Couple.cs" />
+    <Compile Include="Expressions\VarCouple.cs" />
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Common\Types\Type.cs" />
     <Compile Include="Common\Types\TypeName.cs" />
