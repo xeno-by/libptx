@@ -1,6 +1,7 @@
 using System.Linq;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars;
+using Libcuda.DataTypes;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 

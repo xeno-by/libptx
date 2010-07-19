@@ -11,6 +11,8 @@ namespace Libptx.Edsl.Vars
     public class var_u32_v1 : var
     {
         public var_u32_v1_a1 this[int dim] { get { return Clone<var_u32_v1_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
+        public var_u32 x { get { return Clone<var_u32>(v => v.Type = v.Type.x, v => v.Init = null); } }
+        public var_u32 r { get { return Clone<var_u32>(v => v.Type = v.Type.r, v => v.Init = null); } }
 
         public new var_u32_v1 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
         public new var_u32_v1 sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }

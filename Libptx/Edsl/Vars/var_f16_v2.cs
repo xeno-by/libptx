@@ -11,6 +11,10 @@ namespace Libptx.Edsl.Vars
     public class var_f16_v2 : var
     {
         public var_f16_v2_a1 this[int dim] { get { return Clone<var_f16_v2_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
+        public var_f16 x { get { return Clone<var_f16>(v => v.Type = v.Type.x, v => v.Init = null); } }
+        public var_f16 r { get { return Clone<var_f16>(v => v.Type = v.Type.r, v => v.Init = null); } }
+        public var_f16 y { get { return Clone<var_f16>(v => v.Type = v.Type.y, v => v.Init = null); } }
+        public var_f16 g { get { return Clone<var_f16>(v => v.Type = v.Type.g, v => v.Init = null); } }
 
         public new var_f16_v2 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
         public new var_f16_v2 sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }

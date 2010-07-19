@@ -11,6 +11,14 @@ namespace Libptx.Edsl.Vars
     public class var_f32_v4 : var
     {
         public var_f32_v4_a1 this[int dim] { get { return Clone<var_f32_v4_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
+        public var_f32 x { get { return Clone<var_f32>(v => v.Type = v.Type.x, v => v.Init = null); } }
+        public var_f32 r { get { return Clone<var_f32>(v => v.Type = v.Type.r, v => v.Init = null); } }
+        public var_f32 y { get { return Clone<var_f32>(v => v.Type = v.Type.y, v => v.Init = null); } }
+        public var_f32 g { get { return Clone<var_f32>(v => v.Type = v.Type.g, v => v.Init = null); } }
+        public var_f32 z { get { return Clone<var_f32>(v => v.Type = v.Type.z, v => v.Init = null); } }
+        public var_f32 b { get { return Clone<var_f32>(v => v.Type = v.Type.b, v => v.Init = null); } }
+        public var_f32 w { get { return Clone<var_f32>(v => v.Type = v.Type.w, v => v.Init = null); } }
+        public var_f32 a { get { return Clone<var_f32>(v => v.Type = v.Type.a, v => v.Init = null); } }
 
         public new var_f32_v4 reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
         public new var_f32_v4 sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }
