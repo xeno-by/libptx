@@ -238,6 +238,9 @@
     <Compile Include="Vars\var_u8_v4.cs" />
     <Compile Include="Vars\var_u8_v4_a1.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="todo.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
