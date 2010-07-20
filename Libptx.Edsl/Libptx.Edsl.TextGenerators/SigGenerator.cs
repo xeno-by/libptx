@@ -1,6 +1,6 @@
 using System;
 
-namespace Libptx.TextGenerators
+namespace Libptx.Edsl.TextGenerators
 {
     internal static class SigGenerator
     {

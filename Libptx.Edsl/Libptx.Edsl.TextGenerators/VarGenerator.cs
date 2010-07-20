@@ -12,7 +12,7 @@ using XenoGears.Functional;
 using XenoGears.Strings;
 using Type=System.Type;
 
-namespace Libptx.TextGenerators
+namespace Libptx.Edsl.TextGenerators
 {
     internal static class VarGenerator
     {
@@ -84,7 +84,7 @@ namespace Libptx.TextGenerators
 
             var dir_types = @"..\..\..\Libptx.Edsl\Types\";
             if (!Directory.Exists(dir_types)) Directory.CreateDirectory(dir_types);
-            var dir_types_relaxed = @"..\..\..\Libptx\Edsl\Types\Relaxed\";
+            var dir_types_relaxed = @"..\..\..\Libptx.Edsl\Types\Relaxed\";
             if (!Directory.Exists(dir_types_relaxed)) Directory.CreateDirectory(dir_types_relaxed);
             var dir_vars = @"..\..\..\Libptx.Edsl\Vars\";
             if (!Directory.Exists(dir_vars)) Directory.CreateDirectory(dir_vars);

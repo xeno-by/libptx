@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Libptx.TextGenerators
+namespace Libptx.Edsl.TextGenerators
 {
     internal class Program
     {
         public static void Main(String[] args)
         {
-//            VarGenerator.DoGenerate();
-            SigGenerator.DoGenerate();
+            VarGenerator.DoGenerate();
+//            SigGenerator.DoGenerate();
         }
     }
 }
