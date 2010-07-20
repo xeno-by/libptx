@@ -9,3 +9,4 @@ glob:*/bin/
 glob:*/obj/
 glob:*/AssemblyInfo.cs
 glob:ThirdPartyStuff/*/Binaries/*
+glob:*/Dependencies/*

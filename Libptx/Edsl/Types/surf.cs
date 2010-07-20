@@ -9,24 +9,23 @@ namespace Libptx.Edsl.Types
 {
     public class surf : type
     {
-        public static var_surf reg { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Register); } }
-        public static var_surf sreg { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Special); } }
-        public static var_surf local { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Local); } }
-        public static var_surf shared { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Shared); } }
-        public static var_surf global { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Global); } }
-        public static var_surf param { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Param); } }
-        public static var_surf @const { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const); } }
-        public static var_surf const0 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const0); } }
-        public static var_surf const1 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const1); } }
-        public static var_surf const2 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const2); } }
-        public static var_surf const3 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const3); } }
-        public static var_surf const4 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const4); } }
-        public static var_surf const5 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const5); } }
-        public static var_surf const6 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const6); } }
-        public static var_surf const7 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const7); } }
-        public static var_surf const8 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const8); } }
-        public static var_surf const9 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const9); } }
-        public static var_surf const10 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.Const10); } }
+        public static var_surf reg { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.reg); } }
+        public static var_surf sreg { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.sreg); } }
+        public static var_surf local { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.local); } }
+        public static var_surf shared { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.shared); } }
+        public static var_surf global { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.global); } }
+        public static var_surf param { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.param); } }
+        public static var_surf const0 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const0); } }
+        public static var_surf const1 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const1); } }
+        public static var_surf const2 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const2); } }
+        public static var_surf const3 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const3); } }
+        public static var_surf const4 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const4); } }
+        public static var_surf const5 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const5); } }
+        public static var_surf const6 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const6); } }
+        public static var_surf const7 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const7); } }
+        public static var_surf const8 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const8); } }
+        public static var_surf const9 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const9); } }
+        public static var_surf const10 { get { return new var_surf().Clone(v => v.Space = Common.Enumerations.space.const10); } }
 
         public static var_surf init(Surf value) { return new var_surf().Clone(v => v.Init = value); }
 

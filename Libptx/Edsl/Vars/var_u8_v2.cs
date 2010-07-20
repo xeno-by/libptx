@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars.Types;
+using Libptx.Expressions;
 using Libcuda.DataTypes;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -15,25 +16,23 @@ namespace Libptx.Edsl.Vars
         public var_u8 r { get { return Clone<var_u8>(v => v.Type = v.Type.r, v => v.Init = null); } }
         public var_u8 y { get { return Clone<var_u8>(v => v.Type = v.Type.y, v => v.Init = null); } }
         public var_u8 g { get { return Clone<var_u8>(v => v.Type = v.Type.g, v => v.Init = null); } }
-
-        public new var_u8_v2 reg { get { return Clone(v => v.Space = Common.Enumerations.space.Register); } }
-        public new var_u8_v2 sreg { get { return Clone(v => v.Space = Common.Enumerations.space.Special); } }
-        public new var_u8_v2 local { get { return Clone(v => v.Space = Common.Enumerations.space.Local); } }
-        public new var_u8_v2 shared { get { return Clone(v => v.Space = Common.Enumerations.space.Shared); } }
-        public new var_u8_v2 global { get { return Clone(v => v.Space = Common.Enumerations.space.Global); } }
-        public new var_u8_v2 param { get { return Clone(v => v.Space = Common.Enumerations.space.Param); } }
-        public new var_u8_v2 @const { get { return Clone(v => v.Space = Common.Enumerations.space.Const); } }
-        public new var_u8_v2 const0 { get { return Clone(v => v.Space = Common.Enumerations.space.Const0); } }
-        public new var_u8_v2 const1 { get { return Clone(v => v.Space = Common.Enumerations.space.Const1); } }
-        public new var_u8_v2 const2 { get { return Clone(v => v.Space = Common.Enumerations.space.Const2); } }
-        public new var_u8_v2 const3 { get { return Clone(v => v.Space = Common.Enumerations.space.Const3); } }
-        public new var_u8_v2 const4 { get { return Clone(v => v.Space = Common.Enumerations.space.Const4); } }
-        public new var_u8_v2 const5 { get { return Clone(v => v.Space = Common.Enumerations.space.Const5); } }
-        public new var_u8_v2 const6 { get { return Clone(v => v.Space = Common.Enumerations.space.Const6); } }
-        public new var_u8_v2 const7 { get { return Clone(v => v.Space = Common.Enumerations.space.Const7); } }
-        public new var_u8_v2 const8 { get { return Clone(v => v.Space = Common.Enumerations.space.Const8); } }
-        public new var_u8_v2 const9 { get { return Clone(v => v.Space = Common.Enumerations.space.Const9); } }
-        public new var_u8_v2 const10 { get { return Clone(v => v.Space = Common.Enumerations.space.Const10); } }
+        public new var_u8_v2 reg { get { return Clone(v => v.Space = Common.Enumerations.space.reg); } }
+        public new var_u8_v2 sreg { get { return Clone(v => v.Space = Common.Enumerations.space.sreg); } }
+        public new var_u8_v2 local { get { return Clone(v => v.Space = Common.Enumerations.space.local); } }
+        public new var_u8_v2 shared { get { return Clone(v => v.Space = Common.Enumerations.space.shared); } }
+        public new var_u8_v2 global { get { return Clone(v => v.Space = Common.Enumerations.space.global); } }
+        public new var_u8_v2 param { get { return Clone(v => v.Space = Common.Enumerations.space.param); } }
+        public new var_u8_v2 const0 { get { return Clone(v => v.Space = Common.Enumerations.space.const0); } }
+        public new var_u8_v2 const1 { get { return Clone(v => v.Space = Common.Enumerations.space.const1); } }
+        public new var_u8_v2 const2 { get { return Clone(v => v.Space = Common.Enumerations.space.const2); } }
+        public new var_u8_v2 const3 { get { return Clone(v => v.Space = Common.Enumerations.space.const3); } }
+        public new var_u8_v2 const4 { get { return Clone(v => v.Space = Common.Enumerations.space.const4); } }
+        public new var_u8_v2 const5 { get { return Clone(v => v.Space = Common.Enumerations.space.const5); } }
+        public new var_u8_v2 const6 { get { return Clone(v => v.Space = Common.Enumerations.space.const6); } }
+        public new var_u8_v2 const7 { get { return Clone(v => v.Space = Common.Enumerations.space.const7); } }
+        public new var_u8_v2 const8 { get { return Clone(v => v.Space = Common.Enumerations.space.const8); } }
+        public new var_u8_v2 const9 { get { return Clone(v => v.Space = Common.Enumerations.space.const9); } }
+        public new var_u8_v2 const10 { get { return Clone(v => v.Space = Common.Enumerations.space.const10); } }
 
         public var_u8_v2 init(byte2 value) { return Clone(v => v.Init = value); }
 

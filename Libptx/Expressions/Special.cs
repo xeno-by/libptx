@@ -15,7 +15,7 @@ namespace Libptx.Expressions
 
         public space Space
         {
-            get { return space.Special; }
+            get { return space.sreg; }
         }
 
         public Type Type

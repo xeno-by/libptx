@@ -32,9 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Libcuda, Version=3.1.3851.34705, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Libcuda, Version=3.1.3851.34689, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdPartyStuff\libcuda\Binaries\Release\Libcuda.dll</HintPath>
+      <HintPath>Dependencies\Libcuda.dll</HintPath>
+    </Reference>
+    <Reference Include="Libptx, Version=2.1.3853.22764, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\Libptx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -48,10 +52,6 @@
     <ProjectReference Include="..\..\XenoGears\XenoGears\XenoGears.csproj">
       <Project>{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}</Project>
       <Name>XenoGears</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libptx\Libptx.csproj">
-      <Project>{6272D158-34F7-4DE1-907F-AFFD8E1E28F8}</Project>
-      <Name>Libptx</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

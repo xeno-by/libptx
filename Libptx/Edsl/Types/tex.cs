@@ -9,24 +9,23 @@ namespace Libptx.Edsl.Types
 {
     public class tex : type
     {
-        public static var_tex reg { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Register); } }
-        public static var_tex sreg { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Special); } }
-        public static var_tex local { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Local); } }
-        public static var_tex shared { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Shared); } }
-        public static var_tex global { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Global); } }
-        public static var_tex param { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Param); } }
-        public static var_tex @const { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const); } }
-        public static var_tex const0 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const0); } }
-        public static var_tex const1 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const1); } }
-        public static var_tex const2 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const2); } }
-        public static var_tex const3 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const3); } }
-        public static var_tex const4 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const4); } }
-        public static var_tex const5 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const5); } }
-        public static var_tex const6 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const6); } }
-        public static var_tex const7 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const7); } }
-        public static var_tex const8 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const8); } }
-        public static var_tex const9 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const9); } }
-        public static var_tex const10 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.Const10); } }
+        public static var_tex reg { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.reg); } }
+        public static var_tex sreg { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.sreg); } }
+        public static var_tex local { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.local); } }
+        public static var_tex shared { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.shared); } }
+        public static var_tex global { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.global); } }
+        public static var_tex param { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.param); } }
+        public static var_tex const0 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const0); } }
+        public static var_tex const1 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const1); } }
+        public static var_tex const2 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const2); } }
+        public static var_tex const3 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const3); } }
+        public static var_tex const4 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const4); } }
+        public static var_tex const5 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const5); } }
+        public static var_tex const6 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const6); } }
+        public static var_tex const7 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const7); } }
+        public static var_tex const8 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const8); } }
+        public static var_tex const9 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const9); } }
+        public static var_tex const10 { get { return new var_tex().Clone(v => v.Space = Common.Enumerations.space.const10); } }
 
         public static var_tex init(Tex value) { return new var_tex().Clone(v => v.Init = value); }
 

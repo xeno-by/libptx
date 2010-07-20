@@ -20,7 +20,7 @@ namespace Libptx.TextGenerators
         {
             var types_file = @"..\..\..\Libptx\Common\Types\TypeName.cs";
             var types_lines = File.ReadAllLines(types_file);
-            var types = types_lines.Select(s => s.Extract(@"^\s*\[Affix\(""\..+?""(,\s*.+?\s*)*\)\]\s+(?<name>[\d\w]+?)(\s*=\s*.+?)?\s*,\s*$")).Where(p => p != null).ToReadOnly();
+            var types = types_lines.Select(s => s.Extract(@"^\s*\[Affix\("".+?""(,\s*.+?\s*)*\)\]\s+(?<name>[\d\w]+?)(\s*=\s*.+?)?\s*,\s*$")).Where(p => p != null).ToReadOnly();
             types = types.Select(s => s.ToLower()).ToReadOnly();
 
             var clr_types = new Dictionary<String, Type>();
@@ -79,7 +79,7 @@ namespace Libptx.TextGenerators
 
             var spaces_file = @"..\..\..\Libptx\Common\Enumerations\Space.cs";
             var spaces_lines = File.ReadAllLines(spaces_file);
-            var spaces = spaces_lines.Select(s => s.Parse(@"^\s*\[Affix\(""\.(?<sig>.+?)""(,\s*.+?\s*)*\)\]\s+(?<name>[\d\w]+?)(\s*=\s*.+?)?\s*,\s*$")).Where(p => p != null)
+            var spaces = spaces_lines.Select(s => s.Parse(@"^\s*\[Affix\(""(?<sig>.+?)""(,\s*.+?\s*)*\)\]\s+(?<name>[\d\w]+?)(\s*=\s*.+?)?\s*,\s*$")).Where(p => p != null)
                 .ToDictionary(p => p["sig"].Replace("[", "").Replace("]", "").Fluent(s => s == "const" ? "@const" : s), p => p["name"]).ToReadOnly();
 
             var dir_types = @"..\..\..\Libptx\Edsl\Types\";
@@ -164,7 +164,7 @@ namespace Libptx.TextGenerators
                     if (is_vec(clr) && vec_sz >= 4) write_vecf("a");
                 }
 
-                return buf_var_fa.ToString();
+                return buf_var_fa.ToString().TrimEnd();
             };
 
             Func<String, String> var_common = type =>
@@ -174,7 +174,7 @@ namespace Libptx.TextGenerators
                 w_var_common.Indent += 2;
 
                 // var_u16 (spaces)
-                spaces.ForEach(space => w_var_common.WriteLine("public new var_{0} {1} {{ get {{ return Clone(v => v.Space = Common.Enumerations.Space.{2}); }} }}", type, space.Key, space.Value));
+                spaces.ForEach(space => w_var_common.WriteLine("public new var_{0} {1} {{ get {{ return Clone(v => v.Space = Common.Enumerations.space.{2}); }} }}", type, space.Key, space.Value));
                 w_var_common.WriteLineNoTabs(String.Empty);
 
                 // var_u16 (init)
@@ -254,6 +254,7 @@ namespace Libptx.TextGenerators
                 w_var.WriteLine("using System.Linq;");
                 w_var.WriteLine("using Libptx.Common.Types;");
                 w_var.WriteLine("using Libptx.Edsl.Vars.Types;");
+                w_var.WriteLine("using Libptx.Expressions;");
                 w_var.WriteLine("using Libcuda.DataTypes;");
                 w_var.WriteLine("using XenoGears.Assertions;");
                 w_var.WriteLine("using XenoGears.Functional;");
@@ -264,6 +265,35 @@ namespace Libptx.TextGenerators
                 w_var.WriteLine("public class var_{0} : var", type.ToLower());
                 w_var.WriteLine("{");
                 w_var.Indent++;
+
+                if (type == "u32")
+                {
+                    w_var.WriteLine("public static var_u32 operator -(var_u32 var_u32) { return var_u32.Clone(v => v.Mod |= VarMod.Neg); }");
+                    w_var.WriteLine("public var_u32 b0 { get { return Clone(v => v.Mod |= VarMod.B0); } }");
+                    w_var.WriteLine("public var_u32 b1 { get { return Clone(v => v.Mod |= VarMod.B1); } }");
+                    w_var.WriteLine("public var_u32 b2 { get { return Clone(v => v.Mod |= VarMod.B2); } }");
+                    w_var.WriteLine("public var_u32 b3 { get { return Clone(v => v.Mod |= VarMod.B3); } }");
+                    w_var.WriteLine("public var_u32 h0 { get { return Clone(v => v.Mod |= VarMod.H0); } }");
+                    w_var.WriteLine("public var_u32 h1 { get { return Clone(v => v.Mod |= VarMod.H1); } }");
+                    w_var.WriteLineNoTabs(String.Empty);
+                }
+                else if (type == "s32")
+                {
+                    w_var.WriteLine("public static var_s32 operator -(var_s32 var_s32) { return var_s32.Clone(v => v.Mod |= VarMod.Neg); }");
+                    w_var.WriteLine("public var_s32 b0 { get { return Clone(v => v.Mod |= VarMod.B0); } }");
+                    w_var.WriteLine("public var_s32 b1 { get { return Clone(v => v.Mod |= VarMod.B1); } }");
+                    w_var.WriteLine("public var_s32 b2 { get { return Clone(v => v.Mod |= VarMod.B2); } }");
+                    w_var.WriteLine("public var_s32 b3 { get { return Clone(v => v.Mod |= VarMod.B3); } }");
+                    w_var.WriteLine("public var_s32 h0 { get { return Clone(v => v.Mod |= VarMod.H0); } }");
+                    w_var.WriteLine("public var_s32 h1 { get { return Clone(v => v.Mod |= VarMod.H1); } }");
+                    w_var.WriteLineNoTabs(String.Empty);
+                }
+                else if (type == "pred")
+                {
+                    w_var.WriteLine("public static var_pred operator !(var_pred var_pred) { return var_pred.Clone(v => v.Mod |= VarMod.Not); }");
+                    w_var.WriteLine("public static var_couple operator |(var_pred var_pred1, var_pred var_pred2) { return new var_couple{fst = var_pred1, snd = var_pred2}; }");
+                    w_var.WriteLineNoTabs(String.Empty);
+                }
 
                 var fa = var_fa(type);
                 if (fa.IsNotEmpty()) w_var.WriteLineNoTabs(fa);

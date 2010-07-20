@@ -459,5 +459,10 @@
   -->
   <PropertyGroup>
     <PreBuildEvent>"$(ProjectDir)..\ThirdPartyStuff\autoversioner\AutoVersioner.exe" "$(ProjectDir)$(ProjectFileName)" "$(ProjectDir)Properties\AssemblyInfo.template" "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
+    <PostBuildEvent>if "$(SolutionFileName)"=="Libptx.Full.sln" (
+    if not exist "$(SolutionDir)Libptx.TextGenerators" exit 1
+    if not exist "$(SolutionDir)Libptx.TextGenerators\Dependencies\" mkdir  "$(SolutionDir)Libptx.TextGenerators\Dependencies\"
+    copy *.* "$(SolutionDir)Libptx.TextGenerators\Dependencies\"
+)</PostBuildEvent>
   </PropertyGroup>
 </Project>
