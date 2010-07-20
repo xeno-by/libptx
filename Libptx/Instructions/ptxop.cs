@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using Libptx.Statements;
 

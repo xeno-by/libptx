@@ -1,7 +1,7 @@
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {

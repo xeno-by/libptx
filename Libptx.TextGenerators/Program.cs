@@ -6,8 +6,8 @@ namespace Libptx.TextGenerators
     {
         public static void Main(String[] args)
         {
-            VarGenerator.DoGenerate();
-//            SigGenerator.DoGenerate();
+//            VarGenerator.DoGenerate();
+            SigGenerator.DoGenerate();
         }
     }
 }

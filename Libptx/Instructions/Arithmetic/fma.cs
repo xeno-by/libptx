@@ -3,7 +3,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
@@ -31,7 +31,7 @@ namespace Libptx.Instructions.Arithmetic
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (rnd != null).AssertTrue();
+            (rnd != 0).AssertTrue();
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == f32);
             type.isfloat().AssertTrue();

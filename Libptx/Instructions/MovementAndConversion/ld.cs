@@ -1,9 +1,7 @@
-using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
@@ -28,7 +26,7 @@ namespace Libptx.Instructions.MovementAndConversion
             get
             {
                 var generic = ss == 0;
-                var cache = cop != null;
+                var cache = cop != 0;
                 return (generic || cache) ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_11;
             }
         }
@@ -38,7 +36,7 @@ namespace Libptx.Instructions.MovementAndConversion
             get
             {
                 var generic = ss == 0;
-                var cache = cop != null;
+                var cache = cop != 0;
                 return (generic || cache) ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
         }
@@ -52,9 +50,9 @@ namespace Libptx.Instructions.MovementAndConversion
         {
             (u == true).AssertImplies(ss == 0 || ss == global);
             (u == true).AssertImplies(@volatile == false);
-            (u == true).AssertImplies(cop == null);
-            (@volatile == true).AssertEquiv(cop == null);
-            (cop == null || cop == ca || cop == cg || cop == cs || cop == lu || cop == cv).AssertTrue();
+            (u == true).AssertImplies(cop == 0);
+            (@volatile == true).AssertEquiv(cop == 0);
+            (cop == 0 || cop == ca || cop == cg || cop == cs || cop == lu || cop == cv).AssertTrue();
             type.isv1().AssertFalse();
         }
     }

@@ -4,7 +4,6 @@ using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication

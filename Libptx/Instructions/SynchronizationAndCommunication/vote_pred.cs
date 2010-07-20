@@ -1,7 +1,7 @@
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Enumerations;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
@@ -13,7 +13,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (mode != null).AssertTrue();
+            (mode != 0).AssertTrue();
         }
     }
 }

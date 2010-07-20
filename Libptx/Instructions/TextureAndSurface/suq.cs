@@ -3,7 +3,7 @@ using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.TextureAndSurface
@@ -26,7 +26,7 @@ namespace Libptx.Instructions.TextureAndSurface
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (query != null).AssertTrue();
+            (query != 0).AssertTrue();
             (type == b32).AssertTrue();
         }
     }

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type = Libptx.Common.Types.Type;
@@ -31,7 +31,7 @@ namespace Libptx.Instructions.Arithmetic
         {
             get
             {
-                var f32_rnd = type == f32 && rnd != null;
+                var f32_rnd = type == f32 && rnd != 0;
                 return f32_rnd ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
         }
@@ -39,16 +39,16 @@ namespace Libptx.Instructions.Arithmetic
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (is24 == true).AssertImplies(type == s32 || type == u32);
-            (mode != null).AssertImplies(type.isint());
+            (mode != 0).AssertImplies(type.isint());
             (mode == wide).AssertImplies(type.is16() || type.is32());
-            (rnd != null).AssertImplies(type.isfloat());
-            (type == f64).AssertImplies(rnd != null);
+            (rnd != 0).AssertImplies(type.isfloat());
+            (type == f64).AssertImplies(rnd != 0);
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == s32 || type == f32);
             (sat == true && type.isint()).AssertImplies(mode == mulm_hi);
 
-            (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(rnd != null);
-            (target_hwisa >= HardwareIsa.SM_20 && type == f32).AssertImplies(rnd != null);
+            (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(rnd != 0);
+            (target_hwisa >= HardwareIsa.SM_20 && type == f32).AssertImplies(rnd != 0);
         }
     }
 }

@@ -2,7 +2,7 @@ using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video

@@ -52,6 +52,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\PtxAttribute.cs" />
+    <Compile Include="Common\Enumerations\barlevel.cs" />
+    <Compile Include="Common\Enumerations\cachelevel.cs" />
+    <Compile Include="Common\Enumerations\clampm.cs" />
+    <Compile Include="Common\Enumerations\cop.cs" />
+    <Compile Include="Common\Enumerations\frnd.cs" />
+    <Compile Include="Common\Enumerations\geom.cs" />
+    <Compile Include="Common\Enumerations\irnd.cs" />
+    <Compile Include="Common\Enumerations\mulm.cs" />
+    <Compile Include="Common\Enumerations\op.cs" />
+    <Compile Include="Common\Enumerations\prmtm.cs" />
+    <Compile Include="Common\Enumerations\redm.cs" />
+    <Compile Include="Common\Enumerations\scale.cs" />
+    <Compile Include="Common\Enumerations\size.cs" />
+    <Compile Include="Common\Enumerations\squery.cs" />
+    <Compile Include="Common\Enumerations\test.cs" />
+    <Compile Include="Common\Enumerations\tquery.cs" />
+    <Compile Include="Common\Enumerations\vshm.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\cmp.cs" />
     <Compile Include="Common\Renderable.cs" />
@@ -354,10 +371,6 @@
     <Compile Include="Instructions\ComparisonAndSelection\selp.cs" />
     <Compile Include="Instructions\ComparisonAndSelection\set.cs" />
     <Compile Include="Instructions\ComparisonAndSelection\slct.cs" />
-    <Compile Include="Instructions\Enumerations\barlevel.cs" />
-    <Compile Include="Instructions\Enumerations\scale.cs" />
-    <Compile Include="Instructions\Enumerations\vshm.cs" />
-    <Compile Include="Instructions\Enumerations\redm.cs" />
     <Compile Include="Instructions\Miscellaneous\brkpt.cs" />
     <Compile Include="Instructions\Miscellaneous\pmevent.cs" />
     <Compile Include="Instructions\Miscellaneous\trap.cs" />
@@ -368,19 +381,6 @@
     <Compile Include="Instructions\MovementAndConversion\mov.cs" />
     <Compile Include="Instructions\MovementAndConversion\prefetch.cs" />
     <Compile Include="Instructions\MovementAndConversion\st.cs" />
-    <Compile Include="Instructions\Enumerations\cachelevel.cs" />
-    <Compile Include="Instructions\Enumerations\clamp.cs" />
-    <Compile Include="Instructions\Enumerations\cop.cs" />
-    <Compile Include="Instructions\Enumerations\frnd.cs" />
-    <Compile Include="Instructions\Enumerations\geom.cs" />
-    <Compile Include="Instructions\Enumerations\irnd.cs" />
-    <Compile Include="Instructions\Enumerations\mulm.cs" />
-    <Compile Include="Instructions\Enumerations\op.cs" />
-    <Compile Include="Instructions\Enumerations\prmtm.cs" />
-    <Compile Include="Instructions\Enumerations\size.cs" />
-    <Compile Include="Instructions\Enumerations\squery.cs" />
-    <Compile Include="Instructions\Enumerations\test.cs" />
-    <Compile Include="Instructions\Enumerations\tquery.cs" />
     <Compile Include="Instructions\LogicAndShift\and.cs" />
     <Compile Include="Instructions\LogicAndShift\cnot.cs" />
     <Compile Include="Instructions\LogicAndShift\not.cs" />

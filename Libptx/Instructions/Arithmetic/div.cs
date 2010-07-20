@@ -3,7 +3,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
@@ -27,7 +27,7 @@ namespace Libptx.Instructions.Arithmetic
         {
             get
             {
-                var f32_rnd = type == f32 && rnd != null;
+                var f32_rnd = type == f32 && rnd != 0;
                 var f64_rzmp = type == f64 && (rnd == rz || rnd == rm || rnd == rp);
                 return (f32_rnd || f64_rzmp) ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
@@ -38,10 +38,10 @@ namespace Libptx.Instructions.Arithmetic
             (approx == true).AssertImplies(type == f32);
             (full == true).AssertImplies(type == f32);
             (approx && full).AssertFalse();
-            (rnd != null).AssertEquiv(!approx && !full && type.isfloat());
+            (rnd != 0).AssertEquiv(!approx && !full && type.isfloat());
             (ftz == true).AssertImplies(type == f32);
 
-            (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(approx || full || rnd != null);
+            (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(approx || full || rnd != 0);
         }
     }
 }

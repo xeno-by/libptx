@@ -3,7 +3,6 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
@@ -23,7 +22,7 @@ namespace Libptx.Instructions.Video
             (atype == s32 || atype == u32).AssertTrue();
             (btype == s32 || btype == u32).AssertTrue();
             (cmp == eq || cmp == ne || cmp == lt || cmp == le || cmp == gt || cmp == ge).AssertTrue();
-            (op2 == null || op2 == add || op2 == min || op2 == max).AssertTrue();
+            (op2 == 0 || op2 == add || op2 == min || op2 == max).AssertTrue();
         }
     }
 }

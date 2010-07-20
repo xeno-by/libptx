@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type = Libptx.Common.Types.Type;
@@ -26,7 +26,7 @@ namespace Libptx.Instructions.TextureAndSurface
         {
             get
             {
-                var cache = cop != null;
+                var cache = cop != 0;
                 var sust_p = p == true;
                 var sust_3d = geom == d3;
                 var non_trap = clampm != clamp_trap;
@@ -38,7 +38,7 @@ namespace Libptx.Instructions.TextureAndSurface
         {
             get
             {
-                var cache = cop != null;
+                var cache = cop != 0;
                 var sust_p = p == true;
                 var sust_3d = geom == d3;
                 var non_trap = clampm != clamp_trap;
@@ -54,8 +54,8 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (b || p).AssertTrue();
-            (geom != null).AssertTrue();
-            (cop == null || cop == ca || cop == cg || cop == cs || cop == cv).AssertTrue();
+            (geom != 0).AssertTrue();
+            (cop == 0 || cop == ca || cop == cg || cop == cs || cop == cv).AssertTrue();
 
             (b == true).AssertImplies(dtype.isbit());
             (b == true).AssertImplies(dtype.isscalar() || dtype.isv2() || dtype.isv4());

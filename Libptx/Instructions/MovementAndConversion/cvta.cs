@@ -3,7 +3,6 @@ using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.MovementAndConversion
@@ -21,7 +20,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (space == local || space == shared || space == global).AssertTrue();
-            (size != null).AssertTrue();
+            (size != 0).AssertTrue();
         }
     }
 }

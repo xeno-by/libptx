@@ -3,7 +3,7 @@ using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
@@ -26,7 +26,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
             (popc == true).AssertImplies(type == u32);
             (popc == false).AssertImplies(type == null);
             (pred == true).AssertImplies(op == and || op == or);
-            (pred == false).AssertImplies(op == null);
+            (pred == false).AssertImplies(op == 0);
 
             // todo. implement this
             // Operands a, b, and d have type .u32; operands p and c are predicates.

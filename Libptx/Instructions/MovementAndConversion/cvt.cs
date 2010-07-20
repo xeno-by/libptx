@@ -4,7 +4,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.MovementAndConversion
@@ -31,9 +31,9 @@ namespace Libptx.Instructions.MovementAndConversion
             var f2f = atype.isfloat() && dtype.isfloat();
             (i2i || i2f || f2i || f2f).AssertTrue();
 
-            (irnd != null).AssertImplies(f2i || f2f);
-            (frnd != null).AssertImplies(i2f || f2f);
-            (irnd != null && frnd != null).AssertFalse();
+            (irnd != 0).AssertImplies(f2i || f2f);
+            (frnd != 0).AssertImplies(i2f || f2f);
+            (irnd != 0 && frnd != 0).AssertFalse();
         }
     }
 }

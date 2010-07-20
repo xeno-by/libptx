@@ -4,7 +4,6 @@ using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
@@ -25,7 +24,7 @@ namespace Libptx.Instructions.MovementAndConversion
             get
             {
                 var generic = ss == 0;
-                var cache = cop != null;
+                var cache = cop != 0;
                 return (generic || cache) ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_11;
             }
         }
@@ -35,7 +34,7 @@ namespace Libptx.Instructions.MovementAndConversion
             get
             {
                 var generic = ss == 0;
-                var cache = cop != null;
+                var cache = cop != 0;
                 return (generic || cache) ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
         }
@@ -46,8 +45,8 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_bit64 { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (@volatile == true).AssertEquiv(cop == null);
-            (cop == null || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
+            (@volatile == true).AssertEquiv(cop == 0);
+            (cop == 0 || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
             type.isv1().AssertFalse();
         }
     }

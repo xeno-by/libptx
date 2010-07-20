@@ -4,7 +4,6 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.ComparisonAndSelection
@@ -28,7 +27,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
         protected override bool allow_bit64 { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (boolop == null || boolop == and || boolop == or || boolop == xor).AssertTrue();
+            (boolop == 0 || boolop == and || boolop == or || boolop == xor).AssertTrue();
             (dtype == null || dtype == u32 || dtype == s32 || dtype == f32).AssertTrue();
             (p == true).AssertEquiv(dtype == null);
         }

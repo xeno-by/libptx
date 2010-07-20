@@ -3,7 +3,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
@@ -38,7 +38,7 @@ namespace Libptx.Instructions.Arithmetic
         {
             (c || cc).AssertImplies(type == s32 || type == u32);
             (c || cc).AssertImplies(sat == false);
-            (rnd != null).AssertImplies(type.isfloat());
+            (rnd != 0).AssertImplies(type.isfloat());
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == s32 || type == f32);
         }

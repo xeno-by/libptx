@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
+using Libptx.Common.Enumerations;
 
 namespace Libptx.Instructions.ComparisonAndSelection
 {
