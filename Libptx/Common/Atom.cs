@@ -63,43 +63,43 @@ namespace Libptx.Common
         protected static Type sampler { get { return TypeName.Sampler; } }
         protected static Type surf { get { return TypeName.Surf; } }
 
-        protected static Comparison eq { get { return Comparison.Equal; } }
-        protected static Comparison ne { get { return Comparison.NotEqual; } }
-        protected static Comparison lt { get { return Comparison.LessThan; } }
-        protected static Comparison le { get { return Comparison.LessThanOrEqual; } }
-        protected static Comparison gt { get { return Comparison.GreaterThan; } }
-        protected static Comparison ge { get { return Comparison.GreaterThanOrEqual; } }
-        protected static Comparison lo { get { return Comparison.Lower; } }
-        protected static Comparison ls { get { return Comparison.LowerOrSame; } }
-        protected static Comparison hi { get { return Comparison.Higher; } }
-        protected static Comparison hs { get { return Comparison.HigherOrSame; } }
-        protected static Comparison equ { get { return Comparison.EqualUnordered; } }
-        protected static Comparison neu { get { return Comparison.NotEqualUnordered; } }
-        protected static Comparison ltu { get { return Comparison.LessThanUnordered; } }
-        protected static Comparison leu { get { return Comparison.LessThanOrEqualUnordered; } }
-        protected static Comparison gtu { get { return Comparison.GreaterThanUnordered; } }
-        protected static Comparison geu { get { return Comparison.GreaterThanOrEqualUnordered; } }
-        protected static Comparison num { get { return Comparison.BothNumbers; } }
-        protected static Comparison nan { get { return Comparison.AnyNan; } }
+        protected static cmp eq { get { return cmp.eq; } }
+        protected static cmp ne { get { return cmp.ne; } }
+        protected static cmp lt { get { return cmp.lt; } }
+        protected static cmp le { get { return cmp.le; } }
+        protected static cmp gt { get { return cmp.gt; } }
+        protected static cmp ge { get { return cmp.ge; } }
+        protected static cmp lo { get { return cmp.lo; } }
+        protected static cmp ls { get { return cmp.ls; } }
+        protected static cmp hi { get { return cmp.hi; } }
+        protected static cmp hs { get { return cmp.hs; } }
+        protected static cmp equ { get { return cmp.equ; } }
+        protected static cmp neu { get { return cmp.neu; } }
+        protected static cmp ltu { get { return cmp.ltu; } }
+        protected static cmp leu { get { return cmp.leu; } }
+        protected static cmp gtu { get { return cmp.gtu; } }
+        protected static cmp geu { get { return cmp.geu; } }
+        protected static cmp num { get { return cmp.num; } }
+        protected static cmp nan { get { return cmp.nan; } }
 
-        protected static Space reg { get { return Space.Register; } }
-        protected static Space sreg { get { return Space.Special; } }
-        protected static Space local { get { return Space.Local; } }
-        protected static Space shared { get { return Space.Shared; } }
-        protected static Space global { get { return Space.Global; } }
-        protected static Space param { get { return Space.Param; } }
-        protected static Space @const { get { return Space.Const; } }
-        protected static Space const0 { get { return Space.Const0; } }
-        protected static Space const1 { get { return Space.Const1; } }
-        protected static Space const2 { get { return Space.Const2; } }
-        protected static Space const3 { get { return Space.Const3; } }
-        protected static Space const4 { get { return Space.Const4; } }
-        protected static Space const5 { get { return Space.Const5; } }
-        protected static Space const6 { get { return Space.Const6; } }
-        protected static Space const7 { get { return Space.Const7; } }
-        protected static Space const8 { get { return Space.Const8; } }
-        protected static Space const9 { get { return Space.Const9; } }
-        protected static Space const10 { get { return Space.Const10; } }
+        protected static space reg { get { return space.reg; } }
+        protected static space sreg { get { return space.sreg; } }
+        protected static space local { get { return space.local; } }
+        protected static space shared { get { return space.shared; } }
+        protected static space global { get { return space.global; } }
+        protected static space param { get { return space.param; } }
+        protected static space @const { get { return space.@const; } }
+        protected static space const0 { get { return space.const0; } }
+        protected static space const1 { get { return space.const1; } }
+        protected static space const2 { get { return space.const2; } }
+        protected static space const3 { get { return space.const3; } }
+        protected static space const4 { get { return space.const4; } }
+        protected static space const5 { get { return space.const5; } }
+        protected static space const6 { get { return space.const6; } }
+        protected static space const7 { get { return space.const7; } }
+        protected static space const8 { get { return space.const8; } }
+        protected static space const9 { get { return space.const9; } }
+        protected static space const10 { get { return space.const10; } }
 
         #endregion
     }
