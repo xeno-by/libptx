@@ -382,7 +382,6 @@
     <Compile Include="Instructions\Enumerations\testpop.cs" />
     <Compile Include="Instructions\Enumerations\tquery.cs" />
     <Compile Include="Instructions\Enumerations\tquerys.cs" />
-    <Compile Include="Instructions\Enumerations\vec.cs" />
     <Compile Include="Instructions\LogicAndShift\and.cs" />
     <Compile Include="Instructions\LogicAndShift\cnot.cs" />
     <Compile Include="Instructions\LogicAndShift\not.cs" />

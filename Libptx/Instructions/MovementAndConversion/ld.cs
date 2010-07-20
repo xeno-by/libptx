@@ -1,20 +1,19 @@
+using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
-using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
+using Type=Libptx.Common.Types.Type;
+using Libptx.Edsl.Types;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
     [Ptxop("ld{.ss}{.cop}.type          d, [a];")]
-    [Ptxop("ld{.ss}{.cop}.vec.type      d, [a];")]
     [Ptxop("ld.volatile{.ss}.type       d, [a];")]
-    [Ptxop("ld.volatile{.ss}.vec.type   d, [a];")]
     [Ptxop("ldu{.ss}.type               d, [a];")]
-    [Ptxop("ldu{.ss}.vec.type           d, [a];")]
     [DebuggerNonUserCode]
     public class ld : ptxop
     {
@@ -22,7 +21,6 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
         [Affix] public space ss { get; set; }
         [Affix] public cop cop { get; set; }
-        [Affix] public vec vec { get; set; }
         [Affix] public Type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
@@ -49,6 +47,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
+        protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (u == true).AssertImplies(ss == 0 || ss == global);
@@ -56,6 +55,7 @@ namespace Libptx.Instructions.MovementAndConversion
             (u == true).AssertImplies(cop == null);
             (@volatile == true).AssertEquiv(cop == null);
             (cop == null || cop == ca || cop == cg || cop == cs || cop == lu || cop == cv).AssertTrue();
+            type.isv1().AssertFalse();
         }
     }
 }

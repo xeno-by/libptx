@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -10,16 +11,13 @@ using XenoGears.Assertions;
 namespace Libptx.Instructions.MovementAndConversion
 {
     [Ptxop("st{.ss}{.cop}.type          d, [a];")]
-    [Ptxop("st{.ss}{.cop}.vec.type      d, [a];")]
     [Ptxop("st.volatile{.ss}.type       d, [a];")]
-    [Ptxop("st.volatile{.ss}.vec.type   d, [a];")]
     [DebuggerNonUserCode]
     public class st : ptxop
     {
         [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
         [Affix] public space ss { get; set; }
         [Affix] public cop cop { get; set; }
-        [Affix] public vec vec { get; set; }
         [Affix] public Type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
@@ -50,6 +48,7 @@ namespace Libptx.Instructions.MovementAndConversion
         {
             (@volatile == true).AssertEquiv(cop == null);
             (cop == null || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
+            type.isv1().AssertFalse();
         }
     }
 }

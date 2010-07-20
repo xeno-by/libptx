@@ -10,8 +10,8 @@ using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("suld.b.geom{.cop}.vec.dtype.clampm   d, [a, b];", SoftwareIsa.PTX_15)]
-    [Ptxop("suld.p.geom{.cop}.v4.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
+    [Ptxop("suld.b.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_15)]
+    [Ptxop("suld.p.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
     [DebuggerNonUserCode]
     public class suld : ptxop
     {
@@ -19,7 +19,6 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public bool p { get; set; }
         [Affix] public geom geom { get; set; }
         [Affix] public cop cop { get; set; }
-        [Affix] public vec vec { get; set; }
         [Affix] public Type dtype { get; set; }
         [Affix] public clampm clampm { get; set; }
 
@@ -51,14 +50,17 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
+        protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (b || p).AssertTrue();
             (geom != null).AssertTrue();
             (cop == null || cop == ca || cop == cg || cop == cs || cop == cv).AssertTrue();
-            (p == true).AssertImplies(vec == v4);
+
             (b == true).AssertImplies(dtype.isbit());
+            (b == true).AssertImplies(dtype.isscalar() || dtype.isv2() || dtype.isv4());
             (p == true).AssertImplies(dtype.is32());
+            (p == true).AssertImplies(dtype.isv4());
         }
     }
 }

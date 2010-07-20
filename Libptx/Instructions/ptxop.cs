@@ -59,9 +59,6 @@ namespace Libptx.Instructions
         protected static cop wb { get { return cop.wb; } }
         protected static cop wt { get { return cop.wt; } }
 
-        protected static vec v2 { get { return vec.v2; } }
-        protected static vec v4 { get { return vec.v4; } }
-
         protected static cachelevel L1 { get { return cachelevel.L1; } }
         protected static cachelevel L2 { get { return cachelevel.L2; } }
 
@@ -133,9 +130,26 @@ namespace Libptx.Instructions
         protected virtual bool allow_bit32 { get { return false; } }
         protected virtual bool allow_bit64 { get { return false; } }
         protected virtual bool allow_pred { get { return false; } }
-        protected override void CustomValidate(Module ctx) { custom_validate_opcode(ctx.Version, ctx.Target); custom_validate_op(ctx.Version, ctx.Target); }
+        protected virtual bool allow_vec { get { return false; } }
+        protected override void CustomValidate(Module ctx)
+        {
+            validate_opcode(ctx.Version, ctx.Target);
+            custom_validate_opcode(ctx.Version, ctx.Target);
+            validate_op(ctx.Version, ctx.Target);
+            custom_validate_op(ctx.Version, ctx.Target);
+        }
+
         protected virtual void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
+        private void validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        {
+            throw new NotImplementedException();
+        }
+
         protected virtual void custom_validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
+        private void validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        {
+            throw new NotImplementedException();
+        }
 
         protected override void RenderAsPtx(TextWriter writer)
         {

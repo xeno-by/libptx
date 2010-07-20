@@ -88,7 +88,6 @@ namespace Libptx.Edsl.Types
         public static int bits(this Type type)
         {
             if (type == null) return 0;
-            if (type.Mod != TypeMod.Scalar) return 0;
             switch (type.Name)
             {
                 case TypeName.U8:

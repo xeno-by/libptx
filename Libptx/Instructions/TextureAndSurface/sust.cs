@@ -10,8 +10,8 @@ using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("sust.b.geom{.cop}.vec.dtype.clampm   d, [a, b];", SoftwareIsa.PTX_15)]
-    [Ptxop("sust.p.geom{.cop}.v4.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
+    [Ptxop("sust.b.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_15)]
+    [Ptxop("sust.p.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
     [DebuggerNonUserCode]
     public class sust : ptxop
     {
@@ -19,7 +19,6 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public bool p { get; set; }
         [Affix] public geom geom { get; set; }
         [Affix] public cop cop { get; set; }
-        [Affix] public vec vec { get; set; }
         [Affix] public Type ctype { get; set; }
         [Affix] public clampm clampm { get; set; }
 
@@ -56,9 +55,11 @@ namespace Libptx.Instructions.TextureAndSurface
             (b || p).AssertTrue();
             (geom != null).AssertTrue();
             (cop == null || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
-            (vec != null).AssertTrue();
+
             (b == true).AssertImplies(ctype.isbit());
+            (b == true).AssertImplies(ctype.isscalar() || ctype.isv2() || ctype.isv4());
             (p == true).AssertImplies(ctype.is32());
+            (p == true).AssertImplies(ctype.isv4());
         }
     }
 }
