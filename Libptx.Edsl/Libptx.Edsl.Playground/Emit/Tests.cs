@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using XenoGears.Playground.Framework;
 
-namespace Libptx.Playground.Emit
+namespace Libptx.Edsl.Playground.Emit
 {
     [TestFixture]
     public class Tests : BaseTests

@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A724BB24-59B8-4B1F-966C-96ECA39899BD}</ProjectGuid>
+    <ProjectGuid>{023CB293-A9AF-49FF-9E5A-8C547630B1DA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Libptx.Playground</RootNamespace>
-    <AssemblyName>Libptx.Playground</AssemblyName>
+    <RootNamespace>Libptx.Edsl.TextGenerators</RootNamespace>
+    <AssemblyName>Libptx.Edsl.TextGenerators</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>649</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,25 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Libcuda, Version=3.1.3841.25202, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Libcuda, Version=3.1.3851.34689, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdPartyStuff\libcuda\Binaries\$(Configuration)\Libcuda.dll</HintPath>
+      <HintPath>Dependencies\Libcuda.dll</HintPath>
     </Reference>
-    <Reference Include="nunit-console-runner, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="Libptx, Version=2.1.3853.22764, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdPartyStuff\nunit\lib\nunit-console-runner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdPartyStuff\nunit\lib\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdPartyStuff\nunit\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.util, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdPartyStuff\nunit\lib\nunit.util.dll</HintPath>
+      <HintPath>Dependencies\Libptx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -62,23 +49,17 @@
     <None Include="Properties\AssemblyInfo.template" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Libptx\Libptx.csproj">
-      <Project>{6272D158-34F7-4DE1-907F-AFFD8E1E28F8}</Project>
-      <Name>Libptx</Name>
-    </ProjectReference>
-    <ProjectReference Include="$(XENOGEARS)\XenoGears\XenoGears.csproj">
+    <ProjectReference Include="..\..\..\XenoGears\XenoGears\XenoGears.csproj">
       <Project>{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}</Project>
       <Name>XenoGears</Name>
-    </ProjectReference>
-    <ProjectReference Include="$(XENOGEARS)\XenoGears.Playground\XenoGears.Playground.csproj">
-      <Project>{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}</Project>
-      <Name>XenoGears.Playground</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestRunner.cs" />
-    <Compile Include="MetaTests.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Playground.cs" />
+    <Compile Include="SigGenerator.cs" />
+    <Compile Include="VarGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -89,6 +70,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>"$(ProjectDir)..\ThirdPartyStuff\autoversioner\AutoVersioner.exe" "$(ProjectDir)$(ProjectFileName)" "$(ProjectDir)Properties\AssemblyInfo.template" "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
+    <PreBuildEvent>"$(ProjectDir)..\..\ThirdPartyStuff\autoversioner\AutoVersioner.exe" "$(ProjectDir)$(ProjectFileName)" "$(ProjectDir)Properties\AssemblyInfo.template" "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
   </PropertyGroup>
 </Project>

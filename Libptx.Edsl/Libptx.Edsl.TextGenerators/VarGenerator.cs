@@ -18,7 +18,7 @@ namespace Libptx.TextGenerators
     {
         public static void DoGenerate()
         {
-            var types_file = @"..\..\..\Libptx\Common\Types\TypeName.cs";
+            var types_file = @"..\..\..\..\Libptx\Common\Types\TypeName.cs";
             var types_lines = File.ReadAllLines(types_file);
             var types = types_lines.Select(s => s.Extract(@"^\s*\[Affix\("".+?""(,\s*.+?\s*)*\)\]\s+(?<name>[\d\w]+?)(\s*=\s*.+?)?\s*,\s*$")).Where(p => p != null).ToReadOnly();
             types = types.Select(s => s.ToLower()).ToReadOnly();
@@ -77,18 +77,18 @@ namespace Libptx.TextGenerators
                 return result;
             };
 
-            var spaces_file = @"..\..\..\Libptx\Common\Enumerations\Space.cs";
+            var spaces_file = @"..\..\..\..\Libptx\Common\Enumerations\space.cs";
             var spaces_lines = File.ReadAllLines(spaces_file);
             var spaces = spaces_lines.Select(s => s.Parse(@"^\s*\[Affix\(""(?<sig>.+?)""(,\s*.+?\s*)*\)\]\s+(?<name>[\d\w]+?)(\s*=\s*.+?)?\s*,\s*$")).Where(p => p != null)
                 .ToDictionary(p => p["sig"].Replace("[", "").Replace("]", "").Fluent(s => s == "const" ? "@const" : s), p => p["name"]).ToReadOnly();
 
-            var dir_types = @"..\..\..\Libptx\Edsl\Types\";
+            var dir_types = @"..\..\..\Libptx.Edsl\Types\";
             if (!Directory.Exists(dir_types)) Directory.CreateDirectory(dir_types);
             var dir_types_relaxed = @"..\..\..\Libptx\Edsl\Types\Relaxed\";
             if (!Directory.Exists(dir_types_relaxed)) Directory.CreateDirectory(dir_types_relaxed);
-            var dir_vars = @"..\..\..\Libptx\Edsl\Vars\";
+            var dir_vars = @"..\..\..\Libptx.Edsl\Vars\";
             if (!Directory.Exists(dir_vars)) Directory.CreateDirectory(dir_vars);
-            var dir_hastypes = @"..\..\..\Libptx\Edsl\Vars\Types\";
+            var dir_hastypes = @"..\..\..\Libptx.Edsl\Vars\Types\";
             if (!Directory.Exists(dir_hastypes)) Directory.CreateDirectory(dir_hastypes);
             Func<String, String> dir2ns = dir => dir.Replace(@"..\..\..\", String.Empty).Replace(@"\", ".").Slice(0, -1);
 

@@ -1,8 +1,7 @@
 using System;
-using Libptx.Expressions;
-using Libptx.Edsl.Types;
+using Libptx.Common.Types;
 
-namespace Libptx.Edsl.Vars
+namespace Libptx.Expressions
 {
     public static class VarExtensions
     {

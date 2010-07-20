@@ -2,7 +2,6 @@ using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
-using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libcuda.Versions;
 using XenoGears.Assertions;

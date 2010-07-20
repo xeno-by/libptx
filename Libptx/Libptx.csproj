@@ -75,11 +75,8 @@
     <Compile Include="Common\Types\Vectors.F64.cs" />
     <Compile Include="Common\Types\Vectors.S64.cs" />
     <Compile Include="Common\Types\Vectors.U64.cs" />
-    <Compile Include="Edsl\Annotations\HasRelaxedCoercionTo.cs" />
-    <Compile Include="Edsl\Annotations\HasStrictCoercionTo.cs" />
-    <Compile Include="Edsl\Annotations\HasType.cs" />
-    <Compile Include="Edsl\Var.Extensions.cs" />
-    <Compile Include="Edsl\Type.Dsl.cs" />
+    <Compile Include="Expressions\Var.Extensions.cs" />
+    <Compile Include="Common\Types\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />
     <Compile Include="Common\Annotations\ParticleAttribute.cs" />
     <Compile Include="Common\Annotations\Atoms\Location.cs" />
@@ -100,238 +97,18 @@
     <Compile Include="Common\Types\Sampler.cs" />
     <Compile Include="Common\Types\Surf.cs" />
     <Compile Include="Common\Types\Tex.cs" />
-    <Compile Include="Edsl\Types\b16.cs" />
-    <Compile Include="Edsl\Types\b32.cs" />
-    <Compile Include="Edsl\Types\b64.cs" />
-    <Compile Include="Edsl\Types\b8.cs" />
-    <Compile Include="Edsl\Types\f16.cs" />
-    <Compile Include="Edsl\Types\f32.cs" />
-    <Compile Include="Edsl\Types\f64.cs" />
-    <Compile Include="Edsl\Types\pred.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_b16.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_b32.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_b64.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_b8.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_f16.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_f32.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_f64.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_s16.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_s32.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_s64.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_s8.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_u16.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_u32.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_u64.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_u8.cs" />
-    <Compile Include="Edsl\Types\s16.cs" />
-    <Compile Include="Edsl\Types\s32.cs" />
-    <Compile Include="Edsl\Types\s64.cs" />
-    <Compile Include="Edsl\Types\s8.cs" />
-    <Compile Include="Edsl\Types\sampler.cs" />
-    <Compile Include="Edsl\Types\surf.cs" />
-    <Compile Include="Edsl\Types\tex.cs" />
-    <Compile Include="Edsl\Type.Extensions.cs" />
-    <Compile Include="Edsl\Types\type.cs" />
-    <Compile Include="Edsl\Types\u16.cs" />
-    <Compile Include="Edsl\Types\u32.cs" />
-    <Compile Include="Edsl\Types\u64.cs" />
-    <Compile Include="Edsl\Types\u8.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type.cs" />
-    <Compile Include="Edsl\Types\Relaxed\relaxed_type.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_b16.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_b32.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_b64.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_b8.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_f16.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_f32.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_f64.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_pred.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_s16.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_s32.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_s64.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_s8.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_sampler.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_surf.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_tex.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_u16.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_u32.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_u64.cs" />
-    <Compile Include="Edsl\Vars\Types\has_type_u8.cs" />
-    <Compile Include="Edsl\Vars\var.cs" />
-    <Compile Include="Edsl\Vars\var_b16.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_b16_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b16_v1.cs" />
-    <Compile Include="Edsl\Vars\var_b16_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b16_v2.cs" />
-    <Compile Include="Edsl\Vars\var_b16_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b16_v4.cs" />
-    <Compile Include="Edsl\Vars\var_b16_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b32.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_b32_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b32_v1.cs" />
-    <Compile Include="Edsl\Vars\var_b32_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b32_v2.cs" />
-    <Compile Include="Edsl\Vars\var_b32_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b32_v4.cs" />
-    <Compile Include="Edsl\Vars\var_b32_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b64.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_b64_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b64_v1.cs" />
-    <Compile Include="Edsl\Vars\var_b64_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b64_v2.cs" />
-    <Compile Include="Edsl\Vars\var_b64_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b64_v4.cs" />
-    <Compile Include="Edsl\Vars\var_b64_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b8.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_b8_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b8_v1.cs" />
-    <Compile Include="Edsl\Vars\var_b8_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b8_v2.cs" />
-    <Compile Include="Edsl\Vars\var_b8_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_b8_v4.cs" />
-    <Compile Include="Edsl\Vars\var_b8_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_couple.cs" />
-    <Compile Include="Edsl\Vars\var_f16.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_f16_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f16_v1.cs" />
-    <Compile Include="Edsl\Vars\var_f16_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f16_v2.cs" />
-    <Compile Include="Edsl\Vars\var_f16_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f16_v4.cs" />
-    <Compile Include="Edsl\Vars\var_f16_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f32.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_f32_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f32_v1.cs" />
-    <Compile Include="Edsl\Vars\var_f32_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f32_v2.cs" />
-    <Compile Include="Edsl\Vars\var_f32_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f32_v4.cs" />
-    <Compile Include="Edsl\Vars\var_f32_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f64.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_f64_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f64_v1.cs" />
-    <Compile Include="Edsl\Vars\var_f64_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f64_v2.cs" />
-    <Compile Include="Edsl\Vars\var_f64_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_f64_v4.cs" />
-    <Compile Include="Edsl\Vars\var_f64_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_pred.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_s16.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_s16_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s16_v1.cs" />
-    <Compile Include="Edsl\Vars\var_s16_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s16_v2.cs" />
-    <Compile Include="Edsl\Vars\var_s16_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s16_v4.cs" />
-    <Compile Include="Edsl\Vars\var_s16_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s32.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_s32_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s32_v1.cs" />
-    <Compile Include="Edsl\Vars\var_s32_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s32_v2.cs" />
-    <Compile Include="Edsl\Vars\var_s32_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s32_v4.cs" />
-    <Compile Include="Edsl\Vars\var_s32_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s64.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_s64_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s64_v1.cs" />
-    <Compile Include="Edsl\Vars\var_s64_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s64_v2.cs" />
-    <Compile Include="Edsl\Vars\var_s64_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s64_v4.cs" />
-    <Compile Include="Edsl\Vars\var_s64_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s8.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_s8_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s8_v1.cs" />
-    <Compile Include="Edsl\Vars\var_s8_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s8_v2.cs" />
-    <Compile Include="Edsl\Vars\var_s8_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_s8_v4.cs" />
-    <Compile Include="Edsl\Vars\var_s8_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_sampler.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_surf.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_tex.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_u16.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_u16_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u16_v1.cs" />
-    <Compile Include="Edsl\Vars\var_u16_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u16_v2.cs" />
-    <Compile Include="Edsl\Vars\var_u16_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u16_v4.cs" />
-    <Compile Include="Edsl\Vars\var_u16_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u32.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_u32_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u32_v1.cs" />
-    <Compile Include="Edsl\Vars\var_u32_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u32_v2.cs" />
-    <Compile Include="Edsl\Vars\var_u32_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u32_v4.cs" />
-    <Compile Include="Edsl\Vars\var_u32_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u64.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_u64_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u64_v1.cs" />
-    <Compile Include="Edsl\Vars\var_u64_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u64_v2.cs" />
-    <Compile Include="Edsl\Vars\var_u64_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u64_v4.cs" />
-    <Compile Include="Edsl\Vars\var_u64_v4_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u8.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Edsl\Vars\var_u8_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u8_v1.cs" />
-    <Compile Include="Edsl\Vars\var_u8_v1_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u8_v2.cs" />
-    <Compile Include="Edsl\Vars\var_u8_v2_a1.cs" />
-    <Compile Include="Edsl\Vars\var_u8_v4.cs" />
-    <Compile Include="Edsl\Vars\var_u8_v4_a1.cs" />
+    <Compile Include="Common\Types\Type.Extensions.cs" />
     <Compile Include="Expressions\Address.cs" />
     <Compile Include="Expressions\Addressable.cs" />
     <Compile Include="Common\Atom.cs" />
-    <Compile Include="Expressions\Const.cs" />
-    <Compile Include="Edsl\Const.Dsl.cs" />
+    <Compile Include="Expressions\Const.Core.cs" />
+    <Compile Include="Expressions\Const.Dsl.cs" />
     <Compile Include="Expressions\VarCouple.cs" />
     <Compile Include="Expressions\Expression.cs" />
-    <Compile Include="Common\Types\Type.cs" />
+    <Compile Include="Common\Types\Type.Core.cs" />
     <Compile Include="Common\Types\TypeName.cs" />
     <Compile Include="Common\Enumerations\space.cs" />
-    <Compile Include="Expressions\Var.cs" />
+    <Compile Include="Expressions\Var.Core.cs" />
     <Compile Include="Common\Types\TypeMod.cs" />
     <Compile Include="Expressions\VarMod.cs" />
     <Compile Include="Expressions\Vector.cs" />
@@ -455,10 +232,10 @@
   -->
   <PropertyGroup>
     <PreBuildEvent>"$(ProjectDir)..\ThirdPartyStuff\autoversioner\AutoVersioner.exe" "$(ProjectDir)$(ProjectFileName)" "$(ProjectDir)Properties\AssemblyInfo.template" "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
-    <PostBuildEvent>if "$(SolutionFileName)"=="Libptx.Full.sln" (
-    if not exist "$(SolutionDir)Libptx.TextGenerators" exit 1
-    if not exist "$(SolutionDir)Libptx.TextGenerators\Dependencies\" mkdir  "$(SolutionDir)Libptx.TextGenerators\Dependencies\"
-    copy *.* "$(SolutionDir)Libptx.TextGenerators\Dependencies\"
+    <PostBuildEvent>if "$(SolutionFileName)"=="Libptx.Edsl.sln" (
+    if not exist "$(SolutionDir)Libptx.Edsl.TextGenerators" exit 1
+    if not exist "$(SolutionDir)Libptx.Edsl.TextGenerators\Dependencies\" mkdir  "$(SolutionDir)Libptx.Edsl.TextGenerators\Dependencies\"
+    copy *.* "$(SolutionDir)Libptx.Edsl.TextGenerators\Dependencies\"
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>

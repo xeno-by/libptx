@@ -1,11 +1,11 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
-using Libptx.Edsl.Types;
 
 namespace Libptx.Instructions.MovementAndConversion
 {

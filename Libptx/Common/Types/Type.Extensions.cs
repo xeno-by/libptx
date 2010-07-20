@@ -1,9 +1,7 @@
 using System;
-using Libptx.Common.Types;
 using XenoGears.Assertions;
-using Type=Libptx.Common.Types.Type;
 
-namespace Libptx.Edsl.Types
+namespace Libptx.Common.Types
 {
     public static class TypeExtensions
     {

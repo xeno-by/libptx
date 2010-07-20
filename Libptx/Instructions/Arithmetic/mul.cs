@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
-using Libptx.Edsl.Types;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using Libcuda.Versions;

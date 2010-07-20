@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{144A5193-0D5F-4561-96E2-313AB2A9FC25}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Libptx.Edsl</RootNamespace>
+    <AssemblyName>Libptx.Edsl</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Libcuda, Version=3.1.3841.25202, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ThirdPartyStuff\libcuda\Binaries\$(Configuration)\Libcuda.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AssemblyInfo.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(XENOGEARS)\XenoGears\XenoGears.csproj">
+      <Project>{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}</Project>
+      <Name>XenoGears</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libptx\Libptx.csproj">
+      <Project>{6272D158-34F7-4DE1-907F-AFFD8E1E28F8}</Project>
+      <Name>Libptx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Types\b16.cs" />
+    <Compile Include="Types\b32.cs" />
+    <Compile Include="Types\b64.cs" />
+    <Compile Include="Types\b8.cs" />
+    <Compile Include="Types\f16.cs" />
+    <Compile Include="Types\f32.cs" />
+    <Compile Include="Types\f64.cs" />
+    <Compile Include="Types\pred.cs" />
+    <Compile Include="Types\Relaxed\relaxed_b16.cs" />
+    <Compile Include="Types\Relaxed\relaxed_b32.cs" />
+    <Compile Include="Types\Relaxed\relaxed_b64.cs" />
+    <Compile Include="Types\Relaxed\relaxed_b8.cs" />
+    <Compile Include="Types\Relaxed\relaxed_f16.cs" />
+    <Compile Include="Types\Relaxed\relaxed_f32.cs" />
+    <Compile Include="Types\Relaxed\relaxed_f64.cs" />
+    <Compile Include="Types\Relaxed\relaxed_s16.cs" />
+    <Compile Include="Types\Relaxed\relaxed_s32.cs" />
+    <Compile Include="Types\Relaxed\relaxed_s64.cs" />
+    <Compile Include="Types\Relaxed\relaxed_s8.cs" />
+    <Compile Include="Types\Relaxed\relaxed_type.cs" />
+    <Compile Include="Types\Relaxed\relaxed_u16.cs" />
+    <Compile Include="Types\Relaxed\relaxed_u32.cs" />
+    <Compile Include="Types\Relaxed\relaxed_u64.cs" />
+    <Compile Include="Types\Relaxed\relaxed_u8.cs" />
+    <Compile Include="Types\s16.cs" />
+    <Compile Include="Types\s32.cs" />
+    <Compile Include="Types\s64.cs" />
+    <Compile Include="Types\s8.cs" />
+    <Compile Include="Types\sampler.cs" />
+    <Compile Include="Types\surf.cs" />
+    <Compile Include="Types\tex.cs" />
+    <Compile Include="Types\type.cs" />
+    <Compile Include="Types\u16.cs" />
+    <Compile Include="Types\u32.cs" />
+    <Compile Include="Types\u64.cs" />
+    <Compile Include="Types\u8.cs" />
+    <Compile Include="Vars\Types\has_type.cs" />
+    <Compile Include="Vars\Types\has_type_b16.cs" />
+    <Compile Include="Vars\Types\has_type_b32.cs" />
+    <Compile Include="Vars\Types\has_type_b64.cs" />
+    <Compile Include="Vars\Types\has_type_b8.cs" />
+    <Compile Include="Vars\Types\has_type_f16.cs" />
+    <Compile Include="Vars\Types\has_type_f32.cs" />
+    <Compile Include="Vars\Types\has_type_f64.cs" />
+    <Compile Include="Vars\Types\has_type_pred.cs" />
+    <Compile Include="Vars\Types\has_type_s16.cs" />
+    <Compile Include="Vars\Types\has_type_s32.cs" />
+    <Compile Include="Vars\Types\has_type_s64.cs" />
+    <Compile Include="Vars\Types\has_type_s8.cs" />
+    <Compile Include="Vars\Types\has_type_sampler.cs" />
+    <Compile Include="Vars\Types\has_type_surf.cs" />
+    <Compile Include="Vars\Types\has_type_tex.cs" />
+    <Compile Include="Vars\Types\has_type_u16.cs" />
+    <Compile Include="Vars\Types\has_type_u32.cs" />
+    <Compile Include="Vars\Types\has_type_u64.cs" />
+    <Compile Include="Vars\Types\has_type_u8.cs" />
+    <Compile Include="Vars\var.cs" />
+    <Compile Include="Vars\var_b16.cs" />
+    <Compile Include="Vars\var_b16_a1.cs" />
+    <Compile Include="Vars\var_b16_v1.cs" />
+    <Compile Include="Vars\var_b16_v1_a1.cs" />
+    <Compile Include="Vars\var_b16_v2.cs" />
+    <Compile Include="Vars\var_b16_v2_a1.cs" />
+    <Compile Include="Vars\var_b16_v4.cs" />
+    <Compile Include="Vars\var_b16_v4_a1.cs" />
+    <Compile Include="Vars\var_b32.cs" />
+    <Compile Include="Vars\var_b32_a1.cs" />
+    <Compile Include="Vars\var_b32_v1.cs" />
+    <Compile Include="Vars\var_b32_v1_a1.cs" />
+    <Compile Include="Vars\var_b32_v2.cs" />
+    <Compile Include="Vars\var_b32_v2_a1.cs" />
+    <Compile Include="Vars\var_b32_v4.cs" />
+    <Compile Include="Vars\var_b32_v4_a1.cs" />
+    <Compile Include="Vars\var_b64.cs" />
+    <Compile Include="Vars\var_b64_a1.cs" />
+    <Compile Include="Vars\var_b64_v1.cs" />
+    <Compile Include="Vars\var_b64_v1_a1.cs" />
+    <Compile Include="Vars\var_b64_v2.cs" />
+    <Compile Include="Vars\var_b64_v2_a1.cs" />
+    <Compile Include="Vars\var_b64_v4.cs" />
+    <Compile Include="Vars\var_b64_v4_a1.cs" />
+    <Compile Include="Vars\var_b8.cs" />
+    <Compile Include="Vars\var_b8_a1.cs" />
+    <Compile Include="Vars\var_b8_v1.cs" />
+    <Compile Include="Vars\var_b8_v1_a1.cs" />
+    <Compile Include="Vars\var_b8_v2.cs" />
+    <Compile Include="Vars\var_b8_v2_a1.cs" />
+    <Compile Include="Vars\var_b8_v4.cs" />
+    <Compile Include="Vars\var_b8_v4_a1.cs" />
+    <Compile Include="Vars\var_couple.cs" />
+    <Compile Include="Vars\var_f16.cs" />
+    <Compile Include="Vars\var_f16_a1.cs" />
+    <Compile Include="Vars\var_f16_v1.cs" />
+    <Compile Include="Vars\var_f16_v1_a1.cs" />
+    <Compile Include="Vars\var_f16_v2.cs" />
+    <Compile Include="Vars\var_f16_v2_a1.cs" />
+    <Compile Include="Vars\var_f16_v4.cs" />
+    <Compile Include="Vars\var_f16_v4_a1.cs" />
+    <Compile Include="Vars\var_f32.cs" />
+    <Compile Include="Vars\var_f32_a1.cs" />
+    <Compile Include="Vars\var_f32_v1.cs" />
+    <Compile Include="Vars\var_f32_v1_a1.cs" />
+    <Compile Include="Vars\var_f32_v2.cs" />
+    <Compile Include="Vars\var_f32_v2_a1.cs" />
+    <Compile Include="Vars\var_f32_v4.cs" />
+    <Compile Include="Vars\var_f32_v4_a1.cs" />
+    <Compile Include="Vars\var_f64.cs" />
+    <Compile Include="Vars\var_f64_a1.cs" />
+    <Compile Include="Vars\var_f64_v1.cs" />
+    <Compile Include="Vars\var_f64_v1_a1.cs" />
+    <Compile Include="Vars\var_f64_v2.cs" />
+    <Compile Include="Vars\var_f64_v2_a1.cs" />
+    <Compile Include="Vars\var_f64_v4.cs" />
+    <Compile Include="Vars\var_f64_v4_a1.cs" />
+    <Compile Include="Vars\var_pred.cs" />
+    <Compile Include="Vars\var_s16.cs" />
+    <Compile Include="Vars\var_s16_a1.cs" />
+    <Compile Include="Vars\var_s16_v1.cs" />
+    <Compile Include="Vars\var_s16_v1_a1.cs" />
+    <Compile Include="Vars\var_s16_v2.cs" />
+    <Compile Include="Vars\var_s16_v2_a1.cs" />
+    <Compile Include="Vars\var_s16_v4.cs" />
+    <Compile Include="Vars\var_s16_v4_a1.cs" />
+    <Compile Include="Vars\var_s32.cs" />
+    <Compile Include="Vars\var_s32_a1.cs" />
+    <Compile Include="Vars\var_s32_v1.cs" />
+    <Compile Include="Vars\var_s32_v1_a1.cs" />
+    <Compile Include="Vars\var_s32_v2.cs" />
+    <Compile Include="Vars\var_s32_v2_a1.cs" />
+    <Compile Include="Vars\var_s32_v4.cs" />
+    <Compile Include="Vars\var_s32_v4_a1.cs" />
+    <Compile Include="Vars\var_s64.cs" />
+    <Compile Include="Vars\var_s64_a1.cs" />
+    <Compile Include="Vars\var_s64_v1.cs" />
+    <Compile Include="Vars\var_s64_v1_a1.cs" />
+    <Compile Include="Vars\var_s64_v2.cs" />
+    <Compile Include="Vars\var_s64_v2_a1.cs" />
+    <Compile Include="Vars\var_s64_v4.cs" />
+    <Compile Include="Vars\var_s64_v4_a1.cs" />
+    <Compile Include="Vars\var_s8.cs" />
+    <Compile Include="Vars\var_s8_a1.cs" />
+    <Compile Include="Vars\var_s8_v1.cs" />
+    <Compile Include="Vars\var_s8_v1_a1.cs" />
+    <Compile Include="Vars\var_s8_v2.cs" />
+    <Compile Include="Vars\var_s8_v2_a1.cs" />
+    <Compile Include="Vars\var_s8_v4.cs" />
+    <Compile Include="Vars\var_s8_v4_a1.cs" />
+    <Compile Include="Vars\var_sampler.cs" />
+    <Compile Include="Vars\var_surf.cs" />
+    <Compile Include="Vars\var_tex.cs" />
+    <Compile Include="Vars\var_u16.cs" />
+    <Compile Include="Vars\var_u16_a1.cs" />
+    <Compile Include="Vars\var_u16_v1.cs" />
+    <Compile Include="Vars\var_u16_v1_a1.cs" />
+    <Compile Include="Vars\var_u16_v2.cs" />
+    <Compile Include="Vars\var_u16_v2_a1.cs" />
+    <Compile Include="Vars\var_u16_v4.cs" />
+    <Compile Include="Vars\var_u16_v4_a1.cs" />
+    <Compile Include="Vars\var_u32.cs" />
+    <Compile Include="Vars\var_u32_a1.cs" />
+    <Compile Include="Vars\var_u32_v1.cs" />
+    <Compile Include="Vars\var_u32_v1_a1.cs" />
+    <Compile Include="Vars\var_u32_v2.cs" />
+    <Compile Include="Vars\var_u32_v2_a1.cs" />
+    <Compile Include="Vars\var_u32_v4.cs" />
+    <Compile Include="Vars\var_u32_v4_a1.cs" />
+    <Compile Include="Vars\var_u64.cs" />
+    <Compile Include="Vars\var_u64_a1.cs" />
+    <Compile Include="Vars\var_u64_v1.cs" />
+    <Compile Include="Vars\var_u64_v1_a1.cs" />
+    <Compile Include="Vars\var_u64_v2.cs" />
+    <Compile Include="Vars\var_u64_v2_a1.cs" />
+    <Compile Include="Vars\var_u64_v4.cs" />
+    <Compile Include="Vars\var_u64_v4_a1.cs" />
+    <Compile Include="Vars\var_u8.cs" />
+    <Compile Include="Vars\var_u8_a1.cs" />
+    <Compile Include="Vars\var_u8_v1.cs" />
+    <Compile Include="Vars\var_u8_v1_a1.cs" />
+    <Compile Include="Vars\var_u8_v2.cs" />
+    <Compile Include="Vars\var_u8_v2_a1.cs" />
+    <Compile Include="Vars\var_u8_v4.cs" />
+    <Compile Include="Vars\var_u8_v4_a1.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)..\..\ThirdPartyStuff\autoversioner\AutoVersioner.exe" "$(ProjectDir)$(ProjectFileName)" "$(ProjectDir)Properties\AssemblyInfo.template" "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

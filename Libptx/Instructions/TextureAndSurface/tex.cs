@@ -5,7 +5,6 @@ using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
-using Libptx.Edsl.Types;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
