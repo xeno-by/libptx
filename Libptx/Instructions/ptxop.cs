@@ -12,22 +12,6 @@ namespace Libptx.Instructions
     {
         #region Enumeration values => Static properties
 
-        protected static type u8 { get { return type.u8; } }
-        protected static type s8 { get { return type.s8; } }
-        protected static type u16 { get { return type.u16; } }
-        protected static type s16 { get { return type.s16; } }
-        protected static type u32 { get { return type.u32; } }
-        protected static type s32 { get { return type.s32; } }
-        protected static type u64 { get { return type.u64; } }
-        protected static type s64 { get { return type.s64; } }
-        protected static type f16 { get { return type.f32; } }
-        protected static type f32 { get { return type.f32; } }
-        protected static type f64 { get { return type.f64; } }
-        protected static type b8 { get { return type.b8; } }
-        protected static type b16 { get { return type.b16; } }
-        protected static type b32 { get { return type.b32; } }
-        protected static type b64 { get { return type.b64; } }
-
         protected static frnd rn { get { return frnd.rn; } }
         protected static frnd rz { get { return frnd.rz; } }
         protected static frnd rm { get { return frnd.rm; } }
@@ -56,25 +40,6 @@ namespace Libptx.Instructions
         protected static testpop normal { get { return testpop.normal; } }
         protected static testpop subnormal { get { return testpop.subnormal; } }
 
-        protected static cmpop eq { get { return cmpop.eq; } }
-        protected static cmpop ne { get { return cmpop.ne; } }
-        protected static cmpop lt { get { return cmpop.lt; } }
-        protected static cmpop le { get { return cmpop.le; } }
-        protected static cmpop gt { get { return cmpop.gt; } }
-        protected static cmpop ge { get { return cmpop.ge; } }
-        protected static cmpop cmpop_lo { get { return cmpop.lo; } }
-        protected static cmpop ls { get { return cmpop.ls; } }
-        protected static cmpop cmpop_hi { get { return cmpop.hi; } }
-        protected static cmpop hs { get { return cmpop.hs; } }
-        protected static cmpop equ { get { return cmpop.equ; } }
-        protected static cmpop neu { get { return cmpop.neu; } }
-        protected static cmpop ltu { get { return cmpop.ltu; } }
-        protected static cmpop leu { get { return cmpop.leu; } }
-        protected static cmpop gtu { get { return cmpop.gtu; } }
-        protected static cmpop geu { get { return cmpop.geu; } }
-        protected static cmpop num { get { return cmpop.num; } }
-        protected static cmpop nan { get { return cmpop.nan; } }
-
         protected static op add { get { return op.add; } }
         protected static op min { get { return op.min; } }
         protected static op max { get { return op.max; } }
@@ -96,12 +61,6 @@ namespace Libptx.Instructions
 
         protected static vec v2 { get { return vec.v2; } }
         protected static vec v4 { get { return vec.v4; } }
-
-        protected static ss @const { get { return ss.@const; } }
-        protected static ss global { get { return ss.global; } }
-        protected static ss local { get { return ss.local; } }
-        protected static ss param { get { return ss.param; } }
-        protected static ss shared { get { return ss.shared; } }
 
         protected static cachelevel L1 { get { return cachelevel.L1; } }
         protected static cachelevel L2 { get { return cachelevel.L2; } }
@@ -138,13 +97,6 @@ namespace Libptx.Instructions
         protected static barlevel cta { get { return barlevel.cta; } }
         protected static barlevel gl { get { return barlevel.gl; } }
         protected static barlevel sys { get { return barlevel.sys; } }
-
-        protected static sel b0 { get { return sel.b0; } }
-        protected static sel b1 { get { return sel.b1; } }
-        protected static sel b2 { get { return sel.b2; } }
-        protected static sel b3 { get { return sel.b3; } }
-        protected static sel h0 { get { return sel.h0; } }
-        protected static sel h1 { get { return sel.h1; } }
 
         protected static vshm vshm_clamp { get { return vshm.clamp; } }
         protected static vshm vshm_wrap { get { return vshm.wrap; } }

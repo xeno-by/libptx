@@ -1,7 +1,9 @@
+using System;
 using Libptx.Common.Annotations.Quanta;
 
 namespace Libptx.Common.Types
 {
+    [Flags]
     public enum TypeMod
     {
         [Affix(null)] Scalar = 0,

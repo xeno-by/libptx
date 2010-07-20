@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 
@@ -12,7 +13,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [DebuggerNonUserCode]
     public class mov : ptxop
     {
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

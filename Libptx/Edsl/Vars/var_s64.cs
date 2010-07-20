@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars.Types;
 using Libptx.Expressions;
@@ -15,23 +16,23 @@ namespace Libptx.Edsl.Vars
         public var_s64_v2 v2 { get { return Clone<var_s64_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
         public var_s64_v4 v4 { get { return Clone<var_s64_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }
         public var_s64_a1 this[int dim] { get { return Clone<var_s64_a1>(v => v.Type = v.Type[dim], v => v.Init = null); } }
-        public new var_s64 reg { get { return Clone(v => v.Space = Common.Enumerations.space.reg); } }
-        public new var_s64 sreg { get { return Clone(v => v.Space = Common.Enumerations.space.sreg); } }
-        public new var_s64 local { get { return Clone(v => v.Space = Common.Enumerations.space.local); } }
-        public new var_s64 shared { get { return Clone(v => v.Space = Common.Enumerations.space.shared); } }
-        public new var_s64 global { get { return Clone(v => v.Space = Common.Enumerations.space.global); } }
-        public new var_s64 param { get { return Clone(v => v.Space = Common.Enumerations.space.param); } }
-        public new var_s64 const0 { get { return Clone(v => v.Space = Common.Enumerations.space.const0); } }
-        public new var_s64 const1 { get { return Clone(v => v.Space = Common.Enumerations.space.const1); } }
-        public new var_s64 const2 { get { return Clone(v => v.Space = Common.Enumerations.space.const2); } }
-        public new var_s64 const3 { get { return Clone(v => v.Space = Common.Enumerations.space.const3); } }
-        public new var_s64 const4 { get { return Clone(v => v.Space = Common.Enumerations.space.const4); } }
-        public new var_s64 const5 { get { return Clone(v => v.Space = Common.Enumerations.space.const5); } }
-        public new var_s64 const6 { get { return Clone(v => v.Space = Common.Enumerations.space.const6); } }
-        public new var_s64 const7 { get { return Clone(v => v.Space = Common.Enumerations.space.const7); } }
-        public new var_s64 const8 { get { return Clone(v => v.Space = Common.Enumerations.space.const8); } }
-        public new var_s64 const9 { get { return Clone(v => v.Space = Common.Enumerations.space.const9); } }
-        public new var_s64 const10 { get { return Clone(v => v.Space = Common.Enumerations.space.const10); } }
+        public new var_s64 reg { get { return Clone(v => v.Space = space.reg); } }
+        public new var_s64 sreg { get { return Clone(v => v.Space = space.sreg); } }
+        public new var_s64 local { get { return Clone(v => v.Space = space.local); } }
+        public new var_s64 shared { get { return Clone(v => v.Space = space.shared); } }
+        public new var_s64 global { get { return Clone(v => v.Space = space.global); } }
+        public new var_s64 param { get { return Clone(v => v.Space = space.param); } }
+        public new var_s64 const0 { get { return Clone(v => v.Space = space.const0); } }
+        public new var_s64 const1 { get { return Clone(v => v.Space = space.const1); } }
+        public new var_s64 const2 { get { return Clone(v => v.Space = space.const2); } }
+        public new var_s64 const3 { get { return Clone(v => v.Space = space.const3); } }
+        public new var_s64 const4 { get { return Clone(v => v.Space = space.const4); } }
+        public new var_s64 const5 { get { return Clone(v => v.Space = space.const5); } }
+        public new var_s64 const6 { get { return Clone(v => v.Space = space.const6); } }
+        public new var_s64 const7 { get { return Clone(v => v.Space = space.const7); } }
+        public new var_s64 const8 { get { return Clone(v => v.Space = space.const8); } }
+        public new var_s64 const9 { get { return Clone(v => v.Space = space.const9); } }
+        public new var_s64 const10 { get { return Clone(v => v.Space = space.const10); } }
 
         public var_s64 init(long value) { return Clone(v => v.Init = value); }
 

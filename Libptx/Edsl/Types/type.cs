@@ -1,4 +1,5 @@
-using Libptx.Common.Types;
+using System;
+using Type=Libptx.Common.Types.Type;
 using var=Libptx.Edsl.Vars.var;
 
 namespace Libptx.Edsl.Types

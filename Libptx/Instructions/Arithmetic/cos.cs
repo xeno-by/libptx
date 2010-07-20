@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -13,7 +14,7 @@ namespace Libptx.Instructions.Arithmetic
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

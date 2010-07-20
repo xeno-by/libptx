@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -18,16 +20,16 @@ namespace Libptx.Instructions.MovementAndConversion
     {
         [Mod] public bool u { get; set; }
         [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
-        [Affix] public ss ss { get; set; }
+        [Affix] public space ss { get; set; }
         [Affix] public cop cop { get; set; }
         [Affix] public vec vec { get; set; }
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {
             get
             {
-                var generic = ss == null;
+                var generic = ss == 0;
                 var cache = cop != null;
                 return (generic || cache) ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_11;
             }
@@ -37,7 +39,7 @@ namespace Libptx.Instructions.MovementAndConversion
         {
             get
             {
-                var generic = ss == null;
+                var generic = ss == 0;
                 var cache = cop != null;
                 return (generic || cache) ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
@@ -49,11 +51,11 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_bit64 { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (u == true).AssertImplies(ss == null || ss == global);
+            (u == true).AssertImplies(ss == 0 || ss == global);
             (u == true).AssertImplies(@volatile == false);
             (u == true).AssertImplies(cop == null);
             (@volatile == true).AssertEquiv(cop == null);
-            (ss == null || ss == ca || ss == cg || ss == cs || ss == lu || ss == cv).AssertTrue();
+            (cop == null || cop == ca || cop == cg || cop == cs || cop == lu || cop == cv).AssertTrue();
         }
     }
 }

@@ -7,14 +7,14 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
 {
-    [Ptxop20("vsub.dtype.atype.btype{.sat} d, a{.asel}, b{.bsel};")]
-    [Ptxop20("vsub.dtype.atype.btype{.sat}.op2 d, a{.asel}, b{.bsel}, c;")]
-    [Ptxop20("vsub.dtype.atype.btype{.sat} d.dsel, a{.asel}, b{.bsel}, c;")]
+    [Ptxop20("vsub.dtype.atype.btype{.sat} d, a, b;")]
+    [Ptxop20("vsub.dtype.atype.btype{.sat}.op2 d, a, b, c;")]
+    [Ptxop20("vsub.dtype.atype.btype{.sat} d.dsel, a, b, c;")]
     public class vsub : ptxop
     {
-        [Affix] public type dtype { get; set; }
-        [Affix] public type atype { get; set; }
-        [Affix] public type btype { get; set; }
+        [Affix] public Type dtype { get; set; }
+        [Affix] public Type atype { get; set; }
+        [Affix] public Type btype { get; set; }
         [Affix] public bool sat { get; set; }
         [Affix] public op op2 { get; set; }
 

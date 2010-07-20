@@ -1,8 +1,9 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.LogicAndShift
@@ -11,7 +12,7 @@ namespace Libptx.Instructions.LogicAndShift
     [DebuggerNonUserCode]
     public class shr : ptxop
     {
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

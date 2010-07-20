@@ -5,6 +5,7 @@ using Libcuda.Versions;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Annotations.Atoms;
 using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 
@@ -43,25 +44,25 @@ namespace Libptx.Common
 
         #region Enumeration values => Static properties
 
-        protected static Type u8 { get { return TypeName.U8; } }
-        protected static Type s8 { get { return TypeName.S8; } }
-        protected static Type u16 { get { return TypeName.U16; } }
-        protected static Type s16 { get { return TypeName.S16; } }
-        protected static Type u32 { get { return TypeName.U32; } }
-        protected static Type s32 { get { return TypeName.S32; } }
-        protected static Type u64 { get { return TypeName.U64; } }
-        protected static Type s64 { get { return TypeName.S64; } }
-        protected static Type f16 { get { return TypeName.F16; } }
-        protected static Type f32 { get { return TypeName.F32; } }
-        protected static Type f64 { get { return TypeName.F64; } }
-        protected static Type b8 { get { return TypeName.B8; } }
-        protected static Type b16 { get { return TypeName.B16; } }
-        protected static Type b32 { get { return TypeName.B32; } }
-        protected static Type b64 { get { return TypeName.B64; } }
-        protected static Type pred { get { return TypeName.Pred; } }
-        protected static Type tex { get { return TypeName.Tex; } }
-        protected static Type sampler { get { return TypeName.Sampler; } }
-        protected static Type surf { get { return TypeName.Surf; } }
+        protected static u8 u8 { get { return new u8(); } }
+        protected static s8 s8 { get { return new s8(); } }
+        protected static u16 u16 { get { return new u16(); } }
+        protected static s16 s16 { get { return new s16(); } }
+        protected static u32 u32 { get { return new u32(); } }
+        protected static s32 s32 { get { return new s32(); } }
+        protected static u64 u64 { get { return new u64(); } }
+        protected static s64 s64 { get { return new s64(); } }
+        protected static f16 f16 { get { return new f16(); } }
+        protected static f32 f32 { get { return new f32(); } }
+        protected static f64 f64 { get { return new f64(); } }
+        protected static b8 b8 { get { return new b8(); } }
+        protected static b16 b16 { get { return new b16(); } }
+        protected static b32 b32 { get { return new b32(); } }
+        protected static b64 b64 { get { return new b64(); } }
+        protected static pred pred { get { return new pred(); } }
+        protected static tex tex { get { return new tex(); } }
+        protected static sampler sampler { get { return new sampler(); } }
+        protected static surf surf { get { return new surf(); } }
 
         protected static cmp eq { get { return cmp.eq; } }
         protected static cmp ne { get { return cmp.ne; } }

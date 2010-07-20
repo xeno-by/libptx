@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -15,9 +16,9 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     public class bar_red : ptxop
     {
         [Affix] public bool popc { get; set; }
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
         [Affix] public op op { get; set; }
-        [Affix] public bool pred { get; set; }
+        [Affix] public new bool pred { get; set; }
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

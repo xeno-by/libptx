@@ -1,19 +1,21 @@
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
 {
-    [Ptxop20("vset.atype.btype.cmp d, a{.asel}, b{.bsel};")]
-    [Ptxop20("vset.atype.btype.cmp.op2 d, a{.asel}, b{.bsel}, c;")]
-    [Ptxop20("vset.atype.btype.cmp d.dsel, a{.asel}, b{.bsel}, c;")]
+    [Ptxop20("vset.atype.btype.cmp d, a, b;")]
+    [Ptxop20("vset.atype.btype.cmp.op2 d, a, b, c;")]
+    [Ptxop20("vset.atype.btype.cmp d.dsel, a, b, c;")]
     public class vset : ptxop
     {
-        [Affix] public type atype { get; set; }
-        [Affix] public type btype { get; set; }
-        [Affix] public cmpop cmp { get; set; }
+        [Affix] public Type atype { get; set; }
+        [Affix] public Type btype { get; set; }
+        [Affix] public cmp cmp { get; set; }
         [Affix] public op op2 { get; set; }
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)

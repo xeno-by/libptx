@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -16,8 +18,8 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix] public frnd frnd { get; set; }
         [Affix] public bool ftz { get; set; }
         [Affix] public bool sat { get; set; }
-        [Affix] public type dtype { get; set; }
-        [Affix] public type atype { get; set; }
+        [Affix] public Type dtype { get; set; }
+        [Affix] public Type atype { get; set; }
 
         protected override bool allow_int8 { get { return true; } }
         protected override bool allow_float16 { get { return true; } }

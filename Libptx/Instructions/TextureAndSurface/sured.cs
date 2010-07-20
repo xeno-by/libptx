@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
@@ -16,7 +18,7 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public bool p { get; set; }
         [Affix] public op op { get; set; }
         [Affix] public geom geom { get; set; }
-        [Affix] public type ctype { get; set; }
+        [Affix] public Type ctype { get; set; }
         [Affix] public clampm clampm { get; set; }
 
         protected override bool allow_bit8 { get { return true; } }

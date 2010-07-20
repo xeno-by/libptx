@@ -61,6 +61,7 @@
     <Compile Include="Edsl\Annotations\HasRelaxedCoercionTo.cs" />
     <Compile Include="Edsl\Annotations\HasStrictCoercionTo.cs" />
     <Compile Include="Edsl\Annotations\HasType.cs" />
+    <Compile Include="Edsl\Var.Extensions.cs" />
     <Compile Include="Edsl\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />
     <Compile Include="Common\Annotations\ParticleAttribute.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Edsl\Types\sampler.cs" />
     <Compile Include="Edsl\Types\surf.cs" />
     <Compile Include="Edsl\Types\tex.cs" />
+    <Compile Include="Edsl\Type.Extensions.cs" />
     <Compile Include="Edsl\Types\type.cs" />
     <Compile Include="Edsl\Types\u16.cs" />
     <Compile Include="Edsl\Types\u32.cs" />
@@ -355,7 +357,6 @@
     <Compile Include="Instructions\Enumerations\barlevel.cs" />
     <Compile Include="Instructions\Enumerations\scale.cs" />
     <Compile Include="Instructions\Enumerations\vshm.cs" />
-    <Compile Include="Instructions\Enumerations\sel.cs" />
     <Compile Include="Instructions\Enumerations\redm.cs" />
     <Compile Include="Instructions\Miscellaneous\brkpt.cs" />
     <Compile Include="Instructions\Miscellaneous\pmevent.cs" />
@@ -369,7 +370,6 @@
     <Compile Include="Instructions\MovementAndConversion\st.cs" />
     <Compile Include="Instructions\Enumerations\cachelevel.cs" />
     <Compile Include="Instructions\Enumerations\clamp.cs" />
-    <Compile Include="Instructions\Enumerations\cmpop.cs" />
     <Compile Include="Instructions\Enumerations\cop.cs" />
     <Compile Include="Instructions\Enumerations\frnd.cs" />
     <Compile Include="Instructions\Enumerations\geom.cs" />
@@ -379,11 +379,9 @@
     <Compile Include="Instructions\Enumerations\prmtm.cs" />
     <Compile Include="Instructions\Enumerations\size.cs" />
     <Compile Include="Instructions\Enumerations\squery.cs" />
-    <Compile Include="Instructions\Enumerations\ss.cs" />
     <Compile Include="Instructions\Enumerations\testpop.cs" />
     <Compile Include="Instructions\Enumerations\tquery.cs" />
     <Compile Include="Instructions\Enumerations\tquerys.cs" />
-    <Compile Include="Instructions\Enumerations\type.cs" />
     <Compile Include="Instructions\Enumerations\vec.cs" />
     <Compile Include="Instructions\LogicAndShift\and.cs" />
     <Compile Include="Instructions\LogicAndShift\cnot.cs" />

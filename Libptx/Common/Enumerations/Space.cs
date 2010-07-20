@@ -4,7 +4,7 @@ namespace Libptx.Common.Enumerations
 {
     public enum space
     {
-        [Affix("reg")] reg = 0,
+        [Affix("reg")] reg = 1,
         [Affix("sreg")] sreg,
         [Affix("local")] local,
         [Affix("shared")] shared,

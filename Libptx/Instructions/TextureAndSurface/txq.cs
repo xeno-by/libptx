@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -14,7 +15,7 @@ namespace Libptx.Instructions.TextureAndSurface
     {
         [Affix] public tquery tquery { get; set; }
         [Affix] public tquerys squery { get; set; }
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
         {

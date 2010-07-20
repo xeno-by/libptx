@@ -1,5 +1,8 @@
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -10,9 +13,9 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     [Ptxop("atom{.space}.op.type d, [a], b, c;")]
     public class atom : ptxop
     {
-        [Affix] public ss space { get; set; }
+        [Affix] public space space { get; set; }
         [Affix] public op op { get; set; }
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {
@@ -23,7 +26,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
                 if ((op == add || op == cas || op == exch) && type.is64()) return HardwareIsa.SM_12;
                 if (space == shared && type.is64()) return HardwareIsa.SM_20;
                 if (op == add && type == f32) return HardwareIsa.SM_20;
-                if (space == null) return HardwareIsa.SM_20;
+                if (space == 0) return HardwareIsa.SM_20;
                 return HardwareIsa.SM_10;
             }
         }
@@ -32,7 +35,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         protected override bool allow_bit64 { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (space == null || space == global || space == shared).AssertTrue();
+            (space == 0 || space == global || space == shared).AssertTrue();
             (op == and || op == or || op == xor || op == cas || op == exch || op == add || op == inc || op == dec || op == min || op == max).AssertTrue();
             (op == and || op == or || op == xor).AssertImplies(type == b32);
             (op == cas || op == exch).AssertImplies(type == b32 || type == b64);

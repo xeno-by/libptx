@@ -1,8 +1,9 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Arithmetic
@@ -11,7 +12,7 @@ namespace Libptx.Instructions.Arithmetic
     [DebuggerNonUserCode]
     public class popc : ptxop
     {
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

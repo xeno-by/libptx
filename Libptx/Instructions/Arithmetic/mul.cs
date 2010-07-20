@@ -1,10 +1,11 @@
-using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions.Arithmetic
 {
@@ -20,7 +21,7 @@ namespace Libptx.Instructions.Arithmetic
         [Affix] public frnd rnd { get; set; }
         [Affix] public bool ftz { get; set; }
         [Affix] public bool sat { get; set; }
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override HardwareIsa custom_hwisa
         {

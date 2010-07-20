@@ -1,19 +1,20 @@
 ﻿using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
 {
-    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d, a{.asel}, b{.bsel};")]
-    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode}.op2 d, a{.asel}, b{.bsel}, c;")]
-    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d.dsel, a{.asel}, b{.bsel}, c;")]
+    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d, a, b;")]
+    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode}.op2 d, a, b, c;")]
+    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d.dsel, a, b, c;")]
     public class vshl : ptxop
     {
-        [Affix] public type dtype { get; set; }
-        [Affix] public type atype { get; set; }
-        [Affix] public type btype { get; set; }
+        [Affix] public Type dtype { get; set; }
+        [Affix] public Type atype { get; set; }
+        [Affix] public Type btype { get; set; }
         [Affix] public bool sat { get; set; }
         [Affix] public vshm mode { get; set; }
         [Affix] public op op2 { get; set; }

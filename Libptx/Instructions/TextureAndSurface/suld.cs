@@ -1,10 +1,12 @@
 using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Edsl.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
@@ -18,7 +20,7 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public geom geom { get; set; }
         [Affix] public cop cop { get; set; }
         [Affix] public vec vec { get; set; }
-        [Affix] public type dtype { get; set; }
+        [Affix] public Type dtype { get; set; }
         [Affix] public clampm clampm { get; set; }
 
         protected override SoftwareIsa custom_swisa

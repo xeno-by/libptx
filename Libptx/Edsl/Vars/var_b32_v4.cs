@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars.Types;
 using Libptx.Expressions;
@@ -20,23 +21,23 @@ namespace Libptx.Edsl.Vars
         public var_b32 b { get { return Clone<var_b32>(v => v.Type = v.Type.b, v => v.Init = null); } }
         public var_b32 w { get { return Clone<var_b32>(v => v.Type = v.Type.w, v => v.Init = null); } }
         public var_b32 a { get { return Clone<var_b32>(v => v.Type = v.Type.a, v => v.Init = null); } }
-        public new var_b32_v4 reg { get { return Clone(v => v.Space = Common.Enumerations.space.reg); } }
-        public new var_b32_v4 sreg { get { return Clone(v => v.Space = Common.Enumerations.space.sreg); } }
-        public new var_b32_v4 local { get { return Clone(v => v.Space = Common.Enumerations.space.local); } }
-        public new var_b32_v4 shared { get { return Clone(v => v.Space = Common.Enumerations.space.shared); } }
-        public new var_b32_v4 global { get { return Clone(v => v.Space = Common.Enumerations.space.global); } }
-        public new var_b32_v4 param { get { return Clone(v => v.Space = Common.Enumerations.space.param); } }
-        public new var_b32_v4 const0 { get { return Clone(v => v.Space = Common.Enumerations.space.const0); } }
-        public new var_b32_v4 const1 { get { return Clone(v => v.Space = Common.Enumerations.space.const1); } }
-        public new var_b32_v4 const2 { get { return Clone(v => v.Space = Common.Enumerations.space.const2); } }
-        public new var_b32_v4 const3 { get { return Clone(v => v.Space = Common.Enumerations.space.const3); } }
-        public new var_b32_v4 const4 { get { return Clone(v => v.Space = Common.Enumerations.space.const4); } }
-        public new var_b32_v4 const5 { get { return Clone(v => v.Space = Common.Enumerations.space.const5); } }
-        public new var_b32_v4 const6 { get { return Clone(v => v.Space = Common.Enumerations.space.const6); } }
-        public new var_b32_v4 const7 { get { return Clone(v => v.Space = Common.Enumerations.space.const7); } }
-        public new var_b32_v4 const8 { get { return Clone(v => v.Space = Common.Enumerations.space.const8); } }
-        public new var_b32_v4 const9 { get { return Clone(v => v.Space = Common.Enumerations.space.const9); } }
-        public new var_b32_v4 const10 { get { return Clone(v => v.Space = Common.Enumerations.space.const10); } }
+        public new var_b32_v4 reg { get { return Clone(v => v.Space = space.reg); } }
+        public new var_b32_v4 sreg { get { return Clone(v => v.Space = space.sreg); } }
+        public new var_b32_v4 local { get { return Clone(v => v.Space = space.local); } }
+        public new var_b32_v4 shared { get { return Clone(v => v.Space = space.shared); } }
+        public new var_b32_v4 global { get { return Clone(v => v.Space = space.global); } }
+        public new var_b32_v4 param { get { return Clone(v => v.Space = space.param); } }
+        public new var_b32_v4 const0 { get { return Clone(v => v.Space = space.const0); } }
+        public new var_b32_v4 const1 { get { return Clone(v => v.Space = space.const1); } }
+        public new var_b32_v4 const2 { get { return Clone(v => v.Space = space.const2); } }
+        public new var_b32_v4 const3 { get { return Clone(v => v.Space = space.const3); } }
+        public new var_b32_v4 const4 { get { return Clone(v => v.Space = space.const4); } }
+        public new var_b32_v4 const5 { get { return Clone(v => v.Space = space.const5); } }
+        public new var_b32_v4 const6 { get { return Clone(v => v.Space = space.const6); } }
+        public new var_b32_v4 const7 { get { return Clone(v => v.Space = space.const7); } }
+        public new var_b32_v4 const8 { get { return Clone(v => v.Space = space.const8); } }
+        public new var_b32_v4 const9 { get { return Clone(v => v.Space = space.const9); } }
+        public new var_b32_v4 const10 { get { return Clone(v => v.Space = space.const10); } }
 
         public var_b32_v4 init(Bit32_V4 value) { return Clone(v => v.Init = value); }
         public var_b32_v4 init(Bit32_V3 value) { return Clone(v => v.Init = value); }

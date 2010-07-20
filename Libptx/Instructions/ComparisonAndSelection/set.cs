@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -15,11 +17,11 @@ namespace Libptx.Instructions.ComparisonAndSelection
     public class set : ptxop
     {
         [Mod] public bool p { get; set; }
-        [Affix] public cmpop cmpop { get; set; }
+        [Affix] public cmp cmpop { get; set; }
         [Affix] public op boolop { get; set; }
         [Affix] public bool ftz { get; set; }
-        [Affix] public type dtype { get; set; }
-        [Affix] public type stype { get; set; }
+        [Affix] public Type dtype { get; set; }
+        [Affix] public Type stype { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

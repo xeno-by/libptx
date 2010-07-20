@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Instructions.Enumerations;
 using XenoGears.Assertions;
@@ -14,8 +15,8 @@ namespace Libptx.Instructions.TextureAndSurface
     {
         [Affix] public geom geom { get; set; }
         [Affix] public vec vec { get; set; }
-        [Affix] public type dtype { get; set; }
-        [Affix] public type btype { get; set; }
+        [Affix] public Type dtype { get; set; }
+        [Affix] public Type btype { get; set; }
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

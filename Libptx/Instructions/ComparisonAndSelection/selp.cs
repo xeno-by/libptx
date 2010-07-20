@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
-using Libptx.Instructions.Enumerations;
 
 namespace Libptx.Instructions.ComparisonAndSelection
 {
@@ -9,7 +9,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
     [DebuggerNonUserCode]
     public class selp : ptxop
     {
-        [Affix] public type type { get; set; }
+        [Affix] public Type type { get; set; }
 
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }

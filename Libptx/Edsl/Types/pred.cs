@@ -1,4 +1,5 @@
 using System.Linq;
+using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Edsl.Vars;
 using Libcuda.DataTypes;
@@ -9,23 +10,23 @@ namespace Libptx.Edsl.Types
 {
     public class pred : type
     {
-        public static var_pred reg { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.reg); } }
-        public static var_pred sreg { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.sreg); } }
-        public static var_pred local { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.local); } }
-        public static var_pred shared { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.shared); } }
-        public static var_pred global { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.global); } }
-        public static var_pred param { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.param); } }
-        public static var_pred const0 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const0); } }
-        public static var_pred const1 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const1); } }
-        public static var_pred const2 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const2); } }
-        public static var_pred const3 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const3); } }
-        public static var_pred const4 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const4); } }
-        public static var_pred const5 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const5); } }
-        public static var_pred const6 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const6); } }
-        public static var_pred const7 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const7); } }
-        public static var_pred const8 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const8); } }
-        public static var_pred const9 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const9); } }
-        public static var_pred const10 { get { return new var_pred().Clone(v => v.Space = Common.Enumerations.space.const10); } }
+        public static var_pred reg { get { return new var_pred().Clone(v => v.Space = space.reg); } }
+        public static var_pred sreg { get { return new var_pred().Clone(v => v.Space = space.sreg); } }
+        public static var_pred local { get { return new var_pred().Clone(v => v.Space = space.local); } }
+        public static var_pred shared { get { return new var_pred().Clone(v => v.Space = space.shared); } }
+        public static var_pred global { get { return new var_pred().Clone(v => v.Space = space.global); } }
+        public static var_pred param { get { return new var_pred().Clone(v => v.Space = space.param); } }
+        public static var_pred const0 { get { return new var_pred().Clone(v => v.Space = space.const0); } }
+        public static var_pred const1 { get { return new var_pred().Clone(v => v.Space = space.const1); } }
+        public static var_pred const2 { get { return new var_pred().Clone(v => v.Space = space.const2); } }
+        public static var_pred const3 { get { return new var_pred().Clone(v => v.Space = space.const3); } }
+        public static var_pred const4 { get { return new var_pred().Clone(v => v.Space = space.const4); } }
+        public static var_pred const5 { get { return new var_pred().Clone(v => v.Space = space.const5); } }
+        public static var_pred const6 { get { return new var_pred().Clone(v => v.Space = space.const6); } }
+        public static var_pred const7 { get { return new var_pred().Clone(v => v.Space = space.const7); } }
+        public static var_pred const8 { get { return new var_pred().Clone(v => v.Space = space.const8); } }
+        public static var_pred const9 { get { return new var_pred().Clone(v => v.Space = space.const9); } }
+        public static var_pred const10 { get { return new var_pred().Clone(v => v.Space = space.const10); } }
 
         public static var_pred init(bool value) { return new var_pred().Clone(v => v.Init = value); }
 

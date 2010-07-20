@@ -174,7 +174,7 @@ namespace Libptx.TextGenerators
                 w_var_common.Indent += 2;
 
                 // var_u16 (spaces)
-                spaces.ForEach(space => w_var_common.WriteLine("public new var_{0} {1} {{ get {{ return Clone(v => v.Space = Common.Enumerations.space.{2}); }} }}", type, space.Key, space.Value));
+                spaces.ForEach(space => w_var_common.WriteLine("public new var_{0} {1} {{ get {{ return Clone(v => v.Space = space.{2}); }} }}", type, space.Key, space.Value));
                 w_var_common.WriteLineNoTabs(String.Empty);
 
                 // var_u16 (init)
@@ -252,6 +252,7 @@ namespace Libptx.TextGenerators
                 var w_var = new StringWriter(buf_var).Indented();
                 w_var.WriteLine("using System;");
                 w_var.WriteLine("using System.Linq;");
+                w_var.WriteLine("using Libptx.Common.Enumerations;");
                 w_var.WriteLine("using Libptx.Common.Types;");
                 w_var.WriteLine("using Libptx.Edsl.Vars.Types;");
                 w_var.WriteLine("using Libptx.Expressions;");
@@ -346,6 +347,7 @@ namespace Libptx.TextGenerators
                         var buf_type = new StringBuilder();
                         var w_type = new StringWriter(buf_type).Indented();
                         w_type.WriteLine("using System.Linq;");
+                        w_type.WriteLine("using Libptx.Common.Enumerations;");
                         w_type.WriteLine("using Libptx.Common.Types;");
                         w_type.WriteLine("using Libptx.Edsl.Vars;");
                         w_type.WriteLine("using Libcuda.DataTypes;");
@@ -363,7 +365,7 @@ namespace Libptx.TextGenerators
                         var w = new StringWriter(buf);
                         var fa = var_fa(c_type);
                         fa = fa.Replace("public", "public static new");
-                        if (fa.IsNotEmpty()) w.WriteLine(fa);
+                        if (fa.IsNotEmpty()) w.WriteLine(fa + Environment.NewLine);
                         var cmn = var_common(c_type);
                         cmn = cmn.Replace("public new", "public").Replace("public", "public static");
                         w.WriteLine(cmn);
@@ -371,7 +373,7 @@ namespace Libptx.TextGenerators
                         s = s.Replace("return Clone", "return new var_" + c_type + "().Clone");
                         s = s.SplitLines().Select(ln =>
                         {
-                            if (ln.Contains("this")) return "        // " + ln.Trim();
+                            if (ln.Contains("this")) return ln.Replace("public static new", "public");
                             if (ln.Contains("{ Alignment =")) return null;
                             return ln;
                         }).Where(ln => ln != null).StringJoin(Environment.NewLine);
