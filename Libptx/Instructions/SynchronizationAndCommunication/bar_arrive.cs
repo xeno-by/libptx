@@ -8,7 +8,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     [DebuggerNonUserCode]
     public class bar_arrive : ptxop
     {
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             // todo. implement the following:
             // Operands a, b, and d have type .u32; operands p and c are predicates.

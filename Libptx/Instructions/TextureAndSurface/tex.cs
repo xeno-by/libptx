@@ -17,7 +17,7 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public type dtype { get; set; }
         [Affix] public type btype { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (geom != null).AssertTrue();
             (vec == v4).AssertTrue();

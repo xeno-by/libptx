@@ -30,7 +30,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (space == null || space == global || space == shared).AssertTrue();
             (op == and || op == or || op == xor || op == cas || op == exch || op == add || op == inc || op == dec || op == min || op == max).AssertTrue();

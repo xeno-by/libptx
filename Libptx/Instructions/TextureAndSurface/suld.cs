@@ -49,7 +49,7 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (b || p).AssertTrue();
             (geom != null).AssertTrue();

@@ -41,7 +41,7 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (rnd != null).AssertEquiv(!approx);
             (rnd != null && type == f64).AssertImplies(approx == false);

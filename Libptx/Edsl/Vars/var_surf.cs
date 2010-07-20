@@ -10,24 +10,24 @@ namespace Libptx.Edsl.Vars
 {
     public class var_surf : has_type_surf
     {
-        public new var_surf reg { get { return Clone(v => v.Space = Common.Enumerations.Space.Register); } }
-        public new var_surf sreg { get { return Clone(v => v.Space = Common.Enumerations.Space.Special); } }
-        public new var_surf local { get { return Clone(v => v.Space = Common.Enumerations.Space.Local); } }
-        public new var_surf shared { get { return Clone(v => v.Space = Common.Enumerations.Space.Shared); } }
-        public new var_surf global { get { return Clone(v => v.Space = Common.Enumerations.Space.Global); } }
-        public new var_surf param { get { return Clone(v => v.Space = Common.Enumerations.Space.Param); } }
-        public new var_surf @const { get { return Clone(v => v.Space = Common.Enumerations.Space.Const); } }
-        public new var_surf const0 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const0); } }
-        public new var_surf const1 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const1); } }
-        public new var_surf const2 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const2); } }
-        public new var_surf const3 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const3); } }
-        public new var_surf const4 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const4); } }
-        public new var_surf const5 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const5); } }
-        public new var_surf const6 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const6); } }
-        public new var_surf const7 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const7); } }
-        public new var_surf const8 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const8); } }
-        public new var_surf const9 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const9); } }
-        public new var_surf const10 { get { return Clone(v => v.Space = Common.Enumerations.Space.Const10); } }
+        public new var_surf reg { get { return Clone(v => v.Space = Common.Enumerations.space.Register); } }
+        public new var_surf sreg { get { return Clone(v => v.Space = Common.Enumerations.space.Special); } }
+        public new var_surf local { get { return Clone(v => v.Space = Common.Enumerations.space.Local); } }
+        public new var_surf shared { get { return Clone(v => v.Space = Common.Enumerations.space.Shared); } }
+        public new var_surf global { get { return Clone(v => v.Space = Common.Enumerations.space.Global); } }
+        public new var_surf param { get { return Clone(v => v.Space = Common.Enumerations.space.Param); } }
+        public new var_surf @const { get { return Clone(v => v.Space = Common.Enumerations.space.Const); } }
+        public new var_surf const0 { get { return Clone(v => v.Space = Common.Enumerations.space.Const0); } }
+        public new var_surf const1 { get { return Clone(v => v.Space = Common.Enumerations.space.Const1); } }
+        public new var_surf const2 { get { return Clone(v => v.Space = Common.Enumerations.space.Const2); } }
+        public new var_surf const3 { get { return Clone(v => v.Space = Common.Enumerations.space.Const3); } }
+        public new var_surf const4 { get { return Clone(v => v.Space = Common.Enumerations.space.Const4); } }
+        public new var_surf const5 { get { return Clone(v => v.Space = Common.Enumerations.space.Const5); } }
+        public new var_surf const6 { get { return Clone(v => v.Space = Common.Enumerations.space.Const6); } }
+        public new var_surf const7 { get { return Clone(v => v.Space = Common.Enumerations.space.Const7); } }
+        public new var_surf const8 { get { return Clone(v => v.Space = Common.Enumerations.space.Const8); } }
+        public new var_surf const9 { get { return Clone(v => v.Space = Common.Enumerations.space.Const9); } }
+        public new var_surf const10 { get { return Clone(v => v.Space = Common.Enumerations.space.Const10); } }
 
         public var_surf init(Surf value) { return Clone(v => v.Init = value); }
 

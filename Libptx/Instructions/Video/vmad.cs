@@ -17,7 +17,7 @@ namespace Libptx.Instructions.Video
         [Affix] public bool sat { get; set; }
         [Affix] public scale scale { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (dtype == s32 || dtype == u32).AssertTrue();
             (atype == s32 || atype == u32).AssertTrue();

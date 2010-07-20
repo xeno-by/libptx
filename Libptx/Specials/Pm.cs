@@ -7,7 +7,7 @@ using XenoGears.Assertions;
 namespace Libptx.Specials
 {
     [Special("%pm{index}", typeof(uint), SoftwareIsa.PTX_13)]
-    public class Pm : Special
+    public class pm : Special
     {
         [Affix("index")] public int Index { get; set; }
 

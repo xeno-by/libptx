@@ -21,7 +21,7 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override bool allow_int8 { get { return true; } }
         protected override bool allow_float16 { get { return true; } }
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             var i2i = atype.isint() && dtype.isint();
             var i2f = atype.isint() && dtype.isfloat();

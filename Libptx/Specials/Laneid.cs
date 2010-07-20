@@ -5,7 +5,7 @@ using Libptx.Specials.Annotations;
 namespace Libptx.Specials
 {
     [Special("%laneid", typeof(uint), SoftwareIsa.PTX_13)]
-    public class Laneid : Special
+    public class laneid : Special
     {
     }
 }

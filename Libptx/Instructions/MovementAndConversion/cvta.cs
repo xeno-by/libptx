@@ -17,7 +17,7 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix] public ss space { get; set; }
         [Affix] public size size { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (space == local || space == shared || space == global).AssertTrue();
             (size != null).AssertTrue();

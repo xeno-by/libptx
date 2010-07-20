@@ -18,7 +18,7 @@ namespace Libptx.Instructions.Arithmetic
     [DebuggerNonUserCode]
     public class mad : ptxop
     {
-        [Mod] public bool is24 { get; set; }
+        [Mod("24")] public bool is24 { get; set; }
         [Affix] public mulm mode { get; set; }
         [Affix] public frnd rnd { get; set; }
         [Affix] public bool ftz { get; set; }
@@ -34,7 +34,7 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (is24 == true).AssertImplies(type == s32 || type == u32);
             (mode != null).AssertImplies(type.isint());

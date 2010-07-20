@@ -1,12 +1,14 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using Libptx.Instructions.Enumerations;
 using Libcuda.Versions;
+using Libptx.Statements;
 
 namespace Libptx.Instructions
 {
     [DebuggerNonUserCode]
-    public abstract class ptxop
+    public abstract class ptxop : Instruction
     {
         #region Enumeration values => Static properties
 
@@ -152,71 +154,26 @@ namespace Libptx.Instructions
 
         #endregion
 
-        public static implicit operator ptxop(String opcode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int name
-        {
-            get
-            {
-                // todo. take the following into account:
-                // 1) GetType().Attr<Ptxop>().cop
-                // 2) GetType().Name
-                throw new NotImplementedException();
-            }
-        }
-
-        public ptxoptype optype
-        {
-            get
-            {
-                // todo. first populate enumeration values
-                throw new NotImplementedException();
-            }
-        }
-
-        private ptxopspec opspec
-        {
-            get
-            {
-                // todo. take the following into account:
-                // 1) GetType().Attr<Ptxop>().Spec
-                // 2) GetType().GetProps().Attr<Ptxfrag>().Spec
-                throw new NotImplementedException();
-            }
-        }
-
-        public SoftwareIsa swisa { get { throw new NotImplementedException(); } }
+        protected override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)custom_swisa, (int)default_swisa); } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
         private SoftwareIsa default_swisa
         {
             get
             {
-                // todo. take the following into account:
-                // 1) GetType().Attr<Ptxop>().swisa
-                // 2) GetType().GetProps().Attr<Ptxfrag>().swisa
                 throw new NotImplementedException();
             }
         }
 
-        public HardwareIsa hwisa { get { throw new NotImplementedException(); } }
+        protected override HardwareIsa CustomTarget { get { return (HardwareIsa)Math.Max((int)custom_hwisa, (int)default_hwisa); } }
         protected virtual HardwareIsa custom_hwisa { get { return HardwareIsa.SM_10; } }
         private HardwareIsa default_hwisa
         {
             get
             {
-                // todo. take the following into account:
-                // 1) GetType().Attr<Ptxop>().hwisa
-                // 2) GetType().GetProps().Attr<Ptxfrag>().hwisa
-                // 3) any type is f64 => hwisa >= SM_13
                 throw new NotImplementedException();
             }
         }
 
-        public void validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa) { default_validate(target_swisa, target_hwisa); custom_validate(target_swisa, target_hwisa); }
-        protected virtual void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa) { /* do nothing by default */ }
         protected virtual bool allow_int8 { get { return false; } }
         protected virtual bool allow_float16 { get { return false; } }
         protected virtual bool allow_bit8 { get { return false; } }
@@ -224,24 +181,12 @@ namespace Libptx.Instructions
         protected virtual bool allow_bit32 { get { return false; } }
         protected virtual bool allow_bit64 { get { return false; } }
         protected virtual bool allow_pred { get { return false; } }
-        private void default_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
-        {
-            // todo. verify that all types != null
-            // todo. disallow bXX by default
-            // todo. disallow f16 by default
-            // todo. disallow preds by default
-            // todo. verify that swisa and hwisa don't supercede targets
-            throw new NotImplementedException();
-        }
+        protected override void CustomValidate(Module ctx) { custom_validate_opcode(ctx.Version, ctx.Target); custom_validate_op(ctx.Version, ctx.Target); }
+        protected virtual void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
+        protected virtual void custom_validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
 
-        public override String ToString() { return to_string(); }
-        public static implicit operator String(ptxop opcode) { return opcode == null ? null : opcode.to_string(); }
-        protected virtual String to_string()
+        protected override void RenderAsPtx(TextWriter writer)
         {
-            // todo. take the following into account:
-            // 1) GetType().Attr<Ptxop>().ISA
-            // 2) GetType().GetProps().Attr<Ptxfrag>() => whether it's suffix or endian
-            // 3) order of properties is important!!
             throw new NotImplementedException();
         }
     }

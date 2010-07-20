@@ -2,25 +2,25 @@ using Libptx.Common.Annotations.Quanta;
 
 namespace Libptx.Common.Enumerations
 {
-    public enum Space
+    public enum space
     {
-        [Affix(".reg")] Register = 0,
-        [Affix(".sreg")] Special,
-        [Affix(".local")] Local,
-        [Affix(".shared")] Shared,
-        [Affix(".global")] Global,
-        [Affix(".param")] Param,
-        [Affix(".const")] Const,
-        [Affix(".const[0]")] Const0 = Const,
-        [Affix(".const[1]")] Const1,
-        [Affix(".const[2]")] Const2,
-        [Affix(".const[3]")] Const3,
-        [Affix(".const[4]")] Const4,
-        [Affix(".const[5]")] Const5,
-        [Affix(".const[6]")] Const6,
-        [Affix(".const[7]")] Const7,
-        [Affix(".const[8]")] Const8,
-        [Affix(".const[9]")] Const9,
-        [Affix(".const[10]")] Const10,
+        [Affix("reg")] reg = 0,
+        [Affix("sreg")] sreg,
+        [Affix("local")] local,
+        [Affix("shared")] shared,
+        [Affix("global")] global,
+        [Affix("param")] param,
+        [Affix("const")] @const,
+        [Affix("const[0]")] const0 = @const,
+        [Affix("const[1]")] const1,
+        [Affix("const[2]")] const2,
+        [Affix("const[3]")] const3,
+        [Affix("const[4]")] const4,
+        [Affix("const[5]")] const5,
+        [Affix("const[6]")] const6,
+        [Affix("const[7]")] const7,
+        [Affix("const[8]")] const8,
+        [Affix("const[9]")] const9,
+        [Affix("const[10]")] const10,
     }
 }

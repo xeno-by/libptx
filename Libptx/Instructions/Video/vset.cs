@@ -16,7 +16,7 @@ namespace Libptx.Instructions.Video
         [Affix] public cmpop cmp { get; set; }
         [Affix] public op op2 { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (atype == s32 || atype == u32).AssertTrue();
             (btype == s32 || btype == u32).AssertTrue();

@@ -16,7 +16,7 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix] public ss space { get; set; }
         [Affix] public cachelevel level { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (u == true).AssertEquiv(space == null && level == L1);
             (space == local || space == global).AssertTrue();

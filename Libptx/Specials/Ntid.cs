@@ -5,7 +5,7 @@ using Libptx.Specials.Annotations;
 namespace Libptx.Specials
 {
     [Special("%ntid", typeof(uint4))]
-    public class Ntid : Special
+    public class ntid : Special
     {
     }
 }

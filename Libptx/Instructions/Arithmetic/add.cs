@@ -32,7 +32,7 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (c || cc).AssertImplies(type == s32 || type == u32);
             (c || cc).AssertImplies(sat == false);

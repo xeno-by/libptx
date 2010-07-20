@@ -13,9 +13,9 @@ namespace Libptx.Expressions
             get { throw new NotImplementedException(); }
         }
 
-        public Space Space
+        public space Space
         {
-            get { return Space.Special; }
+            get { return space.Special; }
         }
 
         public Type Type

@@ -19,7 +19,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         [Affix] public op op { get; set; }
         [Affix] public bool pred { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (popc ^ pred).AssertTrue();
             (popc == true).AssertImplies(type == u32);

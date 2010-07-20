@@ -7,9 +7,9 @@ using XenoGears.Assertions;
 namespace Libptx.Specials
 {
     [Special20("%lanemask_{op}", typeof(uint))]
-    public class Lanemask : Special
+    public class lanemask : Special
     {
-        [Affix("op")] public Comparison Mask { get; set; }
+        [Affix("op")] public cmp Mask { get; set; }
 
         protected override void CustomValidate(Module ctx)
         {

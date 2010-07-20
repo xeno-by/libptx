@@ -8,7 +8,7 @@ using XenoGears.Assertions;
 namespace Libptx.Specials
 {
     [Special("%envreg{index}", typeof(Bit32), SoftwareIsa.PTX_21, HardwareIsa.SM_10)]
-    public class Envreg : Special
+    public class envreg : Special
     {
         [Affix("index")] public int Index { get; set; }
 

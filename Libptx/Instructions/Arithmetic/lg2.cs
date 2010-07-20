@@ -15,7 +15,7 @@ namespace Libptx.Instructions.Arithmetic
         [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }
         [Affix] public type type { get; set; }
 
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             approx.AssertTrue();
             (ftz == true).AssertImplies(type == f32);

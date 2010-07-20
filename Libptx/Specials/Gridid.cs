@@ -4,7 +4,7 @@ using Libptx.Specials.Annotations;
 namespace Libptx.Specials
 {
     [Special("%gridid", typeof(uint))]
-    public class Gridid : Special
+    public class gridid : Special
     {
     }
 }

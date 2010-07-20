@@ -44,7 +44,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
-        protected override void custom_validate(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (@volatile == true).AssertEquiv(cop == null);
             (ss == null || ss == wb || ss == cg || ss == cs || ss == wt).AssertTrue();
