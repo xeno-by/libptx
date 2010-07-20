@@ -10,6 +10,8 @@ namespace Libptx.Edsl.Types
 {
     public class b16 : type
     {
+        public b16() { Name = TypeName.B16; }
+
         public static new var_b16_v1 v1 { get { return new var_b16().Clone<var_b16_v1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
         public static new var_b16_v2 v2 { get { return new var_b16().Clone<var_b16_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
         public static new var_b16_v4 v4 { get { return new var_b16().Clone<var_b16_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }

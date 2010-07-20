@@ -14,7 +14,11 @@ namespace Libptx.Statements
         protected override void CustomValidate(Module ctx)
         {
             Func<Block, int> cntInBlock = null;
-            cntInBlock = blk => blk.Stmts.Count(s => s == this) + blk.Stmts.OfType<Block>().Sum(sub => cntInBlock(sub));
+            cntInBlock = blk => blk.Stmts.Count(s =>
+            {
+                var lbl = s as Label;
+                return lbl != null && lbl.Name == this.Name && lbl.Name != null;
+            }) + blk.Stmts.OfType<Block>().Sum(sub => cntInBlock(sub));
 
             ctx.Funcs.AssertNone(f => cntInBlock(f.Body) > 1);
             ctx.Entries.AssertNone(f => cntInBlock(f.Body) > 1);

@@ -10,6 +10,8 @@ namespace Libptx.Edsl.Types
 {
     public class tex : type
     {
+        public tex() { Name = TypeName.Tex; }
+
         public static var_tex reg { get { return new var_tex().Clone(v => v.Space = space.reg); } }
         public static var_tex sreg { get { return new var_tex().Clone(v => v.Space = space.sreg); } }
         public static var_tex local { get { return new var_tex().Clone(v => v.Space = space.local); } }

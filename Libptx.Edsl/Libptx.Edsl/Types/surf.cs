@@ -10,6 +10,8 @@ namespace Libptx.Edsl.Types
 {
     public class surf : type
     {
+        public surf() { Name = TypeName.Surf; }
+
         public static var_surf reg { get { return new var_surf().Clone(v => v.Space = space.reg); } }
         public static var_surf sreg { get { return new var_surf().Clone(v => v.Space = space.sreg); } }
         public static var_surf local { get { return new var_surf().Clone(v => v.Space = space.local); } }

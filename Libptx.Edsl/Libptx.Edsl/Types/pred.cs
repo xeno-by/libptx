@@ -10,6 +10,8 @@ namespace Libptx.Edsl.Types
 {
     public class pred : type
     {
+        public pred() { Name = TypeName.Pred; }
+
         public static var_pred reg { get { return new var_pred().Clone(v => v.Space = space.reg); } }
         public static var_pred sreg { get { return new var_pred().Clone(v => v.Space = space.sreg); } }
         public static var_pred local { get { return new var_pred().Clone(v => v.Space = space.local); } }

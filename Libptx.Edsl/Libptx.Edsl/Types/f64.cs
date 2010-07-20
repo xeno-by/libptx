@@ -10,6 +10,8 @@ namespace Libptx.Edsl.Types
 {
     public class f64 : type
     {
+        public f64() { Name = TypeName.F64; }
+
         public static new var_f64_v1 v1 { get { return new var_f64().Clone<var_f64_v1>(v => v.Type = v.Type.v1, v => v.Init = null); } }
         public static new var_f64_v2 v2 { get { return new var_f64().Clone<var_f64_v2>(v => v.Type = v.Type.v2, v => v.Init = null); } }
         public static new var_f64_v4 v4 { get { return new var_f64().Clone<var_f64_v4>(v => v.Type = v.Type.v4, v => v.Init = null); } }

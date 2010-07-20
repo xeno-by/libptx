@@ -9,6 +9,9 @@ namespace Libptx.Instructions
     [DebuggerNonUserCode]
     public abstract partial class ptxop : Instruction
     {
+        public String Name { get { throw new NotImplementedException(); } }
+        protected override void RenderAsPtx(TextWriter writer) { throw new NotImplementedException(); }
+
         protected override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)custom_swisa, (int)default_swisa); } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
         private SoftwareIsa default_swisa
@@ -54,11 +57,6 @@ namespace Libptx.Instructions
 
         protected virtual void custom_validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
         private void validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void RenderAsPtx(TextWriter writer)
         {
             throw new NotImplementedException();
         }

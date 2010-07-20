@@ -10,6 +10,8 @@ namespace Libptx.Edsl.Types
 {
     public class sampler : type
     {
+        public sampler() { Name = TypeName.Sampler; }
+
         public static var_sampler reg { get { return new var_sampler().Clone(v => v.Space = space.reg); } }
         public static var_sampler sreg { get { return new var_sampler().Clone(v => v.Space = space.sreg); } }
         public static var_sampler local { get { return new var_sampler().Clone(v => v.Space = space.local); } }

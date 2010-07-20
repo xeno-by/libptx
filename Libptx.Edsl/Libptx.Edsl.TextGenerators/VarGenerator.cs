@@ -361,6 +361,9 @@ namespace Libptx.Edsl.TextGenerators
                         w_type.WriteLine("{");
                         w_type.Indent++;
 
+                        w_type.WriteLine("public {0}() {{ Name = TypeName.{1}; }}", c_type, c_type.Capitalize());
+                        w_type.WriteLineNoTabs(String.Empty);
+
                         var buf = new StringBuilder();
                         var w = new StringWriter(buf);
                         var fa = var_fa(c_type);
