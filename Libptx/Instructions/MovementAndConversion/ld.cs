@@ -13,7 +13,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop("ld.volatile{.ss}.type       d, [a];")]
     [Ptxop("ldu{.ss}.type               d, [a];")]
     [DebuggerNonUserCode]
-    public class ld : ptxop
+    public partial class ld : ptxop
     {
         [Mod] public bool u { get; set; }
         [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }

@@ -1,14 +1,13 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using Libptx.Statements;
 
 namespace Libptx.Instructions
 {
     [DebuggerNonUserCode]
-    public abstract class ptxop : Instruction
+    public abstract partial class ptxop : Instruction
     {
         protected override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)custom_swisa, (int)default_swisa); } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }

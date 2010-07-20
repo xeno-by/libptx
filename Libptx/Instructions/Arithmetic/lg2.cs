@@ -10,7 +10,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop("lg2.approx{.ftz}.f32 d, a;")]
     [DebuggerNonUserCode]
-    public class lg2 : ptxop
+    public partial class lg2 : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public bool ftz { get; set; }

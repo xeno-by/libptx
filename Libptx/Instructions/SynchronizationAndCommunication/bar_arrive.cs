@@ -6,7 +6,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop20("bar.arrive a, b;")]
     [DebuggerNonUserCode]
-    public class bar_arrive : ptxop
+    public partial class bar_arrive : ptxop
     {
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {

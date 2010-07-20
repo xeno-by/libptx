@@ -7,7 +7,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
 {
     [Ptxop("selp.type d, a, b, c;")]
     [DebuggerNonUserCode]
-    public class selp : ptxop
+    public partial class selp : ptxop
     {
         [Affix] public Type type { get; set; }
 

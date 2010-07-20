@@ -13,7 +13,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     [Ptxop20("bar.red.popc.type d, a{, b}, {!}c;")]
     [Ptxop20("bar.red.op.pred p, a{, b}, {!}c;")]
     [DebuggerNonUserCode]
-    public class bar_red : ptxop
+    public partial class bar_red : ptxop
     {
         [Affix] public bool popc { get; set; }
         [Affix] public Type type { get; set; }

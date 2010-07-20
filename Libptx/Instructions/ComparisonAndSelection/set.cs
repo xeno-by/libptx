@@ -13,7 +13,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
     [Ptxop("setp.cmpop{.ftz}.stype              p[|q], a, b;")]
     [Ptxop("setp.cmpop.boolop{.ftz}.stype       p[|q], a, b, {!}c;")]
     [DebuggerNonUserCode]
-    public class set : ptxop
+    public partial class set : ptxop
     {
         [Mod] public bool p { get; set; }
         [Affix] public cmp cmpop { get; set; }

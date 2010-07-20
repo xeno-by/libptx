@@ -6,8 +6,9 @@ namespace Libptx.Edsl.TextGenerators
     {
         public static void Main(String[] args)
         {
-            VarGenerator.DoGenerate();
-//            SigGenerator.DoGenerate();
+//            VarGenerator.DoGenerate();
+//            EnumGenerator.DoGenerate();
+            SigGenerator.DoGenerate();
         }
     }
 }

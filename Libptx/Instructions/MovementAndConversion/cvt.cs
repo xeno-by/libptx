@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
@@ -11,7 +11,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop("cvt{.irnd}{.ftz}{.sat}.dtype.atype d, a;")]
     [Ptxop("cvt{.frnd}{.ftz}{.sat}.dtype.atype d, a;")]
     [DebuggerNonUserCode]
-    public class cvt : ptxop
+    public partial class cvt : ptxop
     {
         [Affix] public irnd irnd { get; set; }
         [Affix] public frnd frnd { get; set; }

@@ -9,7 +9,7 @@ namespace Libptx.Instructions.LogicAndShift
 {
     [Ptxop("xor.type d, a, b;")]
     [DebuggerNonUserCode]
-    public class xor : ptxop
+    public partial class xor : ptxop
     {
         [Affix] public Type type { get; set; }
 

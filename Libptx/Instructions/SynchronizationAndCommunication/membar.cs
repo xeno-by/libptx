@@ -6,7 +6,7 @@ using Libptx.Common.Enumerations;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("membar.level;")]
-    public class membar : ptxop
+    public partial class membar : ptxop
     {
         [Affix] public barlevel level { get; set; }
 

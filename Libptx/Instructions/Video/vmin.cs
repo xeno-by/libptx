@@ -1,4 +1,4 @@
-﻿using Libcuda.Versions;
+using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -10,7 +10,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vmin.dtype.atype.btype{.sat} d, a, b;")]
     [Ptxop20("vmin.dtype.atype.btype{.sat}.op2 d, a, b, c;")]
     [Ptxop20("vmin.dtype.atype.btype{.sat} d.dsel, a, b, c;")]
-    public class vmin : ptxop
+    public partial class vmin : ptxop
     {
         [Affix] public Type dtype { get; set; }
         [Affix] public Type atype { get; set; }

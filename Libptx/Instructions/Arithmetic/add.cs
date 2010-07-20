@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -15,7 +15,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("add{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
     [Ptxop("add{.rnd}.f64               d, a, b;")]
     [DebuggerNonUserCode]
-    public class add : ptxop
+    public partial class add : ptxop
     {
         [Mod(SoftwareIsa.PTX_12)] public bool c { get; set; }
         [Affix(SoftwareIsa.PTX_12)] public bool cc { get; set; }

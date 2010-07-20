@@ -12,7 +12,7 @@ namespace Libptx.Instructions.TextureAndSurface
     [Ptxop("sust.b.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_15)]
     [Ptxop("sust.p.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
     [DebuggerNonUserCode]
-    public class sust : ptxop
+    public partial class sust : ptxop
     {
         [Affix] public bool b { get; set; }
         [Affix] public bool p { get; set; }

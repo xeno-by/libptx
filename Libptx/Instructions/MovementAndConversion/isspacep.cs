@@ -9,7 +9,7 @@ namespace Libptx.Instructions.MovementAndConversion
 {
     [Ptxop20("isspacep.space p, a;")]
     [DebuggerNonUserCode]
-    public class isspacep : ptxop
+    public partial class isspacep : ptxop
     {
         [Affix] public space space { get; set; }
 

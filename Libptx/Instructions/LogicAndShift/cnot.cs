@@ -9,7 +9,7 @@ namespace Libptx.Instructions.LogicAndShift
 {
     [Ptxop("cnot.type d, a;")]
     [DebuggerNonUserCode]
-    public class cnot : ptxop
+    public partial class cnot : ptxop
     {
         [Affix] public Type type { get; set; }
 

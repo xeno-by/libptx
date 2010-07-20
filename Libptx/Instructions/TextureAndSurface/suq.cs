@@ -10,7 +10,7 @@ namespace Libptx.Instructions.TextureAndSurface
 {
     [Ptxop("suq.query.b32 d, [a];", SoftwareIsa.PTX_15)]
     [DebuggerNonUserCode]
-    public class suq : ptxop
+    public partial class suq : ptxop
     {
         [Affix] public squery query { get; set; }
         [Affix] public Type type { get; set; }

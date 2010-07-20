@@ -8,7 +8,7 @@ using XenoGears.Assertions;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("red{.space}.op.type [a], b;", SoftwareIsa.PTX_12)]
-    public class red : ptxop
+    public partial class red : ptxop
     {
         [Affix] public space space { get; set; }
         [Affix] public op op { get; set; }

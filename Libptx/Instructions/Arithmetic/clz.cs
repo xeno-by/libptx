@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop20("clz.type d, a;")]
     [DebuggerNonUserCode]
-    public class clz : ptxop
+    public partial class clz : ptxop
     {
         [Affix] public Type type { get; set; }
 

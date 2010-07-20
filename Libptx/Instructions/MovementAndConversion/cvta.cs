@@ -11,7 +11,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop20("cvta.space.size     p, var;")]
     [Ptxop20("cvta.to.space.size  p, a;")]
     [DebuggerNonUserCode]
-    public class cvta : ptxop
+    public partial class cvta : ptxop
     {
         [Affix] public bool to { get; set; }
         [Affix] public space space { get; set; }

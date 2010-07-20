@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx.Edsl", "Libptx.Edsl\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx", "..\Libptx\Libptx.csproj", "{6272D158-34F7-4DE1-907F-AFFD8E1E28F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears", "%XENOGEARS%\XenoGears\XenoGears.csproj", "{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears", "..\..\XenoGears\XenoGears\XenoGears.csproj", "{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears.Playground", "%XENOGEARS%\XenoGears.Playground\XenoGears.Playground.csproj", "{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears.Playground", "..\..\XenoGears\XenoGears.Playground\XenoGears.Playground.csproj", "{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx.Playground", "..\Libptx.Playground\Libptx.Playground.csproj", "{A724BB24-59B8-4B1F-966C-96ECA39899BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A724BB24-59B8-4B1F-966C-96ECA39899BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A724BB24-59B8-4B1F-966C-96ECA39899BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A724BB24-59B8-4B1F-966C-96ECA39899BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A724BB24-59B8-4B1F-966C-96ECA39899BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

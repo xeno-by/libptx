@@ -9,7 +9,7 @@ namespace Libptx.Instructions.Arithmetic
 {
     [Ptxop20("copysign.type d, a, b;")]
     [DebuggerNonUserCode]
-    public class copysign : ptxop
+    public partial class copysign : ptxop
     {
         [Affix] public Type type { get; set; }
 

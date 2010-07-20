@@ -4,7 +4,7 @@ using Libptx.Instructions.Annotations;
 namespace Libptx.Instructions.Miscellaneous
 {
     [Ptxop("pmevent a;", SoftwareIsa.PTX_14)]
-    public class pmevent : ptxop
+    public partial class pmevent : ptxop
     {
     }
 }

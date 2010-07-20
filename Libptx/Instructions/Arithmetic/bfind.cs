@@ -11,7 +11,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop20("bfind.type d, a;")]
     [Ptxop20("bfind.shiftamt.type d, a;")]
     [DebuggerNonUserCode]
-    public class bfind : ptxop
+    public partial class bfind : ptxop
     {
         [Affix] public bool shiftamt { get; set; }
         [Affix] public Type type { get; set; }

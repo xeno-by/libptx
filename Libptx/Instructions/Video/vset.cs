@@ -10,7 +10,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vset.atype.btype.cmp d, a, b;")]
     [Ptxop20("vset.atype.btype.cmp.op2 d, a, b, c;")]
     [Ptxop20("vset.atype.btype.cmp d.dsel, a, b, c;")]
-    public class vset : ptxop
+    public partial class vset : ptxop
     {
         [Affix] public Type atype { get; set; }
         [Affix] public Type btype { get; set; }

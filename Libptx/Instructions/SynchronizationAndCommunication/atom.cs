@@ -9,7 +9,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("atom{.space}.op.type d, [a], b;")]
     [Ptxop("atom{.space}.op.type d, [a], b, c;")]
-    public class atom : ptxop
+    public partial class atom : ptxop
     {
         [Affix] public space space { get; set; }
         [Affix] public op op { get; set; }

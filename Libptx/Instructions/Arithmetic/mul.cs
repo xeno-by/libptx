@@ -14,7 +14,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("mul{.rnd}{.ftz}{.sat}.f32   d, a, b;")]
     [Ptxop("mul{.rnd}.f64               d, a, b;")]
     [DebuggerNonUserCode]
-    public class mul : ptxop
+    public partial class mul : ptxop
     {
         [Mod("24")] public bool is24 { get; set; }
         [Affix] public mulm mode { get; set; }

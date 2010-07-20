@@ -20,4 +20,3 @@
 18) extern funcs?
 19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
 20) initializers for text, sampler and surf constants
-21) version-specific e-DSLs

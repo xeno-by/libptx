@@ -11,7 +11,7 @@ namespace Libptx.Instructions.MovementAndConversion
     [Ptxop("st{.ss}{.cop}.type          d, [a];")]
     [Ptxop("st.volatile{.ss}.type       d, [a];")]
     [DebuggerNonUserCode]
-    public class st : ptxop
+    public partial class st : ptxop
     {
         [Affix(SoftwareIsa.PTX_11)] public bool @volatile { get; set; }
         [Affix] public space ss { get; set; }

@@ -12,7 +12,7 @@ namespace Libptx.Instructions.Arithmetic
     [Ptxop("sqrt.rnd{.ftz}.f32       d, a;")]
     [Ptxop("sqrt.rnd.f64             d, a;")]
     [DebuggerNonUserCode]
-    public class sqrt : ptxop
+    public partial class sqrt : ptxop
     {
         [Affix(SoftwareIsa.PTX_14)] public bool approx { get; set; }
         [Affix(SoftwareIsa.PTX_14)] public frnd rnd { get; set; }
