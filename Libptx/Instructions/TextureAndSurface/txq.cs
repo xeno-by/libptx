@@ -9,12 +9,10 @@ using XenoGears.Assertions;
 namespace Libptx.Instructions.TextureAndSurface
 {
     [Ptxop("txq.tquery.b32 d, [a];", SoftwareIsa.PTX_15)]
-    [Ptxop("txq.squery.b32 d, [a];", SoftwareIsa.PTX_15)]
     [DebuggerNonUserCode]
     public class txq : ptxop
     {
         [Affix] public tquery tquery { get; set; }
-        [Affix] public tquerys squery { get; set; }
         [Affix] public Type type { get; set; }
 
         protected override SoftwareIsa custom_swisa
@@ -28,7 +26,6 @@ namespace Libptx.Instructions.TextureAndSurface
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (tquery != null ^ squery != null).AssertTrue();
             (type == b32).AssertTrue();
         }
     }

@@ -379,9 +379,8 @@
     <Compile Include="Instructions\Enumerations\prmtm.cs" />
     <Compile Include="Instructions\Enumerations\size.cs" />
     <Compile Include="Instructions\Enumerations\squery.cs" />
-    <Compile Include="Instructions\Enumerations\testpop.cs" />
+    <Compile Include="Instructions\Enumerations\test.cs" />
     <Compile Include="Instructions\Enumerations\tquery.cs" />
-    <Compile Include="Instructions\Enumerations\tquerys.cs" />
     <Compile Include="Instructions\LogicAndShift\and.cs" />
     <Compile Include="Instructions\LogicAndShift\cnot.cs" />
     <Compile Include="Instructions\LogicAndShift\not.cs" />

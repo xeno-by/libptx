@@ -33,12 +33,12 @@ namespace Libptx.Instructions
         protected static prmtm ecr { get { return prmtm.ecr; } }
         protected static prmtm rc16 { get { return prmtm.rc16; } }
 
-        protected static testpop finite { get { return testpop.finite; } }
-        protected static testpop infinite { get { return testpop.infinite; } }
-        protected static testpop number { get { return testpop.number; } }
-        protected static testpop notanumber { get { return testpop.notanumber; } }
-        protected static testpop normal { get { return testpop.normal; } }
-        protected static testpop subnormal { get { return testpop.subnormal; } }
+        protected static test finite { get { return test.finite; } }
+        protected static test infinite { get { return test.infinite; } }
+        protected static test number { get { return test.number; } }
+        protected static test notanumber { get { return test.notanumber; } }
+        protected static test normal { get { return test.normal; } }
+        protected static test subnormal { get { return test.subnormal; } }
 
         protected static op add { get { return op.add; } }
         protected static op min { get { return op.min; } }
@@ -75,11 +75,10 @@ namespace Libptx.Instructions
         protected static tquery tex_channel_datatype { get { return tquery.channel_datatype; } }
         protected static tquery tex_channel_order { get { return tquery.channel_order; } }
         protected static tquery tex_normalized_coords { get { return tquery.normalized_coords; } }
-
-        protected static tquerys tex_filter_mode { get { return tquerys.filter_mode; } }
-        protected static tquerys tex_addr_mode_0 { get { return tquerys.addr_mode_0; } }
-        protected static tquerys tex_addr_mode_1 { get { return tquerys.addr_mode_1; } }
-        protected static tquerys tex_addr_mode_2 { get { return tquerys.addr_mode_2; } }
+        protected static tquery tex_filter_mode { get { return tquery.filter_mode; } }
+        protected static tquery tex_addr_mode_0 { get { return tquery.addr_mode_0; } }
+        protected static tquery tex_addr_mode_1 { get { return tquery.addr_mode_1; } }
+        protected static tquery tex_addr_mode_2 { get { return tquery.addr_mode_2; } }
 
         protected static clampm clamp_trap { get { return clampm.trap; } }
         protected static clampm clamp_clamp { get { return clampm.clamp; } }
@@ -131,6 +130,7 @@ namespace Libptx.Instructions
         protected virtual bool allow_bit64 { get { return false; } }
         protected virtual bool allow_pred { get { return false; } }
         protected virtual bool allow_vec { get { return false; } }
+        protected virtual bool allow_array { get { return false; } }
         protected override void CustomValidate(Module ctx)
         {
             validate_opcode(ctx.Version, ctx.Target);

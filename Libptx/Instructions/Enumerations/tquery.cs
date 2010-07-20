@@ -12,6 +12,10 @@ namespace Libptx.Instructions.Enumerations
         public static tquery channel_datatype { get { throw new NotImplementedException(); } }
         public static tquery channel_order { get { throw new NotImplementedException(); } }
         public static tquery normalized_coords { get { throw new NotImplementedException(); } }
+        public static tquery filter_mode { get { throw new NotImplementedException(); } }
+        public static tquery addr_mode_0 { get { throw new NotImplementedException(); } }
+        public static tquery addr_mode_1 { get { throw new NotImplementedException(); } }
+        public static tquery addr_mode_2 { get { throw new NotImplementedException(); } }
 
         public String name { get { throw new NotImplementedException(); } }
         public static bool operator ==(tquery m1, tquery m2) { throw new NotImplementedException(); }

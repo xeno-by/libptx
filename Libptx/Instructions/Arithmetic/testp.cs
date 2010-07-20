@@ -13,7 +13,7 @@ namespace Libptx.Instructions.Arithmetic
     [DebuggerNonUserCode]
     public class testp : ptxop
     {
-        [Affix] public testpop op { get; set; }
+        [Affix] public test op { get; set; }
         [Affix] public Type type { get; set; }
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
