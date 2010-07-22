@@ -20,7 +20,6 @@ namespace Libptx.Statements
                 return lbl != null && lbl.Name == this.Name && lbl.Name != null;
             }) + blk.Stmts.OfType<Block>().Sum(sub => cntInBlock(sub));
 
-            ctx.Funcs.AssertNone(f => cntInBlock(f.Body) > 1);
             ctx.Entries.AssertNone(f => cntInBlock(f.Body) > 1);
         }
 

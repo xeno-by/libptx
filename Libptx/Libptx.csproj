@@ -76,6 +76,7 @@
     <Compile Include="Common\Types\Vectors.S64.cs" />
     <Compile Include="Common\Types\Vectors.U64.cs" />
     <Compile Include="Entries.cs" />
+    <Compile Include="Expressions\Var.Dsl.cs" />
     <Compile Include="Expressions\Var.Extensions.cs" />
     <Compile Include="Common\Types\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />

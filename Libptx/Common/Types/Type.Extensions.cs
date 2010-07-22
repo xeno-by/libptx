@@ -1,5 +1,7 @@
 using System;
 using XenoGears.Assertions;
+using XenoGears.Functional;
+using System.Linq;
 
 namespace Libptx.Common.Types
 {
@@ -145,11 +147,36 @@ namespace Libptx.Common.Types
             return 0;
         }
 
+        public static Type vec_el(this Type type)
+        {
+            if (type == null) return null;
+            if (!type.isvec()) return null;
+
+            var el = new Type();
+            el.Name = type.Name;
+            el.Mod = type.Mod & ~(TypeMod.V1 | TypeMod.V2 | TypeMod.V4);
+            el.Dims = new int[0];
+            return el;
+        }
+
         public static bool isarr(this Type type) { return type.rank() != 0; }
         public static int rank(this Type type)
         {
             if (type == null) return 0;
             return type.Dims == null ? 0 : type.Dims.Length;
+        }
+
+        public static Type arr_el(this Type type)
+        {
+            if (type == null) return null;
+            if (!type.isarr()) return null;
+
+            var el = new Type();
+            el.Name = type.Name;
+            el.Mod = type.Mod;
+            el.Dims = (type.Dims ?? new int[0]).SkipLast(1).ToArray();
+            if (el.Dims.Count() == 0) el.Mod &= ~TypeMod.Array;
+            return el;
         }
     }
 }

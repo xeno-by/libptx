@@ -6,7 +6,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public class Var : Atom, Expression, Addressable
+    public partial class Var : Atom, Expression, Addressable
     {
         public String Name { get; set; } // may be null
         public space Space { get; set; }
