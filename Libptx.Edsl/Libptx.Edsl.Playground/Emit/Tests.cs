@@ -9,36 +9,17 @@ namespace Libptx.Edsl.Playground.Emit
         [Test]
         public void MatMul()
         {
-            // add various overloads for this ctor (same as for AtomAttribute)
-            var module = new Module(SoftwareIsa.PTX_14, HardwareIsa.SM_13);
-
-            // when vars are created, align gets defaulted to sizeof(type), space will get defaulted to param when added to Params collection
-            // add appropriate ctors for Func and Entry, introduce mirrored AddFunc methods
-            //
-            // also add the Signature method that provides bulk-set of the signature outside of the ctor:
-            // 1) native lambda form: (uint a_width, uint a_height, uint a_raw, uint b_width, uint b_height, uint b_raw, uint c_width, uint c_height, uint c_raw) => {}
-            // 2) esoteric lambda form: a => b8[12].align4, b => b8[12].align4, c => b8[12].align4
-            //
-            // what about return values?
-            // 1) multiple return values needs to be specified manually
-            // 2) native lambda form might specify them by providing non-empty body, e.g. "(int foo) => default(float)"
-            // 3) esoteric lambda form might specify them by appending "_ret" to parameter names
-            //
-            // ahh... why don't we have static import?!
-            // all those shortcuts like "b32" can be imported by implementing an interface and wiring those with static helper
-            // also we could provide a regioned copy/paste with default implementation of those symbols
-            var kernel = new Entry("MatMulKernel", a => b8[12].align4, b => b8[12].align4, c => b8[12].align4);
-
             // __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C)
-            var a = kernel.Params[0], b = kernel.Params[1], c = kernel.Params[2];
-            Label loop_body, after_loop, exit;
-            Var_S32 a_width, a_height, a_raw, b_width, b_height, b_raw, row, col, cvalue, dim;
-            Var_S32 a_offset, a_offset_lo, a_offset_stride, a_offset_hi;
-            Var_S32 b_offset, b_offset_lo, b_offset_stride, b_offset_hi;
-            kernel.def(out loop_body, out after_loop, out exit) // out varargs? "def", but not "def_label" since here we can facilitate ad-hoc overloading
-            .def(out a_width, out a_height, out a_raw, out b_width, out b_height, out b_raw, out row, out col, out cvalue, out dim)
-            .def(out a_offset, out a_offset_lo, out a_offset_stride, out a_offset_hi)
-            .def(out b_offset, out b_offset_lo, out b_offset_stride, out b_offset_hi)
+            var module = new Ptx14.Sm13.Module();
+            var a = b8[12].align4, b = b8[12].align4, c = b8[12].align4;
+            var kernel = new Entry("MatMulKernel", a, b, c);
+            kernel.Params.SetNames("A", "B", "C");
+
+            var loop_body = label, after_loop = label, exit = label;
+            var a_width = s32, a_height = s32, a_raw = s32, b_width = s32, b_height = s32, b_raw = s32, c_width = s32, c_height = s32, c_raw = s32;
+            var row = s32, col = s32, cvalue = s32, dim = s32;
+            var a_offset = s32, a_offset_lo = s32, a_offset_stride = s32, a_offset_hi = s32;
+            var b_offset = s32, b_offset_lo = s32, b_offset_stride = s32, b_offset_hi = s32;
 
             // int row = blockIdx.y * blockDim.y + threadIdx.y;
             // int col = blockIdx.x * blockDim.x + threadIdx.x;
@@ -48,7 +29,7 @@ namespace Libptx.Edsl.Playground.Emit
            .mov(rh3, ctaid.y)
            .mov(rh4, ntid.y)
            .mul.wide(r2, rh3, rh4)
-           .cvt(r3, tid.x) // exact types since they determine the signature
+           .cvt.s32.u16(r3, tid.x)
            .add(col, r3, r1)
            .cvt(r5, tid.y)
            .add(row, r5, r2)
@@ -56,7 +37,7 @@ namespace Libptx.Edsl.Playground.Emit
             // if (A.height <= row || B.width <= col) return;
            .ld.param(b_width, b + 0)
            .ld.param(a_height, a + 4)
-           .set.le(p6, a_height.u32, row.u32) // notice the ".u32" qualifier
+           .set.le(p6, a_height, row)
            .set.le(p7, b_width, col)
            .or(p1, p6, p7)
            .@(p1).bra(exit)

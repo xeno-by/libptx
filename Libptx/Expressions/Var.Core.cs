@@ -11,17 +11,18 @@ namespace Libptx.Expressions
         public String Name { get; set; } // may be null
         public space Space { get; set; }
         public Type Type { get; set; } // must not be null
-        public int Size { get { return Type.Size; } }
         public Const Init { get; set; }
-        public int Alignment { get; set; } // non-negative
+        public int Alignment { get; set; } // non-negative, multiple of Type element's size
         public VarMod Mod { get; set; }
         public bool IsVisible { get; set; }
         public bool IsExtern { get; set; }
 
-        // todo. inits are only allowed for <what> spaces?
+        public Var() { Space = space.reg; }
+        public int Size { get { return Type.Size; } }
 
         protected override void CustomValidate(Module ctx)
         {
+            // todo. inits are only allowed for <what> spaces?
             throw new NotImplementedException();
         }
 
