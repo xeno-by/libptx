@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Libcuda.Versions;
 using Libptx.Common;
+using Libptx.Expressions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 
@@ -23,31 +24,64 @@ namespace Libptx
             set { _tuning = value ?? new Tuning(); }
         }
 
-        private IList<Entry> _entries = new List<Entry>();
-        public IList<Entry> Entries
+        private Entries _entries = new Entries();
+        public Entries Entries
         {
             get { return _entries; }
-            set { _entries = value ?? new List<Entry>(); }
+            set { _entries = value ?? new Entries(); }
         }
 
-        private IList<Func> _funcs = new List<Func>();
-        public IList<Func> Funcs
+        public Entry AddEntry(params Var[] @params)
         {
-            get { return _funcs; }
-            set { _funcs = value ?? new List<Func>(); }
+            return AddEntry((IEnumerable<Var>)@params);
+        }
+
+        public Entry AddEntry(String name, params Var[] @params)
+        {
+            return AddEntry(name, (IEnumerable<Var>)@params);
+        }
+
+        public Entry AddEntry(IEnumerable<Var> @params)
+        {
+            return AddEntry(null, @params);
+        }
+
+        public Entry AddEntry(String name, IEnumerable<Var> @params)
+        {
+            var entry = new Entry();
+            entry.Name = name;
+            entry.Params.AddElements(@params ?? Seq.Empty<Var>());
+            return entry;
         }
 
         public Module()
+            : this(SoftwareIsa.PTX_21, HardwareIsa.SM_10)
         {
-            Version = SoftwareIsa.PTX_21;
-            Target = HardwareIsa.SM_10;
+        }
+
+        public Module(SoftwareIsa softwareIsa)
+            : this(softwareIsa, HardwareIsa.SM_10)
+        {
+        }
+
+        public Module(HardwareIsa hardwareIsa)
+            : this(hardwareIsa < HardwareIsa.SM_20 ? SoftwareIsa.PTX_10 : SoftwareIsa.PTX_20, hardwareIsa)
+        {
+        }
+
+        public Module(SoftwareIsa softwareIsa, HardwareIsa hardwareIsa)
+        {
+            Version = softwareIsa;
+            Target = hardwareIsa;
 
             UnifiedTexturing = true;
             EmulateDoubles = false;
             Tuning = new Tuning();
+        }
 
-            Entries = new List<Entry>();
-            Funcs = new List<Func>();
+        public Module(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
+            : this(softwareIsa, hardwareIsa)
+        {
         }
 
         void Validatable.Validate(Module ctx) { (ctx == this).AssertTrue(); Validate(); }
@@ -59,7 +93,6 @@ namespace Libptx
             Tuning.Validate(this);
 
             Entries.ForEach(e => e.Validate(this));
-            Funcs.ForEach(f => f.Validate(this));
         }
 
         void Renderable.RenderAsPtx(TextWriter writer)

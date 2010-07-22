@@ -11,6 +11,7 @@ namespace Libptx.Expressions
         public String Name { get; set; } // may be null
         public space Space { get; set; }
         public Type Type { get; set; } // must not be null
+        public int Size { get { return Type.Size; } }
         public Const Init { get; set; }
         public int Alignment { get; set; } // non-negative
         public VarMod Mod { get; set; }

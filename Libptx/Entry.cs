@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Libcuda.Versions;
 using Libptx.Common;
-using Libptx.Expressions;
 using Libptx.Statements;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -14,24 +11,29 @@ namespace Libptx
 {
     public class Entry : Atom
     {
-        public String Name { get; set; }
+        private String _name = null;
+        public virtual String Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
 
         private Tuning _tuning = new Tuning();
-        public Tuning Tuning
+        public virtual Tuning Tuning
         {
             get { return _tuning; }
             set { _tuning = value ?? new Tuning(); }
         }
 
-        private IList<Var> _params = new List<Var>();
-        public IList<Var> Params
+        private Params _params = new Params();
+        public virtual Params Params
         {
             get { return _params; }
-            set { _params = value ?? new List<Var>(); }
+            set { _params = value ?? new Params(); }
         }
 
         private Block _body = new Block();
-        public Block Body
+        public virtual Block Body
         {
             get { return _body; }
             set { _body = value ?? new Block(); }
@@ -43,7 +45,7 @@ namespace Libptx
 
             var size_limit = 256;
             if (ctx.Version >= SoftwareIsa.PTX_15) size_limit += 4096;
-            (Params.Sum(p => Marshal.SizeOf(p.Type)) <= size_limit).AssertTrue();
+            (Params.Sum(p => p.Size) <= size_limit).AssertTrue();
 
             Tuning.Validate(ctx);
             Params.ForEach(p => p.Validate(ctx));

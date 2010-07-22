@@ -9,6 +9,8 @@ namespace Libptx.Common.Types
         public TypeMod Mod { get; set; }
         public int[] Dims { get; set; }
 
+        public int Size { get { throw new NotImplementedException(); } }
+
         public static bool operator ==(Type t1, Type t2) { throw new NotImplementedException(); }
         public static bool operator !=(Type t1, Type t2) { return !(t1 == t2); }
         public override bool Equals(Object obj) { throw new NotImplementedException(); }

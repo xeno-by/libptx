@@ -17,6 +17,6 @@
 15) todo for readme.txt: variadic functions are not implemented
 16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype)
 17) todo for readme.txt: old-style texturing (kinda moot point, since new versions of PTX texturing support all hardware targets)
-18) extern funcs?
 19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
 20) initializers for text, sampler and surf constants
+21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
