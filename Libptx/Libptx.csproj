@@ -76,6 +76,9 @@
     <Compile Include="Common\Types\Vectors.S64.cs" />
     <Compile Include="Common\Types\Vectors.U64.cs" />
     <Compile Include="Entries.cs" />
+    <Compile Include="Expressions\Addressable.cs" />
+    <Compile Include="Expressions\Index.cs" />
+    <Compile Include="Expressions\Offset.cs" />
     <Compile Include="Expressions\Var.Dsl.cs" />
     <Compile Include="Expressions\Var.Extensions.cs" />
     <Compile Include="Common\Types\Type.Dsl.cs" />
@@ -101,7 +104,6 @@
     <Compile Include="Common\Types\Tex.cs" />
     <Compile Include="Common\Types\Type.Extensions.cs" />
     <Compile Include="Expressions\Address.cs" />
-    <Compile Include="Expressions\Addressable.cs" />
     <Compile Include="Common\Atom.cs" />
     <Compile Include="Expressions\Const.Core.cs" />
     <Compile Include="Expressions\Const.Dsl.cs" />

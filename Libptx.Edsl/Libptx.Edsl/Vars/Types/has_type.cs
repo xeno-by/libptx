@@ -2,7 +2,7 @@ using Libptx.Edsl.Types;
 
 namespace Libptx.Edsl.Vars.Types
 {
-    public class has_type<T> : var
+    public interface has_type<T>
         where T : type
     {
     }

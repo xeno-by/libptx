@@ -1,20 +1,31 @@
-﻿namespace Libptx.Expressions
+﻿using Libptx.Common.Enumerations;
+using XenoGears.Assertions;
+
+namespace Libptx.Expressions
 {
     public partial class Var
     {
-        public Address this[int offset]
+        public Index this[int offset]
         {
-            get { return new Address { Base = this, Offset = offset * Type.Size }; }
+            get
+            {
+                (Space != space.reg).AssertTrue();
+                return new Index { Base = this, Offset = offset };
+            }
         }
 
         public static Address operator +(Var @var, int offset)
         {
-            return @var == null ? null : new Address { Base = @var, Offset = offset };
+            if (@var == null) return null;
+            (@var.Space != space.reg).AssertTrue();
+            return new Address { Base = @var, Offset = offset };
         }
 
         public static Address operator -(Var @var, int offset)
         {
-            return @var == null ? null : new Address { Base = @var, Offset = -offset };
+            if (@var == null) return null;
+            (@var.Space != space.reg).AssertTrue();
+            return new Address { Base = @var, Offset = -offset };
         }
     }
 }

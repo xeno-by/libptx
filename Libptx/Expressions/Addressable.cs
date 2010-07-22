@@ -1,6 +1,6 @@
 namespace Libptx.Expressions
 {
-    public interface Addressable : Expression
+    public interface Addressable
     {
     }
 }
