@@ -53,10 +53,12 @@ namespace Libptx.Instructions
         sqrt,
         st,
         sub,
-        suld,
+        suld_b,
+        suld_p,
         suq,
         sured,
-        sust,
+        sust_b,
+        sust_p,
         testp,
         tex,
         trap,
@@ -494,9 +496,17 @@ namespace Libptx.Instructions.Arithmetic
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    public partial class suld
+    public partial class suld_b
     {
-        public override ptxoptype discr { get { return ptxoptype.suld; } }
+        public override ptxoptype discr { get { return ptxoptype.suld_b; } }
+    }
+}
+
+namespace Libptx.Instructions.TextureAndSurface
+{
+    public partial class suld_p
+    {
+        public override ptxoptype discr { get { return ptxoptype.suld_p; } }
     }
 }
 
@@ -518,9 +528,17 @@ namespace Libptx.Instructions.TextureAndSurface
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    public partial class sust
+    public partial class sust_b
     {
-        public override ptxoptype discr { get { return ptxoptype.sust; } }
+        public override ptxoptype discr { get { return ptxoptype.sust_b; } }
+    }
+}
+
+namespace Libptx.Instructions.TextureAndSurface
+{
+    public partial class sust_p
+    {
+        public override ptxoptype discr { get { return ptxoptype.sust_p; } }
     }
 }
 

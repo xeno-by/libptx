@@ -4,6 +4,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
+using Libptx.Expressions;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.TextureAndSurface

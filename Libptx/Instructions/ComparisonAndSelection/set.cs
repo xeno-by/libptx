@@ -15,7 +15,6 @@ namespace Libptx.Instructions.ComparisonAndSelection
     [DebuggerNonUserCode]
     public partial class set : ptxop
     {
-        [Mod] public bool p { get; set; }
         [Affix] public cmp cmpop { get; set; }
         [Affix] public op boolop { get; set; }
         [Affix] public bool ftz { get; set; }
@@ -29,7 +28,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
         {
             (boolop == 0 || boolop == and || boolop == or || boolop == xor).AssertTrue();
             (dtype == null || dtype == u32 || dtype == s32 || dtype == f32).AssertTrue();
-            (p == true).AssertEquiv(dtype == null);
+            // todo. p and d are mutually exclusive
         }
     }
 }

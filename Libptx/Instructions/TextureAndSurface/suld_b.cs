@@ -11,12 +11,9 @@ using Type = Libptx.Common.Types.Type;
 namespace Libptx.Instructions.TextureAndSurface
 {
     [Ptxop("suld.b.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_15)]
-    [Ptxop("suld.p.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
     [DebuggerNonUserCode]
-    public partial class suld : ptxop
+    public partial class suld_b : ptxop
     {
-        [Affix] public bool b { get; set; }
-        [Affix] public bool p { get; set; }
         [Affix] public geom geom { get; set; }
         [Affix] public cop cop { get; set; }
         [Affix] public Type dtype { get; set; }
@@ -27,10 +24,9 @@ namespace Libptx.Instructions.TextureAndSurface
             get
             {
                 var cache = cop != 0;
-                var sust_p = p == true;
-                var sust_3d = geom == d3;
+                var suld_3d = geom == d3;
                 var non_trap = clampm != clamp_trap;
-                return cache || sust_p || sust_3d || non_trap ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_15;
+                return cache || suld_3d || non_trap ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_15;
             }
         }
 
@@ -39,10 +35,9 @@ namespace Libptx.Instructions.TextureAndSurface
             get
             {
                 var cache = cop != 0;
-                var sust_p = p == true;
-                var sust_3d = geom == d3;
+                var suld_3d = geom == d3;
                 var non_trap = clampm != clamp_trap;
-                return cache || sust_p || sust_3d || non_trap ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
+                return cache || suld_3d || non_trap ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
         }
 
@@ -53,14 +48,9 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (b || p).AssertTrue();
             (geom != 0).AssertTrue();
             (cop == 0 || cop == ca || cop == cg || cop == cs || cop == cv).AssertTrue();
-
-            (b == true).AssertImplies(dtype.is_bit());
-            (b == true).AssertImplies(dtype.is_scalar() || dtype.is_v2() || dtype.is_v4());
-            (p == true).AssertImplies(dtype.is32());
-            (p == true).AssertImplies(dtype.is_v4());
+            (dtype.is_bit() && (dtype.is_scalar() || dtype.is_v2() || dtype.is_v4())).AssertTrue();
         }
     }
 }
