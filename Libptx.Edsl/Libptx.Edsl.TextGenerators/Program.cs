@@ -31,13 +31,16 @@ namespace Libptx.Edsl.TextGenerators
                 var dir = @"..\..\..\..\" + op.Namespace.Replace(".", @"\") + @"\";
                 var file = dir + op.Name + ".cs";
                 var text = File.ReadAllText(file);
-                if (!text.Contains("using Type = Libptx.Common.Types.Type;"))
+                Action<String> use = ns =>
                 {
-                    var liof = text.LastIndexOf("using") + 1;
-                    var next = text.IndexOf(Environment.NewLine, liof);
-                    var ins = next == -1 ? 0 : (next + Environment.NewLine.Length);
-                    text = text.Insert(ins, "using Type = Libptx.Common.Types.Type;" + Environment.NewLine);
-                }
+                    if (!text.Contains("using " + ns + ";"))
+                    {
+                        var liof = text.LastIndexOf("using") + 1;
+                        var next = text.IndexOf(Environment.NewLine, liof);
+                        var ins = next == -1 ? 0 : (next + Environment.NewLine.Length);
+                        text = text.Insert(ins, "using " + ns + ";" + Environment.NewLine);
+                    }
+                };
 
                 var buf = new StringBuilder();
                 var w = new StringWriter(buf).Indented();
@@ -71,7 +74,8 @@ namespace Libptx.Edsl.TextGenerators
 
                 names.ForEach(name =>
                 {
-                    var decl = String.Format("public Type {0} {{ get; set; }}", name);
+                    use("Libptx.Expressions");
+                    var decl = String.Format("public Expression {0} {{ get; set; }}", name);
                     if (text.Contains(decl))
                     {
                         var iof_decl = text.IndexOf(decl);
@@ -85,6 +89,7 @@ namespace Libptx.Edsl.TextGenerators
                 });
 
                 w.WriteLineNoTabs(String.Empty);
+                use("Libcuda.Versions");
                 w.WriteLine("protected override void custom_validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa)");
                 w.WriteLine("{");
                 w.Indent++;
@@ -96,6 +101,7 @@ namespace Libptx.Edsl.TextGenerators
                     if (props.Contains(name + "type")) prop = name + "type";
                     if (props.Contains("type")) prop = "type";
 
+                    use("XenoGears.Assertions");
                     w.WriteLine("agree({0}, {1}).AssertTrue();", name, prop);
                 });
                 w.Indent--;

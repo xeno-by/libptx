@@ -33,6 +33,14 @@ namespace Libptx.Instructions
             }
         }
 
+        protected override void CustomValidate(Module ctx)
+        {
+            validate_opcode(ctx.Version, ctx.Target);
+            custom_validate_opcode(ctx.Version, ctx.Target);
+            validate_ops(ctx.Version, ctx.Target);
+            custom_validate_ops(ctx.Version, ctx.Target);
+        }
+
         protected virtual bool allow_int8 { get { return false; } }
         protected virtual bool allow_float16 { get { return false; } }
         protected virtual bool allow_bit8 { get { return false; } }
@@ -42,21 +50,15 @@ namespace Libptx.Instructions
         protected virtual bool allow_pred { get { return false; } }
         protected virtual bool allow_vec { get { return false; } }
         protected virtual bool allow_array { get { return false; } }
-        protected override void CustomValidate(Module ctx)
-        {
-            validate_opcode(ctx.Version, ctx.Target);
-            custom_validate_opcode(ctx.Version, ctx.Target);
-            validate_ops(ctx.Version, ctx.Target);
-            custom_validate_ops(ctx.Version, ctx.Target);
-        }
-
-        protected virtual void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
+        protected virtual void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa) { }
         private void validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             // todo. all types must be not null
+            // todo. verify all restrictions for types (i mean, allow_*)
             throw new NotImplementedException();
         }
 
+        protected virtual bool allow_nonreg { get { return false; } }
         protected virtual bool allow_xyzw { get { return false; } }
         protected virtual bool allow_sel { get { return false; } }
         protected virtual bool allow_not { get { return false; } }
@@ -66,6 +68,7 @@ namespace Libptx.Instructions
         private void validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             // todo. all operands must be not null
+            // todo. verify all restrictions for operands (i mean, allow_*)
             throw new NotImplementedException();
         }
 
