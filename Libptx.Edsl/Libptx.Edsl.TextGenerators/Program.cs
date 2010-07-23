@@ -36,7 +36,7 @@ namespace Libptx.Edsl.TextGenerators
                     var liof = text.LastIndexOf("using") + 1;
                     var next = text.IndexOf(Environment.NewLine, liof);
                     var ins = next == -1 ? 0 : (next + Environment.NewLine.Length);
-                    text = text.Insert(ins, "using Types = Libptx.Common.Types.Type;" + Environment.NewLine);
+                    text = text.Insert(ins, "using Type = Libptx.Common.Types.Type;" + Environment.NewLine);
                 }
 
                 var buf = new StringBuilder();
