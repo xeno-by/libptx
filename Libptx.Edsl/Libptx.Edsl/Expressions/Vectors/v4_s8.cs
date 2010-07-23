@@ -8,6 +8,7 @@ namespace Libptx.Edsl.Expressions.Vectors
     {
         public v4_s8(reg_s8 x, reg_s8 y, reg_s8 z, reg_s8 w)
         {
+            ElementType = s8;
             Elements.Add(x.AssertCast<var>());
             Elements.Add(y.AssertCast<var>());
             Elements.Add(z.AssertCast<var>());

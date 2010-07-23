@@ -8,6 +8,7 @@ namespace Libptx.Edsl.Expressions.Vectors
     {
         public v2_u16(reg_u16 x, reg_u16 y)
         {
+            ElementType = u16;
             Elements.Add(x.AssertCast<var>());
             Elements.Add(y.AssertCast<var>());
         }

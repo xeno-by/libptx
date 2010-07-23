@@ -8,6 +8,7 @@ namespace Libptx.Edsl.Expressions.Vectors
     {
         public v4_u32(reg_u32 x, reg_u32 y, reg_u32 z, reg_u32 w)
         {
+            ElementType = u32;
             Elements.Add(x.AssertCast<var>());
             Elements.Add(y.AssertCast<var>());
             Elements.Add(z.AssertCast<var>());

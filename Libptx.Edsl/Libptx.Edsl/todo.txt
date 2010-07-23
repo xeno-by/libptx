@@ -1,4 +1,0 @@
-﻿todo list for the Libptx.Edsl library:
-
-1) The library is to be transformed into 100% automatically generated binary (code won't be under VCS).
-2) Implement version-specific Edsl libraries (e.g. Libptx.Edsl.Ptx21.Sm13.dll) with version-specific Module subclasses.

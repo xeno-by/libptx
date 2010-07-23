@@ -1,15 +1,23 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using Libcuda.Versions;
 using XenoGears.Reflection.Attributes;
 using XenoGears.Reflection.Shortcuts;
 using System.Linq;
+using XenoGears.Functional;
 
 namespace Libptx.Common.Annotations
 {
     public static class ParticleHelpers
     {
         public static String Signature(this Object obj)
+        {
+            var sigs = obj.Signatures();
+            return sigs == null ? null : sigs.SingleOrDefault();
+        }
+
+        public static ReadOnlyCollection<String> Signatures(this Object obj)
         {
             if (obj == null)
             {
@@ -20,70 +28,82 @@ namespace Libptx.Common.Annotations
                 var cap = obj as ICustomAttributeProvider;
                 if (cap != null)
                 {
-                    var pcl = cap.AttrOrNull<ParticleAttribute>();
-                    return pcl == null ? null : pcl.Signature;
+                    var pcls = cap.Attrs<ParticleAttribute>();
+                    return pcls.Select(pcl => pcl.Signature).ToReadOnly();
                 }
 
                 var t = obj.GetType();
                 if (t.IsEnum)
                 {
                     var f = t.GetFields(BF.PublicStatic).SingleOrDefault(f1 => Equals(f1.GetValue(null), obj));
-                    return f.Signature();
+                    return f.Signatures();
                 }
 
-                return t.Signature();
+                return t.Signatures();
             }
         }
 
         public static SoftwareIsa Version(this Object obj)
         {
+            var sigs = obj.Versions();
+            return sigs == null ? 0 : sigs.SingleOrDefault();
+        }
+
+        public static ReadOnlyCollection<SoftwareIsa> Versions(this Object obj)
+        {
             if (obj == null)
             {
-                return 0;
+                return null;
             }
             else
             {
                 var cap = obj as ICustomAttributeProvider;
                 if (cap != null)
                 {
-                    var pcl = cap.AttrOrNull<ParticleAttribute>();
-                    return pcl == null ? 0 : pcl.Version;
+                    var pcls = cap.Attrs<ParticleAttribute>();
+                    return pcls.Select(pcl => pcl.Version).ToReadOnly();
                 }
 
                 var t = obj.GetType();
                 if (t.IsEnum)
                 {
                     var f = t.GetFields(BF.PublicStatic).SingleOrDefault(f1 => Equals(f1.GetValue(null), obj));
-                    return f.Version();
+                    return f.Versions();
                 }
 
-                return t.Version();
+                return t.Versions();
             }
         }
 
         public static HardwareIsa Target(this Object obj)
         {
+            var sigs = obj.Targets();
+            return sigs == null ? 0 : sigs.SingleOrDefault();
+        }
+
+        public static ReadOnlyCollection<HardwareIsa> Targets(this Object obj)
+        {
             if (obj == null)
             {
-                return 0;
+                return null;
             }
             else
             {
                 var cap = obj as ICustomAttributeProvider;
                 if (cap != null)
                 {
-                    var pcl = cap.AttrOrNull<ParticleAttribute>();
-                    return pcl == null ? 0 : pcl.Target;
+                    var pcls = cap.Attrs<ParticleAttribute>();
+                    return pcls.Select(pcl => pcl.Target).ToReadOnly();
                 }
 
                 var t = obj.GetType();
                 if (t.IsEnum)
                 {
                     var f = t.GetFields(BF.PublicStatic).SingleOrDefault(f1 => Equals(f1.GetValue(null), obj));
-                    return f.Target();
+                    return f.Targets();
                 }
 
-                return t.Target();
+                return t.Targets();
             }
         }
     }

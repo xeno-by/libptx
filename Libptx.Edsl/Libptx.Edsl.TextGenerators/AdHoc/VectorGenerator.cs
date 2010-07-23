@@ -57,6 +57,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
 
                 w_vec.WriteLine("{");
                 w_vec.Indent++;
+                w_vec.WriteLine("ElementType = {0};", t.vec_el().Name.Signature());
                 1.UpTo(t.vec_rank()).ForEach(i => w_vec.WriteLine("Elements.Add({0}.AssertCast<var>());", arg_name(i)));
                 w_vec.Indent--;
                 w_vec.WriteLine("}");

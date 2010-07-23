@@ -1,19 +1,25 @@
 ﻿using System;
 using System.IO;
-using Libptx.Common;
 using Libptx.Common.Enumerations;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public partial class Var : Atom, Expression, Addressable
+    public abstract class Var_Aux : Expression
+    {
+        protected abstract Type GetExpressionType();
+        public sealed override Type Type { get { return GetExpressionType(); } }
+    }
+
+    public partial class Var : Var_Aux, Addressable
     {
         public Var Base { get; set; }
         public VarMod Mod { get; set; }
 
         public String Name { get; set; } // may be null
         public space Space { get; set; }
-        public Type Type { get; set; } // must not be null
+        public new Type Type { get; set; } // must not be null
+        protected override Type GetExpressionType() { return Type; }
         public Const Init { get; set; }
         public int Alignment { get; set; } // non-negative, multiple of Type element's size
         public bool IsVisible { get; set; }

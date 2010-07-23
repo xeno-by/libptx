@@ -8,6 +8,7 @@ namespace Libptx.Edsl.Expressions.Vectors
     {
         public v1_f64(reg_f64 x)
         {
+            ElementType = f64;
             Elements.Add(x.AssertCast<var>());
         }
 

@@ -45,19 +45,21 @@ namespace Libptx.Instructions
         {
             validate_opcode(ctx.Version, ctx.Target);
             custom_validate_opcode(ctx.Version, ctx.Target);
-            validate_op(ctx.Version, ctx.Target);
-            custom_validate_op(ctx.Version, ctx.Target);
+            validate_ops(ctx.Version, ctx.Target);
+            custom_validate_ops(ctx.Version, ctx.Target);
         }
 
         protected virtual void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
         private void validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
+            // todo. all types must be not null
             throw new NotImplementedException();
         }
 
-        protected virtual void custom_validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
-        private void validate_op(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected virtual void custom_validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
+        private void validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
+            // todo. all operands must be not null
             throw new NotImplementedException();
         }
     }

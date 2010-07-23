@@ -1,15 +1,21 @@
 using System;
 using System.IO;
-using Libptx.Common;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
 using Libptx.Statements;
+using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public class Address : Atom, Expression
+    public class Address : Expression
     {
         public Addressable Base { get; set; } // may be null
         public Offset Offset { get; set; }
+
+        public override Type Type
+        {
+            get { return typeof(Ptr); }
+        }
 
         public static implicit operator Address(long offset)
         {

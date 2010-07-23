@@ -9,17 +9,17 @@ namespace Libptx.Edsl
         {
             public class Entry_Aux : Libptx.Entry
             {
-                protected Libptx.Statements.Block GetBody() { return base.Body; }
-                protected void SetBody(Libptx.Statements.Block value) { base.Body = value; }
+                protected virtual Libptx.Statements.Block GetEntryBody() { return base.Body; }
+                protected virtual void SetEntryBody(Libptx.Statements.Block value) { base.Body = value; }
 
                 public sealed override Libptx.Statements.Block Body
                 {
-                    get { return GetBody(); }
-                    set { SetBody(value); }
+                    get { return GetEntryBody(); }
+                    set { SetEntryBody(value); }
                 }
             }
 
-            public class Entry : Libptx.Entry
+            public class Entry : Entry_Aux
             {
                 private readonly Libptx.Entry _base;
                 public Entry() : this(new Libptx.Entry()) { }
@@ -42,6 +42,9 @@ namespace Libptx.Edsl
                     get { return _base.Params; }
                     set { _base.Params = value; }
                 }
+
+                protected override Libptx.Statements.Block GetEntryBody() { return Body; }
+                protected override void SetEntryBody(Libptx.Statements.Block value) { Body = new Block(value); }
 
                 public new Block Body
                 {

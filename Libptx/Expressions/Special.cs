@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
-using Libptx.Common;
 using Libptx.Common.Enumerations;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public abstract partial class Special : Atom, Expression
+    public abstract partial class Special : Expression
     {
         public String Name
         {
@@ -18,7 +17,7 @@ namespace Libptx.Expressions
             get { return space.sreg; }
         }
 
-        public Type Type
+        public override Type Type
         {
             get { throw new NotImplementedException(); }
         }

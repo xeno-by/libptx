@@ -6,10 +6,11 @@ using Libptx.Statements;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using System.Linq;
+using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public partial class Const : Atom, Expression
+    public partial class Const : Expression
     {
         public Const(Object value)
         {
@@ -25,6 +26,11 @@ namespace Libptx.Expressions
                 ValidateValue(value);
                 _value = value;
             }
+        }
+
+        public override Type Type
+        {
+            get { return _value == null ? null : _value.GetType(); }
         }
 
         private void ValidateValue(Object value)

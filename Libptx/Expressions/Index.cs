@@ -1,13 +1,19 @@
 using System;
 using System.IO;
-using Libptx.Common;
+using Libptx.Common.Types;
+using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public class Index : Atom, Expression
+    public class Index : Expression
     {
         public Var Base { get; set; } // may be null
         public int Offset { get; set; }
+
+        public override Type Type
+        {
+            get { return typeof(Ptr); }
+        }
 
         protected override void CustomValidate(Module ctx)
         {
