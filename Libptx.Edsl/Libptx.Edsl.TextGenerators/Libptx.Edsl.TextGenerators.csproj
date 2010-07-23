@@ -59,6 +59,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdHoc\PtxopGenerator.cs" />
     <Compile Include="AdHoc\SpecialGenerator.cs" />
     <Compile Include="AdHoc\SpecialtypeGenerator.cs" />
     <Compile Include="AdHoc\PtxoptypeGenerator.cs" />
