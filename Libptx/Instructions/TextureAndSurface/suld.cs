@@ -57,10 +57,10 @@ namespace Libptx.Instructions.TextureAndSurface
             (geom != 0).AssertTrue();
             (cop == 0 || cop == ca || cop == cg || cop == cs || cop == cv).AssertTrue();
 
-            (b == true).AssertImplies(dtype.isbit());
-            (b == true).AssertImplies(dtype.isscalar() || dtype.isv2() || dtype.isv4());
+            (b == true).AssertImplies(dtype.is_bit());
+            (b == true).AssertImplies(dtype.is_scalar() || dtype.is_v2() || dtype.is_v4());
             (p == true).AssertImplies(dtype.is32());
-            (p == true).AssertImplies(dtype.isv4());
+            (p == true).AssertImplies(dtype.is_v4());
         }
     }
 }

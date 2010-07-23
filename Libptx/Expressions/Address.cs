@@ -11,7 +11,7 @@ namespace Libptx.Expressions
         public Addressable Base { get; set; } // may be null
         public Offset Offset { get; set; }
 
-        public static implicit operator Address(int offset)
+        public static implicit operator Address(long offset)
         {
             return new Address { Offset = offset };
         }

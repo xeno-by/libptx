@@ -24,10 +24,10 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_float16 { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            var i2i = atype.isint() && dtype.isint();
-            var i2f = atype.isint() && dtype.isfloat();
-            var f2i = atype.isfloat() && dtype.isint();
-            var f2f = atype.isfloat() && dtype.isfloat();
+            var i2i = atype.is_int() && dtype.is_int();
+            var i2f = atype.is_int() && dtype.is_float();
+            var f2i = atype.is_float() && dtype.is_int();
+            var f2f = atype.is_float() && dtype.is_float();
             (i2i || i2f || f2i || f2f).AssertTrue();
 
             (irnd != 0).AssertImplies(f2i || f2f);

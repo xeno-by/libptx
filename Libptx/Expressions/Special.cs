@@ -6,7 +6,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public abstract class Special : Atom, Expression
+    public abstract partial class Special : Atom, Expression
     {
         public String Name
         {

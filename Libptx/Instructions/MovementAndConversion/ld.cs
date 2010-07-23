@@ -53,7 +53,7 @@ namespace Libptx.Instructions.MovementAndConversion
             (u == true).AssertImplies(cop == 0);
             (@volatile == true).AssertEquiv(cop == 0);
             (cop == 0 || cop == ca || cop == cg || cop == cs || cop == lu || cop == cv).AssertTrue();
-            type.isv1().AssertFalse();
+            type.is_v1().AssertFalse();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Libptx.Instructions.Arithmetic
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            type.isfloat().AssertTrue();
+            type.is_float().AssertTrue();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (geom != 0).AssertTrue();
-            (dtype.is32() && dtype.isv4()).AssertTrue();
+            (dtype.is32() && dtype.is_v4()).AssertTrue();
             (btype == s32 || btype == f32).AssertTrue();
 
             // todo. implement this:

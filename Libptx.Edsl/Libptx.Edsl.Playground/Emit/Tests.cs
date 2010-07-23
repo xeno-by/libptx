@@ -11,15 +11,15 @@ namespace Libptx.Edsl.Playground.Emit
         {
             // __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C)
             var module = new Ptx14.Sm13.Module();
-            var a = b8[12].align4, b = b8[12].align4, c = b8[12].align4;
+            var a = param.align4.b8[12], b = param.align4.b8[12], c = param.align4.b8[12];
             var kernel = new Entry("MatMulKernel", a, b, c);
             kernel.Params.SetNames("A", "B", "C");
 
             var loop_body = label, after_loop = label, exit = label;
-            var a_width = s32, a_height = s32, a_raw = s32, b_width = s32, b_height = s32, b_raw = s32, c_width = s32, c_height = s32, c_raw = s32;
-            var row = s32, col = s32, cvalue = s32, dim = s32;
-            var a_offset = s32, a_offset_lo = s32, a_offset_stride = s32, a_offset_hi = s32;
-            var b_offset = s32, b_offset_lo = s32, b_offset_stride = s32, b_offset_hi = s32;
+            var a_width = reg.s32, a_height = reg.s32, a_raw = reg.s32, b_width = reg.s32, b_height = reg.s32, b_raw = reg.s32, c_width = reg.s32, c_height = reg.s32, c_raw = reg.s32;
+            var row = reg.s32, col = reg.s32, cvalue = reg.s32, dim = reg.s32;
+            var a_offset = reg.s32, a_offset_lo = reg.s32, a_offset_stride = reg.s32, a_offset_hi = reg.s32;
+            var b_offset = reg.s32, b_offset_lo = reg.s32, b_offset_stride = reg.s32, b_offset_hi = reg.s32;
 
             // int row = blockIdx.y * blockDim.y + threadIdx.y;
             // int col = blockIdx.x * blockDim.x + threadIdx.x;

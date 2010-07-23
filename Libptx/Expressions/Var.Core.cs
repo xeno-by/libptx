@@ -20,12 +20,14 @@ namespace Libptx.Expressions
         public bool IsExtern { get; set; }
 
         public Var() { Space = space.reg; }
-        public int Size { get { return Type.Size; } }
+        public int SizeInMemory { get { return Type.SizeInMemory; } }
+        public int SizeOfElement { get { return Type.SizeOfElement; } }
 
         protected override void CustomValidate(Module ctx)
         {
-            // todo.Initializers are allowed for all types except .f16 and .pred.
-            // todo. inits are only allowed for <what> spaces?
+            // todo. arrays and regs
+            // todo. Initializers are allowed for all types except .f16 and .pred.
+            // todo. Currently, variable initialization is supported only for constant and global state spaces
             throw new NotImplementedException();
         }
 

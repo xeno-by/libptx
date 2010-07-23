@@ -11,8 +11,8 @@ namespace Libptx.Edsl
         {
             public class Entries : BaseList<Entry>
             {
-                public Entries(params Entry[] entries) : this((IEnumerable<Entry>)entries) {}
-                public Entries(IEnumerable<Entry> entries) : this(new Libptx.Entries((entries ?? Seq.Empty<Entry>()).Select(e => (Libptx.Entry)e))) {}
+                public Entries(params Entry[] entries) : this((IEnumerable<Entry>)entries) { }
+                public Entries(IEnumerable<Entry> entries) : this(new Libptx.Entries((entries ?? Seq.Empty<Entry>()).Select(e => (Libptx.Entry)e))) { }
 
                 private readonly Libptx.Entries _base;
                 internal Entries(Libptx.Entries @base) { _base = @base; }

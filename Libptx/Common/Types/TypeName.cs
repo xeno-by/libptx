@@ -21,8 +21,8 @@ namespace Libptx.Common.Types
         [Affix("b32")] B32,
         [Affix("b64")] B64,
         [Affix("pred")] Pred,
-        [Affix("texref", SoftwareIsa.PTX_15)] Tex,
-        [Affix("samplerref", SoftwareIsa.PTX_15)] Sampler,
-        [Affix("surfref", SoftwareIsa.PTX_15)] Surf,
+        [Affix("texref", SoftwareIsa.PTX_15)] Texref,
+        [Affix("samplerref", SoftwareIsa.PTX_15)] Samplerref,
+        [Affix("surfref", SoftwareIsa.PTX_15)] Surfref,
     }
 }

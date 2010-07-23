@@ -1,26 +1,129 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using Libcuda.DataTypes;
+using Libptx.Common.Annotations;
+using XenoGears.Assertions;
+using XenoGears.Functional;
+using XenoGears.Strings;
 using ClrType = System.Type;
 
 namespace Libptx.Common.Types
 {
-    public partial class Type
+    public partial class Type : IEquatable<Type>
     {
         public TypeName Name { get; set; }
         public TypeMod Mod { get; set; }
         public int[] Dims { get; set; }
 
-        public int Size { get { throw new NotImplementedException(); } }
+        public override String ToString()
+        {
+            var buf = new StringBuilder();
+            var w = new StringWriter(buf);
+            var el = this.arr_el() ?? this;
+            if (el.is_vec()) w.Write(".v{0} ", el.vec_rank());
+            w.Write(Name.Signature().AssertNotNull());
+            if (this.is_arr()) w.Write(" " + (Dims ?? Seq.Empty<int>()).Select(dim => dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
+            return buf.ToString();
+        }
 
-        public static bool operator ==(Type t1, Type t2) { throw new NotImplementedException(); }
-        public static bool operator !=(Type t1, Type t2) { return !(t1 == t2); }
-        public override bool Equals(Object obj) { throw new NotImplementedException(); }
-        public override int GetHashCode() { throw new NotImplementedException(); }
-        public override String ToString() { throw new NotImplementedException(); }
+        public int SizeInMemory { get { return SizeOfElement * (Dims ?? new int[0]).Product(); } }
+        public int SizeOfElement
+        {
+            get
+            {
+                var el = this.Unfold(t => t.arr_el(), t => t != null).Last();
+                var el_sz = Marshal.SizeOf((ClrType)(Type)el.Name);
+                return el.is_vec() ? el_sz * el.vec_rank() : el_sz;
+            }
+        }
 
-        public static implicit operator TypeName(Type t) { throw new NotImplementedException(); }
-        public static implicit operator Type(TypeName t) { throw new NotImplementedException(); }
+        // public static implicit operator TypeName(Type t) { return t == null ? 0 : t.is_scalar() ? t.Name : 0; }
+        public static implicit operator Type(TypeName t) { return new Type { Name = t, Mod = TypeMod.Scalar }; }
 
-        public static implicit operator ClrType(Type t) { throw new NotImplementedException(); }
-        public static implicit operator Type(ClrType t) { throw new NotImplementedException(); }
+        public ClrType ClrType { get { return (ClrType)this; } }
+        public static implicit operator ClrType(Type t)
+        {
+            if (t == null) return null;
+            var el = t.arr_el() ?? t;
+
+            var clr = t.Name.ClrType();
+            if (el.is_vec())
+            {
+                var rank = el.vec_rank();
+                var tv1_name = typeof(int3).Namespace + "." + clr.GetCSharpRef(ToCSharpOptions.Terse) + rank;
+                var tv1 = typeof(int3).Assembly.GetType(tv1_name);
+                var tv2_name = typeof(Bit8).Namespace + "." + clr.GetCSharpRef(ToCSharpOptions.Terse) + rank;
+                var tv2 = typeof(Bit8).Assembly.GetType(tv2_name);
+                var tv3_name = typeof(Bit8).Namespace + "." + clr.GetCSharpRef(ToCSharpOptions.Terse) + "_V" + rank;
+                var tv3 = typeof(Bit8).Assembly.GetType(tv3_name);
+                clr = tv1 ?? tv2 ?? tv3;
+            }
+
+            if (t.is_arr())
+            {
+                var rank = t.arr_rank();
+                clr = 1.UpTo(rank).Fold(clr, (aux, _) => aux == null ? null : aux.MakeArrayType());
+            }
+
+            return clr;
+        }
+
+        private static readonly Dictionary<ClrType, Type> pool = new Dictionary<ClrType, Type>();
+        static Type()
+        {
+            var scalars = Enum.GetValues(typeof(TypeName)).Cast<TypeName>();
+            var combos = Combinatorics.CartesianProduct(scalars, new []{ TypeMod.Scalar, TypeMod.V1, TypeMod.V2, TypeMod.V4 }, 0.UpTo(1));
+            var types = combos.Zip((t, mod, dims) => new Type{Name = t, Mod = mod | (dims == 1 ? TypeMod.Array : TypeMod.Scalar), Dims = dims.Times(0).ToArray()});
+            types.ForEach(t =>
+            {
+                var clr = t.ClrType;
+                if (clr != null) pool.Add(t, t);
+            });
+        }
+
+        public static implicit operator Type(ClrType t)
+        {
+            return pool.GetOrDefault(t);
+        }
+
+        public bool Equals(Type other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.Name, Name) && Equals(other.Mod, Mod) && Seq.Equals(other.Dims ?? Seq.Empty<int>(), Dims ?? Seq.Empty<int>());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Type)) return false;
+            return Equals((Type)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int result = Name.GetHashCode();
+                result = (result * 397) ^ Mod.GetHashCode();
+                result = (result * 397) ^ (Dims ?? Seq.Empty<int>()).Fold(0, (acc, curr) => acc ^ (curr * 397));
+                return result;
+            }
+        }
+
+        public static bool operator ==(Type left, Type right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Type left, Type right)
+        {
+            return !Equals(left, right);
+        }
     }
 }

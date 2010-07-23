@@ -5,7 +5,7 @@ using Libptx.Common.Annotations.Atoms;
 
 namespace Libptx.Instructions.Annotations
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     [DebuggerNonUserCode]
     public class PtxopAttribute : AtomAttribute
     {

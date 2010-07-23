@@ -59,9 +59,9 @@ namespace Libptx.Common
         protected static Type b32 { get { return new Type { Name = TypeName.B32 }; } }
         protected static Type b64 { get { return new Type { Name = TypeName.B64 }; } }
         protected static Type pred { get { return new Type { Name = TypeName.Pred }; } }
-        protected static Type tex { get { return new Type { Name = TypeName.Tex }; } }
-        protected static Type sampler { get { return new Type { Name = TypeName.Sampler }; } }
-        protected static Type surf { get { return new Type { Name = TypeName.Surf }; } }
+        protected static Type texref { get { return new Type { Name = TypeName.Texref }; } }
+        protected static Type samplerref { get { return new Type { Name = TypeName.Samplerref }; } }
+        protected static Type surfref { get { return new Type { Name = TypeName.Surfref }; } }
 
         protected static barlevel cta { get { return barlevel.cta; } }
         protected static barlevel gl { get { return barlevel.gl; } }

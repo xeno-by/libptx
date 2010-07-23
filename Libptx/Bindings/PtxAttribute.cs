@@ -11,7 +11,7 @@ namespace Libptx.Bindings
     // 4) linkage to embedded text in resources
     // 5) linkage to pre-compiled binaries stored in native libs, e.g. within CUBLAS or CUFFT
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     [DebuggerNonUserCode]
     public class PtxAttribute : Attribute
     {

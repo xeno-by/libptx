@@ -7,11 +7,11 @@ namespace Libptx.Expressions
 {
     public class Vector : Atom, Expression
     {
-        private IList<Var> _vars = new List<Var>();
-        public IList<Var> Vars
+        private IList<Var> _elements = new List<Var>();
+        public IList<Var> Elements
         {
-            get { return _vars; }
-            set { _vars = value ?? new List<Var>(); }
+            get { return _elements; }
+            set { _elements = value ?? new List<Var>(); }
         }
 
         public static implicit operator Vector(Var[] vars)

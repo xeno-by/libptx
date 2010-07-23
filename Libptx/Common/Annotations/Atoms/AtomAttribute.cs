@@ -4,7 +4,7 @@ using Libcuda.Versions;
 
 namespace Libptx.Common.Annotations.Atoms
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     [DebuggerNonUserCode]
     public abstract class AtomAttribute : ParticleAttribute
     {

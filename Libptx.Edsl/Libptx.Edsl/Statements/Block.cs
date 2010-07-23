@@ -2,30 +2,24 @@
 using Libptx.Expressions;
 using Libptx.Statements;
 
-namespace Libptx.Edsl
+namespace Libptx.Edsl.Statements
 {
-    public static partial class Ptx21
+    public class Block : Libptx.Statements.Block
     {
-        public static partial class Sm20
+        private readonly Libptx.Statements.Block _base;
+        public Block() : this(new Libptx.Statements.Block()) { }
+        internal Block(Libptx.Statements.Block @base) { _base = @base; }
+
+        public override IList<Var> Vars
         {
-            public class Block : Libptx.Statements.Block
-            {
-                private readonly Libptx.Statements.Block _base;
-                public Block() : this(new Libptx.Statements.Block()) { }
-                internal Block(Libptx.Statements.Block @base) { _base = @base; }
+            get { return _base.Vars; }
+            set { base.Vars = value; }
+        }
 
-                public override IList<Var> Vars
-                {
-                    get { return _base.Vars; }
-                    set { base.Vars = value; }
-                }
-
-                public override IList<Statement> Stmts
-                {
-                    get { return _base.Stmts; }
-                    set { base.Stmts = value; }
-                }
-            }
+        public override IList<Statement> Stmts
+        {
+            get { return _base.Stmts; }
+            set { base.Stmts = value; }
         }
     }
 }

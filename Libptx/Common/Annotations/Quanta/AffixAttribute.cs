@@ -4,7 +4,7 @@ using Libcuda.Versions;
 
 namespace Libptx.Common.Annotations.Quanta
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     [DebuggerNonUserCode]
     public class AffixAttribute : QuantumAttribute
     {

@@ -45,7 +45,7 @@ namespace Libptx
 
             var size_limit = 256;
             if (ctx.Version >= SoftwareIsa.PTX_15) size_limit += 4096;
-            (Params.Sum(p => p.Size) <= size_limit).AssertTrue();
+            (Params.Sum(p => p.SizeInMemory) <= size_limit).AssertTrue();
 
             Tuning.Validate(ctx);
             Params.ForEach(p => p.Validate(ctx));

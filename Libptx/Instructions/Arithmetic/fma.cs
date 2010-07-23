@@ -33,7 +33,7 @@ namespace Libptx.Instructions.Arithmetic
             (rnd != 0).AssertTrue();
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == f32);
-            type.isfloat().AssertTrue();
+            type.is_float().AssertTrue();
         }
     }
 }

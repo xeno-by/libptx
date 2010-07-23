@@ -21,7 +21,7 @@ namespace Libptx.Instructions.Arithmetic
         {
             approx.AssertTrue();
             (ftz == true).AssertImplies(type == f32);
-            type.isfloat().AssertTrue();
+            type.is_float().AssertTrue();
 
             (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(approx);
         }

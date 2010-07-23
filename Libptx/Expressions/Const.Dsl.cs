@@ -1,10 +1,14 @@
 ﻿using Libcuda.DataTypes;
 using Libptx.Common.Types;
+using Libptx.Statements;
 
 namespace Libptx.Expressions
 {
     public partial class Const
     {
+        public static implicit operator Const(Var value) { return new Const(value); }
+        public static implicit operator Const(Label value) { return new Const(value); }
+
         public static implicit operator Const(bool value) { return new Const(value); }
         public static implicit operator Const(sbyte value) { return new Const(value); }
         public static implicit operator Const(sbyte1 value) { return new Const(value); }
@@ -39,13 +43,9 @@ namespace Libptx.Expressions
         public static implicit operator Const(long value) { return new Const(value); }
         public static implicit operator Const(long1 value) { return new Const(value); }
         public static implicit operator Const(long2 value) { return new Const(value); }
-        public static implicit operator Const(long3 value) { return new Const(value); }
-        public static implicit operator Const(long4 value) { return new Const(value); }
         public static implicit operator Const(ulong value) { return new Const(value); }
         public static implicit operator Const(ulong1 value) { return new Const(value); }
         public static implicit operator Const(ulong2 value) { return new Const(value); }
-        public static implicit operator Const(ulong3 value) { return new Const(value); }
-        public static implicit operator Const(ulong4 value) { return new Const(value); }
         public static implicit operator Const(half value) { return new Const(value); }
         public static implicit operator Const(half1 value) { return new Const(value); }
         public static implicit operator Const(half2 value) { return new Const(value); }
@@ -59,8 +59,6 @@ namespace Libptx.Expressions
         public static implicit operator Const(double value) { return new Const(value); }
         public static implicit operator Const(double1 value) { return new Const(value); }
         public static implicit operator Const(double2 value) { return new Const(value); }
-        public static implicit operator Const(double3 value) { return new Const(value); }
-        public static implicit operator Const(double4 value) { return new Const(value); }
         public static implicit operator Const(Bit8 value) { return new Const(value); }
         public static implicit operator Const(Bit8_V1 value) { return new Const(value); }
         public static implicit operator Const(Bit8_V2 value) { return new Const(value); }
@@ -79,11 +77,9 @@ namespace Libptx.Expressions
         public static implicit operator Const(Bit64 value) { return new Const(value); }
         public static implicit operator Const(Bit64_V1 value) { return new Const(value); }
         public static implicit operator Const(Bit64_V2 value) { return new Const(value); }
-        public static implicit operator Const(Bit64_V3 value) { return new Const(value); }
-        public static implicit operator Const(Bit64_V4 value) { return new Const(value); }
-        public static implicit operator Const(Tex value) { return new Const(value); }
-        public static implicit operator Const(Sampler value) { return new Const(value); }
-        public static implicit operator Const(Surf value) { return new Const(value); }
+        public static implicit operator Const(Texref value) { return new Const(value); }
+        public static implicit operator Const(Samplerref value) { return new Const(value); }
+        public static implicit operator Const(Surfref value) { return new Const(value); }
         public static implicit operator Const(sbyte[] value) { return new Const(value); }
         public static implicit operator Const(sbyte1[] value) { return new Const(value); }
         public static implicit operator Const(sbyte2[] value) { return new Const(value); }
@@ -117,13 +113,9 @@ namespace Libptx.Expressions
         public static implicit operator Const(long[] value) { return new Const(value); }
         public static implicit operator Const(long1[] value) { return new Const(value); }
         public static implicit operator Const(long2[] value) { return new Const(value); }
-        public static implicit operator Const(long3[] value) { return new Const(value); }
-        public static implicit operator Const(long4[] value) { return new Const(value); }
         public static implicit operator Const(ulong[] value) { return new Const(value); }
         public static implicit operator Const(ulong1[] value) { return new Const(value); }
         public static implicit operator Const(ulong2[] value) { return new Const(value); }
-        public static implicit operator Const(ulong3[] value) { return new Const(value); }
-        public static implicit operator Const(ulong4[] value) { return new Const(value); }
         public static implicit operator Const(half[] value) { return new Const(value); }
         public static implicit operator Const(half1[] value) { return new Const(value); }
         public static implicit operator Const(half2[] value) { return new Const(value); }
@@ -137,8 +129,6 @@ namespace Libptx.Expressions
         public static implicit operator Const(double[] value) { return new Const(value); }
         public static implicit operator Const(double1[] value) { return new Const(value); }
         public static implicit operator Const(double2[] value) { return new Const(value); }
-        public static implicit operator Const(double3[] value) { return new Const(value); }
-        public static implicit operator Const(double4[] value) { return new Const(value); }
         public static implicit operator Const(Bit8[] value) { return new Const(value); }
         public static implicit operator Const(Bit8_V1[] value) { return new Const(value); }
         public static implicit operator Const(Bit8_V2[] value) { return new Const(value); }
@@ -157,7 +147,5 @@ namespace Libptx.Expressions
         public static implicit operator Const(Bit64[] value) { return new Const(value); }
         public static implicit operator Const(Bit64_V1[] value) { return new Const(value); }
         public static implicit operator Const(Bit64_V2[] value) { return new Const(value); }
-        public static implicit operator Const(Bit64_V3[] value) { return new Const(value); }
-        public static implicit operator Const(Bit64_V4[] value) { return new Const(value); }
     }
 }

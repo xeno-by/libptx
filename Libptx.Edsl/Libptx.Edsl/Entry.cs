@@ -1,4 +1,5 @@
 using System;
+using Libptx.Edsl.Statements;
 
 namespace Libptx.Edsl
 {
@@ -8,10 +9,10 @@ namespace Libptx.Edsl
         {
             public class Entry_Aux : Libptx.Entry
             {
-                protected Statements.Block GetBody() { return base.Body; }
-                protected void SetBody(Statements.Block value) { base.Body = value; }
+                protected Libptx.Statements.Block GetBody() { return base.Body; }
+                protected void SetBody(Libptx.Statements.Block value) { base.Body = value; }
 
-                public sealed override Statements.Block Body
+                public sealed override Libptx.Statements.Block Body
                 {
                     get { return GetBody(); }
                     set { SetBody(value); }
@@ -21,7 +22,7 @@ namespace Libptx.Edsl
             public class Entry : Libptx.Entry
             {
                 private readonly Libptx.Entry _base;
-                public Entry() : this(new Libptx.Entry()) {}
+                public Entry() : this(new Libptx.Entry()) { }
                 internal Entry(Libptx.Entry @base) { _base = @base; }
 
                 public override String Name

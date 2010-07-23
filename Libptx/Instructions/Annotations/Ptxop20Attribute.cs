@@ -5,7 +5,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Annotations
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     [DebuggerNonUserCode]
     public class Ptxop20Attribute : PtxopAttribute
     {

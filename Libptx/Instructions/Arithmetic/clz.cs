@@ -15,7 +15,7 @@ namespace Libptx.Instructions.Arithmetic
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (type.isbit() && type.bits() >= 32).AssertTrue();
+            (type.is_bit() && type.bits() >= 32).AssertTrue();
         }
     }
 }

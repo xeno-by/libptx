@@ -39,13 +39,13 @@ namespace Libptx.Instructions.Arithmetic
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             (is24 == true).AssertImplies(type == s32 || type == u32);
-            (mode != 0).AssertImplies(type.isint());
+            (mode != 0).AssertImplies(type.is_int());
             (mode == wide).AssertImplies(type.is16() || type.is32());
-            (rnd != 0).AssertImplies(type.isfloat());
+            (rnd != 0).AssertImplies(type.is_float());
             (type == f64).AssertImplies(rnd != 0);
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == s32 || type == f32);
-            (sat == true && type.isint()).AssertImplies(mode == mulm_hi);
+            (sat == true && type.is_int()).AssertImplies(mode == mulm_hi);
 
             (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(rnd != 0);
             (target_hwisa >= HardwareIsa.SM_20 && type == f32).AssertImplies(rnd != 0);

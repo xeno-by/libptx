@@ -20,7 +20,7 @@ namespace Libptx.Instructions.LogicAndShift
 
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (type.isbit() || type.ispred()).AssertTrue();
+            (type.is_bit() || type.is_pred()).AssertTrue();
         }
     }
 }

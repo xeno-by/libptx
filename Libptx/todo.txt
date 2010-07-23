@@ -20,3 +20,4 @@
 19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
 20) initializers for text, sampler and surf constants
 21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
+22) move all asserts, e.g. (Space != space.reg).AssertTrue() into validation

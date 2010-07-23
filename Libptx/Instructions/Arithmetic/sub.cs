@@ -37,7 +37,7 @@ namespace Libptx.Instructions.Arithmetic
         {
             (c || cc).AssertImplies(type == s32 || type == u32);
             (c || cc).AssertImplies(sat == false);
-            (rnd != 0).AssertImplies(type.isfloat());
+            (rnd != 0).AssertImplies(type.is_float());
             (ftz == true).AssertImplies(type == f32);
             (sat == true).AssertImplies(type == s32 || type == f32);
         }
