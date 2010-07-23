@@ -62,6 +62,7 @@ namespace Libptx.Common
         protected static Type texref { get { return new Type { Name = TypeName.Texref }; } }
         protected static Type samplerref { get { return new Type { Name = TypeName.Samplerref }; } }
         protected static Type surfref { get { return new Type { Name = TypeName.Surfref }; } }
+        protected static Type ptr { get { return new Type { Name = TypeName.Ptr }; } }
 
         protected static barlevel cta { get { return barlevel.cta; } }
         protected static barlevel gl { get { return barlevel.gl; } }

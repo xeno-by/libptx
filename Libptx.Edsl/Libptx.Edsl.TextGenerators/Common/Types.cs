@@ -27,7 +27,7 @@ namespace Libptx.Edsl.TextGenerators.Common
                     return (Type)t;
                 }).Where(t => t != null).ToReadOnly();
 
-                return all.Intersect(TypeName.Pred, TypeName.Texref, TypeName.Samplerref, TypeName.Surfref).ToReadOnly();
+                return all.Intersect(TypeName.Pred, TypeName.Texref, TypeName.Samplerref, TypeName.Surfref, TypeName.Ptr).ToReadOnly();
             }
         }
 

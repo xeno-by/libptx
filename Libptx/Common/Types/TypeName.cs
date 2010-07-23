@@ -24,5 +24,6 @@ namespace Libptx.Common.Types
         [Affix("texref", SoftwareIsa.PTX_15)] Texref,
         [Affix("samplerref", SoftwareIsa.PTX_15)] Samplerref,
         [Affix("surfref", SoftwareIsa.PTX_15)] Surfref,
+        [Affix("ptr")] Ptr,
     }
 }

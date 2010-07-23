@@ -10,16 +10,17 @@ namespace Libptx.Common.Types
         [Flags]
         private enum TypeSpec
         {
-            Integer = 2,
-            Signed = 4 | Integer,
-            Unsigned = 8 | Integer,
-            Float = 16,
-            Bit = 32,
-            Opaque = 64,
-            Pred = 128 | Opaque,
-            Texref = 256 | Opaque,
-            Samplerref = 512 | Opaque,
-            Surfref = 1024 | Opaque,
+            Integer = 1,
+            Signed = 2 | Integer,
+            Unsigned = 4 | Integer,
+            Float = 8,
+            Bit = 16,
+            Opaque = 32,
+            Pred = 64 | Opaque,
+            Texref = 128 | Opaque,
+            Samplerref = 256 | Opaque,
+            Surfref = 512 | Opaque,
+            Ptr = 1024 | Opaque,
             V1 = 2048,
             V2 = 4096,
             V4 = 8192,
@@ -70,6 +71,8 @@ namespace Libptx.Common.Types
                         return TypeSpec.Samplerref;
                     case TypeName.Surfref:
                         return TypeSpec.Surfref;
+                    case TypeName.Ptr:
+                        return TypeSpec.Ptr;
                     default:
                         throw AssertionHelper.Fail();
                 }
@@ -89,6 +92,7 @@ namespace Libptx.Common.Types
         public static bool is_texref(this Type type) { return (type.spec() & TypeSpec.Texref) == TypeSpec.Texref; }
         public static bool is_samplerref(this Type type) { return (type.spec() & TypeSpec.Samplerref) == TypeSpec.Samplerref; }
         public static bool is_surfref(this Type type) { return (type.spec() & TypeSpec.Surfref) == TypeSpec.Surfref; }
+        public static bool is_ptr(this Type type) { return (type.spec() & TypeSpec.Ptr) == TypeSpec.Ptr; }
 
         public static bool is_scalar(this Type type) { return !type.is_opaque() && !type.is_vec() && !type.is_arr(); }
         public static bool is_int(this Type type) { return (type.spec() & TypeSpec.Integer) == TypeSpec.Integer; }
@@ -189,6 +193,8 @@ namespace Libptx.Common.Types
                 case TypeName.Samplerref:
                     return 0;
                 case TypeName.Surfref:
+                    return 0;
+                case TypeName.Ptr:
                     return 0;
                 default:
                     throw AssertionHelper.Fail();

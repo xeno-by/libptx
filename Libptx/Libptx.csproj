@@ -73,6 +73,7 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\cmp.cs" />
     <Compile Include="Common\Renderable.cs" />
+    <Compile Include="Common\Types\Ptr.cs" />
     <Compile Include="Common\Types\TypeNameExtensions.cs" />
     <Compile Include="Entries.cs" />
     <Compile Include="Expressions\Addressable.cs" />

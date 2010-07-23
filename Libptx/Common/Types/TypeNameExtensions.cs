@@ -30,6 +30,7 @@ namespace Libptx.Common.Types
             pool.Add(TypeName.Texref, typeof(Texref));
             pool.Add(TypeName.Samplerref, typeof(Samplerref));
             pool.Add(TypeName.Surfref, typeof(Surfref));
+            pool.Add(TypeName.Ptr, typeof(Ptr));
         }
 
         public static ClrType ClrType(this TypeName t)
