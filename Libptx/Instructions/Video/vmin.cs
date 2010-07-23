@@ -7,9 +7,9 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
 {
-    [Ptxop20("vmin.dtype.atype.btype{.sat} d, a, b;")]
-    [Ptxop20("vmin.dtype.atype.btype{.sat}.op2 d, a, b, c;")]
-    [Ptxop20("vmin.dtype.atype.btype{.sat} d.dsel, a, b, c;")]
+    [Ptxop20("vmin.dtype.atype.btype{.sat} d, a{.asel}, b{.bsel};")]
+    [Ptxop20("vmin.dtype.atype.btype{.sat}.op2 d, a{.asel}, b{.bsel}, c;")]
+    [Ptxop20("vmin.dtype.atype.btype{.sat} d.dsel, a{.asel}, b{.bsel}, c;")]
     public partial class vmin : ptxop
     {
         [Affix] public Type dtype { get; set; }

@@ -56,7 +56,12 @@ namespace Libptx.Instructions
             throw new NotImplementedException();
         }
 
-        protected virtual void custom_validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa) {}
+        protected virtual bool allow_xyzw { get { return false; } }
+        protected virtual bool allow_sel { get { return false; } }
+        protected virtual bool allow_not { get { return false; } }
+        protected virtual bool allow_neg { get { return false; } }
+        protected virtual bool allow_couple { get { return false; } }
+        protected virtual void custom_validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa) { }
         private void validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             // todo. all operands must be not null

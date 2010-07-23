@@ -7,9 +7,9 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
 {
-    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d, a, b;")]
-    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode}.op2 d, a, b, c;")]
-    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d.dsel, a, b, c;")]
+    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d, a{.asel}, b{.bsel};")]
+    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode}.op2 d, a{.asel}, b{.bsel}, c;")]
+    [Ptxop20("vshl.dtype.atype.btype{.sat}{.mode} d.dsel, a{.asel}, b{.bsel}, c;")]
     public partial class vshl : ptxop
     {
         [Affix] public Type dtype { get; set; }

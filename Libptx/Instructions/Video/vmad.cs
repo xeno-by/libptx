@@ -7,8 +7,8 @@ using XenoGears.Assertions;
 
 namespace Libptx.Instructions.Video
 {
-    [Ptxop20("vmad.dtype.atype.btype{.sat}{.scale} d, {-}a, {-}b, {-}c;")]
-    [Ptxop20("vmad.dtype.atype.btype.po{.sat}{.scale} d, a, b, c;")]
+    [Ptxop20("vmad.dtype.atype.btype{.sat}{.scale} d, {-}a{.asel}, {-}b{.asel}, {-}c;")]
+    [Ptxop20("vmad.dtype.atype.btype.po{.sat}{.scale} d, a{.asel}, b{.asel}, c;")]
     public partial class vmad : ptxop
     {
         [Affix] public Type dtype { get; set; }
