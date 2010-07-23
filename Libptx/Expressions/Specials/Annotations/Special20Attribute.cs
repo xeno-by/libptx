@@ -40,7 +40,7 @@ namespace Libptx.Expressions.Specials.Annotations
         }
 
         public Special20Attribute(String signature, Type type, SoftwareIsa softwareIsa)
-            : this(signature, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_10)
+            : this(signature, type, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_20)
         {
         }
 

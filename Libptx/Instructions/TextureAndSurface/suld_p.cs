@@ -10,7 +10,7 @@ using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop20("suld.p.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_20)]
+    [Ptxop20("suld.p.geom{.cop}.dtype.clampm    d, [a, b];")]
     [DebuggerNonUserCode]
     public partial class suld_p : ptxop
     {

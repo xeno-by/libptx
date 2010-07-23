@@ -40,7 +40,7 @@ namespace Libptx.Common.Annotations.Atoms
         }
 
         protected Atom20Attribute(String signature, SoftwareIsa softwareIsa)
-            : this(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_10)
+            : this(signature, softwareIsa.AssertThat(isa => isa >= SoftwareIsa.PTX_20), HardwareIsa.SM_20)
         {
         }
 
