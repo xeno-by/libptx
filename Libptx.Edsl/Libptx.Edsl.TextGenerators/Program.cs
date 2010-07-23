@@ -31,7 +31,13 @@ namespace Libptx.Edsl.TextGenerators
                 var dir = @"..\..\..\..\" + op.Namespace.Replace(".", @"\") + @"\";
                 var file = dir + op.Name + ".cs";
                 var text = File.ReadAllText(file);
-                if (!text.Contains("using Libptx.Common.Types;")) text = "using Libptx.Common.Types;" + Environment.NewLine + text;
+                if (!text.Contains("using Type = Libptx.Common.Types.Type;"))
+                {
+                    var liof = text.LastIndexOf("using") + 1;
+                    var next = text.IndexOf(Environment.NewLine, liof);
+                    var ins = next == -1 ? 0 : (next + Environment.NewLine.Length);
+                    text = text.Insert(ins, "using Types = Libptx.Common.Types.Type;" + Environment.NewLine);
+                }
 
                 var buf = new StringBuilder();
                 var w = new StringWriter(buf).Indented();
