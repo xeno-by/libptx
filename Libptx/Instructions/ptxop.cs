@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
+using Libptx.Expressions;
 using Libptx.Statements;
 
 namespace Libptx.Instructions
@@ -65,6 +66,21 @@ namespace Libptx.Instructions
         private void validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
             // todo. all operands must be not null
+            throw new NotImplementedException();
+        }
+
+        protected bool exact(Expression expr, Type t)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected bool agree(Expression expr, Type t)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected bool relax(Expression expr, Type t)
+        {
             throw new NotImplementedException();
         }
     }

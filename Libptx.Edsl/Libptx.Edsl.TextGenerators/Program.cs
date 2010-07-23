@@ -1,14 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Libcuda.Versions;
-using Libptx.Edsl.TextGenerators.AdHoc;
 using Libptx.Instructions;
 using System.Linq;
 using XenoGears.Functional;
 using XenoGears.Reflection.Shortcuts;
 using Libptx.Common.Annotations;
 using XenoGears.Strings;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Edsl.TextGenerators
 {
@@ -29,20 +28,10 @@ namespace Libptx.Edsl.TextGenerators
             var ops = libptx.GetTypes().Where(t => t.BaseType == typeof(ptxop)).ToReadOnly();
             foreach (var op in ops)
             {
-//                var ps = op.GetProperties(BF.PublicInstance | BF.DeclOnly);
-//                if (ps.Count(p => p.PropertyType == typeof(Type)) > 1)
-//                {
-//                    Console.WriteLine(op.Name);
-//                }
-//                var cnts = op.Signatures().Select(s => s.Count(c => c == ',')).Distinct();
-//                if (cnts.Count() > 1)
-//                {
-//                    Console.WriteLine(op.Name + ": " + cnts.StringJoin());
-//                    if (op.Name == "mad")
-//                    {
-//                        op.Signatures().ForEach(s => Console.WriteLine(s));
-//                    }
-//                }
+                var dir = @"..\..\..\..\" + op.Namespace.Replace(".", @"\") + @"\";
+                var file = dir + op.Name + ".cs";
+                var text = File.ReadAllText(file);
+                if (!text.Contains("using Libptx.Common.Types;")) text = "using Libptx.Common.Types;" + Environment.NewLine + text;
 
                 var buf = new StringBuilder();
                 var w = new StringWriter(buf).Indented();
@@ -63,19 +52,31 @@ namespace Libptx.Edsl.TextGenerators
 
                     var arg_list = s.Slice(eof + 1).Trim();
                     arg_list = arg_list.Extract("^(?<name>.*?);?$");
-                    var parsed_args = arg_list.Split(',').Select(arg =>
+                    var parsed_args = arg_list.Split(",".MkArray(), StringSplitOptions.RemoveEmptyEntries).Select(arg =>
                     {
-                        arg = arg.Trim().Extract(@"^(\})?(?<name>.*)(\{)?$");
-                        arg = arg.Trim().Extract(@"^\{(?<name>.*)\}$") ?? arg.Trim();
-                        arg = arg.Trim().Extract(@"^(\])?(?<name>.*)(\[)?$");
-                        arg = arg.Trim().Extract(@"^\[(?<name>.*)\]$") ?? arg.Trim();
-                        var parsed = arg.Trim().Parse(@"^((\{)?(?<prefix>[!-])(\})?)?(?<name>[\w\d]+)(\[\|(?<othername>[\w\d]+)\])?((\{)?\.(?<suffix>[\w\d]+)(\})?)?$");
+                        arg = arg.Trim().Replace("[", "").Replace("]", "").Replace("{", "").Replace("}", "");
+                        var parsed = arg.Trim().Parse(@"^(?<prefix>[!-])?(?<name>[\w\d]+)(\|(?<othername>[\w\d]+))?(\.(?<suffix>[\w\d]+))?$");
                         return parsed["name"];
                     }).ToReadOnly();
 
                     return parsed_args;
                 }).Distinct().ToReadOnly();
-                names.ForEach(name => w.WriteLine("public Type {0} {{ get; set; }}", name));
+                if (names.IsEmpty()) continue;
+
+                names.ForEach(name =>
+                {
+                    var decl = String.Format("public Type {0} {{ get; set; }}", name);
+                    if (text.Contains(decl))
+                    {
+                        var iof_decl = text.IndexOf(decl);
+                        iof_decl -= "        ".Length;
+                        iof_decl -= Environment.NewLine.Length * 2;
+                        var iof_brace = text.IndexOf("}", iof_decl);
+                        text = text.Remove(iof_decl, iof_brace - iof_decl + 1);
+                    }
+
+                    w.WriteLine(decl);
+                });
 
                 w.WriteLineNoTabs(String.Empty);
                 w.WriteLine("protected override void custom_validate_ops(SoftwareIsa target_swisa, HardwareIsa target_hwisa)");
@@ -89,15 +90,13 @@ namespace Libptx.Edsl.TextGenerators
                     if (props.Contains(name + "type")) prop = name + "type";
                     if (props.Contains("type")) prop = "type";
 
-                    w.WriteLine("({0} == {1}).AssertTrue();", name, prop);
+                    w.WriteLine("agree({0}, {1}).AssertTrue();", name, prop);
                 });
                 w.Indent--;
-                w.WriteLine("}");
+                w.Write("}");
 
-                var dir = @"..\..\..\..\" + op.Namespace.Replace(".", @"\") + @"\";
-                var file = dir + op.Name + ".cs";
-                var text = File.ReadAllText(file);
-                var iof = text.IndicesOf(c => c == '}').ThirdLast();
+                var iof = text.IndicesOf(c => c == '}').ThirdLastOrDefault(-1);
+                if (iof == -1) continue;
                 text = text.Insert(iof + 1, buf.ToString());
                 File.WriteAllText(file, text);
             }
