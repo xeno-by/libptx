@@ -66,6 +66,9 @@ namespace Libptx.Edsl.TextGenerators
                     var parsed_args = arg_list.Split(',').Select(arg =>
                     {
                         arg = arg.Trim().Extract(@"^(\})?(?<name>.*)(\{)?$");
+                        arg = arg.Trim().Extract(@"^\{(?<name>.*)\}$") ?? arg.Trim();
+                        arg = arg.Trim().Extract(@"^(\])?(?<name>.*)(\[)?$");
+                        arg = arg.Trim().Extract(@"^\[(?<name>.*)\]$") ?? arg.Trim();
                         var parsed = arg.Trim().Parse(@"^((\{)?(?<prefix>[!-])(\})?)?(?<name>[\w\d]+)(\[\|(?<othername>[\w\d]+)\])?((\{)?\.(?<suffix>[\w\d]+)(\})?)?$");
                         return parsed["name"];
                     }).ToReadOnly();
@@ -91,11 +94,11 @@ namespace Libptx.Edsl.TextGenerators
                 w.Indent--;
                 w.WriteLine("}");
 
-                var dir = @"..\..\..\..\Libptx\" + op.Namespace.Replace(".", @"\") + @"\";
+                var dir = @"..\..\..\..\" + op.Namespace.Replace(".", @"\") + @"\";
                 var file = dir + op.Name + ".cs";
                 var text = File.ReadAllText(file);
                 var iof = text.IndicesOf(c => c == '}').ThirdLast();
-                text = text.Insert(iof, buf.ToString());
+                text = text.Insert(iof + 1, buf.ToString());
                 File.WriteAllText(file, text);
             }
         }
