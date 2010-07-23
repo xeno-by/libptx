@@ -9,12 +9,9 @@ using XenoGears.Assertions;
 namespace Libptx.Instructions.TextureAndSurface
 {
     [Ptxop20("sured.b.op.geom.ctype.clampm [a,b],c;")]
-    [Ptxop20("sured.p.op.geom.ctype.clampm [a,b],c;")]
     [DebuggerNonUserCode]
-    public partial class sured : ptxop
+    public partial class sured_b : ptxop
     {
-        [Affix] public bool b { get; set; }
-        [Affix] public bool p { get; set; }
         [Affix] public op op { get; set; }
         [Affix] public geom geom { get; set; }
         [Affix] public Type ctype { get; set; }
@@ -26,10 +23,8 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override bool allow_bit64 { get { return true; } }
         protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
         {
-            (b || p).AssertTrue();
             (geom != 0).AssertTrue();
-            (b == true).AssertImplies(ctype == b32);
-            (p == true).AssertImplies(ctype.is32());
+            (ctype == b32).AssertTrue();
             (op == add || op == min || op == max || op == and || op == or || op == xor).AssertTrue();
         }
     }

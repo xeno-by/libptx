@@ -56,7 +56,8 @@ namespace Libptx.Instructions
         suld_b,
         suld_p,
         suq,
-        sured,
+        sured_b,
+        sured_p,
         sust_b,
         sust_p,
         testp,
@@ -520,9 +521,17 @@ namespace Libptx.Instructions.TextureAndSurface
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    public partial class sured
+    public partial class sured_b
     {
-        public override ptxoptype discr { get { return ptxoptype.sured; } }
+        public override ptxoptype discr { get { return ptxoptype.sured_b; } }
+    }
+}
+
+namespace Libptx.Instructions.TextureAndSurface
+{
+    public partial class sured_p
+    {
+        public override ptxoptype discr { get { return ptxoptype.sured_p; } }
     }
 }
 
