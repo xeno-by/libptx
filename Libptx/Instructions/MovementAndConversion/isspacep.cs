@@ -4,6 +4,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
@@ -13,9 +14,18 @@ namespace Libptx.Instructions.MovementAndConversion
     {
         [Affix] public space space { get; set; }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (space == local || space == shared || space == global).AssertTrue();
+        }
+
+        public Expression p { get; set; }
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(p, pred).AssertTrue();
+            (agree(a, u32) || agree(a, u64)).AssertTrue();
         }
     }
 }

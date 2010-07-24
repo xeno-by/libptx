@@ -5,6 +5,7 @@ namespace Libptx.Expressions
     public enum VarMod
     {
         [Prefix("!")] Not = 1,
+        [Infix("|")] Couple,
         [Prefix("-")] Neg,
         [Affix("b0")] B0,
         [Affix("b1")] B1,

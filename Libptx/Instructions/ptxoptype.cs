@@ -7,11 +7,13 @@ namespace Libptx.Instructions
         and,
         atom,
         bar_arrive,
-        bar_red,
+        bar_red_pred,
+        bar_red_u32,
         bar_sync,
         bfe,
         bfi,
         bfind,
+        bra,
         brev,
         brkpt,
         clz,
@@ -20,8 +22,10 @@ namespace Libptx.Instructions
         cos,
         cvt,
         cvta,
+        cvta_to,
         div,
         ex2,
+        exit,
         fma,
         isspacep,
         ld,
@@ -46,6 +50,7 @@ namespace Libptx.Instructions
         sad,
         selp,
         set,
+        setp,
         shl,
         shr,
         sin,
@@ -129,9 +134,17 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    public partial class bar_red
+    public partial class bar_red_pred
     {
-        public override ptxoptype discr { get { return ptxoptype.bar_red; } }
+        public override ptxoptype discr { get { return ptxoptype.bar_red_pred; } }
+    }
+}
+
+namespace Libptx.Instructions.SynchronizationAndCommunication
+{
+    public partial class bar_red_u32
+    {
+        public override ptxoptype discr { get { return ptxoptype.bar_red_u32; } }
     }
 }
 
@@ -164,6 +177,14 @@ namespace Libptx.Instructions.Arithmetic
     public partial class bfind
     {
         public override ptxoptype discr { get { return ptxoptype.bfind; } }
+    }
+}
+
+namespace Libptx.Instructions.ControlFlow
+{
+    public partial class bra
+    {
+        public override ptxoptype discr { get { return ptxoptype.bra; } }
     }
 }
 
@@ -231,6 +252,14 @@ namespace Libptx.Instructions.MovementAndConversion
     }
 }
 
+namespace Libptx.Instructions.MovementAndConversion
+{
+    public partial class cvta_to
+    {
+        public override ptxoptype discr { get { return ptxoptype.cvta_to; } }
+    }
+}
+
 namespace Libptx.Instructions.Arithmetic
 {
     public partial class div
@@ -244,6 +273,14 @@ namespace Libptx.Instructions.Arithmetic
     public partial class ex2
     {
         public override ptxoptype discr { get { return ptxoptype.ex2; } }
+    }
+}
+
+namespace Libptx.Instructions.ControlFlow
+{
+    public partial class exit
+    {
+        public override ptxoptype discr { get { return ptxoptype.exit; } }
     }
 }
 
@@ -436,6 +473,14 @@ namespace Libptx.Instructions.ComparisonAndSelection
     public partial class set
     {
         public override ptxoptype discr { get { return ptxoptype.set; } }
+    }
+}
+
+namespace Libptx.Instructions.ComparisonAndSelection
+{
+    public partial class setp
+    {
+        public override ptxoptype discr { get { return ptxoptype.setp; } }
     }
 }
 

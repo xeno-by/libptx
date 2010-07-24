@@ -145,9 +145,6 @@ namespace Libptx.Common
         protected static scale shr7 { get { return scale.shr7; } }
         protected static scale shr15 { get { return scale.shr15; } }
 
-        protected static size sz32 { get { return size.sz32; } }
-        protected static size sz64 { get { return size.sz64; } }
-
         protected static space reg { get { return space.reg; } }
         protected static space sreg { get { return space.sreg; } }
         protected static space local { get { return space.local; } }

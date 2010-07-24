@@ -37,8 +37,8 @@ namespace Libptx.Edsl.Playground.Emit
             // if (A.height <= row || B.width <= col) return;
            .ld.param(b_width, b + 0)
            .ld.param(a_height, a + 4)
-           .set.le(p6, a_height, row)
-           .set.le(p7, b_width, col)
+           .setp.le(p6, a_height, row)
+           .setp.le(p7, b_width, col)
            .or(p1, p6, p7)
            .@(p1).bra(exit)
 
@@ -48,7 +48,7 @@ namespace Libptx.Edsl.Playground.Emit
            // for (int dim = 0; dim < A.width; ++dim)
            .ld.param(a_width, a + 0)
            .mov(dim, 0)
-           .set.le(p2|p8, a_width, dim)
+           .setp.le(p2|p8, a_width, dim)
            .@(!p8).bra(after_loop)
 
            // Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];
@@ -71,7 +71,7 @@ namespace Libptx.Edsl.Playground.Emit
            .mad(cvalue, f3, f2, cvalue)
            .add(a_offset, a_offset, 4)
            .add(b_offset, b_offset, b_offset_stride)
-           .set.ne(p3, a_offset, a_offset_hi)
+           .setp.ne(p3, a_offset, a_offset_hi)
            .@(p2).bra(loop_body)
            .bra_uni(after_loop)
 

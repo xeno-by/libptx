@@ -5,6 +5,7 @@ using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
@@ -24,9 +25,24 @@ namespace Libptx.Instructions.TextureAndSurface
             }
         }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
+            (tquery != 0).AssertTrue();
             (type == b32).AssertTrue();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, type).AssertTrue();
+            (agree(a, texref) || agree(a, samplerref)).AssertTrue();
+
+            var is_tex_query = (tquery == tex_width || tquery == tex_height || tquery == tex_depth || tquery == tex_channel_datatype || tquery == tex_channel_order || tquery == tex_normalized_coords);
+            var is_sampler_query = (tquery == tex_filter_mode || tquery == tex_addr_mode_0 || tquery == tex_addr_mode_1 || tquery == tex_addr_mode_2);
+            is_tex_query.AssertImplies(agree(a, texref));
+            is_sampler_query.AssertImplies(agree(a, samplerref) || (ctx.UnifiedTexturing && agree(a, texref)));
         }
     }
 }

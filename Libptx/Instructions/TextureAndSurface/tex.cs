@@ -18,15 +18,28 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public Type dtype { get; set; }
         [Affix] public Type btype { get; set; }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (geom != 0).AssertTrue();
             (dtype.is32() && dtype.is_v4()).AssertTrue();
             (btype == s32 || btype == f32).AssertTrue();
+        }
 
-            // todo. implement this:
-            // Extension using opaque texref and samplerref types and independent mode texturing
-            // introduced in PTX ISA version 1.5 (an excerpt from PTX ISA 2.1 manual)
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+        public Expression c { get; set; }
+        public Expression b { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, dtype).AssertTrue();
+            agree(a, texref).AssertTrue();
+            agree_or_null(b, samplerref).AssertTrue();
+            (b != null).AssertImplies(!ctx.UnifiedTexturing);
+            if (geom == d1) (agree(c, btype) || agree(c, btype.v1) || agree(c, btype.v4)).AssertTrue();
+            else if (geom == d2) (agree(c, btype.v2) || agree(c, btype.v4)).AssertTrue();
+            else if (geom == d3) agree(c, btype.v4).AssertTrue();
+            else throw AssertionHelper.Fail();
         }
     }
 }

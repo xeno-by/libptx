@@ -4,6 +4,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.LogicAndShift
 {
@@ -17,9 +18,18 @@ namespace Libptx.Instructions.LogicAndShift
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             type.is_bit().AssertTrue();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, type).AssertTrue();
+            agree(a, type).AssertTrue();
         }
     }
 }

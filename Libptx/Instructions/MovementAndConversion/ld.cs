@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
@@ -6,6 +7,7 @@ using Libptx.Instructions.Annotations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
@@ -46,7 +48,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
         protected override bool allow_vec { get { return true; } }
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (u == true).AssertImplies(ss == 0 || ss == global);
             (u == true).AssertImplies(@volatile == false);
@@ -54,6 +56,16 @@ namespace Libptx.Instructions.MovementAndConversion
             (@volatile == true).AssertEquiv(cop == 0);
             (cop == 0 || cop == ca || cop == cg || cop == cs || cop == lu || cop == cv).AssertTrue();
             type.is_v1().AssertFalse();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+
+        protected override bool allow_ptr { get { return true; } }
+        protected override void custom_validate_operands(Module ctx)
+        {
+            (relax(d, type) && is_reg(d)).AssertTrue();
+            is_ptr(a, ss).AssertTrue();
         }
     }
 }

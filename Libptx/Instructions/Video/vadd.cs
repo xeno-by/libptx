@@ -4,6 +4,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.Video
 {
@@ -18,12 +19,36 @@ namespace Libptx.Instructions.Video
         [Affix] public bool sat { get; set; }
         [Affix] public op op2 { get; set; }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (dtype == s32 || dtype == u32).AssertTrue();
             (atype == s32 || atype == u32).AssertTrue();
             (btype == s32 || btype == u32).AssertTrue();
             (op2 == 0 || op2 == add || op2 == min || op2 == max).AssertTrue();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+        public Expression b { get; set; }
+        public Expression c { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            var datamerge = op2 == 0 && c != null;
+            if (datamerge)
+            {
+                agree(d, dtype, exact(sel)).AssertTrue();
+                agree(a, atype, sel).AssertTrue();
+                agree(b, btype, sel).AssertTrue();
+                agree(c, dtype).AssertTrue();
+            }
+            else
+            {
+                agree(d, dtype).AssertTrue();
+                agree(a, atype, sel).AssertTrue();
+                agree(b, btype, sel).AssertTrue();
+                agree_or_null(c, dtype).AssertTrue();
+            }
         }
     }
 }

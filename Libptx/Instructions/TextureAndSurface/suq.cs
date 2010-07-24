@@ -5,6 +5,7 @@ using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
@@ -24,10 +25,19 @@ namespace Libptx.Instructions.TextureAndSurface
             }
         }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (query != 0).AssertTrue();
             (type == b32).AssertTrue();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, type).AssertTrue();
+            agree(a, surfref).AssertTrue();
         }
     }
 }

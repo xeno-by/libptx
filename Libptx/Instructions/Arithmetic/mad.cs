@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
@@ -7,6 +6,7 @@ using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type = Libptx.Common.Types.Type;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.Arithmetic
 {
@@ -36,7 +36,7 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (is24 == true).AssertImplies(type == s32 || type == u32);
             (mode != 0).AssertImplies(type.is_int());
@@ -47,8 +47,21 @@ namespace Libptx.Instructions.Arithmetic
             (sat == true).AssertImplies(type == s32 || type == f32);
             (sat == true && type.is_int()).AssertImplies(mode == mulm_hi);
 
-            (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(rnd != 0);
-            (target_hwisa >= HardwareIsa.SM_20 && type == f32).AssertImplies(rnd != 0);
+            (ctx.Version >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(rnd != 0);
+            (ctx.Target >= HardwareIsa.SM_20 && type == f32).AssertImplies(rnd != 0);
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+        public Expression b { get; set; }
+        public Expression c { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, type).AssertTrue();
+            agree(a, type).AssertTrue();
+            agree(b, type).AssertTrue();
+            agree(c, type).AssertTrue();
         }
     }
 }

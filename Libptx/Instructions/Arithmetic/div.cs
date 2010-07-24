@@ -5,6 +5,7 @@ using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.Arithmetic
 {
@@ -32,7 +33,7 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (approx == true).AssertImplies(type == f32);
             (full == true).AssertImplies(type == f32);
@@ -40,7 +41,18 @@ namespace Libptx.Instructions.Arithmetic
             (rnd != 0).AssertEquiv(!approx && !full && type.is_float());
             (ftz == true).AssertImplies(type == f32);
 
-            (target_swisa >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(approx || full || rnd != 0);
+            (ctx.Version >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(approx || full || rnd != 0);
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+        public Expression b { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, type).AssertTrue();
+            agree(a, type).AssertTrue();
+            agree(b, type).AssertTrue();
         }
     }
 }

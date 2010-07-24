@@ -4,6 +4,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
@@ -16,10 +17,18 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix] public space space { get; set; }
         [Affix] public cachelevel level { get; set; }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (u == true).AssertEquiv(space == 0 && level == L1);
-            (space == local || space == global).AssertTrue();
+            (space == 0 || space == local || space == global).AssertTrue();
+            (level == L1 || level == L2).AssertTrue();
+        }
+
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(a, ptr).AssertTrue();
         }
     }
 }

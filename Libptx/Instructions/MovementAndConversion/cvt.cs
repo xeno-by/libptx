@@ -5,6 +5,7 @@ using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
@@ -22,7 +23,7 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override bool allow_int8 { get { return true; } }
         protected override bool allow_float16 { get { return true; } }
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             var i2i = atype.is_int() && dtype.is_int();
             var i2f = atype.is_int() && dtype.is_float();
@@ -33,6 +34,15 @@ namespace Libptx.Instructions.MovementAndConversion
             (irnd != 0).AssertImplies(f2i || f2f);
             (frnd != 0).AssertImplies(i2f || f2f);
             (irnd != 0 && frnd != 0).AssertFalse();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            relax(d, dtype).AssertTrue();
+            relax(a, atype).AssertTrue();
         }
     }
 }

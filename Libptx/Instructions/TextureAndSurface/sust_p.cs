@@ -6,6 +6,7 @@ using Libptx.Common.Enumerations;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type = Libptx.Common.Types.Type;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
@@ -22,11 +23,25 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (geom != 0).AssertTrue();
             (cop == 0 || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
             (ctype.is32() && ctype.is_v4()).AssertTrue();
+        }
+
+        public Expression a { get; set; }
+        public Expression b { get; set; }
+        public Expression c { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(a, surfref).AssertTrue();
+            if (geom == d1) (agree(b, s32) || agree(b, s32.v1)).AssertTrue();
+            else if (geom == d2) agree(b, s32.v2).AssertTrue();
+            else if (geom == d3) agree(b, s32.v4).AssertTrue();
+            else throw AssertionHelper.Fail();
+            agree(c, ctype).AssertTrue();
         }
     }
 }

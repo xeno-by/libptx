@@ -3,6 +3,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
+using Libptx.Expressions;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
@@ -11,9 +12,18 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     {
         [Affix] public redm mode { get; set; }
 
-        protected override void custom_validate_opcode(SoftwareIsa target_swisa, HardwareIsa target_hwisa)
+        protected override void custom_validate_opcode(Module ctx)
         {
             (mode != 0).AssertTrue();
+        }
+
+        public Expression d { get; set; }
+        public Expression a { get; set; }
+
+        protected override void custom_validate_operands(Module ctx)
+        {
+            agree(d, pred).AssertTrue();
+            agree(a, pred, not).AssertTrue();
         }
     }
 }

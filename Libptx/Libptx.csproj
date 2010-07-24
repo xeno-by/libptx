@@ -65,7 +65,6 @@
     <Compile Include="Common\Enumerations\prmtm.cs" />
     <Compile Include="Common\Enumerations\redm.cs" />
     <Compile Include="Common\Enumerations\scale.cs" />
-    <Compile Include="Common\Enumerations\size.cs" />
     <Compile Include="Common\Enumerations\squery.cs" />
     <Compile Include="Common\Enumerations\test.cs" />
     <Compile Include="Common\Enumerations\tquery.cs" />
@@ -108,7 +107,6 @@
     <Compile Include="Common\Atom.cs" />
     <Compile Include="Expressions\Const.Core.cs" />
     <Compile Include="Expressions\Const.Dsl.cs" />
-    <Compile Include="Expressions\VarCouple.cs" />
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Common\Types\Type.Core.cs" />
     <Compile Include="Common\Types\TypeName.cs" />
@@ -150,12 +148,16 @@
     <Compile Include="Instructions\Arithmetic\sqrt.cs" />
     <Compile Include="Instructions\Arithmetic\sub.cs" />
     <Compile Include="Instructions\Arithmetic\testp.cs" />
+    <Compile Include="Instructions\ComparisonAndSelection\setp.cs" />
     <Compile Include="Instructions\ComparisonAndSelection\selp.cs" />
     <Compile Include="Instructions\ComparisonAndSelection\set.cs" />
     <Compile Include="Instructions\ComparisonAndSelection\slct.cs" />
+    <Compile Include="Instructions\ControlFlow\bra.cs" />
+    <Compile Include="Instructions\ControlFlow\exit.cs" />
     <Compile Include="Instructions\Miscellaneous\brkpt.cs" />
     <Compile Include="Instructions\Miscellaneous\pmevent.cs" />
     <Compile Include="Instructions\Miscellaneous\trap.cs" />
+    <Compile Include="Instructions\MovementAndConversion\cvta_to.cs" />
     <Compile Include="Instructions\MovementAndConversion\cvt.cs" />
     <Compile Include="Instructions\MovementAndConversion\cvta.cs" />
     <Compile Include="Instructions\MovementAndConversion\isspacep.cs" />
@@ -174,8 +176,9 @@
     <Compile Include="Instructions\ptxoptype.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\bar_arrive.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\atom.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red_u32.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\bar_sync.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red_pred.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\vote_pred.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\red.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\membar.cs" />
