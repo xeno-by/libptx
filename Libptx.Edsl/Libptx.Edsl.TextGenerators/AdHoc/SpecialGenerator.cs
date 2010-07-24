@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Text;
+using Libcuda.Versions;
+using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Expressions.Specials.Annotations;
 using XenoGears.Functional;
@@ -8,6 +10,7 @@ using XenoGears.Strings;
 using System.Linq;
 using Libptx.Edsl.TextGenerators.Common;
 using XenoGears.Reflection.Attributes;
+using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Edsl.TextGenerators.AdHoc
 {
@@ -35,8 +38,25 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 w.WriteLine("{");
                 w.Indent++;
 
-                var type = t.Attr<SpecialAttribute>().Type;
-                w.EmitTypeSpec(t.Name, type, Space.Other);
+                var xid = t.Name == "tid" || t.Name == "ntid" || t.Name == "ctaid" || t.Name == "nctaid";
+                if (xid)
+                {
+                    var post_20 = Context.Current.Version >= SoftwareIsa.PTX_20;
+                    if (post_20)
+                    {
+                        w.EmitTypeSpec(t.Name, new Type { Name = TypeName.U16, Mod = TypeMod.V4 }, Space.Other);
+                        w.EmitTypeSpec(t.Name, new Type { Name = TypeName.U32, Mod = TypeMod.V4 }, Space.Other);
+                    }
+                    else
+                    {
+                        w.EmitTypeSpec(t.Name, new Type { Name = TypeName.U16, Mod = TypeMod.V4 }, Space.Other);
+                    }
+                }
+                else
+                {
+                    var type = t.Attr<SpecialAttribute>().Type;
+                    w.EmitTypeSpec(t.Name, type, Space.Other);
+                }
 
                 // todo. also emit same stuff as gets emitted for non-reg vars of appropriate type
                 // e.g. .x, .y, .z accessors for grid-related special registers

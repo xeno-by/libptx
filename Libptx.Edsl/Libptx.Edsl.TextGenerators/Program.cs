@@ -12,7 +12,9 @@ namespace Libptx.Edsl.TextGenerators
             {
                 PtxoptypeGenerator.DoGenerate();
                 SpecialtypeGenerator.DoGenerate();
-                PtxopGenerator.DoGenerate();
+
+                // uncommenting and running this will kill all the customizations!
+//                PtxopGenerator.DoGenerate();
 
                 TypeGenerator.DoGenerate();
                 SpecialGenerator.DoGenerate();
