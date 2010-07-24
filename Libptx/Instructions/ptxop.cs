@@ -5,6 +5,7 @@ using Libcuda.Versions;
 using Libptx.Common.Enumerations;
 using Libptx.Expressions;
 using Libptx.Statements;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions
 {
@@ -119,6 +120,7 @@ namespace Libptx.Instructions
 
         protected bool is_reg(Expression expr)
         {
+            // todo. inline vectors are always reg!
             // todo. no mods are allowed here regardless of allow_XXX
             throw new NotImplementedException();
         }

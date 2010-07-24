@@ -1,5 +1,4 @@
-using System;
-using Libcuda.Versions;
+using Libptx.Common.Types;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;

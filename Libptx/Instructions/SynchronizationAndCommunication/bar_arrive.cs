@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Libcuda.Versions;
 using Libptx.Instructions.Annotations;
 using Libptx.Expressions;
 using XenoGears.Assertions;

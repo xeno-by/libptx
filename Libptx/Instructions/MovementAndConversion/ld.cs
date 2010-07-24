@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;

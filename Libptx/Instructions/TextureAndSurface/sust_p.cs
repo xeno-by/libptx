@@ -3,7 +3,6 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
-using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type = Libptx.Common.Types.Type;
 using Libptx.Expressions;
@@ -23,6 +22,7 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
+        protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(Module ctx)
         {
             (geom != 0).AssertTrue();

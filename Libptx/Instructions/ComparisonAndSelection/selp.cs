@@ -3,7 +3,6 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libptx.Expressions;
-using Libcuda.Versions;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions.ComparisonAndSelection

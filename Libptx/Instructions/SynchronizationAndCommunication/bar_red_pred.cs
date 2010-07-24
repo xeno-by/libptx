@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;

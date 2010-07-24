@@ -1,4 +1,3 @@
-using System;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
@@ -57,7 +56,8 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
             (agree(d, type) && is_reg(d)).AssertTrue();
             is_ptr(a, space != 0 ? space : (global | shared)).AssertTrue();
             (agree(b, type) && is_reg(b)).AssertTrue();
-            (agree(c, type) && is_reg(c)).AssertTrue();
+            (c == null || (agree(c, type) && is_reg(c))).AssertTrue();
+            (c != null).AssertImplies(op == cas);
         }
     }
 }

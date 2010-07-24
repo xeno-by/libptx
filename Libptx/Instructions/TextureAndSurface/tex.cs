@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -18,6 +17,7 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public Type dtype { get; set; }
         [Affix] public Type btype { get; set; }
 
+        protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(Module ctx)
         {
             (geom != 0).AssertTrue();

@@ -87,6 +87,9 @@ namespace Libptx
         void Validatable.Validate(Module ctx) { (ctx == this).AssertTrue(); Validate(); }
         public void Validate()
         {
+            // todo. 128 textures uni mode, 16 samplers non-uni
+            // todo. what's the max amount of surfaces?
+
             (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 

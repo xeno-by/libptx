@@ -1,4 +1,3 @@
-using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
