@@ -48,6 +48,7 @@ namespace Libptx.Instructions.Arithmetic
         {
             (rnd != 0).AssertEquiv(!approx);
             (rnd != 0 && type == f64).AssertImplies(approx == false);
+            (rnd != 0 && type == f64).AssertImplies(ftz == false);
             type.is_float().AssertTrue();
 
             (ctx.Version >= SoftwareIsa.PTX_14 && type == f64).AssertImplies(approx || rnd != 0);

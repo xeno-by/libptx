@@ -19,10 +19,7 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public Type dtype { get; set; }
         [Affix] public clampm clampm { get; set; }
 
-        protected override bool allow_bit8 { get { return true; } }
-        protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
-        protected override bool allow_bit64 { get { return true; } }
         protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(Module ctx)
         {

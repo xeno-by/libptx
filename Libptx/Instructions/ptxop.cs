@@ -55,8 +55,7 @@ namespace Libptx.Instructions
         protected virtual void custom_validate_opcode(Module ctx) { }
         private void validate_opcode(Module ctx)
         {
-            // todo. all types must be not null
-            // todo. now what about optional types?
+            // todo. verify nullity vs optional types?!
             // todo. verify all restrictions for types (i mean, allow_*)
             throw new NotImplementedException();
         }
@@ -66,8 +65,7 @@ namespace Libptx.Instructions
         protected virtual void custom_validate_operands(Module ctx) { }
         private void validate_operands(Module ctx)
         {
-            // todo. all operands must be not null
-            // todo. now what about optional operands?
+            // todo. don't verify nullity - custom validation will uncover those if they are present
             // todo. verify all restrictions for operands (i mean, allow_*)
             // todo. constants are treated as regs
             // todo. also verify count of Operands collection!

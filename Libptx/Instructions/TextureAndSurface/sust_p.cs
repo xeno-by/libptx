@@ -19,16 +19,13 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public Type ctype { get; set; }
         [Affix] public clampm clampm { get; set; }
 
-        protected override bool allow_bit8 { get { return true; } }
-        protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
-        protected override bool allow_bit64 { get { return true; } }
         protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(Module ctx)
         {
             (geom != 0).AssertTrue();
             (cop == 0 || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
-            (ctype.is32() && ctype.is_v4()).AssertTrue();
+            (ctype.is32() && (ctype.is_scalar() || ctype.is_v2() || ctype.is_v4())).AssertTrue();
         }
 
         sust_p() { 1.UpTo(3).ForEach(_ => Operands.Add(null)); }

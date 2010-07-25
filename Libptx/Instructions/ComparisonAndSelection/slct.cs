@@ -23,6 +23,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
 
         protected override void custom_validate_opcode(Module ctx)
         {
+            (ftz == true).AssertImplies(ctype == f32);
             (ctype == s32 || ctype == f32).AssertTrue();
         }
 

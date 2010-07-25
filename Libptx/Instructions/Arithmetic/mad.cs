@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
@@ -8,16 +9,17 @@ using XenoGears.Assertions;
 using Type = Libptx.Common.Types.Type;
 using Libptx.Expressions;
 using XenoGears.Functional;
+using XenoGears.Strings;
 
 namespace Libptx.Instructions.Arithmetic
 {
-    [Ptxop("mad{.mode}.type         d, a, b, c;")]
-    [Ptxop("mad.hi.sat.s32          d, a, b, c;")]
-    [Ptxop("mad24{.hi,.lo}.type     d, a, b, c;")]
-    [Ptxop("mad24.hi.sat.s32        d, a, b, c;")]
-    [Ptxop("mad{.ftz}{.sat}.f32     d, a, b, c;")]
-    [Ptxop("mad.rnd{.ftz}{.sat}.f32 d, a, b, c;")]
-    [Ptxop("mad.rnd.f64             d, a, b, c;")]
+    [Ptxop("mad{.hi,.lo,.wide}.type     d, a, b, c;")]
+    [Ptxop("mad.hi.sat.s32              d, a, b, c;")]
+    [Ptxop("mad24{.hi,.lo}.type         d, a, b, c;")]
+    [Ptxop("mad24.hi.sat.s32            d, a, b, c;")]
+    [Ptxop("mad{.ftz}{.sat}.f32         d, a, b, c;")]
+    [Ptxop("mad.rnd{.ftz}{.sat}.f32     d, a, b, c;")]
+    [Ptxop("mad.rnd.f64                 d, a, b, c;")]
     [DebuggerNonUserCode]
     public partial class mad : ptxop
     {
@@ -60,10 +62,25 @@ namespace Libptx.Instructions.Arithmetic
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(d, type).AssertTrue();
-            agree(a, type).AssertTrue();
-            agree(b, type).AssertTrue();
-            agree(c, type).AssertTrue();
+            if (mode == wide)
+            {
+                var s_typename = type.Name.ToString();
+                var s_twice_typename = s_typename.Slice(0, 1) + int.Parse(s_typename.Slice(1)) * 2;
+                var twice_typename = (TypeName)Enum.Parse(typeof(TypeName), s_twice_typename);
+                var twice_type = new Type { Name = twice_typename, Mod = type.Mod, Dims = type.Dims };
+
+                agree(d, twice_type).AssertTrue();
+                agree(a, type).AssertTrue();
+                agree(b, type).AssertTrue();
+                agree(c, twice_type).AssertTrue();
+            }
+            else
+            {
+                agree(d, type).AssertTrue();
+                agree(a, type).AssertTrue();
+                agree(b, type).AssertTrue();
+                agree(c, type).AssertTrue();
+            }
         }
     }
 }

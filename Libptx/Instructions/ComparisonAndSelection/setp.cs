@@ -25,6 +25,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
         protected override void custom_validate_opcode(Module ctx)
         {
             (boolop == 0 || boolop == and || boolop == or || boolop == xor).AssertTrue();
+            (ftz == true).AssertImplies(type == f32);
         }
 
         setp() { 1.UpTo(4).ForEach(_ => Operands.Add(null)); }
