@@ -2,23 +2,13 @@
 
 9) bidirectional transformation: [plain text] <=> [object model]
 10) stubs for bidirectional transformation: [binary] <=> [object model]
-11) e-DSL notions:
- * state-modifying props for Var and Type (e.g. foo.h0)
- * the latter includes also operators ! and - for Vars and, generally, where appropriate
- * [] for Addressable
- * Addressable -> Address shortcut, e.g. the "addr()" method or property
- * + and - operators for Addressable and Address
- * Ret prop for Callable (which is implemented as AssertSingle, of course)
- * u/d casts where appropriate: T <-> Type, T <-> String and so on
- * shortcuts for specials, instructions, directives: ctors, static methods, extensions ala ILTrait, whatever
 12) implement tostrings for all
 13) add readme.txt (similarly as for Libcuda)
 14) todo for readme.txt: 2.0 ABI is not implemented
 15) todo for readme.txt: variadic functions are not implemented
 16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype)
-17) todo for readme.txt: old-style texturing (kinda moot point, since new versions of PTX texturing support all hardware targets)
 19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
-20) initializers for text, sampler and surf constants
+20) initializers for texref, samplerref and surfref constants
 21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
 22) move all asserts, e.g. (Space != space.reg).AssertTrue() into validation
 23) todo for readme.txt: bit buckets - too much work finding out what instructions support them

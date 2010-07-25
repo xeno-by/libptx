@@ -89,6 +89,7 @@ namespace Libptx
         {
             // todo. 128 textures uni mode, 16 samplers non-uni
             // todo. what's the max amount of surfaces?
+            // todo. backwards compatibility for textures!
 
             (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);

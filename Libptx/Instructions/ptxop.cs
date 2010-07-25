@@ -70,6 +70,7 @@ namespace Libptx.Instructions
             // todo. now what about optional operands?
             // todo. verify all restrictions for operands (i mean, allow_*)
             // todo. constants are treated as regs
+            // todo. also verify count of Operands collection!
             throw new NotImplementedException();
         }
 

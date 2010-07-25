@@ -7,6 +7,7 @@ using Libcuda.Versions;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 using Libptx.Expressions;
+using XenoGears.Functional;
 
 namespace Libptx.Instructions.MovementAndConversion
 {
@@ -57,8 +58,9 @@ namespace Libptx.Instructions.MovementAndConversion
             type.is_v1().AssertFalse();
         }
 
-        public Expression d { get; set; }
-        public Expression a { get; set; }
+        ld() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
+        public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
+        public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
 
         protected override bool allow_ptr { get { return true; } }
         protected override void custom_validate_operands(Module ctx)

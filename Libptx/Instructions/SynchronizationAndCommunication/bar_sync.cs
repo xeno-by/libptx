@@ -3,6 +3,7 @@ using Libcuda.Versions;
 using Libptx.Instructions.Annotations;
 using Libptx.Expressions;
 using XenoGears.Assertions;
+using XenoGears.Functional;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
@@ -28,16 +29,9 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
             }
         }
 
-        protected override void custom_validate_opcode(Module ctx)
-        {
-            // todo. implement the following:
-            // Operands a, b, and d have type .u32; operands p and c are predicates.
-            // Register operands, thread count ... introduced in PTX ISA version 2.0.
-            // Register operands, thread count ... require sm_20 or later.
-        }
-
-        public Expression a { get; set; }
-        public Expression b { get; set; }
+        bar_sync() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
+        public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
+        public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 
         protected override void custom_validate_operands(Module ctx)
         {

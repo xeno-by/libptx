@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
+using XenoGears.Functional;
 
 namespace Libptx.Instructions.ControlFlow
 {
@@ -12,7 +13,8 @@ namespace Libptx.Instructions.ControlFlow
     {
         [Affix] public new bool uni { get; set; }
 
-        public Expression tgt { get; set; }
+        bra() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
+        public Expression tgt { get { return Operands[0]; } set { Operands[0] = value; } }
 
         protected override bool allow_ptr { get { return true; } }
         protected override void custom_validate_operands(Module ctx)

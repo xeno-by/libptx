@@ -6,7 +6,6 @@ namespace Libptx.Statements
 {
     public abstract class Instruction : Atom, Statement
     {
-        // todo. override this in concrete instructions with var_pred/var_couple
         public Var Guard { get; set; } // may be null
 
         private IList<Expression> _operands = new List<Expression>();
