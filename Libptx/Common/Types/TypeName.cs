@@ -15,7 +15,7 @@ namespace Libptx.Common.Types
         [Affix("s64")] S64,
         [Affix("f16")] F16,
         [Affix("f32")] F32,
-        [Affix("f64", SoftwareIsa.PTX_14, HardwareIsa.SM_13)] F64,
+        [Affix("f64")] F64,
         [Affix("b8")] B8,
         [Affix("b16")] B16,
         [Affix("b32")] B32,
