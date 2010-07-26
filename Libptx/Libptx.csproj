@@ -92,7 +92,6 @@
     <Compile Include="Expressions\Immediate\WarpSz.cs" />
     <Compile Include="Expressions\Slots\Slot.cs" />
     <Compile Include="Expressions\Modded.cs" />
-    <Compile Include="Expressions\Addresses\Index.cs" />
     <Compile Include="Expressions\Addresses\Offset.cs" />
     <Compile Include="Expressions\Slots\Specials\Annotations\Special15Attribute.cs" />
     <Compile Include="Expressions\Slots\Specials\specialtype.cs" />

@@ -9,7 +9,7 @@ namespace Libptx.Expressions.Slots
         // impure, but convenient
         // now we can write like that: "arr[foo + 2]"
 
-        public Index this[Address address]
+        public Address this[Address address]
         {
             get
             {
@@ -17,7 +17,7 @@ namespace Libptx.Expressions.Slots
                 // however, here it's justified, since silently ignoring non-empty address.Base might lead to mysterious behavior
                 // whereas stupid mistakes like forgetting to provide a mandatory attribute of an instruction will crash anyways
                 (address != null && address.Base == null).AssertTrue();
-                return new Index{Base = this, Offset = address.Offset};
+                return new Address{Base = this, Offset = address.Offset};
             }
         }
 
