@@ -11,4 +11,4 @@
 21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
 23) todo for readme.txt: bit buckets - too much work finding out what instructions support them
 24) todo for readme.txt: hasn't passed rigorous testing
-25) check that we validate everything including tiniest particles
+25) check that we validate everything including tiniest particles, e.g. Vars of an Index!!

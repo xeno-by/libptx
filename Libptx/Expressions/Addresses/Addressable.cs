@@ -1,6 +1,8 @@
+using Libptx.Common;
+
 namespace Libptx.Expressions.Addresses
 {
-    public interface Addressable
+    public interface Addressable : Validatable, Renderable
     {
     }
 }

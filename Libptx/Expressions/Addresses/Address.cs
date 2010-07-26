@@ -7,6 +7,7 @@ using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using Type=Libptx.Common.Types.Type;
+using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Addresses
 {
@@ -43,8 +44,32 @@ namespace Libptx.Expressions.Addresses
 
         protected override void CustomValidate(Module ctx)
         {
-            // todo. read up the rules of what is allowed and what is not
-            throw new NotImplementedException();
+            (Base != null || Offset != null).AssertTrue();
+            if (Base != null) Base.Validate(ctx);
+            if (Offset != null) Offset.Validate(ctx);
+
+            // the following combos of Base and Offset are valid:
+            //
+            //         |      null     |   null + off  |   reg + off   | non-reg + off |
+            // ========|===============|===============|===============|===============|
+            // null    |    invalid    |      [42]     |    [A + 42]   |    invalid    |
+            // reg     |    invalid    |    invalid    |    invalid    |    invalid    |
+            // non-reg |      [A]      |      A[42]    |    A[B + 42]  |    invalid    |
+            // label   |      lbl      |    invalid    |    invalid    |    invalid    |
+            // ========|===============|===============|===============|===============|
+
+            if (Base != null)
+            {
+                var base_var = Base as Var;
+                if (base_var != null)
+                {
+                    (base_var.Space != reg).AssertTrue();
+                }
+                else
+                {
+                    (Offset == null).AssertTrue();
+                }
+            }
         }
 
         protected override void RenderAsPtx(TextWriter writer)

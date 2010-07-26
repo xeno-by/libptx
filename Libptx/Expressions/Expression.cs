@@ -1,10 +1,11 @@
 using System.Diagnostics;
+using Libptx.Common;
 using Libptx.Common.Types;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
-    public interface Expression
+    public interface Expression : Validatable, Renderable
     {
         Type Type { get; }
     }

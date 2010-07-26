@@ -2,15 +2,16 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
+using Libptx.Common.Spaces;
 using Libptx.Expressions.Slots;
-using Libptx.Statements;
+using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Addresses
 {
     [DebuggerNonUserCode]
-    public class Offset : Renderable, Validatable
+    public class Offset : Atom
     {
-        public Addressable Base { get; set; }
+        public Var Base { get; set; }
         public long Imm { get; set; }
 
         public static implicit operator Offset(Var @var)
@@ -18,24 +19,26 @@ namespace Libptx.Expressions.Addresses
             return @var == null ? null : new Offset { Base = @var };
         }
 
-        public static implicit operator Offset(Label label)
-        {
-            return label == null ? null : new Offset { Base = label };
-        }
-
         public static implicit operator Offset(long offset)
         {
             return new Offset { Imm = offset };
         }
 
-        public void Validate(Module ctx)
+        // an Offset might also be a combo of base var and an immediate constant
+        // see Var.Dsl and its user-defined operators for more information
+
+        protected override void CustomValidate(Module ctx)
         {
-            // todo. read up the rules of what is allowed and what is not
-            throw new NotImplementedException();
+            if (Base != null)
+            {
+                (Base.Space == space.reg).AssertTrue();
+                Base.Validate(ctx);
+            }
         }
 
-        public void RenderAsPtx(TextWriter writer)
+        protected override void RenderAsPtx(TextWriter writer)
         {
+            // todo. +-8
             throw new NotImplementedException();
         }
     }

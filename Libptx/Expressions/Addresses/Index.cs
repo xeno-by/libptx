@@ -5,14 +5,15 @@ using Libptx.Common;
 using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Slots;
 using Type=Libptx.Common.Types.Type;
+using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Addresses
 {
     [DebuggerNonUserCode]
     public class Index : Atom, Expression
     {
-        public Var Base { get; set; } // may be null
-        public long Offset { get; set; }
+        public Var Base { get; set; }
+        public Offset Offset { get; set; }
 
         public Type Type
         {
@@ -21,8 +22,10 @@ namespace Libptx.Expressions.Addresses
 
         protected override void CustomValidate(Module ctx)
         {
-            // todo. read up the rules of what is allowed and what is not
-            throw new NotImplementedException();
+            (Base != null && Offset != null).AssertTrue();
+            (Base.is_arr()).AssertTrue();
+            Base.Validate(ctx);
+            Offset.Validate(ctx);
         }
 
         protected override void RenderAsPtx(TextWriter writer)

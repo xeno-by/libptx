@@ -2,7 +2,7 @@ using Libptx.Common;
 
 namespace Libptx.Statements
 {
-    public interface Statement : Renderable, Validatable
+    public interface Statement : Validatable, Renderable
     {
     }
 }
