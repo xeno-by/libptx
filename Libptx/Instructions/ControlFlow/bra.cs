@@ -13,7 +13,7 @@ namespace Libptx.Instructions.ControlFlow
     {
         [Affix] public new bool uni { get; set; }
 
-        bra() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
+        public bra() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
         public Expression tgt { get { return Operands[0]; } set { Operands[0] = value; } }
 
         protected override bool allow_ptr { get { return true; } }

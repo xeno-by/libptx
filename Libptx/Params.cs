@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Libptx.Expressions;
+using Libptx.Expressions.Slots;
 using XenoGears.Collections;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -19,14 +19,14 @@ namespace Libptx
         public override void RemoveAt(int index) { _impl.RemoveAt(index); }
     }
 
-    public class ParamsExtensions
+    public static class ParamsExtensions
     {
-        public static void SetNames(Params @params, params String[] names)
+        public static void SetNames(this Params @params, params String[] names)
         {
             SetNames(@params, (IEnumerable<String>)names);
         }
 
-        public static void SetNames(Params @params, IEnumerable<String> names)
+        public static void SetNames(this Params @params, IEnumerable<String> names)
         {
             @params.AssertNotNull();
             names.AssertNotNull();

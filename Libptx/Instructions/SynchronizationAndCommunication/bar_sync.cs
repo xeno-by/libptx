@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Libcuda.Versions;
+using Libptx.Expressions.Immediate;
 using Libptx.Instructions.Annotations;
 using Libptx.Expressions;
 using XenoGears.Assertions;
@@ -29,7 +30,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
             }
         }
 
-        bar_sync() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
+        public bar_sync() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
         public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 

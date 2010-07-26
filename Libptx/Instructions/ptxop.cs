@@ -37,6 +37,7 @@ namespace Libptx.Instructions
 
         protected sealed override void CustomValidate(Module ctx)
         {
+            base.CustomValidate(ctx);
             validate_opcode(ctx);
             custom_validate_opcode(ctx);
             validate_operands(ctx);
@@ -72,19 +73,19 @@ namespace Libptx.Instructions
             throw new NotImplementedException();
         }
 
-        protected static VarMod not { get { return VarMod.Not; } }
-        protected static VarMod couple { get { return VarMod.Couple; } }
-        protected static VarMod neg { get { return VarMod.Neg; } }
-        protected static VarMod sel { get { return VarMod.B0 | VarMod.B1 | VarMod.B2 | VarMod.B3 | VarMod.H0 | VarMod.H1; } }
-        protected static VarMod member { get { return VarMod.X | VarMod.R | VarMod.Y | VarMod.G | VarMod.Z | VarMod.B | VarMod.W | VarMod.A; } }
-        protected static VarMod exact(VarMod mod) { return mod | (VarMod)65536; }
+        protected static Mod not { get { return Mod.Not; } }
+        protected static Mod couple { get { return Mod.Couple; } }
+        protected static Mod neg { get { return Mod.Neg; } }
+        protected static Mod sel { get { return Mod.B0 | Mod.B1 | Mod.B2 | Mod.B3 | Mod.H0 | Mod.H1; } }
+        protected static Mod member { get { return Mod.X | Mod.R | Mod.Y | Mod.G | Mod.Z | Mod.B | Mod.W | Mod.A; } }
+        protected static Mod exact(Mod mod) { return mod | (Mod)65536; }
 
         protected bool agree(Expression expr, Type t)
         {
             return agree(expr, t, 0);
         }
 
-        protected bool agree(Expression expr, Type t, VarMod mod)
+        protected bool agree(Expression expr, Type t, Mod mod)
         {
             // todo. if mod == 0, then disallow mods
             // todo. allow instances of Vector!
@@ -101,7 +102,7 @@ namespace Libptx.Instructions
             return agree_or_null(expr, t, 0);
         }
 
-        protected bool agree_or_null(Expression expr, Type t, VarMod mod)
+        protected bool agree_or_null(Expression expr, Type t, Mod mod)
         {
             return expr == null || agree(expr, t, mod);
         }
@@ -111,7 +112,7 @@ namespace Libptx.Instructions
             return relax(expr, t, 0);
         }
 
-        protected bool relax(Expression expr, Type t, VarMod mod)
+        protected bool relax(Expression expr, Type t, Mod mod)
         {
             // todo. same as for agree
             throw new NotImplementedException();

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
+using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -45,7 +46,7 @@ namespace Libptx
 
             var size_limit = 256;
             if (ctx.Version >= SoftwareIsa.PTX_15) size_limit += 4096;
-            (Params.Sum(p => p.SizeInMemory) <= size_limit).AssertTrue();
+            (Params.Sum(p => p.SizeInMemory()) <= size_limit).AssertTrue();
 
             Tuning.Validate(ctx);
             Params.ForEach(p => p.Validate(ctx));

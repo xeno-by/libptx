@@ -46,7 +46,7 @@ namespace Libptx.Instructions.Arithmetic
             (sat == true).AssertImplies(type == f32);
         }
 
-        mul() { 1.UpTo(3).ForEach(_ => Operands.Add(null)); }
+        public mul() { 1.UpTo(3).ForEach(_ => Operands.Add(null)); }
         public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }

@@ -24,7 +24,7 @@ namespace Libptx.Instructions.MovementAndConversion
             (level == L1 || level == L2).AssertTrue();
         }
 
-        prefetch() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
+        public prefetch() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
         public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
 
         protected override void custom_validate_operands(Module ctx)

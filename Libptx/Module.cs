@@ -4,6 +4,7 @@ using System.IO;
 using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Expressions;
+using Libptx.Expressions.Slots;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 

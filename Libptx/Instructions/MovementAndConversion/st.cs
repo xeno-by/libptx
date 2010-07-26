@@ -52,7 +52,7 @@ namespace Libptx.Instructions.MovementAndConversion
             type.is_v1().AssertFalse();
         }
 
-        st() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
+        public st() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
         public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 

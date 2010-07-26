@@ -1,17 +1,19 @@
 using System;
 using System.IO;
 using System.Linq;
+using Libptx.Common;
 using Libptx.Common.Types;
 using Libptx.Expressions;
+using Libptx.Expressions.Addresses;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Statements
 {
-    public class Label : Expression, Statement, Addressable
+    public class Label : Atom, Expression, Statement, Addressable
     {
         public String Name { get; set; } // may be null
-        public override Type Type { get { return typeof(Ptr); } }
+        public Type Type { get { return typeof(Ptr); } }
 
         protected override void CustomValidate(Module ctx)
         {

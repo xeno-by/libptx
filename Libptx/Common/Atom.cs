@@ -26,6 +26,13 @@ namespace Libptx.Common
             set { _pragmas = value ?? new List<String>(); }
         }
 
+        private IList<String> _comments = new List<String>();
+        public IList<String> Comments
+        {
+            get { return _comments; }
+            set { _comments = value ?? new List<String>(); }
+        }
+
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
         protected SoftwareIsa CoreVersion { get { throw new NotImplementedException(); } }
         protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }

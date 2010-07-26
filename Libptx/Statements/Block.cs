@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Libptx.Common;
-using Libptx.Expressions;
+using Libptx.Expressions.Slots;
 using XenoGears.Functional;
 
 namespace Libptx.Statements

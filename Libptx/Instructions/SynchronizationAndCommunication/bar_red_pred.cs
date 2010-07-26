@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
+using Libptx.Expressions.Immediate;
 using Libptx.Instructions.Annotations;
 using Libptx.Common.Enumerations;
 using XenoGears.Assertions;
@@ -22,7 +23,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
             (op == and || op == or).AssertTrue();
         }
 
-        bar_red_pred() { 1.UpTo(4).ForEach(_ => Operands.Add(null)); }
+        public bar_red_pred() { 1.UpTo(4).ForEach(_ => Operands.Add(null)); }
         public Expression p { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
