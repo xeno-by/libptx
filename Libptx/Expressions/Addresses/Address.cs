@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Libptx.Common.Enumerations;
-using Libptx.Common.Types;
+using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using Type=Libptx.Common.Types.Type;

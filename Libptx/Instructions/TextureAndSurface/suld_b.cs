@@ -11,7 +11,7 @@ using XenoGears.Functional;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("suld.b.geom{.cop}.dtype.clampm    d, [a, b];", SoftwareIsa.PTX_15)]
+    [Ptxop15("suld.b.geom{.cop}.dtype.clampm    d, [a, b];")]
     [DebuggerNonUserCode]
     public partial class suld_b : ptxop
     {

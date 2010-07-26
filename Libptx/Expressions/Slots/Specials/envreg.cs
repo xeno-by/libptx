@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
-using Libptx.Common.Types;
+using Libptx.Common.Types.Bits;
 using Libptx.Expressions.Slots.Specials.Annotations;
 using XenoGears.Assertions;
 

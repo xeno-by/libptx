@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
-using Libptx.Common.Types;
+using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Slots;
 using Type=Libptx.Common.Types.Type;
 

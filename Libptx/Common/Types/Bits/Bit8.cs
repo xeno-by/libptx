@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace Libptx.Common.Types
+namespace Libptx.Common.Types.Bits
 {
     [DebuggerNonUserCode]
     public struct Bit8

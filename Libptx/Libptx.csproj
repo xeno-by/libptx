@@ -52,7 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\PtxAttribute.cs" />
+    <Compile Include="Common\Annotations\Atoms\Atom15Attribute.cs" />
     <Compile Include="Common\Annotations\ParticleHelpers.cs" />
+    <Compile Include="Common\Annotations\Quanta\Attr20Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\AttrAttribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Affix15Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Attr15Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Suffix15Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Prefix15Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Mod15Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Infix15Attribute.cs" />
     <Compile Include="Common\Enumerations\barlevel.cs" />
     <Compile Include="Common\Enumerations\cachelevel.cs" />
     <Compile Include="Common\Enumerations\clampm.cs" />
@@ -72,14 +81,20 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\cmp.cs" />
     <Compile Include="Common\Renderable.cs" />
-    <Compile Include="Common\Types\Ptr.cs" />
+    <Compile Include="Common\Types\Opaques\AddrMode.cs" />
+    <Compile Include="Common\Types\Opaques\CL_ChannelDataType.cs" />
+    <Compile Include="Common\Types\Opaques\CL_ChannelOrder.cs" />
+    <Compile Include="Common\Types\Opaques\FilterMode.cs" />
+    <Compile Include="Common\Types\Pointers\Ptr.cs" />
     <Compile Include="Entries.cs" />
     <Compile Include="Expressions\Addresses\Addressable.cs" />
     <Compile Include="Expressions\Immediate\Vector.Dsl.cs" />
+    <Compile Include="Expressions\Immediate\WarpSz.cs" />
     <Compile Include="Expressions\Slots\Slot.cs" />
     <Compile Include="Expressions\Modded.cs" />
     <Compile Include="Expressions\Addresses\Index.cs" />
     <Compile Include="Expressions\Addresses\Offset.cs" />
+    <Compile Include="Expressions\Slots\Specials\Annotations\Special15Attribute.cs" />
     <Compile Include="Expressions\Slots\Specials\specialtype.cs" />
     <Compile Include="Expressions\Slots\Var.Dsl.cs" />
     <Compile Include="Common\Types\Type.Dsl.cs" />
@@ -96,13 +111,13 @@
     <Compile Include="Common\Annotations\Quanta\PrefixAttribute.cs" />
     <Compile Include="Common\Annotations\Quanta\Infix20Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\QuantumAttribute.cs" />
-    <Compile Include="Common\Types\Bit16.cs" />
-    <Compile Include="Common\Types\Bit32.cs" />
-    <Compile Include="Common\Types\Bit64.cs" />
-    <Compile Include="Common\Types\Bit8.cs" />
-    <Compile Include="Common\Types\Samplerref.cs" />
-    <Compile Include="Common\Types\Surfref.cs" />
-    <Compile Include="Common\Types\Texref.cs" />
+    <Compile Include="Common\Types\Bits\Bit16.cs" />
+    <Compile Include="Common\Types\Bits\Bit32.cs" />
+    <Compile Include="Common\Types\Bits\Bit64.cs" />
+    <Compile Include="Common\Types\Bits\Bit8.cs" />
+    <Compile Include="Common\Types\Opaques\Samplerref.cs" />
+    <Compile Include="Common\Types\Opaques\Surfref.cs" />
+    <Compile Include="Common\Types\Opaques\Texref.cs" />
     <Compile Include="Common\Types\Type.Extensions.cs" />
     <Compile Include="Expressions\Addresses\Address.cs" />
     <Compile Include="Common\Atom.cs" />
@@ -118,6 +133,7 @@
     <Compile Include="Expressions\Immediate\Vector.Core.cs" />
     <Compile Include="Common\Annotations\Atoms\Atom20Attribute.cs" />
     <Compile Include="Common\Annotations\Atoms\AtomAttribute.cs" />
+    <Compile Include="Instructions\Annotations\Ptxop15Attribute.cs" />
     <Compile Include="Instructions\Annotations\Ptxop20Attribute.cs" />
     <Compile Include="Instructions\Annotations\PtxopAttribute.cs" />
     <Compile Include="Common\Annotations\Quanta\InfixAttribute.cs" />

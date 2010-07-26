@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Libcuda.DataTypes;
 using Libptx.Common.Annotations;
+using Libptx.Common.Types.Bits;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using XenoGears.Strings;
@@ -37,6 +38,10 @@ namespace Libptx.Common.Types
         {
             get
             {
+                if (this.is_opaque()) return 0;
+                if (this.is_pred()) return 0;
+                if (this.is_ptr()) return 0;
+
                 var el = this.Unfold(t => t.arr_el(), t => t != null).Last();
                 var el_sz = Marshal.SizeOf((ClrType)(Type)el.Name);
                 return el.is_vec() ? el_sz * el.vec_rank() : el_sz;

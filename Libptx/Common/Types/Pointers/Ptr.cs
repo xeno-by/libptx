@@ -1,9 +1,9 @@
 using System.Diagnostics;
 
-namespace Libptx.Common.Types
+namespace Libptx.Common.Types.Pointers
 {
     [DebuggerNonUserCode]
-    public struct Surfref
+    public struct Ptr
     {
     }
 }

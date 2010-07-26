@@ -48,6 +48,7 @@ namespace Libptx
 
             var size_limit = 256;
             if (ctx.Version >= SoftwareIsa.PTX_15) size_limit += 4096;
+            // todo. what if we pass pointers? what if we pass textures?
             (Params.Sum(p => p.SizeInMemory()) <= size_limit).AssertTrue();
 
             Tuning.Validate(ctx);

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
+using Libptx.Common.Annotations;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Annotations.Atoms;
 using Libptx.Common.Types;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
+using XenoGears.Reflection.Attributes;
+using XenoGears.Functional;
 
 namespace Libptx.Common
 {
@@ -36,11 +39,11 @@ namespace Libptx.Common
         }
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
-        protected SoftwareIsa CoreVersion { get { throw new NotImplementedException(); } }
+        protected SoftwareIsa CoreVersion { get { return this.Versions().MinOrDefault(); } }
         protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
 
         public HardwareIsa Target { get { return (HardwareIsa)Math.Max((int)CoreTarget, (int)CustomTarget); } }
-        protected HardwareIsa CoreTarget { get { throw new NotImplementedException(); } }
+        protected HardwareIsa CoreTarget { get { return this.Targets().MinOrDefault(); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
         public void Validate(Module ctx) { (ctx.Version >= Version).AssertTrue(); (ctx.Target >= Target).AssertTrue(); CustomValidate(ctx); }

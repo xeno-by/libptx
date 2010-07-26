@@ -89,19 +89,20 @@ namespace Libptx.Common.Types
             return spec;
         }
 
-        public static bool is_opaque(this Type type) { return (type.spec() & TypeSpec.Opaque) == TypeSpec.Opaque; }
-        public static bool is_pred(this Type type) { return (type.spec() & TypeSpec.Pred) == TypeSpec.Pred; }
-        public static bool is_texref(this Type type) { return (type.spec() & TypeSpec.Texref) == TypeSpec.Texref; }
-        public static bool is_samplerref(this Type type) { return (type.spec() & TypeSpec.Samplerref) == TypeSpec.Samplerref; }
-        public static bool is_surfref(this Type type) { return (type.spec() & TypeSpec.Surfref) == TypeSpec.Surfref; }
-        public static bool is_ptr(this Type type) { return (type.spec() & TypeSpec.Ptr) == TypeSpec.Ptr; }
-
-        public static bool is_scalar(this Type type) { return !type.is_opaque() && !type.is_vec() && !type.is_arr(); }
+        public static bool is_scalar(this Type type) { return !type.is_opaque() && !type.is_pred() && !type.is_ptr() && !type.is_vec() && !type.is_arr(); }
         public static bool is_int(this Type type) { return (type.spec() & TypeSpec.Integer) == TypeSpec.Integer; }
         public static bool is_signed(this Type type) { return (type.spec() & TypeSpec.Signed) == TypeSpec.Signed; }
         public static bool is_unsigned(this Type type) { return (type.spec() & TypeSpec.Unsigned) == TypeSpec.Unsigned; }
         public static bool is_float(this Type type) { return (type.spec() & TypeSpec.Float) == TypeSpec.Float; }
         public static bool is_bit(this Type type) { return (type.spec() & TypeSpec.Bit) == TypeSpec.Bit; }
+
+        public static bool is_pred(this Type type) { return (type.spec() & TypeSpec.Pred) == TypeSpec.Pred; }
+        public static bool is_ptr(this Type type) { return (type.spec() & TypeSpec.Ptr) == TypeSpec.Ptr; }
+
+        public static bool is_opaque(this Type type) { return (type.spec() & TypeSpec.Opaque) == TypeSpec.Opaque; }
+        public static bool is_texref(this Type type) { return (type.spec() & TypeSpec.Texref) == TypeSpec.Texref; }
+        public static bool is_samplerref(this Type type) { return (type.spec() & TypeSpec.Samplerref) == TypeSpec.Samplerref; }
+        public static bool is_surfref(this Type type) { return (type.spec() & TypeSpec.Surfref) == TypeSpec.Surfref; }
 
         public static bool is_vec(this Type type) { return type.vec_rank() != 0; }
         public static bool is_v1(this Type type) { return type.vec_rank() == 1; }

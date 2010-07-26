@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Libptx.Common;
-using Libptx.Common.Types;
+using Libptx.Common.Types.Pointers;
 using Libptx.Expressions;
 using Libptx.Expressions.Addresses;
 using XenoGears.Assertions;

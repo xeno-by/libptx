@@ -10,7 +10,7 @@ using XenoGears.Functional;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
-    [Ptxop("txq.tquery.b32 d, [a];", SoftwareIsa.PTX_15)]
+    [Ptxop15("txq.tquery.b32 d, [a];")]
     [DebuggerNonUserCode]
     public partial class txq : ptxop
     {

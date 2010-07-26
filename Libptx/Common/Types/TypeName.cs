@@ -3,6 +3,9 @@ using System.Diagnostics;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
+using Libptx.Common.Types.Bits;
+using Libptx.Common.Types.Opaques;
+using Libptx.Common.Types.Pointers;
 using XenoGears.Functional;
 using ClrType = System.Type;
 
@@ -26,9 +29,9 @@ namespace Libptx.Common.Types
         [Affix("b32")] B32,
         [Affix("b64")] B64,
         [Affix("pred")] Pred,
-        [Affix("texref", SoftwareIsa.PTX_15)] Texref,
-        [Affix("samplerref", SoftwareIsa.PTX_15)] Samplerref,
-        [Affix("surfref", SoftwareIsa.PTX_15)] Surfref,
+        [Affix15("texref")] Texref,
+        [Affix15("samplerref")] Samplerref,
+        [Affix15("surfref")] Surfref,
         [Affix("ptr")] Ptr,
     }
 

@@ -1,5 +1,6 @@
 ﻿using Libcuda.DataTypes;
-using Libptx.Common.Types;
+using Libptx.Common.Types.Bits;
+using Libptx.Common.Types.Opaques;
 using Libptx.Expressions.Slots;
 using Libptx.Statements;
 
@@ -12,8 +13,10 @@ namespace Libptx.Expressions.Immediate
         public static implicit operator Const(Var value) { return new Const(value); }
         public static implicit operator Const(Label value) { return new Const(value); }
 
-        // opaques
+        // predicates
         public static implicit operator Const(bool value) { return new Const(value); }
+
+        // opaques
         public static implicit operator Const(Texref value) { return new Const(value); }
         public static implicit operator Const(Samplerref value) { return new Const(value); }
         public static implicit operator Const(Surfref value) { return new Const(value); }
