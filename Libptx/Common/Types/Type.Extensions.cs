@@ -89,6 +89,15 @@ namespace Libptx.Common.Types
             return spec;
         }
 
+        public static Type el(this Type type)
+        {
+            var el = new Type();
+            el.Name = type.Name;
+            el.Mod = TypeMod.Scalar;
+            el.Dims = new int[0];
+            return el;
+        }
+
         public static bool is_scalar(this Type type) { return !type.is_opaque() && !type.is_pred() && !type.is_ptr() && !type.is_vec() && !type.is_arr(); }
         public static bool is_int(this Type type) { return (type.spec() & TypeSpec.Integer) == TypeSpec.Integer; }
         public static bool is_signed(this Type type) { return (type.spec() & TypeSpec.Signed) == TypeSpec.Signed; }

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using Libcuda.DataTypes;
 using Libptx.Common.Annotations;
 using Libptx.Common.Types.Bits;
@@ -16,21 +15,26 @@ using ClrType = System.Type;
 namespace Libptx.Common.Types
 {
     [DebuggerNonUserCode]
-    public partial class Type : IEquatable<Type>
+    public partial class Type : Atom, IEquatable<Type>
     {
         public TypeName Name { get; set; }
         public TypeMod Mod { get; set; }
         public int[] Dims { get; set; }
 
-        public override String ToString()
+        protected override void CustomValidate(Module ctx)
         {
-            var buf = new StringBuilder();
-            var w = new StringWriter(buf);
+            (SizeOfElement <= 128).AssertTrue();
+            this.is_vec().AssertImplies(this.el().is_scalar());
+            this.is_arr().AssertImplies(this.el().is_scalar());
+        }
+
+        protected override void RenderAsPtx(TextWriter writer)
+        {
             var el = this.arr_el() ?? this;
-            if (el.is_vec()) w.Write(".v{0} ", el.vec_rank());
-            w.Write(Name.Signature().AssertNotNull());
-            if (this.is_arr()) w.Write(" " + (Dims ?? Seq.Empty<int>()).Select(dim => dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
-            return buf.ToString();
+            if (el.is_vec()) writer.Write(".v{0} ", el.vec_rank());
+            writer.Write(Name.Signature().AssertNotNull());
+            if (this.is_arr()) writer.Write(" " + (Dims ?? Seq.Empty<int>()).Select(dim => 
+                dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
         }
 
         public int SizeInMemory { get { return SizeOfElement * (Dims ?? new int[0]).Product(); } }
@@ -43,8 +47,7 @@ namespace Libptx.Common.Types
                 if (this.is_ptr()) return 0;
 
                 var el = this.Unfold(t => t.arr_el(), t => t != null).Last();
-                var el_sz = Marshal.SizeOf((ClrType)(Type)el.Name);
-                return el.is_vec() ? el_sz * el.vec_rank() : el_sz;
+                return Marshal.SizeOf((ClrType)(Type)el.Name);
             }
         }
 

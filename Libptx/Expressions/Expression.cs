@@ -17,18 +17,20 @@ namespace Libptx.Expressions
             return new Modded{Expr = expr, Mod = mod};
         }
 
-        public static bool is_opaque(this Expression expr) { return expr == null ? false : expr.Type.is_opaque(); }
-        public static bool is_pred(this Expression expr) { return expr == null ? false : expr.Type.is_pred(); }
-        public static bool is_texref(this Expression expr) { return expr == null ? false : expr.Type.is_texref(); }
-        public static bool is_samplerref(this Expression expr) { return expr == null ? false : expr.Type.is_samplerref(); }
-        public static bool is_surfref(this Expression expr) { return expr == null ? false : expr.Type.is_surfref(); }
-
         public static bool is_scalar(this Expression expr) { return expr == null ? false : expr.Type.is_scalar(); }
         public static bool is_int(this Expression expr) { return expr == null ? false : expr.Type.is_int(); }
         public static bool is_signed(this Expression expr) { return expr == null ? false : expr.Type.is_signed(); }
         public static bool is_unsigned(this Expression expr) { return expr == null ? false : expr.Type.is_unsigned(); }
         public static bool is_float(this Expression expr) { return expr == null ? false : expr.Type.is_float(); }
         public static bool is_bit(this Expression expr) { return expr == null ? false : expr.Type.is_bit(); }
+
+        public static bool is_pred(this Expression expr) { return expr == null ? false : expr.Type.is_pred(); }
+        public static bool is_ptr(this Expression expr) { return expr == null ? false : expr.Type.is_ptr(); }
+
+        public static bool is_opaque(this Expression expr) { return expr == null ? false : expr.Type.is_opaque(); }
+        public static bool is_texref(this Expression expr) { return expr == null ? false : expr.Type.is_texref(); }
+        public static bool is_samplerref(this Expression expr) { return expr == null ? false : expr.Type.is_samplerref(); }
+        public static bool is_surfref(this Expression expr) { return expr == null ? false : expr.Type.is_surfref(); }
 
         public static bool is_vec(this Expression expr) { return expr == null ? false : expr.Type.is_vec(); }
         public static int vec_rank(this Expression expr) { return expr == null ? 0 : expr.Type.vec_rank(); }

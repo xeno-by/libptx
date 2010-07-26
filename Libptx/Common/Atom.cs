@@ -8,9 +8,10 @@ using Libptx.Common.Enumerations;
 using Libptx.Common.Annotations.Atoms;
 using Libptx.Common.Spaces;
 using Libptx.Common.Types;
+using Libptx.Expressions;
+using Libptx.Expressions.Slots;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
-using XenoGears.Reflection.Attributes;
 using XenoGears.Functional;
 
 namespace Libptx.Common
@@ -193,6 +194,92 @@ namespace Libptx.Common
 
         protected static vshm vshm_clamp { get { return vshm.clamp; } }
         protected static vshm vshm_wrap { get { return vshm.wrap; } }
+
+        #endregion
+
+        #region Type checking utilities
+
+        protected static Mod not { get { return Mod.Not; } }
+        protected static Mod couple { get { return Mod.Couple; } }
+        protected static Mod neg { get { return Mod.Neg; } }
+        protected static Mod sel { get { return Mod.B0 | Mod.B1 | Mod.B2 | Mod.B3 | Mod.H0 | Mod.H1; } }
+        protected static Mod member { get { return Mod.X | Mod.R | Mod.Y | Mod.G | Mod.Z | Mod.B | Mod.W | Mod.A; } }
+        protected static Mod exact(Mod mod) { return mod | (Mod)65536; }
+
+        protected bool agree(Type t_expr, Type t)
+        {
+            return agree(new Var { Type = t_expr }, t);
+        }
+
+        protected bool agree(Expression expr, Type t)
+        {
+            return agree(expr, t, 0);
+        }
+
+        protected bool agree(Expression expr, Type t, Mod mod)
+        {
+            // todo. if mod == 0, then disallow mods
+            // todo. allow instances of Vector!
+            // todo. if mod != 0, then verify types of vars
+            // todo. if mod != 0, then var might lack it and it'll be ok
+            // todo. correctly process exact(mod)!
+            // todo. also verify types of vars, e.g. couple can consist only of two preds
+            // todo. exception for specials!
+            // todo. u32 and u64 agree with opaque types!
+            // todo. but not vice versa: the only place where opaques can be used in place of u32/u64 is mov's src operand!
+            throw new NotImplementedException();
+        }
+
+        protected bool agree_or_null(Type t_expr, Type t)
+        {
+            return t_expr == null || agree(t_expr, t);
+        }
+
+        protected bool agree_or_null(Expression expr, Type t)
+        {
+            return agree_or_null(expr, t, 0);
+        }
+
+        protected bool agree_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || agree(expr, t, mod);
+        }
+
+        protected bool relax(Type t_expr, Type t)
+        {
+            return relax(new Var { Type = t_expr }, t);
+        }
+
+        protected bool relax(Expression expr, Type t)
+        {
+            return relax(expr, t, 0);
+        }
+
+        protected bool relax(Expression expr, Type t, Mod mod)
+        {
+            // todo. same as for agree
+            throw new NotImplementedException();
+        }
+
+        protected bool is_reg(Expression expr)
+        {
+            // todo. inline vectors are always reg!
+            // todo. no mods are allowed here regardless of allow_XXX
+            throw new NotImplementedException();
+        }
+
+        protected bool is_special(Expression expr)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected static space code { get { return (space)65536; } }
+
+        protected bool is_ptr(Expression expr, space space)
+        {
+            // todo. any pointer agrees with space == 0
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
