@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace Libptx
 {
+    [DebuggerNonUserCode]
     public class Tuning : Atom
     {
         public int Maxnreg { get; set; }

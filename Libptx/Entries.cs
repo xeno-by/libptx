@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using XenoGears.Collections;
 using XenoGears.Functional;
 
 namespace Libptx
 {
+    [DebuggerNonUserCode]
     public class Entries : BaseList<Entry>
     {
         public Entries(params Entry[] entries) : this((IEnumerable<Entry>)entries) {}

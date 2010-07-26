@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Reflection;
 using Libcuda.Versions;
 using XenoGears.Reflection.Attributes;
@@ -9,6 +10,7 @@ using XenoGears.Functional;
 
 namespace Libptx.Common.Annotations
 {
+    [DebuggerNonUserCode]
     public static class ParticleHelpers
     {
         public static String Signature(this Object obj)

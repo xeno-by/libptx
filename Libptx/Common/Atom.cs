@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
 using Libptx.Common.Enumerations;
@@ -10,6 +11,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Common
 {
+    [DebuggerNonUserCode]
     public abstract class Atom : Validatable, Renderable
     {
         private IList<Location> _locations = new List<Location>();

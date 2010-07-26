@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
@@ -12,6 +13,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("atom{.space}.op.type d, [a], b;")]
     [Ptxop("atom{.space}.op.type d, [a], b, c;")]
+    [DebuggerNonUserCode]
     public partial class atom : ptxop
     {
         [Affix] public space space { get; set; }

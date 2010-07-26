@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Immediate
 {
+    [DebuggerNonUserCode]
     public partial class Vector : Atom, Expression
     {
         private Type _elementType;

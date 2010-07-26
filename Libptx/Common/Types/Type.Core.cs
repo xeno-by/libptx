@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -13,6 +14,7 @@ using ClrType = System.Type;
 
 namespace Libptx.Common.Types
 {
+    [DebuggerNonUserCode]
     public partial class Type : IEquatable<Type>
     {
         public TypeName Name { get; set; }

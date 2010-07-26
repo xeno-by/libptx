@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Libptx.Common;
 using Libptx.Expressions;
 
 namespace Libptx.Statements
 {
+    [DebuggerNonUserCode]
     public abstract class Instruction : Atom, Statement
     {
         public Expression Guard { get; set; } // may be null

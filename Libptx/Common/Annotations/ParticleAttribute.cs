@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics;
 using Libcuda.Versions;
 
 namespace Libptx.Common.Annotations
 {
+    [DebuggerNonUserCode]
     public abstract class ParticleAttribute : Attribute
     {
         public String Signature { get; set; }

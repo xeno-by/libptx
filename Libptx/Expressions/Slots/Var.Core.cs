@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Libptx.Common.Enumerations;
@@ -8,6 +9,7 @@ using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Slots
 {
+    [DebuggerNonUserCode]
     public partial class Var : Atom, Slot, Addressable
     {
         public String Name { get; set; } // may be null

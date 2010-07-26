@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -8,6 +9,7 @@ using XenoGears.Functional;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop20("vote.ballot.b32 d, {!}a;")]
+    [DebuggerNonUserCode]
     public partial class vote_ballot : ptxop
     {
         [Affix] public Type type { get; set; }

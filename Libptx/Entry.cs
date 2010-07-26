@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Libcuda.Versions;
@@ -10,6 +11,7 @@ using XenoGears.Functional;
 
 namespace Libptx
 {
+    [DebuggerNonUserCode]
     public class Entry : Atom
     {
         private String _name = null;

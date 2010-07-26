@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Libptx.Common.Enumerations;
 
 namespace Libptx.Expressions.Slots
@@ -9,6 +10,7 @@ namespace Libptx.Expressions.Slots
         space Space { get; }
     }
 
+    [DebuggerNonUserCode]
     public static class SlotExtensions
     {
         public static int SizeInMemory(this Slot var)

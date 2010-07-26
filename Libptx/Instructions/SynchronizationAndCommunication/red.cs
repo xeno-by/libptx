@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
@@ -10,6 +11,7 @@ using XenoGears.Functional;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("red{.space}.op.type [a], b;", SoftwareIsa.PTX_12)]
+    [DebuggerNonUserCode]
     public partial class red : ptxop
     {
         [Affix] public space space { get; set; }

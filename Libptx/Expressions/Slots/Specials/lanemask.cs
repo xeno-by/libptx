@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions.Slots.Specials.Annotations;
@@ -6,6 +7,7 @@ using XenoGears.Assertions;
 namespace Libptx.Expressions.Slots.Specials
 {
     [Special20("%lanemask_{op}", typeof(uint))]
+    [DebuggerNonUserCode]
     public partial class lanemask : Special
     {
         [Affix("op")] public cmp Mask { get; set; }

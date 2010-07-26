@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using System.Linq;
 
 namespace Libptx.Common.Types
 {
+    [DebuggerNonUserCode]
     public static class TypeExtensions
     {
         [Flags]

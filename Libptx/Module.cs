@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
 using Libptx.Common;
-using Libptx.Expressions;
 using Libptx.Expressions.Slots;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 
 namespace Libptx
 {
+    [DebuggerNonUserCode]
     public class Module : Validatable, Renderable
     {
         public SoftwareIsa Version { get; set; }
@@ -93,11 +94,13 @@ namespace Libptx
             // todo. backwards compatibility for textures!
             // todo. < SM_13 && !EmulateDoubles => verify that there are no f64 instructions used
 
-            (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
+            // this is commented out because there's no problem with UnifiedTexturing
+            // if the version is prior to PTX_15, corresponding directive just won't be rendered
+//            (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
+            (UnifiedTexturing == false).AssertImplies(Version >= SoftwareIsa.PTX_15);
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
             Tuning.Validate(this);
-
             Entries.ForEach(e => e.Validate(this));
         }
 

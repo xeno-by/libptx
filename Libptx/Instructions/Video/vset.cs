@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
@@ -11,6 +12,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vset.atype.btype.cmp d, a{.asel}, b{.bsel};")]
     [Ptxop20("vset.atype.btype.cmp.op2 d, a{.asel}, b{.bsel}, c;")]
     [Ptxop20("vset.atype.btype.cmp d.dsel, a{.asel}, b{.bsel}, c;")]
+    [DebuggerNonUserCode]
     public partial class vset : ptxop
     {
         [Affix] public Type atype { get; set; }

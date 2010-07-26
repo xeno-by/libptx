@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics;
 
 namespace Libptx.Common.Annotations.Atoms
 {
+    [DebuggerNonUserCode]
     public class Location
     {
         public String File { get; set; }

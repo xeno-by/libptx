@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
 {
+    [DebuggerNonUserCode]
     public class Modded : Atom, Expression
     {
         public Expression Expr { get; set; }

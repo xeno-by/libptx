@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -10,6 +11,7 @@ namespace Libptx.Instructions.Video
 {
     [Ptxop20("vmad.dtype.atype.btype{.sat}{.scale} d, {-}a{.asel}, {-}b{.asel}, {-}c;")]
     [Ptxop20("vmad.dtype.atype.btype.po{.sat}{.scale} d, a{.asel}, b{.asel}, c;")]
+    [DebuggerNonUserCode]
     public partial class vmad : ptxop
     {
         [Affix] public Type dtype { get; set; }

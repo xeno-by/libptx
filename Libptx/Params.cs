@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
 using Libptx.Expressions.Slots;
@@ -8,6 +9,7 @@ using XenoGears.Functional;
 
 namespace Libptx
 {
+    [DebuggerNonUserCode]
     public class Params : BaseList<Var>
     {
         private readonly List<Var> _impl = new List<Var>();
@@ -19,6 +21,7 @@ namespace Libptx
         public override void RemoveAt(int index) { _impl.RemoveAt(index); }
     }
 
+    [DebuggerNonUserCode]
     public static class ParamsExtensions
     {
         public static void SetNames(this Params @params, params String[] names)

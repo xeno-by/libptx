@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
@@ -9,6 +10,7 @@ using XenoGears.Functional;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("vote.mode.pred d, {!}a;", SoftwareIsa.PTX_12)]
+    [DebuggerNonUserCode]
     public partial class vote_pred : ptxop
     {
         [Affix] public redm mode { get; set; }

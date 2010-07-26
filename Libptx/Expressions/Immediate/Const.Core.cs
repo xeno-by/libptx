@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Libcuda.DataTypes;
 using Libptx.Common;
@@ -10,6 +11,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Immediate
 {
+    [DebuggerNonUserCode]
     public partial class Const : Atom, Expression
     {
         public Const(Object value)

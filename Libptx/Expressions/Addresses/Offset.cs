@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Libptx.Expressions.Slots;
@@ -6,6 +7,7 @@ using Libptx.Statements;
 
 namespace Libptx.Expressions.Addresses
 {
+    [DebuggerNonUserCode]
     public class Offset : Renderable, Validatable
     {
         public Addressable Base { get; set; }

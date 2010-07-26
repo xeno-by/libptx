@@ -15,13 +15,14 @@ using Libptx.Statements;
 using NUnit.Framework;
 using XenoGears.Playground.Framework;
 using Type=Libptx.Common.Types.Type;
+using Libptx.Common;
 
 namespace Libptx.Playground.Emit
 {
     [TestFixture]
     public class AdHoc : BaseTests
     {
-        [Test]
+        [Test, Category("Hot")]
         public void MatMul()
         {
             Func<String, Var> reg_u32 = name => new Var{Name = name, Space = space.reg, Type = new Type{Name = TypeName.U32}};
@@ -132,7 +133,11 @@ namespace Libptx.Playground.Emit
 
             ptx.Add(new Comment{Text = Environment.NewLine});
             ptx.Add(exit);
-            ptx.Add(new exit{});
+            ptx.Add(new exit());
+
+            module.Validate();
+            var s_ptx = module.RenderAsPtx();
+            VerifyResult(s_ptx);
         }
     }
 }

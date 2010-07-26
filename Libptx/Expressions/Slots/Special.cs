@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Libptx.Common.Enumerations;
@@ -6,6 +7,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Slots
 {
+    [DebuggerNonUserCode]
     public abstract partial class Special : Atom, Slot
     {
         public String Name

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Types;
 using Type=Libptx.Common.Types.Type;
 
@@ -8,6 +9,7 @@ namespace Libptx.Expressions
         Type Type { get; }
     }
 
+    [DebuggerNonUserCode]
     public static class ExpressionExtensions
     {
         public static Modded mod(this Expression expr, Mod mod)

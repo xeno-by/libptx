@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Libptx.Common.Types;
@@ -7,6 +8,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Addresses
 {
+    [DebuggerNonUserCode]
     public class Index : Atom, Expression
     {
         public Var Base { get; set; } // may be null

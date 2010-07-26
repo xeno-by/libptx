@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -11,6 +12,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vshl.dtype.atype.u32{.sat}{.mode} d, a{.asel}, b{.bsel};")]
     [Ptxop20("vshl.dtype.atype.u32{.sat}{.mode}.op2 d, a{.asel}, b{.bsel}, c;")]
     [Ptxop20("vshl.dtype.atype.u32{.sat}{.mode} d.dsel, a{.asel}, b{.bsel}, c;")]
+    [DebuggerNonUserCode]
     public partial class vshl : ptxop
     {
         [Affix] public Type dtype { get; set; }

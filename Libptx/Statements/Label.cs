@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Libptx.Common;
@@ -10,6 +11,7 @@ using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Statements
 {
+    [DebuggerNonUserCode]
     public class Label : Atom, Expression, Statement, Addressable
     {
         public String Name { get; set; } // may be null
@@ -17,6 +19,8 @@ namespace Libptx.Statements
 
         protected override void CustomValidate(Module ctx)
         {
+            // todo. what else do we validate here?
+
             Func<Block, int> cntInBlock = null;
             cntInBlock = blk => blk.Stmts.Count(s =>
             {

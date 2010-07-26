@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
 namespace Libptx.Common
 {
+    [DebuggerNonUserCode]
     public static class Extensions
     {
         public static String RenderAsPtx(this Renderable renderable)

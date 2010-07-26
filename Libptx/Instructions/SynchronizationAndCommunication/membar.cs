@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Instructions.Annotations;
@@ -6,6 +7,7 @@ using Libptx.Common.Enumerations;
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
     [Ptxop("membar.level;")]
+    [DebuggerNonUserCode]
     public partial class membar : ptxop
     {
         [Affix] public barlevel level { get; set; }

@@ -18,29 +18,25 @@ namespace Libptx.Expressions.Slots
         public static Address operator +(Var @var, int offset)
         {
             if (@var == null) return null;
-            (@var.Space != space.reg).AssertTrue();
-            return new Address { Base = @var, Offset = offset };
+            if (@var.Space == space.reg) return new Address{Base = null, Offset = new Offset{Base = @var, Imm = offset}};
+            return new Address{Base = @var, Offset = new Offset{Base = null, Imm = offset}};
         }
 
         public static Address operator +(Var @var, long offset)
         {
             if (@var == null) return null;
-            (@var.Space != space.reg).AssertTrue();
-            return new Address { Base = @var, Offset = offset };
+            if (@var.Space == space.reg) return new Address{Base = null, Offset = new Offset{Base = @var, Imm = offset}};
+            return new Address{Base = @var, Offset = new Offset{Base = null, Imm = offset}};
         }
 
         public static Address operator -(Var @var, int offset)
         {
-            if (@var == null) return null;
-            (@var.Space != space.reg).AssertTrue();
-            return new Address { Base = @var, Offset = -offset };
+            return @var + (-offset);
         }
 
         public static Address operator -(Var @var, long offset)
         {
-            if (@var == null) return null;
-            (@var.Space != space.reg).AssertTrue();
-            return new Address { Base = @var, Offset = -offset };
+            return @var + (-offset);
         }
     }
 }

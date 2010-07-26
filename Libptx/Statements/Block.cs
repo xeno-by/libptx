@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
 using Libptx.Expressions.Slots;
@@ -7,6 +8,7 @@ using XenoGears.Functional;
 
 namespace Libptx.Statements
 {
+    [DebuggerNonUserCode]
     public class Block : Atom, Statement
     {
         private IList<Var> _vars = new List<Var>();

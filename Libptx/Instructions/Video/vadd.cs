@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libptx.Common.Types;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Instructions.Annotations;
@@ -11,6 +12,7 @@ namespace Libptx.Instructions.Video
     [Ptxop20("vadd.dtype.atype.btype{.sat} d, a{.asel}, b{.bsel};")]
     [Ptxop20("vadd.dtype.atype.btype{.sat}.op2 d, a{.asel}, b{.bsel}, c;")]
     [Ptxop20("vadd.dtype.atype.btype{.sat} d.dsel, a{.asel}, b{.bsel}, c;")]
+    [DebuggerNonUserCode]
     public partial class vadd : ptxop
     {
         [Affix] public Type dtype { get; set; }

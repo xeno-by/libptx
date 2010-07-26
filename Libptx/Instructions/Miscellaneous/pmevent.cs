@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Expressions;
 using Libptx.Expressions.Immediate;
@@ -8,6 +9,7 @@ using XenoGears.Functional;
 namespace Libptx.Instructions.Miscellaneous
 {
     [Ptxop("pmevent a;", SoftwareIsa.PTX_14)]
+    [DebuggerNonUserCode]
     public partial class pmevent : ptxop
     {
         public pmevent() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
