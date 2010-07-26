@@ -66,7 +66,7 @@ namespace Libptx.Instructions.Arithmetic
             }
             else
             {
-                is_alu(d, type).AssertTrue();
+                is_reg(d, type).AssertTrue();
                 is_alu(a, type).AssertTrue();
                 is_alu(b, type).AssertTrue();
             }

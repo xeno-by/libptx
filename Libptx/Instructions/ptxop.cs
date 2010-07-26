@@ -115,6 +115,7 @@ namespace Libptx.Instructions
         protected bool is_reg(Expression expr, Type t, Mod mod)
         {
             // todo. same as for is_alu, but disallow immediates
+            // todo. I think we should allow vectors here...
             throw new NotImplementedException();
         }
 

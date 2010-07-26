@@ -38,7 +38,7 @@ namespace Libptx.Instructions.TextureAndSurface
 
         protected override void custom_validate_operands(Module ctx)
         {
-            is_alu(d, type).AssertTrue();
+            is_reg(d, type).AssertTrue();
             (is_alu(a, texref) || is_alu(a, samplerref)).AssertTrue();
 
             var is_tex_query = (tquery == tex_width || tquery == tex_height || tquery == tex_depth || tquery == tex_channel_datatype || tquery == tex_channel_order || tquery == tex_normalized_coords);

@@ -26,7 +26,7 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override void custom_validate_operands(Module ctx)
         {
-            is_alu(d, type).AssertTrue();
+            is_reg(d, type).AssertTrue();
 
             var move_from_alu = is_alu(a, type);
             var move_from_special = is_special(a, type);

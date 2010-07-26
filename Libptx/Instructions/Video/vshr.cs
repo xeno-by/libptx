@@ -42,14 +42,14 @@ namespace Libptx.Instructions.Video
             var datamerge = op2 == 0 && c != null;
             if (datamerge)
             {
-                is_alu(d, dtype, exact(sel)).AssertTrue();
+                is_reg(d, dtype, exact(sel)).AssertTrue();
                 is_alu(a, atype, sel).AssertTrue();
                 is_alu(b, btype, sel).AssertTrue();
                 is_alu(c, dtype).AssertTrue();
             }
             else
             {
-                is_alu(d, dtype).AssertTrue();
+                is_reg(d, dtype).AssertTrue();
                 is_alu(a, atype, sel).AssertTrue();
                 is_alu(b, btype, sel).AssertTrue();
                 is_alu_or_null(c, dtype).AssertTrue();

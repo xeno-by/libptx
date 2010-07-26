@@ -38,7 +38,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
 
         protected override void custom_validate_operands(Module ctx)
         {
-            is_alu(d, dtype).AssertTrue();
+            is_reg(d, dtype).AssertTrue();
             is_alu(a, stype).AssertTrue();
             is_alu(b, stype).AssertTrue();
             is_alu_or_null(c, pred, not).AssertTrue();

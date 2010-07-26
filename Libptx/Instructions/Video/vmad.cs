@@ -56,14 +56,14 @@ namespace Libptx.Instructions.Video
 
             if (po)
             {
-                is_alu(d, dtype).AssertTrue();
+                is_reg(d, dtype).AssertTrue();
                 is_alu(a, atype, sel | neg).AssertTrue();
                 is_alu(b, btype, sel | neg).AssertTrue();
                 is_alu(c, dtype, neg).AssertTrue();
             }
             else
             {
-                is_alu(d, dtype).AssertTrue();
+                is_reg(d, dtype).AssertTrue();
                 is_alu(a, atype, sel).AssertTrue();
                 is_alu(b, btype, sel).AssertTrue();
                 is_alu(c, dtype).AssertTrue();
