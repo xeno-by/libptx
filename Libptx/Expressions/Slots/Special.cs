@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
-using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Slots

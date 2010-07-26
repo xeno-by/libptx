@@ -126,7 +126,7 @@
     <Compile Include="Expressions\Expression.cs" />
     <Compile Include="Common\Types\Type.Core.cs" />
     <Compile Include="Common\Types\TypeName.cs" />
-    <Compile Include="Common\Enumerations\space.cs" />
+    <Compile Include="Common\Spaces\space.cs" />
     <Compile Include="Expressions\Slots\Var.Core.cs" />
     <Compile Include="Common\Types\TypeMod.cs" />
     <Compile Include="Expressions\Mod.cs" />

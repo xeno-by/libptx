@@ -1,4 +1,4 @@
-﻿using Libptx.Common.Enumerations;
+﻿using Libptx.Common.Spaces;
 using Libptx.Expressions.Addresses;
 using XenoGears.Assertions;
 

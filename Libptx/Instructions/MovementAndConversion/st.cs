@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
 using Libcuda.Versions;
@@ -41,6 +42,7 @@ namespace Libptx.Instructions.MovementAndConversion
         }
 
         protected override bool allow_int8 { get { return true; } }
+        protected override bool allow_bit8 { get { return true; } }
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }

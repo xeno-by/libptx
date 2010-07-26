@@ -2,8 +2,9 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
-using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 using Libptx.Expressions;
+using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using Type = Libptx.Common.Types.Type;
 
@@ -80,6 +81,11 @@ namespace Libptx.Instructions
         protected static Mod member { get { return Mod.X | Mod.R | Mod.Y | Mod.G | Mod.Z | Mod.B | Mod.W | Mod.A; } }
         protected static Mod exact(Mod mod) { return mod | (Mod)65536; }
 
+        protected bool agree(Type t_expr, Type t)
+        {
+            return agree(new Var{Type = t_expr}, t);
+        }
+
         protected bool agree(Expression expr, Type t)
         {
             return agree(expr, t, 0);
@@ -94,7 +100,14 @@ namespace Libptx.Instructions
             // todo. correctly process exact(mod)!
             // todo. also verify types of vars, e.g. couple can consist only of two preds
             // todo. exception for specials!
+            // todo. u32 and u64 agree with opaque types!
+            // todo. but not vice versa: the only place where opaques can be used in place of u32/u64 is mov's src operand!
             throw new NotImplementedException();
+        }
+
+        protected bool agree_or_null(Type t_expr, Type t)
+        {
+            return t_expr == null || agree(t_expr, t);
         }
 
         protected bool agree_or_null(Expression expr, Type t)
@@ -105,6 +118,11 @@ namespace Libptx.Instructions
         protected bool agree_or_null(Expression expr, Type t, Mod mod)
         {
             return expr == null || agree(expr, t, mod);
+        }
+
+        protected bool relax(Type t_expr, Type t)
+        {
+            return relax(new Var{Type = t_expr}, t);
         }
 
         protected bool relax(Expression expr, Type t)

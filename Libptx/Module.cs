@@ -26,6 +26,13 @@ namespace Libptx
             set { _tuning = value ?? new Tuning(); }
         }
 
+        private IList<Var> _vars = new List<Var>();
+        public virtual IList<Var> Vars
+        {
+            get { return _vars; }
+            set { _vars = value ?? new List<Var>(); }
+        }
+
         private Entries _entries = new Entries();
         public Entries Entries
         {
@@ -101,6 +108,7 @@ namespace Libptx
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
             Tuning.Validate(this);
+            Vars.ForEach(v => v.Validate(this));
             Entries.ForEach(e => e.Validate(this));
         }
 

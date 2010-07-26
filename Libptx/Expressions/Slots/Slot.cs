@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 
 namespace Libptx.Expressions.Slots
 {

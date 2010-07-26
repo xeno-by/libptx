@@ -1,6 +1,7 @@
 ﻿using System;
 using Libcuda.Versions;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Expressions.Immediate;

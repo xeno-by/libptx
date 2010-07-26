@@ -2,10 +2,11 @@
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
-using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 using Libptx.Expressions.Addresses;
 using Libptx.Expressions.Immediate;
 using Type = Libptx.Common.Types.Type;
+using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Slots
 {
@@ -23,12 +24,14 @@ namespace Libptx.Expressions.Slots
 
         protected override void CustomValidate(Module ctx)
         {
+            this.is_opaque().AssertImplies(Space == param || Space == global);
+            (Init != null).AssertImplies(Space.is_const() || Space == global);
+
             // todo. arrays and regs
             // todo. Initializers are allowed for all types except .f16 and .pred.
-            // todo. Currently, variable initialization is supported only for constant and global state spaces
             // todo. declared must not have types: sreg, ptr
             // todo. preds must be reg
-            // todo. other opaques must be global
+            // todo. other opaques must be global/param
             // todo. A texture base address is assumed to be aligned to a 16-byte address?!
             // todo. A surface base address is assumed to be aligned to a 16-byte address?!
             throw new NotImplementedException();

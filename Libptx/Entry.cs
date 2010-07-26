@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
+using Libptx.Common.Types;
 using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using XenoGears.Assertions;
@@ -50,6 +51,13 @@ namespace Libptx
             if (ctx.Version >= SoftwareIsa.PTX_15) size_limit += 4096;
             // todo. what if we pass pointers? what if we pass textures?
             (Params.Sum(p => p.SizeInMemory()) <= size_limit).AssertTrue();
+
+            // 5.3. Texture, Sampler, and Surface Types
+            // The use of these opaque types is limited to:
+            // * Variable definition within global (module) scope and in kernel entry parameter lists.
+            // * Static initialization of module-scope variables using comma-delimited static
+            //   assignment expressions for the named members of the type
+            Params.ForEach(p => p.Type.is_opaque().AssertImplies(p.Init == null));
 
             Tuning.Validate(ctx);
             Params.ForEach(p => p.Validate(ctx));

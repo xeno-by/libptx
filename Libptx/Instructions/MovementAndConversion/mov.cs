@@ -29,7 +29,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override void custom_validate_operands(Module ctx)
         {
             (agree(d, type) && is_reg(d)).AssertTrue();
-            agree(a, type).AssertTrue();
+            (agree(a, type) || (a.is_opaque() && (agree(type, u32) || agree(type, u64)))).AssertTrue();
         }
     }
 }

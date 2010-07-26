@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Spaces;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
 using Libptx.Expressions;

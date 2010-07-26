@@ -42,7 +42,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
             var a_const = (a as Const).AssertNotNull();
             if (a_const != null)
             {
-                var value = @const.AssertCoerce<int>();
+                var value = a_const.AssertCoerce<int>();
                 (0 <= value && value <= 15).AssertTrue();
             }
         }

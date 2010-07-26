@@ -6,6 +6,7 @@ using Libcuda.Versions;
 using Libptx.Common.Annotations;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Annotations.Atoms;
+using Libptx.Common.Spaces;
 using Libptx.Common.Types;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
@@ -163,18 +164,8 @@ namespace Libptx.Common
         protected static space shared { get { return space.shared; } }
         protected static space global { get { return space.global; } }
         protected static space param { get { return space.param; } }
-        protected static space @const { get { return space.@const; } }
-        protected static space const0 { get { return space.const0; } }
-        protected static space const1 { get { return space.const1; } }
-        protected static space const2 { get { return space.const2; } }
-        protected static space const3 { get { return space.const3; } }
-        protected static space const4 { get { return space.const4; } }
-        protected static space const5 { get { return space.const5; } }
-        protected static space const6 { get { return space.const6; } }
-        protected static space const7 { get { return space.const7; } }
-        protected static space const8 { get { return space.const8; } }
-        protected static space const9 { get { return space.const9; } }
-        protected static space const10 { get { return space.const10; } }
+        // note. use methods of spaceExtensions class to check whether some space refers to constant memory
+        // it's all that complicated since there are 11 independent constant banks, so we cannot simply compare space to @const
 
         protected static squery surf_width { get { return squery.width; } }
         protected static squery surf_height { get { return squery.height; } }
