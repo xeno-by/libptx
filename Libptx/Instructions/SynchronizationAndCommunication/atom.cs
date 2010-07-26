@@ -55,13 +55,12 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override bool allow_ptr { get { return true; } }
         protected override void custom_validate_operands(Module ctx)
         {
-            (agree(d, type) && is_reg(d)).AssertTrue();
+            is_alu(d, type).AssertTrue();
             is_ptr(a, space != 0 ? space : (global | shared)).AssertTrue();
-            (agree(b, type) && is_reg(b)).AssertTrue();
-            (c == null || (agree(c, type) && is_reg(c))).AssertTrue();
+            is_alu(b, type).AssertTrue();
+            (c == null || is_alu(c, type)).AssertTrue();
             (c != null).AssertImplies(op == cas);
         }
     }

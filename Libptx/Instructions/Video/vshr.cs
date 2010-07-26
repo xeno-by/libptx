@@ -42,17 +42,17 @@ namespace Libptx.Instructions.Video
             var datamerge = op2 == 0 && c != null;
             if (datamerge)
             {
-                agree(d, dtype, exact(sel)).AssertTrue();
-                agree(a, atype, sel).AssertTrue();
-                agree(b, btype, sel).AssertTrue();
-                agree(c, dtype).AssertTrue();
+                is_alu(d, dtype, exact(sel)).AssertTrue();
+                is_alu(a, atype, sel).AssertTrue();
+                is_alu(b, btype, sel).AssertTrue();
+                is_alu(c, dtype).AssertTrue();
             }
             else
             {
-                agree(d, dtype).AssertTrue();
-                agree(a, atype, sel).AssertTrue();
-                agree(b, btype, sel).AssertTrue();
-                agree_or_null(c, dtype).AssertTrue();
+                is_alu(d, dtype).AssertTrue();
+                is_alu(a, atype, sel).AssertTrue();
+                is_alu(b, btype, sel).AssertTrue();
+                is_alu_or_null(c, dtype).AssertTrue();
             }
         }
     }

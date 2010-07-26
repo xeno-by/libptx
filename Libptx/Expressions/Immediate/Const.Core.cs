@@ -52,6 +52,11 @@ namespace Libptx.Expressions.Immediate
 
         protected override void RenderAsPtx(TextWriter writer)
         {
+            // todo.
+            // 1) true/false -> 1/0
+            // 2) 0x... with optional U (mandatory uppercase)
+            // 3) getbits for f (0f... and 0d....)
+            // 4) also support opaques
             throw new NotImplementedException();
         }
     }

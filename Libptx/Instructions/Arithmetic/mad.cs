@@ -69,17 +69,17 @@ namespace Libptx.Instructions.Arithmetic
                 var twice_typename = (TypeName)Enum.Parse(typeof(TypeName), s_twice_typename);
                 var twice_type = new Type { Name = twice_typename, Mod = type.Mod, Dims = type.Dims };
 
-                agree(d, twice_type).AssertTrue();
-                agree(a, type).AssertTrue();
-                agree(b, type).AssertTrue();
-                agree(c, twice_type).AssertTrue();
+                is_alu(d, twice_type).AssertTrue();
+                is_alu(a, type).AssertTrue();
+                is_alu(b, type).AssertTrue();
+                is_alu(c, twice_type).AssertTrue();
             }
             else
             {
-                agree(d, type).AssertTrue();
-                agree(a, type).AssertTrue();
-                agree(b, type).AssertTrue();
-                agree(c, type).AssertTrue();
+                is_alu(d, type).AssertTrue();
+                is_alu(a, type).AssertTrue();
+                is_alu(b, type).AssertTrue();
+                is_alu(c, type).AssertTrue();
             }
         }
     }

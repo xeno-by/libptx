@@ -56,17 +56,17 @@ namespace Libptx.Instructions.Video
 
             if (po)
             {
-                agree(d, dtype).AssertTrue();
-                agree(a, atype, sel | neg).AssertTrue();
-                agree(b, btype, sel | neg).AssertTrue();
-                agree(c, dtype, neg).AssertTrue();
+                is_alu(d, dtype).AssertTrue();
+                is_alu(a, atype, sel | neg).AssertTrue();
+                is_alu(b, btype, sel | neg).AssertTrue();
+                is_alu(c, dtype, neg).AssertTrue();
             }
             else
             {
-                agree(d, dtype).AssertTrue();
-                agree(a, atype, sel).AssertTrue();
-                agree(b, btype, sel).AssertTrue();
-                agree(c, dtype).AssertTrue();
+                is_alu(d, dtype).AssertTrue();
+                is_alu(a, atype, sel).AssertTrue();
+                is_alu(b, btype, sel).AssertTrue();
+                is_alu(c, dtype).AssertTrue();
             }
         }
     }

@@ -61,11 +61,11 @@ namespace Libptx.Instructions.TextureAndSurface
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(d, dtype).AssertTrue();
-            agree(a, surfref).AssertTrue();
-            if (geom == d1) (agree(d, s32) || agree(d, s32.v1)).AssertTrue();
-            else if (geom == d2) agree(d, s32.v2).AssertTrue();
-            else if (geom == d3) agree(d, s32.v4).AssertTrue();
+            is_alu(d, dtype).AssertTrue();
+            is_alu(a, surfref).AssertTrue();
+            if (geom == d1) (is_alu(d, s32) || is_alu(d, s32.v1)).AssertTrue();
+            else if (geom == d2) is_alu(d, s32.v2).AssertTrue();
+            else if (geom == d3) is_alu(d, s32.v4).AssertTrue();
             else throw AssertionHelper.Fail();
         }
     }

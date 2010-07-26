@@ -35,10 +35,10 @@ namespace Libptx.Instructions.ComparisonAndSelection
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(d, dtype).AssertTrue();
-            agree(a, dtype).AssertTrue();
-            agree(b, dtype).AssertTrue();
-            agree(c, ctype).AssertTrue();
+            is_alu(d, dtype).AssertTrue();
+            is_alu(a, dtype).AssertTrue();
+            is_alu(b, dtype).AssertTrue();
+            is_alu(c, ctype).AssertTrue();
         }
     }
 }

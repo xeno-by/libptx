@@ -27,8 +27,8 @@ namespace Libptx.Instructions.Arithmetic
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(p, pred).AssertTrue();
-            agree(a, type).AssertTrue();
+            is_alu(p, pred).AssertTrue();
+            is_alu(a, type).AssertTrue();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Expressions.Immediate;
+using Libptx.Expressions.Slots;
 using Libptx.Instructions.Annotations;
 using Libptx.Expressions;
 using XenoGears.Assertions;
@@ -16,8 +17,9 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         {
             get
             {
-                var a_reg = is_reg(a);
-                return a_reg || b != null ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_10;
+                var a_var = a as Var;
+                var a_is_reg = a_var != null && a_var.Space == reg;
+                return a_is_reg || b != null ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_10;
             }
         }
 
@@ -25,8 +27,9 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         {
             get
             {
-                var a_reg = is_reg(a);
-                return a_reg || b != null ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
+                var a_var = a as Var;
+                var a_is_reg = a_var != null && a_var.Space == reg;
+                return a_is_reg || b != null ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
             }
         }
 
@@ -36,8 +39,8 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(a, u32).AssertTrue();
-            agree_or_null(b, u32).AssertTrue();
+            is_alu(a, u32).AssertTrue();
+            is_alu_or_null(b, u32).AssertTrue();
 
             var a_const = (a as Const).AssertNotNull();
             if (a_const != null)

@@ -25,15 +25,16 @@ namespace Libptx.Expressions
             get { throw new NotImplementedException(); }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void CustomValidate(Module ctx)
         {
             // todo. what expressions can be modded?
             // e.g. does PTX allow modding immediate expressions?
+            // couple can consist only of two preds and not may be applied only to s32
+            throw new NotImplementedException();
+        }
+
+        protected override void RenderAsPtx(TextWriter writer)
+        {
             throw new NotImplementedException();
         }
     }

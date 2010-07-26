@@ -17,8 +17,8 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(a, u32).AssertTrue();
-            agree(b, u32).AssertTrue();
+            is_alu(a, u32).AssertTrue();
+            is_alu(b, u32).AssertTrue();
 
             var a_const = (a as Const).AssertNotNull();
             if (a_const != null)

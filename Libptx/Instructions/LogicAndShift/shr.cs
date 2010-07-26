@@ -30,9 +30,9 @@ namespace Libptx.Instructions.LogicAndShift
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(d, type).AssertTrue();
-            agree(a, type).AssertTrue();
-            agree(b, u32).AssertTrue();
+            is_alu(d, type).AssertTrue();
+            is_alu(a, type).AssertTrue();
+            is_alu(b, u32).AssertTrue();
         }
     }
 }

@@ -25,8 +25,8 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(p, pred).AssertTrue();
-            (agree(a, u32) || agree(a, u64)).AssertTrue();
+            is_alu(p, pred).AssertTrue();
+            (is_alu(a, u32) || is_alu(a, u64)).AssertTrue();
         }
     }
 }

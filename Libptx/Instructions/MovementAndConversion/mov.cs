@@ -24,12 +24,14 @@ namespace Libptx.Instructions.MovementAndConversion
         public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override bool allow_ptr { get { return true; } }
-        protected override bool allow_special { get { return true; } }
         protected override void custom_validate_operands(Module ctx)
         {
-            (agree(d, type) && is_reg(d)).AssertTrue();
-            (agree(a, type) || (a.is_opaque() && (agree(type, u32) || agree(type, u64)))).AssertTrue();
+            is_alu(d, type).AssertTrue();
+
+            var move_from_alu = is_alu(a, type);
+            var move_from_special = is_special(a, type);
+            var move_from_opaque_to_ptr = a.is_opaque() && (agree(type, u32) || agree(type, u64));
+            (move_from_alu || move_from_special || move_from_opaque_to_ptr).AssertTrue();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(a, ptr).AssertTrue();
+            is_ptr(a, space).AssertTrue();
         }
     }
 }

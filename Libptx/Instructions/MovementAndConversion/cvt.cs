@@ -42,8 +42,8 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override void custom_validate_operands(Module ctx)
         {
-            relax(d, dtype).AssertTrue();
-            relax(a, atype).AssertTrue();
+            is_relaxed_alu(d, dtype).AssertTrue();
+            is_relaxed_alu(a, atype).AssertTrue();
         }
     }
 }

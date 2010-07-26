@@ -4,7 +4,6 @@ using System.IO;
 using Libcuda.Versions;
 using Libptx.Common.Spaces;
 using Libptx.Expressions;
-using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using Type = Libptx.Common.Types.Type;
 
@@ -62,16 +61,170 @@ namespace Libptx.Instructions
             throw new NotImplementedException();
         }
 
-        protected virtual bool allow_ptr { get { return false; } }
-        protected virtual bool allow_special { get { return false; } }
         protected virtual void custom_validate_operands(Module ctx) { }
         private void validate_operands(Module ctx)
         {
             // todo. don't verify nullity - custom validation will uncover those if they are present
-            // todo. verify all restrictions for operands (i mean, allow_*)
-            // todo. constants are treated as regs
             // todo. also verify count of Operands collection!
+            // todo. also run validate for all operands
+            // todo. but keep in mind that operands might be null so check for nullity!
             throw new NotImplementedException();
         }
+
+        #region Operand checking utilities
+
+        protected static Mod not { get { return Mod.Not; } }
+        protected static Mod couple { get { return Mod.Couple; } }
+        protected static Mod neg { get { return Mod.Neg; } }
+        protected static Mod sel { get { return Mod.B0 | Mod.B1 | Mod.B2 | Mod.B3 | Mod.H0 | Mod.H1; } }
+        protected static Mod member { get { return Mod.X | Mod.R | Mod.Y | Mod.G | Mod.Z | Mod.B | Mod.W | Mod.A; } }
+        protected static Mod exact(Mod mod) { return mod | (Mod)65536; }
+
+        protected bool is_alu(Expression expr, Type t)
+        {
+            return is_alu(expr, t, 0);
+        }
+
+        protected bool is_alu(Expression expr, Type t, Mod mod)
+        {
+            // todo. verify types of expressions using agree(expr.Type, t)
+            // todo. only allow immediates (Const, Vector, WarpSz) and register vars (Var, Modded with Base == register Var)
+            // todo. disallow specials here!
+            // todo. if mod == 0, then disallow mods
+            // todo. if mod != 0, then var might lack it and it'll be ok
+            // todo. check mod using Flags!
+            // todo. correctly process exact(mod)!
+            throw new NotImplementedException();
+        }
+
+        protected bool is_alu_or_null(Expression expr, Type t)
+        {
+            return is_alu_or_null(expr, t, 0);
+        }
+
+        protected bool is_alu_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || is_alu(expr, t, mod);
+        }
+
+        protected bool is_reg(Expression expr, Type t)
+        {
+            return is_reg(expr, t, 0);
+        }
+
+        protected bool is_reg(Expression expr, Type t, Mod mod)
+        {
+            // todo. same as for is_alu, but disallow immediates
+            throw new NotImplementedException();
+        }
+
+        protected bool is_reg_or_null(Expression expr, Type t)
+        {
+            return is_reg_or_null(expr, t, 0);
+        }
+
+        protected bool is_reg_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || is_reg(expr, t, mod);
+        }
+
+        protected bool is_special(Expression expr, Type t)
+        {
+            return is_special(expr, t, 0);
+        }
+
+        protected bool is_special(Expression expr, Type t, Mod mod)
+        {
+            // todo. same as for is_alu, but allow specials
+            // todo. exception for types of special registers that specify grid characteristics
+            throw new NotImplementedException();
+        }
+
+        protected bool is_special_or_null(Expression expr, Type t)
+        {
+            return is_special_or_null(expr, t, 0);
+        }
+
+        protected bool is_special_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || is_special(expr, t, mod);
+        }
+
+        protected bool is_relaxed_alu(Expression expr, Type t)
+        {
+            return is_relaxed_alu(expr, t, 0);
+        }
+
+        protected bool is_relaxed_alu(Expression expr, Type t, Mod mod)
+        {
+            // todo. same as for is_alu, but with the use of relaxed_agree
+            throw new NotImplementedException();
+        }
+
+        protected bool is_relaxed_alu_or_null(Expression expr, Type t)
+        {
+            return is_relaxed_alu_or_null(expr, t, 0);
+        }
+
+        protected bool is_relaxed_alu_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || is_relaxed_alu(expr, t, mod);
+        }
+
+        protected bool is_relaxed_reg(Expression expr, Type t)
+        {
+            return is_relaxed_reg(expr, t, 0);
+        }
+
+        protected bool is_relaxed_reg(Expression expr, Type t, Mod mod)
+        {
+            // todo. same as for is_reg, but with the use of relaxed_agree
+            throw new NotImplementedException();
+        }
+
+        protected bool is_relaxed_reg_or_null(Expression expr, Type t)
+        {
+            return is_relaxed_reg_or_null(expr, t, 0);
+        }
+
+        protected bool is_relaxed_reg_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || is_relaxed_reg(expr, t, mod);
+        }
+
+        protected bool is_relaxed_special(Expression expr, Type t)
+        {
+            return is_relaxed_special(expr, t, 0);
+        }
+
+        protected bool is_relaxed_special(Expression expr, Type t, Mod mod)
+        {
+            // todo. same as for is_special, but with the use of relaxed_agree
+            throw new NotImplementedException();
+        }
+
+        protected bool is_relaxed_special_or_null(Expression expr, Type t)
+        {
+            return is_relaxed_special_or_null(expr, t, 0);
+        }
+
+        protected bool is_relaxed_special_or_null(Expression expr, Type t, Mod mod)
+        {
+            return expr == null || is_relaxed_special(expr, t, mod);
+        }
+
+        protected bool is_ptr(Expression expr, space space)
+        {
+            // todo. any pointer agrees with space == 0
+            // todo. check space using Flags (see atom.cs for more info)
+            throw new NotImplementedException();
+        }
+
+        protected bool is_ptr_or_null(Expression expr, space space)
+        {
+            return expr == null || is_ptr(expr, space);
+        }
+
+        #endregion
     }
 }

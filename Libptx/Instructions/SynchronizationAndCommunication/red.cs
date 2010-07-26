@@ -50,11 +50,10 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override bool allow_ptr { get { return true; } }
         protected override void custom_validate_operands(Module ctx)
         {
             is_ptr(a, space != 0 ? space : (global | shared)).AssertTrue();
-            (agree(b, type) && is_reg(b)).AssertTrue();
+            is_alu(b, type).AssertTrue();
         }
     }
 }

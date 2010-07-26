@@ -26,8 +26,8 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
         protected override void custom_validate_operands(Module ctx)
         {
-            agree(d, pred).AssertTrue();
-            agree(a, pred, not).AssertTrue();
+            is_alu(d, pred).AssertTrue();
+            is_alu(a, pred, not).AssertTrue();
         }
     }
 }
