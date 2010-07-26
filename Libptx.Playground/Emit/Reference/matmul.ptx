@@ -1,1 +1,101 @@
-﻿
+﻿.version 1.4
+.target sm_13
+
+.entry MatMulKernel (
+    .param .align 4 .b8 A[12],
+    .param .align 4 .b8 B[12],
+    .param .align 4 .b8 C[12])
+{
+    .reg .u16 %rh<6>;
+    .reg .u32 %r<37>;
+    .reg .f32 %f<5>;
+    .reg .pred %p<9>;
+    .reg .u32 a_width;
+    .reg .u32 a_height;
+    .reg .u32 a_raw;
+    .reg .u32 b_width;
+    .reg .u32 b_height;
+    .reg .u32 b_raw;
+    .reg .u32 c_width;
+    .reg .u32 c_height;
+    .reg .u32 c_raw;
+    .reg .u32 row;
+    .reg .u32 col;
+    .reg .f32 cvalue;
+    .reg .u32 dim;
+    .reg .u32 a_offset;
+    .reg .u32 a_offset_lo;
+    .reg .u32 a_offset_stride
+    .reg .u32 a_offset_hi;
+    .reg .u32 b_offset;
+    .reg .u32 b_offset_lo;
+    .reg .u32 b_offset_stride
+    .reg .u32 b_offset_hi;
+
+    // int row = blockIdx.y * blockDim.y + threadIdx.y;
+    // int col = blockIdx.x * blockDim.x + threadIdx.x;
+    mov.u16             %rh1, %ctaid.x;
+    mov.u16             %rh2, %ntid.x;
+    mul.wide.u16        %r1, %rh1, %rh2;
+    mov.u16             %rh3, %ctaid.y;
+    mov.u16             %rh4, %ntid.y;
+    mul.wide.u16        %r2, %rh3, %rh4;
+    cvt.u32.u16         %r3, %tid.x;
+    add.u32             col, %r3, %r1;
+    cvt.u32.u16         %r5, %tid.y;
+    add.u32             row, %r5, %r2;
+
+    // if (A.height <= row || B.width <= col) return;
+    ld.param.u32        b_width, [B+0];
+    ld.param.u32        a_height, [A+4];
+    setp.le.u32         %p6, a_height, row;
+    setp.le.u32         %p7, b_width, col;
+    or.pred             %p1, %p6, %p7;
+    @%p1 bra            $Exit;
+
+    // float Cvalue = 0;
+    mov.f32             cvalue, 0f00000000; // 0
+
+    // for (int dim = 0; dim < A.width; ++dim)
+    ld.param.u32        a_width, [A+0];
+    mov.u32             dim, 0;
+    setp.le.u32         %p2|%p8, a_width, dim;
+    @!%p8 bra           $AfterLoop;
+
+    // Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];
+    ld.param.u32        a_raw, [A+8];
+    mul.lo.u32          %r18, a_width, row;
+    mul.lo.u32          a_offset_lo, %r18, 4;
+    add.u32             a_offset, a_offset_lo, a_raw;
+    add.u32             %r21, %r18, a_width;
+    mul.lo.u32          %r25, %r21, 4;
+    add.u32             a_offset_hi, %r25, a_raw;
+    ld.param.u32        b_raw, [B+8];
+    mul.lo.u32          b_offset_lo, col, 4;
+    add.u32             b_offset, b_offset_lo, b_raw;
+    mul.lo.u32          b_offset_stride, b_width, 4;
+
+    // Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];
+$LoopBody:
+    ld.global.f32       %f2, [a_offset+0];
+    ld.global.f32       %f3, [b_offset+0];
+    mad.f32             cvalue, %f3, %f2, cvalue;
+    add.u32             a_offset, a_offset, 4;
+    add.u32             b_offset, b_offset, b_offset_stride;
+    setp.ne.u32         %p3, a_offset, a_offset_hi;
+    @%p3 bra            $LoopBody;
+    bra.uni             $AfterLoop;
+
+    // C.elements[row * C.width + col] = Cvalue;
+$AfterLoop:
+    ld.param.u32        c_raw, [C+8];
+    ld.param.u32        c_width, [C+0];
+    mul.lo.u32          %r32, c_width, row;
+    add.u32             %r33, col, %r32;
+    mul.lo.u32          %r34, %r33, 4;
+    add.u32             %r35, c_raw, %r34;
+    st.global.f32       [%r35+0], cvalue;
+
+$Exit:
+    exit;
+}

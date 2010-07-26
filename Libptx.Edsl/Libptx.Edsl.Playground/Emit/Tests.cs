@@ -3,10 +3,6 @@ using XenoGears.Playground.Framework;
 
 namespace Libptx.Edsl.Playground.Emit
 {
-    // todo. naming is an important concern:
-    // 1) there should be a way to emit both named and unnamed var (reg.u32 and reg.u32("foo"))
-    // 2) there should be a way to infer var names from the names of locals (debug-mode only, of course)
-
     [TestFixture]
     public class Tests : BaseTests
     {
