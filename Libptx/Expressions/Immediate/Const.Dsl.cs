@@ -2,7 +2,6 @@
 using Libptx.Common.Types.Bits;
 using Libptx.Common.Types.Opaques;
 using Libptx.Expressions.Slots;
-using Libptx.Statements;
 
 namespace Libptx.Expressions.Immediate
 {
@@ -11,7 +10,6 @@ namespace Libptx.Expressions.Immediate
         // addressables
 //        public static implicit operator Const(Addressable value) { return new Const(value); }
         public static implicit operator Const(Var value) { return new Const(value); }
-        public static implicit operator Const(Label value) { return new Const(value); }
 
         // predicates
         public static implicit operator Const(bool value) { return new Const(value); }

@@ -24,8 +24,12 @@ namespace Libptx.Common.Types
         protected override void CustomValidate(Module ctx)
         {
             (SizeOfElement <= 128).AssertTrue();
+
             this.is_vec().AssertImplies(this.el().is_scalar());
+            this.vec_rank().AssertThat(rank => rank == 0 || rank == 2 || rank == 4);
+
             this.is_arr().AssertImplies(this.el().is_scalar());
+            (Dims ?? new int[0]).AssertEach(dim => dim > 0);
         }
 
         protected override void RenderAsPtx(TextWriter writer)

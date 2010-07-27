@@ -2,24 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
-using Libptx.Common.Spaces;
+using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 
-namespace Libptx.Expressions.Slots
+namespace Libptx.Expressions.Sregs
 {
     [DebuggerNonUserCode]
-    public abstract partial class Special : Atom, Slot
+    public abstract partial class Sreg : Atom, Expression
     {
-        public String Name
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public space Space
-        {
-            get { return space.sreg; }
-        }
-
         public Type Type
         {
             get { throw new NotImplementedException(); }
@@ -27,7 +17,8 @@ namespace Libptx.Expressions.Slots
 
         protected override void CustomValidate(Module ctx)
         {
-            throw new NotImplementedException();
+            (Type != null).AssertTrue();
+            Type.Validate(ctx);
         }
 
         protected override void RenderAsPtx(TextWriter writer)

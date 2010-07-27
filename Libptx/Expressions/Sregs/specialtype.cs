@@ -1,6 +1,6 @@
-using Libptx.Expressions.Slots.Specials;
+using Libptx.Expressions.Sregs;
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public enum specialtype
     {
@@ -22,15 +22,15 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots
+namespace Libptx.Expressions.Sregs
 {
-    public abstract partial class Special
+    public abstract partial class Sreg
     {
         public abstract specialtype discr { get; }
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class clock32
     {
@@ -38,7 +38,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class clock64
     {
@@ -46,7 +46,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class ctaid
     {
@@ -54,7 +54,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class envreg
     {
@@ -62,7 +62,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class gridid
     {
@@ -70,7 +70,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class laneid
     {
@@ -78,7 +78,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class lanemask
     {
@@ -86,7 +86,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class nctaid
     {
@@ -94,7 +94,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class nsmid
     {
@@ -102,7 +102,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class ntid
     {
@@ -110,7 +110,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class nwarpid
     {
@@ -118,7 +118,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class pm
     {
@@ -126,7 +126,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class smid
     {
@@ -134,7 +134,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class tid
     {
@@ -142,7 +142,7 @@ namespace Libptx.Expressions.Slots.Specials
     }
 }
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     public partial class warpid
     {

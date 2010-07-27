@@ -2,17 +2,16 @@
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
-using Libptx.Common.Spaces;
+using Libptx.Common.Enumerations;
 using Libptx.Expressions.Addresses;
 using Libptx.Expressions.Immediate;
 using Type = Libptx.Common.Types.Type;
 using XenoGears.Assertions;
-using XenoGears.Functional;
 
 namespace Libptx.Expressions.Slots
 {
     [DebuggerNonUserCode]
-    public partial class Var : Atom, Slot, Addressable
+    public partial class Var : Atom, Slot, Addressable, Expression
     {
         public String Name { get; set; }
         public space Space { get; set; }
@@ -40,21 +39,18 @@ namespace Libptx.Expressions.Slots
             set { _alignment = value; }
         }
 
-        public bool IsVisible { get; set; }
-        public bool IsExtern { get; set; }
-
         protected override void CustomValidate(Module ctx)
         {
+            if (Name != null) Name.ValidateName();
+            // uniqueness of names is validated by the scope
+
             (Space != 0).AssertTrue();
-            (Space != sreg).AssertTrue();
 
             (Type != null).AssertTrue();
             Type.Validate(ctx);
-            this.is_pred().AssertImplies(Space == reg);
-            this.is_ptr().AssertFalse();
+            this.is_pred().AssertFalse();
             this.is_opaque().AssertImplies(Space == param || Space == global);
-            this.vec_rank().AssertThat(rank => rank == 0 || rank == 2 || rank == 4);
-            this.is_arr().AssertImplies(Space != reg);
+            this.is_ptr().AssertFalse();
 
             agree_or_null(Init, Type);
             (Init != null).AssertImplies(Space.is_const() || Space == global);
@@ -64,9 +60,7 @@ namespace Libptx.Expressions.Slots
             var init_var = Init == null ? null : Init.Value as Var;
             if (init_var != null) (init_var.Space.is_const() || init_var.Space == global).AssertTrue();
 
-            (Alignment > 0).AssertTrue();
-            (_alignment != 0).AssertImplies(!this.is_pred() && !this.is_opaque());
-            Alignment.Unfold(i => i / 2, i => i != 1).AssertEach(i => i % 2 == 0);
+            if (Alignment != 0) Alignment.ValidateAlignment(Type);
         }
 
         protected override void RenderAsPtx(TextWriter writer)

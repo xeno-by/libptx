@@ -1,10 +1,9 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
-using Libptx.Common.Spaces;
+using Libptx.Expressions.Addresses;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
-using Libptx.Expressions;
 using XenoGears.Functional;
 
 namespace Libptx.Instructions.MovementAndConversion
@@ -26,7 +25,7 @@ namespace Libptx.Instructions.MovementAndConversion
         }
 
         public prefetch() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
-        public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
+        public Address a { get { return (Address)Operands[0]; } set { Operands[0] = value; } }
 
         protected override void custom_validate_operands(Module ctx)
         {

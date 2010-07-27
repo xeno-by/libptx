@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Libcuda.DataTypes;
-using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types.Bits;
 using Libptx.Common.Types.Opaques;

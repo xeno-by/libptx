@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Common.Types;
 using Libptx.Expressions.Slots;
+using Libptx.Instructions;
 using Libptx.Statements;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -36,32 +38,44 @@ namespace Libptx
             set { _params = value ?? new Params(); }
         }
 
-        private Block _body = new Block();
-        public virtual Block Body
+        private IList<Statement> _stmts = new List<Statement>();
+        public virtual IList<Statement> Stmts
         {
-            get { return _body; }
-            set { _body = value ?? new Block(); }
+            get { return _stmts; }
+            set { _stmts = value ?? new List<Statement>(); }
         }
 
         protected override void CustomValidate(Module ctx)
         {
-            Params.AssertEach(p => p.Space == param);
+            (Name != null).AssertTrue();
+            Name.ValidateName();
+            // uniqueness of names is validated by the scope
+
+            Tuning.Validate(ctx);
 
             var size_limit = 256;
             if (ctx.Version >= SoftwareIsa.PTX_15) size_limit += 4096;
             // todo. what if we pass pointers? what if we pass textures?
             (Params.Sum(p => p.SizeInMemory()) <= size_limit).AssertTrue();
 
-            // 5.3. Texture, Sampler, and Surface Types
-            // The use of these opaque types is limited to:
-            // * Variable definition within global (module) scope and in kernel entry parameter lists.
-            // * Static initialization of module-scope variables using comma-delimited static
-            //   assignment expressions for the named members of the type
-            Params.ForEach(p => p.Type.is_opaque().AssertImplies(p.Init == null));
+            Params.ForEach(p =>
+            {
+                p.AssertNotNull();
+                p.Validate(ctx);
+                (p.Space == param).AssertTrue();
+            });
 
-            Tuning.Validate(ctx);
-            Params.ForEach(p => p.Validate(ctx));
-            Body.Validate(ctx);
+            Stmts.ForEach(stmt =>
+            {
+                stmt.AssertNotNull();
+                stmt.Validate(ctx);
+
+                var lbl = stmt as Label;
+                if (lbl != null && lbl.Name != null)
+                {
+                    (Stmts.OfType<Label>().Count(lbl2 => lbl2.Name == lbl.Name) == 1).AssertTrue();
+                }
+            });
         }
 
         protected override void RenderAsPtx(TextWriter writer)

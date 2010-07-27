@@ -20,9 +20,7 @@ namespace Libptx.Instructions.ControlFlow
 
         protected override void custom_validate_operands(Module ctx)
         {
-            var addr = (tgt as Address).AssertNotNull();
-            (addr.Base is Label).AssertTrue();
-            (addr.Offset == null).AssertTrue();
+            (tgt is Label).AssertTrue();
         }
     }
 }

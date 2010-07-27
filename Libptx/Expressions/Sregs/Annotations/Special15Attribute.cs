@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Libcuda.Versions;
 using XenoGears.Assertions;
 
-namespace Libptx.Expressions.Slots.Specials.Annotations
+namespace Libptx.Expressions.Sregs.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     [DebuggerNonUserCode]

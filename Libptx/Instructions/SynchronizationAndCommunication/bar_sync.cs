@@ -15,22 +15,12 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     {
         protected override SoftwareIsa custom_swisa
         {
-            get
-            {
-                var a_var = a as Var;
-                var a_is_reg = a_var != null && a_var.Space == reg;
-                return a_is_reg || b != null ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_10;
-            }
+            get { return a is Reg ? SoftwareIsa.PTX_20 : SoftwareIsa.PTX_10; }
         }
 
         protected override HardwareIsa custom_hwisa
         {
-            get
-            {
-                var a_var = a as Var;
-                var a_is_reg = a_var != null && a_var.Space == reg;
-                return a_is_reg || b != null ? HardwareIsa.SM_20 : HardwareIsa.SM_10;
-            }
+            get { return a is Reg ? HardwareIsa.SM_20 : HardwareIsa.SM_10; }
         }
 
         public bar_sync() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }

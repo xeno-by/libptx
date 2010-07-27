@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
-using Libptx.Common.Spaces;
+using Libptx.Common.Enumerations;
 using Libptx.Expressions;
 using Libptx.Statements;
 using Type = Libptx.Common.Types.Type;
@@ -218,6 +218,7 @@ namespace Libptx.Instructions
         {
             // todo. any pointer agrees with space == 0
             // todo. check space using Flags (see atom.cs for more info)
+            // todo. immediate offsets are allowed only for Local space
             throw new NotImplementedException();
         }
 

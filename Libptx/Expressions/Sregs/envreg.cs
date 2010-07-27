@@ -2,14 +2,14 @@ using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types.Bits;
-using Libptx.Expressions.Slots.Specials.Annotations;
+using Libptx.Expressions.Sregs.Annotations;
 using XenoGears.Assertions;
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     [Special("%envreg{index}", typeof(Bit32), SoftwareIsa.PTX_21, HardwareIsa.SM_10)]
     [DebuggerNonUserCode]
-    public partial class envreg : Special
+    public partial class envreg : Sreg
     {
         [Affix("index")] public int Index { get; set; }
 

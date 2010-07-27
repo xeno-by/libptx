@@ -6,9 +6,13 @@
 13) add readme.txt (similarly as for Libcuda)
 14) todo for readme.txt: 2.0 ABI is not implemented
 15) todo for readme.txt: variadic functions are not implemented
-16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype)
+16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype) => labels/funcs ain't slots and ain't addressable
 19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
 21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
 23) todo for readme.txt: bit buckets - too much work finding out what instructions support them
 24) todo for readme.txt: hasn't passed rigorous testing
 25) check that we validate everything including tiniest particles, e.g. Vars of an Index!!
+26) also always validate type
+27) compose all possible valid combos of ptxop values and compare them with all possible valid combos of ptxop signatures
+28) todo for readme.txt: no extern and visible - no doubts since ain't got no time
+29) todo for readme.txt: no scopes - I find this redundant

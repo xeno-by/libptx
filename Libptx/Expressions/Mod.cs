@@ -1,7 +1,9 @@
+using System;
 using Libptx.Common.Annotations.Quanta;
 
 namespace Libptx.Expressions
 {
+    [Flags]
     public enum Mod
     {
         [Prefix("!")] Not = 1,

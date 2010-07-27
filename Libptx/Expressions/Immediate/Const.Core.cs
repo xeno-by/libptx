@@ -14,40 +14,22 @@ namespace Libptx.Expressions.Immediate
     [DebuggerNonUserCode]
     public partial class Const : Atom, Expression
     {
-        public Const(Object value)
-        {
-            Value = value;
-        }
+        public Const() {}
+        public Const(Object value) { Value = value; }
 
-        private Object _value;
-        public Object Value
-        {
-            get { return _value; }
-            set
-            {
-                ValidateValue(value);
-                _value = value;
-            }
-        }
-
-        public Type Type
-        {
-            get { return _value == null ? null : _value.GetType(); }
-        }
-
-        private void ValidateValue(Object value)
-        {
-            value.AssertNotNull();
-
-            if (value is Addressable) return;
-
-            var elt = value.GetType().Unfold(t => t.IsArray ? t.GetElementType() : null, t => t != null).Last();
-            (elt.IsCudaPrimitive() || elt.IsCudaVector()).AssertTrue();
-        }
+        public Object Value { get; set; }
+        public Type Type { get { return Value == null ? null : Value.GetType(); } }
 
         protected override void CustomValidate(Module ctx)
         {
-            ValidateValue(Value);
+            (Type != null).AssertTrue();
+            Type.Validate(ctx);
+
+            (Value != null).AssertTrue();
+            if (Value is Addressable) return;
+
+            var elt = Value.GetType().Unfold(t => t.IsArray ? t.GetElementType() : null, t => t != null).Last();
+            (elt.IsCudaPrimitive() || elt.IsCudaVector()).AssertTrue();
         }
 
         protected override void RenderAsPtx(TextWriter writer)

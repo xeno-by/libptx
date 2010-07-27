@@ -6,7 +6,6 @@ using Libcuda.Versions;
 using Libptx.Common.Annotations;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Annotations.Atoms;
-using Libptx.Common.Spaces;
 using Libptx.Common.Types;
 using Libptx.Expressions;
 using Type=Libptx.Common.Types.Type;
@@ -158,8 +157,6 @@ namespace Libptx.Common
         protected static scale shr7 { get { return scale.shr7; } }
         protected static scale shr15 { get { return scale.shr15; } }
 
-        protected static space reg { get { return space.reg; } }
-        protected static space sreg { get { return space.sreg; } }
         protected static space local { get { return space.local; } }
         protected static space shared { get { return space.shared; } }
         protected static space global { get { return space.global; } }

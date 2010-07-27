@@ -1,12 +1,11 @@
 ﻿using System;
 using Libcuda.Versions;
 using Libptx.Common.Enumerations;
-using Libptx.Common.Spaces;
 using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Expressions.Immediate;
 using Libptx.Expressions.Slots;
-using Libptx.Expressions.Slots.Specials;
+using Libptx.Expressions.Sregs;
 using Libptx.Instructions.Arithmetic;
 using Libptx.Instructions.ComparisonAndSelection;
 using Libptx.Instructions.ControlFlow;
@@ -26,17 +25,17 @@ namespace Libptx.Playground.Emit
         [Test, Category("Hot")]
         public void MatMul()
         {
-            Func<String, Var> reg_u32 = name => new Var{Name = name, Space = space.reg, Type = new Type{Name = TypeName.U32}};
-            Func<String, Var> reg_f32 = name => new Var{Name = name, Space = space.reg, Type = new Type{Name = TypeName.F32}};
-            Func<int, Var> rh = i => new Var{Name = String.Format("%rh{0}", i), Space = space.reg, Type = new Type{Name = TypeName.S16}};
-            Func<int, Var> rhu = i => new Var{Name = String.Format("%rhu{0}", i), Space = space.reg, Type = new Type{Name = TypeName.U16}};
-            Func<int, Var> r = i => new Var{Name = String.Format("%r{0}", i), Space = space.reg, Type = new Type{Name = TypeName.S32}};
-            Func<int, Var> ru = i => new Var{Name = String.Format("%ru{0}", i), Space = space.reg, Type = new Type{Name = TypeName.U32}};
-            Func<int, Var> rl = i => new Var{Name = String.Format("%rl{0}", i), Space = space.reg, Type = new Type{Name = TypeName.S64}};
-            Func<int, Var> rlu = i => new Var{Name = String.Format("%rlu{0}", i), Space = space.reg, Type = new Type{Name = TypeName.U64}};
-            Func<int, Var> f = i => new Var{Name = String.Format("%f{0}", i), Space = space.reg, Type = new Type{Name = TypeName.F32}};
-            Func<int, Var> d = i => new Var{Name = String.Format("%d{0}", i), Space = space.reg, Type = new Type{Name = TypeName.F64}};
-            Func<int, Var> p = i => new Var{Name = String.Format("%p{0}", i), Space = space.reg, Type = new Type{Name = TypeName.Pred}};
+            Func<String, Reg> reg_u32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.U32}};
+            Func<String, Reg> reg_f32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.F32}};
+            Func<int, Reg> rh = i => new Reg{Name = String.Format("%rh{0}", i), Type = new Type{Name = TypeName.S16}};
+            Func<int, Reg> rhu = i => new Reg{Name = String.Format("%rhu{0}", i), Type = new Type{Name = TypeName.U16}};
+            Func<int, Reg> r = i => new Reg{Name = String.Format("%r{0}", i), Type = new Type{Name = TypeName.S32}};
+            Func<int, Reg> ru = i => new Reg{Name = String.Format("%ru{0}", i), Type = new Type{Name = TypeName.U32}};
+            Func<int, Reg> rl = i => new Reg{Name = String.Format("%rl{0}", i), Type = new Type{Name = TypeName.S64}};
+            Func<int, Reg> rlu = i => new Reg{Name = String.Format("%rlu{0}", i), Type = new Type{Name = TypeName.U64}};
+            Func<int, Reg> f = i => new Reg{Name = String.Format("%f{0}", i), Type = new Type{Name = TypeName.F32}};
+            Func<int, Reg> d = i => new Reg{Name = String.Format("%d{0}", i), Type = new Type{Name = TypeName.F64}};
+            Func<int, Reg> p = i => new Reg{Name = String.Format("%p{0}", i), Type = new Type{Name = TypeName.Pred}};
             Type u16 = new Type { Name = TypeName.U16 }, s16 = new Type { Name = TypeName.S16 };
             Type u32 = new Type { Name = TypeName.U32 }, s32 = new Type { Name = TypeName.S32 };
             Type f32 = new Type { Name = TypeName.F32 }, f64 = new Type { Name = TypeName.F64 };
@@ -46,20 +45,16 @@ namespace Libptx.Playground.Emit
             Func<String, Var> param_align4_b8_12 = name => new Var{Name = name, Space = space.param, Alignment = 4, Type = new Type{Name = TypeName.B8, Dims = new []{12}}};
             Var a = param_align4_b8_12("A"), b = param_align4_b8_12("B"), c = param_align4_b8_12("C");
             var kernel = module.AddEntry("MatMulKernel", a, b, c);
-            var ptx = kernel.Body.Stmts;
+            var ptx = kernel.Stmts;
 
-            // todo. auto-add registers to a block if they ain't belong to any of parent blocks
-            // todo. B {B1, B2}: if var is added to B1 first and then to B2, then lift it to B
-            // todo. provide a way to opt-out from this behavior
-            // todo. verify that names within a block do not collide
             Func<String, Label> label = name => new Label{Name = name};
             Label loop_body = label("$LoopBody"), after_loop = label("$AfterLoop"), exit = label("$Exit");
-            Var a_width = reg_u32("a_width"), a_height = reg_u32("a_height"), a_raw = reg_u32("a_raw");
-            Var b_width = reg_u32("b_width"), b_height = reg_u32("b_height"), b_raw = reg_u32("b_raw");
-            Var c_width = reg_u32("c_width"), c_height = reg_u32("c_height"), c_raw = reg_u32("c_raw");
-            Var row = reg_u32("row"), col = reg_u32("col"), cvalue = reg_f32("cvalue"), dim = reg_u32("dim");
-            Var a_offset = reg_u32("a_offset"), a_offset_lo = reg_u32("a_offset_lo"), a_offset_stride = reg_u32("a_offset_stride"), a_offset_hi = reg_u32("a_offset_hi");
-            Var b_offset = reg_u32("b_offset"), b_offset_lo = reg_u32("b_offset_lo"), b_offset_stride = reg_u32("b_offset_stride"), b_offset_hi = reg_u32("b_offset_hi");
+            Reg a_width = reg_u32("a_width"), a_height = reg_u32("a_height"), a_raw = reg_u32("a_raw");
+            Reg b_width = reg_u32("b_width"), b_height = reg_u32("b_height"), b_raw = reg_u32("b_raw");
+            Reg c_width = reg_u32("c_width"), c_height = reg_u32("c_height"), c_raw = reg_u32("c_raw");
+            Reg row = reg_u32("row"), col = reg_u32("col"), cvalue = reg_f32("cvalue"), dim = reg_u32("dim");
+            Reg a_offset = reg_u32("a_offset"), a_offset_lo = reg_u32("a_offset_lo"), a_offset_stride = reg_u32("a_offset_stride"), a_offset_hi = reg_u32("a_offset_hi");
+            Reg b_offset = reg_u32("b_offset"), b_offset_lo = reg_u32("b_offset_lo"), b_offset_stride = reg_u32("b_offset_stride"), b_offset_hi = reg_u32("b_offset_hi");
 
             ptx.Add(new Comment{Text = Environment.NewLine});
             ptx.Add(new Comment{Text = "int row = blockIdx.y * blockDim.y + threadIdx.y;"});
@@ -112,8 +107,8 @@ namespace Libptx.Playground.Emit
             ptx.Add(new Comment{Text = Environment.NewLine});
             ptx.Add(new Comment{Text = "// Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col]"});
             ptx.Add(loop_body);
-            ptx.Add(new ld{ss = space.global, type = f32, d = f(2), a = a_offset + 0});
-            ptx.Add(new ld{ss = space.global, type = f32, d = f(3), a = b_offset + 0});
+            ptx.Add(new ld{ss = space.global, type = f32, d = f(2), a = a_offset});
+            ptx.Add(new ld{ss = space.global, type = f32, d = f(3), a = b_offset});
             ptx.Add(new mad{type = f32, d = cvalue, a = f(3), b = f(2), c = cvalue});
             ptx.Add(new add{type = u32, d = a_offset, a = a_offset, b = (Const)4});
             ptx.Add(new add{type = u32, d = b_offset, a = b_offset, b = b_offset_stride});
@@ -130,7 +125,7 @@ namespace Libptx.Playground.Emit
             ptx.Add(new add{type = u32, d = r(33), a = col, b = r(32)});
             ptx.Add(new mul{mode = mulm.lo, type = u32, d = r(34), a = r(33), b = (Const)4});
             ptx.Add(new add{type = u32, d = r(35), a = c_raw, b = r(34)});
-            ptx.Add(new st{ss = space.global, type = f32, a = r(35) + 0, b = cvalue});
+            ptx.Add(new st{ss = space.global, type = f32, a = r(35), b = cvalue});
 
             ptx.Add(new Comment{Text = Environment.NewLine});
             ptx.Add(exit);

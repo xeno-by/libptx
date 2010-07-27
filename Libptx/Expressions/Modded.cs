@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Libptx.Common;
+using Libptx.Expressions.Slots;
 using Type=Libptx.Common.Types.Type;
+using XenoGears.Assertions;
+using XenoGears.Functional;
 
 namespace Libptx.Expressions
 {
@@ -27,10 +31,124 @@ namespace Libptx.Expressions
 
         protected override void CustomValidate(Module ctx)
         {
-            // todo. what expressions can be modded?
-            // e.g. does PTX allow modding immediate expressions?
-            // couple can consist only of two preds and not may be applied only to s32
-            throw new NotImplementedException();
+            // todo. verify the following hypotheses:
+            // 1) only Reg expressions can be modded
+            // 2) Const and Vector immediates cannot be modded
+            // 3) members accesses (xyzw, rgba) cannot be modded
+
+            (Type != null).AssertTrue();
+            Type.Validate(ctx);
+
+            (Expr == null).AssertImplies((Mod & Mod.Couple) == Mod.Couple);
+            if (Expr != null) Expr.Validate(ctx);
+            if (Expr != null) (Expr is Reg).AssertTrue();
+
+            (Embedded.IsNotEmpty()).AssertImplies((Mod & Mod.Couple) == Mod.Couple);
+            Embedded.ForEach(e => { e.AssertNotNull(); e.Validate(ctx); });
+
+            if ((Mod & Mod.Not) == Mod.Not)
+            {
+                Expr.is_pred().AssertTrue();
+                (Mod == Mod.Not).AssertTrue();
+            }
+
+            if ((Mod & Mod.Couple) == Mod.Couple)
+            {
+                (Expr == null).AssertTrue();
+                (Mod == Mod.Couple).AssertTrue();
+                (Embedded.Count() == 2).AssertTrue();
+                Embedded.AssertEach(e => e.is_pred().AssertTrue());
+            }
+
+            if ((Mod & Mod.Neg) == Mod.Neg)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                ((Mod & ~(Mod.Neg | Mod.B0 | Mod.B1 | Mod.B2 | Mod.B3 | Mod.H0 | Mod.H1)) == 0).AssertTrue();
+            }
+
+            if ((Mod & Mod.B0) == Mod.B0)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                (Mod == Mod.B0 || Mod == (Mod.Neg | Mod.B0)).AssertTrue();
+            }
+
+            if ((Mod & Mod.B1) == Mod.B1)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                (Mod == Mod.B1 || Mod == (Mod.Neg | Mod.B1)).AssertTrue();
+            }
+
+            if ((Mod & Mod.B2) == Mod.B2)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                (Mod == Mod.B2 || Mod == (Mod.Neg | Mod.B2)).AssertTrue();
+            }
+
+            if ((Mod & Mod.B3) == Mod.B3)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                (Mod == Mod.B3 || Mod == (Mod.Neg | Mod.B3)).AssertTrue();
+            }
+
+            if ((Mod & Mod.H0) == Mod.H0)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                (Mod == Mod.H0 || Mod == (Mod.Neg | Mod.H0)).AssertTrue();
+            }
+
+            if ((Mod & Mod.H1) == Mod.H1)
+            {
+                (agree(Expr, u32) || agree(Expr, s32)).AssertTrue();
+                (Mod == Mod.H1 || Mod == (Mod.Neg | Mod.H1)).AssertTrue();
+            }
+
+            if ((Mod & Mod.X) == Mod.X)
+            {
+                (Expr.vec_rank() >= 1).AssertTrue();
+                (Mod == Mod.X).AssertTrue();
+            }
+
+            if ((Mod & Mod.R) == Mod.R)
+            {
+                (Expr.vec_rank() >= 1).AssertTrue();
+                (Mod == Mod.R).AssertTrue();
+            }
+
+            if ((Mod & Mod.Y) == Mod.Y)
+            {
+                (Expr.vec_rank() >= 2).AssertTrue();
+                (Mod == Mod.Y).AssertTrue();
+            }
+
+            if ((Mod & Mod.G) == Mod.G)
+            {
+                (Expr.vec_rank() >= 2).AssertTrue();
+                (Mod == Mod.G).AssertTrue();
+            }
+
+            if ((Mod & Mod.Z) == Mod.Z)
+            {
+                (Expr.vec_rank() >= 3).AssertTrue();
+                (Mod == Mod.Z).AssertTrue();
+            }
+
+            if ((Mod & Mod.B) == Mod.B)
+            {
+                (Expr.vec_rank() >= 3).AssertTrue();
+                (Mod == Mod.B).AssertTrue();
+            }
+
+            if ((Mod & Mod.W) == Mod.W)
+            {
+                (Expr.vec_rank() >= 4).AssertTrue();
+                (Mod == Mod.W).AssertTrue();
+            }
+
+            if ((Mod & Mod.A) == Mod.A)
+            {
+                (Expr.vec_rank() >= 4).AssertTrue();
+                (Mod == Mod.A).AssertTrue();
+            }
         }
 
         protected override void RenderAsPtx(TextWriter writer)

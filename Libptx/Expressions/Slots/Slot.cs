@@ -1,30 +1,35 @@
 using System;
 using System.Diagnostics;
-using Libptx.Common.Spaces;
+using Libptx.Common;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Slots
 {
-    public interface Slot : Expression
+    // I wish, we had mixins
+    // so that I don't have to duplicate alignment validation logic in Var and Reg
+
+    public interface Slot : Validatable, Renderable
     {
-        String Name { get; }
-        space Space { get; }
+        String Name { get; set; }
+        Type Type { get; set; }
+        int Alignment { get; set; }
     }
 
     [DebuggerNonUserCode]
     public static class SlotExtensions
     {
-        public static int SizeInMemory(this Slot var)
+        public static int SizeInMemory(this Slot slot)
         {
-            if (var == null) return 0;
-            if (var.Type == null) return 0;
-            return var.Type.SizeInMemory;
+            if (slot == null) return 0;
+            if (slot.Type == null) return 0;
+            return slot.Type.SizeInMemory;
         }
 
-        public static int SizeOfElement(this Slot var)
+        public static int SizeOfElement(this Slot slot)
         {
-            if (var == null) return 0;
-            if (var.Type == null) return 0;
-            return var.Type.SizeOfElement;
+            if (slot == null) return 0;
+            if (slot.Type == null) return 0;
+            return slot.Type.SizeOfElement;
         }
     }
 }

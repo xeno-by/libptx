@@ -2,4 +2,5 @@
 2) changes in type classification: pred and ptr are no longer opaques
 3) opaques must be capable of being converted to u32 and u64, but ONLY BY MOV INSTRUCTIONS
 4) similarly, u32/u64 registers must be accepted by tex and surf instructions
-5) changes in SizeOfElement for vectors
+5) changes in Type::SizeOfElement for vectors
+6) changes in slots => reg, sreg, var

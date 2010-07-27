@@ -1,21 +1,18 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using Libptx.Common;
 
 namespace Libptx.Statements
 {
     [DebuggerNonUserCode]
-    public class Comment : Statement
+    public class Comment : Atom, Statement
     {
         public String Text { get; set; }
 
-        public void Validate(Module ctx)
+        protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
-        }
-
-        public void RenderAsPtx(TextWriter writer)
-        {
+            // todo. smartly choose between /**/ and //
             throw new NotImplementedException();
         }
     }

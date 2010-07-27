@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using Libcuda.DataTypes;
-using Libptx.Expressions.Slots.Specials.Annotations;
+using Libptx.Expressions.Sregs.Annotations;
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     [Special("%nctaid", typeof(uint4))]
     [DebuggerNonUserCode]
-    public partial class nctaid : Special
+    public partial class nctaid : Sreg
     {
     }
 }

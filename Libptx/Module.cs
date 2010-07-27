@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Expressions.Slots;
@@ -24,13 +25,6 @@ namespace Libptx
         {
             get { return _tuning; }
             set { _tuning = value ?? new Tuning(); }
-        }
-
-        private IList<Var> _vars = new List<Var>();
-        public virtual IList<Var> Vars
-        {
-            get { return _vars; }
-            set { _vars = value ?? new List<Var>(); }
         }
 
         private Entries _entries = new Entries();
@@ -108,8 +102,15 @@ namespace Libptx
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
             Tuning.Validate(this);
-            Vars.ForEach(v => v.Validate(this));
-            Entries.ForEach(e => e.Validate(this));
+
+            Entries.ForEach(e =>
+            {
+                e.AssertNotNull();
+                e.Validate(this);
+
+                (e.Name != null).AssertTrue();
+                (Entries.Count(e2 => e2.Name == e.Name) == 1).AssertTrue();
+            });
         }
 
         void Renderable.RenderAsPtx(TextWriter writer)

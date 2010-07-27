@@ -2,18 +2,16 @@ using System;
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 
-namespace Libptx.Common.Spaces
+namespace Libptx.Common.Enumerations
 {
     [Flags]
     public enum space
     {
-        [Affix("reg")] reg = 1,
-        [Affix("sreg")] sreg = 2,
-        [Affix("local")] local = 4,
-        [Affix("shared")] shared = 8,
-        [Affix("global")] global = 16,
-        [Affix("param")] param = 32,
-        [Affix("const")] @const = 64,
+        [Affix("local")] local = 1,
+        [Affix("shared")] shared = 2,
+        [Affix("global")] global = 4,
+        [Affix("param")] param = 8,
+        [Affix("const")] @const = 16,
         [Affix("const[0]")] const0 = 0 | @const,
         [Affix("const[1]")] const1 = 1 | @const,
         [Affix("const[2]")] const2 = 2 | @const,

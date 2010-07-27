@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using Libptx.Common;
 using Libptx.Common.Types;
+using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
+using XenoGears.Functional;
 
 namespace Libptx.Expressions.Immediate
 {
@@ -48,6 +50,12 @@ namespace Libptx.Expressions.Immediate
 
         protected override void CustomValidate(Module ctx)
         {
+            (Type != null).AssertTrue();
+            Type.Validate(ctx);
+
+            (Elements != null).AssertTrue();
+            Elements.ForEach(el => { el.AssertNotNull(); el.Validate(ctx); });
+
             throw new NotImplementedException();
         }
 

@@ -1,12 +1,12 @@
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Expressions.Slots.Specials.Annotations;
+using Libptx.Expressions.Sregs.Annotations;
 
-namespace Libptx.Expressions.Slots.Specials
+namespace Libptx.Expressions.Sregs
 {
     [Special("%laneid", typeof(uint), SoftwareIsa.PTX_13)]
     [DebuggerNonUserCode]
-    public partial class laneid : Special
+    public partial class laneid : Sreg
     {
     }
 }
