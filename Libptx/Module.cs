@@ -5,7 +5,12 @@ using System.IO;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
+using Libptx.Common.Comments;
+using Libptx.Common.Performance;
+using Libptx.Common.Performance.Pragmas;
+using Libptx.Expressions;
 using Libptx.Expressions.Slots;
+using Libptx.Instructions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 
@@ -19,6 +24,20 @@ namespace Libptx
 
         public bool UnifiedTexturing { get; set; }
         public bool EmulateDoubles { get; set; }
+
+        private IList<Pragma> _pragmas = new List<Pragma>();
+        public IList<Pragma> Pragmas
+        {
+            get { return _pragmas; }
+            set { _pragmas = value ?? new List<Pragma>(); }
+        }
+
+        private IList<Comment> _comments = new List<Comment>();
+        public IList<Comment> Comments
+        {
+            get { return _comments; }
+            set { _comments = value ?? new List<Comment>(); }
+        }
 
         private Tuning _tuning = new Tuning();
         public Tuning Tuning
@@ -90,11 +109,6 @@ namespace Libptx
         void Validatable.Validate(Module ctx) { (ctx == this).AssertTrue(); Validate(); }
         public void Validate()
         {
-            // todo. 128 textures uni mode, 16 samplers non-uni
-            // todo. what's the max amount of surfaces?
-            // todo. backwards compatibility for textures!
-            // todo. < SM_13 && !EmulateDoubles => verify that there are no f64 instructions used
-
             // this is commented out because there's no problem with UnifiedTexturing
             // if the version is prior to PTX_15, corresponding directive just won't be rendered
 //            (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
@@ -102,7 +116,10 @@ namespace Libptx
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
             Tuning.Validate(this);
+            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(this); });
+            Comments.ForEach(c => { c.AssertNotNull(); c.Validate(this); });
 
+            var all_args = new HashSet<Expression>();
             Entries.ForEach(e =>
             {
                 e.AssertNotNull();
@@ -110,11 +127,22 @@ namespace Libptx
 
                 (e.Name != null).AssertTrue();
                 (Entries.Count(e2 => e2.Name == e.Name) == 1).AssertTrue();
+
+                var args = e.Stmts.OfType<ptxop>().SelectMany(op => op.Operands);
+                args.ForEach(arg => all_args.Add(arg));
             });
+
+            if (Target < HardwareIsa.SM_13 && !EmulateDoubles) all_args.AssertNone(arg => arg.is_float() && arg.bits() == 64);
+            if (Version < SoftwareIsa.PTX_15) all_args.AssertNone(arg => arg.is_samplerref() || arg.is_surfref());
+            (all_args.Where(arg => arg.is_texref()).Count() <= 128).AssertTrue();
+            (all_args.Where(arg => arg.is_samplerref()).Count() <= (UnifiedTexturing ? 128 : 16)).AssertTrue();
+            // todo. what's the max amount of surfaces?
         }
 
         void Renderable.RenderAsPtx(TextWriter writer)
         {
+            // todo. gather all locations and render their files with ".file" directives
+
             throw new NotImplementedException();
         }
     }

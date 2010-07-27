@@ -25,6 +25,12 @@ namespace Libptx.Expressions.Addresses
                 {
                     (agree(base_reg.Type, u32) || agree(base_reg.Type, u64)).AssertTrue();
                 }
+
+                var base_var = Base as Var;
+                if (base_var != null)
+                {
+                    base_var.is_opaque().AssertFalse();
+                }
             }
         }
 

@@ -49,6 +49,7 @@ namespace Libptx.Common.Types
                 if (this.is_opaque()) return 0;
                 if (this.is_pred()) return 0;
                 if (this.is_ptr()) return 0;
+                if (this.is_bmk()) return 0;
 
                 var el = this.Unfold(t => t.arr_el(), t => t != null).Last();
                 return Marshal.SizeOf((ClrType)(Type)el.Name);

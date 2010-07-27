@@ -18,15 +18,16 @@ namespace Libptx.Common.Types
             Float = 8,
             Bit = 16,
             Opaque = 32,
-            Pred = 64 | Opaque,
+            Pred = 64,
             Texref = 128 | Opaque,
             Samplerref = 256 | Opaque,
             Surfref = 512 | Opaque,
-            Ptr = 1024 | Opaque,
-            V1 = 2048,
-            V2 = 4096,
-            V4 = 8192,
-            A1 = 16384,
+            Ptr = 1024,
+            Bmk = 2048,
+            V1 = 4096,
+            V2 = 8192,
+            V4 = 16384,
+            A1 = 32768,
         }
 
         private static TypeSpec spec(this Type type)
@@ -75,6 +76,8 @@ namespace Libptx.Common.Types
                         return TypeSpec.Surfref;
                     case TypeName.Ptr:
                         return TypeSpec.Ptr;
+                    case TypeName.Bmk:
+                        return TypeSpec.Bmk;
                     default:
                         throw AssertionHelper.Fail();
                 }
@@ -98,7 +101,7 @@ namespace Libptx.Common.Types
             return el;
         }
 
-        public static bool is_scalar(this Type type) { return !type.is_opaque() && !type.is_pred() && !type.is_ptr() && !type.is_vec() && !type.is_arr(); }
+        public static bool is_scalar(this Type type) { return (type.is_int() || type.is_float() || type.is_bit()) && !type.is_vec() && !type.is_arr(); }
         public static bool is_int(this Type type) { return (type.spec() & TypeSpec.Integer) == TypeSpec.Integer; }
         public static bool is_signed(this Type type) { return (type.spec() & TypeSpec.Signed) == TypeSpec.Signed; }
         public static bool is_unsigned(this Type type) { return (type.spec() & TypeSpec.Unsigned) == TypeSpec.Unsigned; }
@@ -107,6 +110,7 @@ namespace Libptx.Common.Types
 
         public static bool is_pred(this Type type) { return (type.spec() & TypeSpec.Pred) == TypeSpec.Pred; }
         public static bool is_ptr(this Type type) { return (type.spec() & TypeSpec.Ptr) == TypeSpec.Ptr; }
+        public static bool is_bmk(this Type type) { return (type.spec() & TypeSpec.Bmk) == TypeSpec.Bmk; }
 
         public static bool is_opaque(this Type type) { return (type.spec() & TypeSpec.Opaque) == TypeSpec.Opaque; }
         public static bool is_texref(this Type type) { return (type.spec() & TypeSpec.Texref) == TypeSpec.Texref; }
@@ -207,6 +211,8 @@ namespace Libptx.Common.Types
                 case TypeName.Surfref:
                     return 0;
                 case TypeName.Ptr:
+                    return 0;
+                case TypeName.Bmk:
                     return 0;
                 default:
                     throw AssertionHelper.Fail();

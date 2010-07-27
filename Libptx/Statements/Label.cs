@@ -12,7 +12,7 @@ namespace Libptx.Statements
     public class Label : Atom, Expression, Statement
     {
         public String Name { get; set; }
-        public Type Type { get { return typeof(Ptr); } }
+        public Type Type { get { return typeof(Bmk); } }
 
         protected override void CustomValidate(Module ctx)
         {

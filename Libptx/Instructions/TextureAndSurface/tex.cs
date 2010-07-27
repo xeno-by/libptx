@@ -35,8 +35,8 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override void custom_validate_operands(Module ctx)
         {
             is_reg(d, dtype).AssertTrue();
-            is_alu(a, texref).AssertTrue();
-            is_alu_or_null(b, samplerref).AssertTrue();
+            is_texref(a).AssertTrue();
+            is_samplerref_or_null(b).AssertTrue();
             (b != null).AssertImplies(!ctx.UnifiedTexturing);
             if (geom == d1) (is_alu(c, btype) || is_alu(c, btype.v1) || is_alu(c, btype.v4)).AssertTrue();
             else if (geom == d2) (is_alu(c, btype.v2) || is_alu(c, btype.v4)).AssertTrue();

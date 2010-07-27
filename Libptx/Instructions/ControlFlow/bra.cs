@@ -20,7 +20,7 @@ namespace Libptx.Instructions.ControlFlow
 
         protected override void custom_validate_operands(Module ctx)
         {
-            (tgt is Label).AssertTrue();
+            is_bmk(tgt).AssertTrue();
         }
     }
 }

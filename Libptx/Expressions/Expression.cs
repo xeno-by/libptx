@@ -27,6 +27,7 @@ namespace Libptx.Expressions
 
         public static bool is_pred(this Expression expr) { return expr == null ? false : expr.Type.is_pred(); }
         public static bool is_ptr(this Expression expr) { return expr == null ? false : expr.Type.is_ptr(); }
+        public static bool is_bmk(this Expression expr) { return expr == null ? false : expr.Type.is_bmk(); }
 
         public static bool is_opaque(this Expression expr) { return expr == null ? false : expr.Type.is_opaque(); }
         public static bool is_texref(this Expression expr) { return expr == null ? false : expr.Type.is_texref(); }

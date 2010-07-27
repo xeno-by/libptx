@@ -39,7 +39,7 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override void custom_validate_operands(Module ctx)
         {
             is_reg(d, type).AssertTrue();
-            is_alu(a, surfref).AssertTrue();
+            is_surfref(a).AssertTrue();
         }
     }
 }

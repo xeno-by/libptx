@@ -32,6 +32,7 @@ namespace Libptx.Common.Types
         [Affix15("samplerref")] Samplerref,
         [Affix15("surfref")] Surfref,
         [Affix("ptr")] Ptr,
+        [Affix("bmk")] Bmk,
     }
 
     [DebuggerNonUserCode]
@@ -61,6 +62,7 @@ namespace Libptx.Common.Types
             pool.Add(TypeName.Samplerref, typeof(Samplerref));
             pool.Add(TypeName.Surfref, typeof(Surfref));
             pool.Add(TypeName.Ptr, typeof(Ptr));
+            pool.Add(TypeName.Bmk, typeof(Bmk));
         }
 
         public static ClrType ClrType(this TypeName t)

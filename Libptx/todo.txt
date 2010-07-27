@@ -15,4 +15,6 @@
 26) also always validate type
 27) compose all possible valid combos of ptxop values and compare them with all possible valid combos of ptxop signatures
 28) todo for readme.txt: no extern and visible - no doubts since ain't got no time
-29) todo for readme.txt: no scopes - I find this redundant
+29) todo for readme.txt: no scopes - I find this redundant, i.e. vars and labels might event be shared across multiple scopes, tho they will be mapped onto differerent declarations, of course
+30) todo for readme.txt: debugging directives (i.e. @@DWARF and .section) are not supported
+31) don't forget to render locations, pragmas and Atom-level comments!

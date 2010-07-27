@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
-using Libptx.Common;
 using XenoGears.Assertions;
 using System.Linq;
 
-namespace Libptx
+namespace Libptx.Common.Performance
 {
     [DebuggerNonUserCode]
     public class Tuning : Atom

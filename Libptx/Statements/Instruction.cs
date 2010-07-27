@@ -1,15 +1,16 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Libptx.Common;
 using Libptx.Expressions;
+using XenoGears.Assertions;
+using XenoGears.Functional;
 
 namespace Libptx.Statements
 {
     [DebuggerNonUserCode]
     public abstract class Instruction : Atom, Statement
     {
-        public Expression Guard { get; set; } // may be null
+        public Expression Guard { get; set; }
 
         private IList<Expression> _operands = new List<Expression>();
         public IList<Expression> Operands
@@ -20,9 +21,19 @@ namespace Libptx.Statements
 
         protected override void CustomValidate(Module ctx)
         {
-            // todo. validate guard => only var or?!
-            // todo. also validate its type
-            throw new NotImplementedException();
+            if (Guard != null)
+            {
+                Guard.Validate(ctx);
+                Guard.is_pred().AssertTrue();
+            }
+
+            Operands.ForEach(arg =>
+            {
+                // this is commented out because operands may be optional
+                // arg.AssertNotNull();
+
+                if (arg != null) arg.Validate(ctx);
+            });
         }
     }
 }

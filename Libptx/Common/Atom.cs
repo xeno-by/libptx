@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using Libcuda.Versions;
 using Libptx.Common.Annotations;
+using Libptx.Common.Comments;
+using Libptx.Common.Debug;
 using Libptx.Common.Enumerations;
-using Libptx.Common.Annotations.Atoms;
+using Libptx.Common.Performance.Pragmas;
 using Libptx.Common.Types;
 using Libptx.Expressions;
 using Type=Libptx.Common.Types.Type;
@@ -24,18 +26,18 @@ namespace Libptx.Common
             set { _locations = value ?? new List<Location>(); }
         }
 
-        private IList<String> _pragmas = new List<String>();
-        public IList<String> Pragmas
+        private IList<Pragma> _pragmas = new List<Pragma>();
+        public IList<Pragma> Pragmas
         {
             get { return _pragmas; }
-            set { _pragmas = value ?? new List<String>(); }
+            set { _pragmas = value ?? new List<Pragma>(); }
         }
 
-        private IList<String> _comments = new List<String>();
-        public IList<String> Comments
+        private IList<Comment> _comments = new List<Comment>();
+        public IList<Comment> Comments
         {
             get { return _comments; }
-            set { _comments = value ?? new List<String>(); }
+            set { _comments = value ?? new List<Comment>(); }
         }
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
@@ -46,8 +48,18 @@ namespace Libptx.Common
         protected HardwareIsa CoreTarget { get { return this.Targets().MinOrDefault(); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
-        public void Validate(Module ctx) { (ctx.Version >= Version).AssertTrue(); (ctx.Target >= Target).AssertTrue(); CustomValidate(ctx); }
         protected virtual void CustomValidate(Module ctx) { /* do nothing */ }
+        public void Validate(Module ctx)
+        {
+            (ctx.Version >= Version).AssertTrue();
+            (ctx.Target >= Target).AssertTrue();
+
+            Locations.ForEach(l => { l.AssertNotNull(); l.Validate(ctx); });
+            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(ctx); });
+            Comments.ForEach(c => { c.AssertNotNull(); c.Validate(ctx); });
+
+            CustomValidate(ctx);
+        }
 
         void Renderable.RenderAsPtx(TextWriter writer) { RenderAsPtx(writer); }
         protected abstract void RenderAsPtx(TextWriter writer);
@@ -71,10 +83,11 @@ namespace Libptx.Common
         protected static Type b32 { get { return new Type { Name = TypeName.B32 }; } }
         protected static Type b64 { get { return new Type { Name = TypeName.B64 }; } }
         protected static Type pred { get { return new Type { Name = TypeName.Pred }; } }
-        protected static Type texref { get { return new Type { Name = TypeName.Texref }; } }
-        protected static Type samplerref { get { return new Type { Name = TypeName.Samplerref }; } }
-        protected static Type surfref { get { return new Type { Name = TypeName.Surfref }; } }
+        // note. use the is_texref method to check whether some expression is of tex type
+        // note. use the is_samplerref method to check whether some expression is of sampler type
+        // note. use the is_surfref method to check whether some expression is of surf type
         // note. use the is_ptr method to check whether some expression is of pointer type
+        // note. use the is_bmk method to check whether some expression is of bookmark type
 
         protected static barlevel cta { get { return barlevel.cta; } }
         protected static barlevel gl { get { return barlevel.gl; } }

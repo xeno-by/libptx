@@ -12,8 +12,10 @@ namespace Libptx.Instructions
     [DebuggerNonUserCode]
     public abstract partial class ptxop : Instruction
     {
-        public String Name { get { throw new NotImplementedException(); } }
-        protected override void RenderAsPtx(TextWriter writer) { throw new NotImplementedException(); }
+        protected override void RenderAsPtx(TextWriter writer)
+        {
+            throw new NotImplementedException();
+        }
 
         protected sealed override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)custom_swisa, (int)default_swisa); } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
@@ -214,6 +216,36 @@ namespace Libptx.Instructions
             return expr == null || is_relaxed_special(expr, t, mod);
         }
 
+        protected bool is_texref(Expression expr)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected bool is_texref_or_null(Expression expr)
+        {
+            return expr == null || is_texref(expr);
+        }
+
+        protected bool is_samplerref(Expression expr)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected bool is_samplerref_or_null(Expression expr)
+        {
+            return expr == null || is_samplerref(expr);
+        }
+
+        protected bool is_surfref(Expression expr)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected bool is_surfref_or_null(Expression expr)
+        {
+            return expr == null || is_surfref(expr);
+        }
+
         protected bool is_ptr(Expression expr, space space)
         {
             // todo. any pointer agrees with space == 0
@@ -225,6 +257,16 @@ namespace Libptx.Instructions
         protected bool is_ptr_or_null(Expression expr, space space)
         {
             return expr == null || is_ptr(expr, space);
+        }
+
+        protected bool is_bmk(Expression expr)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected bool is_bmk_or_null(Expression expr)
+        {
+            return expr == null || is_bmk(expr);
         }
 
         #endregion

@@ -80,11 +80,15 @@
     <Compile Include="Common\Enumerations\vshm.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\cmp.cs" />
+    <Compile Include="Common\Performance\Pragmas\Annotations\Pragmal20Attribute.cs" />
+    <Compile Include="Common\Performance\Pragmas\nounroll.cs" />
+    <Compile Include="Common\Performance\Pragmas\Pragma.cs" />
     <Compile Include="Common\Renderable.cs" />
     <Compile Include="Common\Types\Opaques\AddrMode.cs" />
     <Compile Include="Common\Types\Opaques\CL_ChannelDataType.cs" />
     <Compile Include="Common\Types\Opaques\CL_ChannelOrder.cs" />
     <Compile Include="Common\Types\Opaques\FilterMode.cs" />
+    <Compile Include="Common\Types\Pointers\Bmk.cs" />
     <Compile Include="Common\Types\Pointers\Ptr.cs" />
     <Compile Include="Common\Validators.cs" />
     <Compile Include="Entries.cs" />
@@ -101,7 +105,7 @@
     <Compile Include="Common\Types\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />
     <Compile Include="Common\Annotations\ParticleAttribute.cs" />
-    <Compile Include="Common\Annotations\Atoms\Location.cs" />
+    <Compile Include="Common\Debug\Location.cs" />
     <Compile Include="Common\Annotations\Quanta\Affix20Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\AffixAttribute.cs" />
     <Compile Include="Common\Annotations\Quanta\Mod20Attribute.cs" />
@@ -239,13 +243,13 @@
     <Compile Include="Expressions\Sregs\ntid.cs" />
     <Compile Include="Expressions\Sregs\tid.cs" />
     <Compile Include="Entry.cs" />
-    <Compile Include="Statements\Comment.cs" />
+    <Compile Include="Common\Comments\Comment.cs" />
     <Compile Include="Statements\Instruction.cs" />
     <Compile Include="Statements\Label.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Statements\Statement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tuning.cs" />
+    <Compile Include="Common\Performance\Tuning.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="todo.txt" />
