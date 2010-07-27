@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using Libptx.Statements;
+using Libptx.Common.Annotations;
+using XenoGears.Assertions;
 
 namespace Libptx.Common.Performance.Pragmas
 {
@@ -8,7 +10,7 @@ namespace Libptx.Common.Performance.Pragmas
     {
         public String Signature
         {
-            get { throw new NotImplementedException(); }
+            get { return this.Signature().AssertNotNull(); }
         }
 
         protected override void RenderAsPtx(TextWriter writer)

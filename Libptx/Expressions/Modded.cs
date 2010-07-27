@@ -26,7 +26,31 @@ namespace Libptx.Expressions
 
         public Type Type
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if ((Mod & Mod.Not) == Mod.Not)
+                {
+                    return typeof(bool);
+                }
+                else if ((Mod & Mod.Couple) == Mod.Couple)
+                {
+                    return typeof(bool);
+                }
+                else if ((Mod & Mod.Neg) == Mod.Neg || (Mod & Mod.H0) == Mod.H0 || (Mod & Mod.H1) == Mod.H1 ||
+                    (Mod & Mod.B0) == Mod.B0 || (Mod & Mod.B1) == Mod.B1 || (Mod & Mod.B2) == Mod.B2 || (Mod & Mod.B3) == Mod.B3)
+                {
+                    return Expr == null ? null : Expr.Type;
+                }
+                else if ((Mod & Mod.X) == Mod.X || (Mod & Mod.Y) == Mod.Y || (Mod & Mod.Z) == Mod.Z || (Mod & Mod.W) == Mod.W ||
+                    (Mod & Mod.R) == Mod.R || (Mod & Mod.G) == Mod.G || (Mod & Mod.B) == Mod.B || (Mod & Mod.A) == Mod.A)
+                {
+                    return Expr == null ? null : Expr.vec_el();
+                }
+                else
+                {
+                    throw AssertionHelper.Fail();
+                }
+            }
         }
 
         protected override void CustomValidate(Module ctx)

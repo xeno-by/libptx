@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
+using Libptx.Expressions.Sregs.Annotations;
 using XenoGears.Assertions;
+using XenoGears.Reflection.Attributes;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Sregs
@@ -12,7 +14,7 @@ namespace Libptx.Expressions.Sregs
     {
         public Type Type
         {
-            get { throw new NotImplementedException(); }
+            get { return this.GetType().Attr<SpecialAttribute>().Type; }
         }
 
         protected override void CustomValidate(Module ctx)

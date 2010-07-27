@@ -2,6 +2,7 @@ using System;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using Type = Libptx.Common.Types.Type;
+using XenoGears.Strings;
 
 namespace Libptx.Common
 {
@@ -9,9 +10,11 @@ namespace Libptx.Common
     {
         public static void ValidateName(this String name)
         {
-            // todo. name cannot be null
-            // todo. also see section 4.4 of PTX ISA spec
-            throw new NotImplementedException();
+            name.AssertNotNull();
+
+            var fmt1 = name.Match("^[a-zA-Z][a-zA-Z0-9_$]*$");
+            var fmt2 = name.Match("^[_$%][a-zA-Z0-9_$]*$");
+            (fmt1.Success || fmt2.Success).AssertTrue();
         }
 
         public static void ValidateAlignment(this int alignment, Type type)

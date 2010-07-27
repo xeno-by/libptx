@@ -1,14 +1,13 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using Libcuda.Versions;
-using Libptx.Common.Annotations.Atoms;
 using XenoGears.Assertions;
 
 namespace Libptx.Common.Performance.Pragmas.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     [DebuggerNonUserCode]
-    public class Pragma20Attribute : AtomAttribute
+    public class Pragma20Attribute : PragmaAttribute
     {
         public Pragma20Attribute()
             : this(null, SoftwareIsa.PTX_20, HardwareIsa.SM_20)

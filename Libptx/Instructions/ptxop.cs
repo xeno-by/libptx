@@ -218,6 +218,7 @@ namespace Libptx.Instructions
 
         protected bool is_texref(Expression expr)
         {
+            // todo. u32/u64-compatible registers agree with texrefs
             throw new NotImplementedException();
         }
 
@@ -228,6 +229,7 @@ namespace Libptx.Instructions
 
         protected bool is_samplerref(Expression expr)
         {
+            // todo. u32/u64-compatible registers agree with samplerrefs
             throw new NotImplementedException();
         }
 
@@ -238,6 +240,7 @@ namespace Libptx.Instructions
 
         protected bool is_surfref(Expression expr)
         {
+            // todo. u32/u64-compatible registers agree with surfrefs
             throw new NotImplementedException();
         }
 
@@ -248,6 +251,7 @@ namespace Libptx.Instructions
 
         protected bool is_ptr(Expression expr, space space)
         {
+            // todo. u32/u64-compatible registers agree with ptr and with any space
             // todo. any pointer agrees with space == 0
             // todo. check space using Flags (see atom.cs for more info)
             // todo. immediate offsets are allowed only for Local space
@@ -261,6 +265,7 @@ namespace Libptx.Instructions
 
         protected bool is_bmk(Expression expr)
         {
+            // todo. u32/u64-compatible registers agree with bmks (tho it's to be implemented)
             throw new NotImplementedException();
         }
 

@@ -80,7 +80,9 @@
     <Compile Include="Common\Enumerations\vshm.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\cmp.cs" />
-    <Compile Include="Common\Performance\Pragmas\Annotations\Pragmal20Attribute.cs" />
+    <Compile Include="Common\Performance\Pragmas\Annotations\Pragma15Attribute.cs" />
+    <Compile Include="Common\Performance\Pragmas\Annotations\Pragma20Attribute.cs" />
+    <Compile Include="Common\Performance\Pragmas\Annotations\PragmaAttribute.cs" />
     <Compile Include="Common\Performance\Pragmas\nounroll.cs" />
     <Compile Include="Common\Performance\Pragmas\Pragma.cs" />
     <Compile Include="Common\Renderable.cs" />

@@ -210,9 +210,25 @@ namespace Libptx.Common
 
         protected bool agree(Type wannabe, Type t)
         {
-            // todo. u32 and u64 agree with opaque types!
-            // todo. but not vice versa: the only place where opaques can be used in place of u32/u64 is mov's src operand!
-            throw new NotImplementedException();
+            (wannabe != null && t != null).AssertTrue();
+
+            var w_el = wannabe.el();
+            var t_el = wannabe.el();
+            Func<bool> agree_els = () =>
+            {
+                if (w_el.is_opaque() || t_el.is_opaque()) return w_el == t_el;
+
+                if (w_el.bits() != t_el.bits()) return false;
+                if (w_el.is_float()) return t.is_float() || t.is_bit();
+                if (w_el.is_int()) return t.is_int() || t.is_bit();
+                if (w_el.is_bit()) return true;
+
+                throw AssertionHelper.Fail();
+            };
+
+            var same_mods = wannabe.Mod == t.Mod;
+            var same_dims = Seq.Equals(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
+            return agree_els() && same_mods && same_dims;
         }
 
         protected bool agree(Expression expr, Type t)
@@ -233,7 +249,25 @@ namespace Libptx.Common
 
         protected bool relaxed_agree(Type wannabe, Type t)
         {
-            throw new NotImplementedException();
+            (wannabe != null && t != null).AssertTrue();
+
+            var w_el = wannabe.el();
+            var t_el = wannabe.el();
+            Func<bool> relaxed_agree_els = () =>
+            {
+                if (w_el.is_opaque() || t_el.is_opaque()) return w_el == t_el;
+
+                if (w_el.bits() < t_el.bits()) return false;
+                if (w_el.is_float()) return (t.is_float() && wannabe.bits() == t.bits()) || t.is_bit();
+                if (w_el.is_int()) return t.is_int() || t.is_bit();
+                if (w_el.is_bit()) return true;
+
+                throw AssertionHelper.Fail();
+            };
+
+            var same_mods = wannabe.Mod == t.Mod;
+            var same_dims = Seq.Equals(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
+            return relaxed_agree_els() && same_mods && same_dims;
         }
 
         protected bool relaxed_agree(Expression expr, Type t)

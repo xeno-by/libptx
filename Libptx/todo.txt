@@ -10,7 +10,7 @@
 19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
 21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
 23) todo for readme.txt: bit buckets - too much work finding out what instructions support them
-24) todo for readme.txt: hasn't passed rigorous testing
+24) todo for readme.txt: hasn't passed rigorous testing, only basic ALU, mem and flow instructions (misc, textures, video and synchronization weren't touched at all)
 25) check that we validate everything including tiniest particles, e.g. Vars of an Index!!
 26) also always validate type
 27) compose all possible valid combos of ptxop values and compare them with all possible valid combos of ptxop signatures
@@ -18,3 +18,6 @@
 29) todo for readme.txt: no scopes - I find this redundant, i.e. vars and labels might event be shared across multiple scopes, tho they will be mapped onto differerent declarations, of course
 30) todo for readme.txt: debugging directives (i.e. @@DWARF and .section) are not supported
 31) don't forget to render locations, pragmas and Atom-level comments!
+32) todo for readme.txt: implement e-DSL and perform #27
+33) vector mysteries (see Vector.cs)
+34) modded validation hypothesis (see Modded.cs)

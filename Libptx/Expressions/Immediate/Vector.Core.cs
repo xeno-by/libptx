@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using Libptx.Common;
 using Libptx.Common.Types;
+using Libptx.Expressions.Slots;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Functional;
@@ -40,10 +41,24 @@ namespace Libptx.Expressions.Immediate
             get
             {
                 var vec_type = ElementType;
-                if (vec_type != null && Elements.Count() == 1) vec_type.Mod |= TypeMod.V1;
-                if (vec_type != null && Elements.Count() == 2) vec_type.Mod |= TypeMod.V2;
-                if (vec_type != null && Elements.Count() == 3) vec_type.Mod |= TypeMod.V4;
-                if (vec_type != null && Elements.Count() == 4) vec_type.Mod |= TypeMod.V4;
+
+                if (Elements.Count() == 1)
+                {
+                    if (vec_type != null) vec_type.Mod |= TypeMod.V1;
+                }
+                else if (Elements.Count() == 2) 
+                {
+                    if (vec_type != null) vec_type.Mod |= TypeMod.V2;
+                }
+                else if (Elements.Count() == 4)
+                {
+                    if (vec_type != null) vec_type.Mod |= TypeMod.V4;
+                }
+                else
+                {
+                    vec_type = null;
+                }
+
                 return vec_type;
             }
         }
@@ -54,9 +69,24 @@ namespace Libptx.Expressions.Immediate
             Type.Validate(ctx);
 
             (Elements != null).AssertTrue();
-            Elements.ForEach(el => { el.AssertNotNull(); el.Validate(ctx); });
+            Elements.ForEach(el =>
+            {
+                el.AssertNotNull();
+                el.Validate(ctx);
 
-            throw new NotImplementedException();
+                // todo. I've witnessed very strange behavior of ptxas:
+                //
+                // 1) can use 0f00000000 in src vectors, tho cannot use 0, 
+                // 2) can use vars in src vectors, but in a strange way: 
+                //   "mov.v4.b32 v4_u32, {a, foo, c, d}" works when foo is ".global .u32" 
+                //   and ain't work when foo is ".global .f32".
+                //
+                // till this gets resolved (e.g. when I have more time to ask NVIDIA)
+                // I only allow registers to comprise Vector literals
+
+                (el is Reg).AssertTrue();
+                agree(el, ElementType);
+            });
         }
 
         protected override void RenderAsPtx(TextWriter writer)
