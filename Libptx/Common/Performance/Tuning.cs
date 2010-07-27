@@ -5,7 +5,7 @@ using System.IO;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
 using XenoGears.Assertions;
-using System.Linq;
+using XenoGears.Functional;
 
 namespace Libptx.Common.Performance
 {
@@ -24,11 +24,11 @@ namespace Libptx.Common.Performance
             {
                 var mods = new List<SoftwareIsa>();
                 if (Maxnreg > 0) mods.Add(SoftwareIsa.PTX_13);
-                if (Maxntid != null) mods.Add(SoftwareIsa.PTX_13);
-                if (Reqntid != null) mods.Add(SoftwareIsa.PTX_21);
+                if (Maxntid != new dim3(0, 0, 0)) mods.Add(SoftwareIsa.PTX_13);
+                if (Reqntid != new dim3(0, 0, 0)) mods.Add(SoftwareIsa.PTX_21);
                 if (Minnctapersm != 0) mods.Add(SoftwareIsa.PTX_20);
                 if (Maxnctapersm != 0) mods.Add(SoftwareIsa.PTX_13);
-                return mods.Max();
+                return mods.MaxOrDefault();
             }
         }
 
