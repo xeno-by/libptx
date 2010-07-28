@@ -7,7 +7,7 @@ namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     [DebuggerNonUserCode]
-    public class Affix15Attribute : QuantumAttribute
+    public class Affix15Attribute : AffixAttribute
     {
         public Affix15Attribute()
             : this(null, SoftwareIsa.PTX_15, HardwareIsa.SM_10)

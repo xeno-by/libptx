@@ -21,5 +21,11 @@ namespace Libptx.Common
                 return buf.ToString();
             }
         }
+
+        public static void RenderAsPtx(this Renderable renderable, TextWriter writer)
+        {
+            if (renderable == null) return;
+            ((Renderable)renderable).RenderAsPtx(writer);
+        }
     }
 }

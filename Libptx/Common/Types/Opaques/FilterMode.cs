@@ -4,7 +4,7 @@ namespace Libptx.Common.Types.Opaques
 {
     public enum FilterMode
     {
-        [Attr15("nearest")] Nearest,
-        [Attr15("linear")] Linear,
+        [Affix15("nearest")] Nearest,
+        [Affix15("linear")] Linear,
     }
 }

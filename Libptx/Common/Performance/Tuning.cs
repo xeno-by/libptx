@@ -1,36 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
+using Libptx.Common.Annotations.Quanta;
 using XenoGears.Assertions;
-using XenoGears.Functional;
 
 namespace Libptx.Common.Performance
 {
     [DebuggerNonUserCode]
     public class Tuning : Atom
     {
-        public int Maxnreg { get; set; }
-        public dim3 Maxntid { get; set; }
-        public dim3 Reqntid { get; set; }
-        public int Minnctapersm { get; set; }
-        public int Maxnctapersm { get; set; }
-
-        protected override SoftwareIsa CustomVersion
-        {
-            get
-            {
-                var mods = new List<SoftwareIsa>();
-                if (Maxnreg > 0) mods.Add(SoftwareIsa.PTX_13);
-                if (Maxntid != new dim3(0, 0, 0)) mods.Add(SoftwareIsa.PTX_13);
-                if (Reqntid != new dim3(0, 0, 0)) mods.Add(SoftwareIsa.PTX_21);
-                if (Minnctapersm != 0) mods.Add(SoftwareIsa.PTX_20);
-                if (Maxnctapersm != 0) mods.Add(SoftwareIsa.PTX_13);
-                return mods.MaxOrDefault();
-            }
-        }
+        [Affix("maxnreg", SoftwareIsa.PTX_13)] public int Maxnreg { get; set; }
+        [Affix("maxntid", SoftwareIsa.PTX_13)] public dim3 Maxntid { get; set; }
+        [Affix("reqntid", SoftwareIsa.PTX_21)] public dim3 Reqntid { get; set; }
+        [Affix("minnctapersm", SoftwareIsa.PTX_20)] public int Minnctapersm { get; set; }
+        [Affix("maxnctapersm", SoftwareIsa.PTX_13)] public int Maxnctapersm { get; set; }
 
         protected override void CustomValidate(Module ctx)
         {
@@ -41,7 +25,11 @@ namespace Libptx.Common.Performance
 
         protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
+            if (Maxnreg != 0) writer.WriteLine(".maxnreg {0}", Maxnreg);
+            if (Maxntid != new dim3()) writer.WriteLine(".maxntid {0}, {1}, {2}", Maxntid.X, Maxntid.Y, Maxntid.Z);
+            if (Reqntid != new dim3()) writer.WriteLine(".reqntid {0}, {1}, {2}", Reqntid.X, Reqntid.Y, Reqntid.Z);
+            if (Minnctapersm != 0) writer.WriteLine(".minnctapersm {0}", Minnctapersm);
+            if (Maxnctapersm != 0) writer.WriteLine(".maxnctapersm {0}", Maxnctapersm);
         }
     }
 }

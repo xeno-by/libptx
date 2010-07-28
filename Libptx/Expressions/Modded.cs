@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -9,6 +8,7 @@ using Libptx.Expressions.Slots;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Functional;
+using Libptx.Reflection;
 
 namespace Libptx.Expressions
 {
@@ -178,7 +178,38 @@ namespace Libptx.Expressions
 
         protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
+            if (this.has_mod(not))
+            {
+                writer.Write(not.Signature());
+                writer.Write(Expr);
+            }
+            else if (this.has_mod(couple))
+            {
+                writer.Write(Embedded.First());
+                writer.Write(couple.Signature());
+                writer.Write(Embedded.Second());
+            }
+            else if (this.has_mod(neg | sel))
+            {
+                if (this.has_mod(neg)) writer.Write("-");
+                writer.Write(Expr);
+                if (this.has_mod(sel))
+                {
+                    var postfix = (Mod & sel).Signature();
+                    writer.Write("." + postfix);
+                }
+            }
+            else if (this.has_mod(member))
+            {
+                writer.Write(Expr);
+
+                var postfix = (Mod & member).Signature();
+                writer.Write("." + postfix);
+            }
+            else
+            {
+                throw AssertionHelper.Fail();
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
+using Libptx.Expressions.Addresses;
 using Libptx.Instructions.Annotations;
 using Libptx.Expressions;
 using XenoGears.Assertions;
@@ -29,8 +30,9 @@ namespace Libptx.Instructions.MovementAndConversion
             is_reg(d, type).AssertTrue();
 
             var move_from_alu_or_sreg = is_alu_or_sreg(a, type);
+            var move_address = a is Address;
             var move_from_opaque_to_ptr = a.is_opaque() && (agree(type, u32) || agree(type, u64));
-            (move_from_alu_or_sreg || move_from_opaque_to_ptr).AssertTrue();
+            (move_from_alu_or_sreg || move_address || move_from_opaque_to_ptr).AssertTrue();
         }
     }
 }

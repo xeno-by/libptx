@@ -1,23 +1,18 @@
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Libcuda.Versions;
-using Libptx.Common.Annotations;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
-using Libptx.Common.Types.Opaques;
-using Libptx.Common.Types.Pointers;
 using Libptx.Expressions;
 using Libptx.Expressions.Immediate;
 using Libptx.Expressions.Slots;
 using Libptx.Expressions.Sregs;
+using Libptx.Reflection;
 using Libptx.Statements;
 using XenoGears.Reflection.Shortcuts;
 using Type = Libptx.Common.Types.Type;
-using XenoGears.Reflection.Attributes;
 using XenoGears.Functional;
-using XenoGears;
 using XenoGears.Assertions;
 
 namespace Libptx.Instructions
@@ -27,48 +22,22 @@ namespace Libptx.Instructions
     {
         protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
+            // todo. backwards compatibility for textures:
+            // render .global .texref as .tex .u32
+            // render tex instruction without brackets
+
+//            Pragmas.ForEach(p => p.RenderAsPtx(writer));
+//            throw new NotImplementedException();
+
+            // todo. implement this =)
+            writer.Write(this.GetType().Name);
         }
 
-        protected sealed override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)custom_swisa, (int)default_swisa); } }
+        protected sealed override SoftwareIsa CustomVersion { get { return custom_swisa; } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
-        private SoftwareIsa default_swisa
-        {
-            get
-            {
-                var t_swisa = this.Version();
 
-                var props = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<ParticleAttribute>()).ToReadOnly();
-                var p_swisas = props.Select(p =>
-                {
-                    var v = p.GetValue(this, null);
-                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                    return Equals(v, @default) ? 0 : p.Version();
-                }).ToReadOnly();
-
-                return (SoftwareIsa)Math.Max((int)t_swisa, (int)p_swisas.MaxOrDefault());
-            }
-        }
-
-        protected sealed override HardwareIsa CustomTarget { get { return (HardwareIsa)Math.Max((int)custom_hwisa, (int)default_hwisa); } }
+        protected sealed override HardwareIsa CustomTarget { get { return custom_hwisa; } }
         protected virtual HardwareIsa custom_hwisa { get { return HardwareIsa.SM_10; } }
-        private HardwareIsa default_hwisa
-        {
-            get
-            {
-                var t_hwisa = this.Version();
-
-                var props = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<ParticleAttribute>()).ToReadOnly();
-                var p_hwisas = props.Select(p =>
-                {
-                    var v = p.GetValue(this, null);
-                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                    return Equals(v, @default) ? 0 : p.Target();
-                }).ToReadOnly();
-
-                return (HardwareIsa)Math.Max((int)t_hwisa, (int)p_hwisas.MaxOrDefault());
-            }
-        }
 
         protected sealed override void CustomValidate(Module ctx)
         {

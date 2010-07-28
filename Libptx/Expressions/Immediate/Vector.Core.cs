@@ -92,7 +92,15 @@ namespace Libptx.Expressions.Immediate
 
         protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
+            writer.Write("{");
+
+            Elements.ForEach((el, i) =>
+            {
+                if (i != 0) writer.Write(", ");
+                el.RenderAsPtx(writer);
+            });
+
+            writer.Write("}");
         }
     }
 

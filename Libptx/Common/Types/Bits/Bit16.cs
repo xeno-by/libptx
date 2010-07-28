@@ -10,7 +10,7 @@ namespace Libptx.Common.Types.Bits
     [DebuggerNonUserCode]
     public struct Bit16
     {
-        internal short _fillerForSizeof;
+        public ushort Raw { get; set; }
     }
 
     [DebuggerNonUserCode]

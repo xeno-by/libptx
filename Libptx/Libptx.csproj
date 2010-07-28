@@ -53,15 +53,13 @@
   <ItemGroup>
     <Compile Include="Bindings\PtxAttribute.cs" />
     <Compile Include="Common\Annotations\Atoms\Atom15Attribute.cs" />
-    <Compile Include="Common\Annotations\ParticleHelpers.cs" />
-    <Compile Include="Common\Annotations\Quanta\Attr20Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\AttrAttribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Quantum15Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\Quantum20Attribute.cs" />
+    <Compile Include="Common\Annotations\Quanta\QuantumAttribute.cs" />
+    <Compile Include="Reflection\Ptxops.cs" />
+    <Compile Include="Reflection\Common.cs" />
     <Compile Include="Common\Annotations\Quanta\Affix15Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Attr15Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Suffix15Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Prefix15Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\Mod15Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Infix15Attribute.cs" />
     <Compile Include="Common\Enumerations\barlevel.cs" />
     <Compile Include="Common\Enumerations\cachelevel.cs" />
     <Compile Include="Common\Enumerations\clampm.cs" />
@@ -107,17 +105,10 @@
     <Compile Include="Common\Types\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />
     <Compile Include="Common\Annotations\ParticleAttribute.cs" />
-    <Compile Include="Common\Debug\Location.cs" />
     <Compile Include="Common\Annotations\Quanta\Affix20Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\AffixAttribute.cs" />
     <Compile Include="Common\Annotations\Quanta\Mod20Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\ModAttribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Suffix20Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\SuffixAttribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Prefix20Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\PrefixAttribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\Infix20Attribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\QuantumAttribute.cs" />
     <Compile Include="Common\Types\Bits\Bit16.cs" />
     <Compile Include="Common\Types\Bits\Bit32.cs" />
     <Compile Include="Common\Types\Bits\Bit64.cs" />
@@ -143,7 +134,6 @@
     <Compile Include="Instructions\Annotations\Ptxop15Attribute.cs" />
     <Compile Include="Instructions\Annotations\Ptxop20Attribute.cs" />
     <Compile Include="Instructions\Annotations\PtxopAttribute.cs" />
-    <Compile Include="Common\Annotations\Quanta\InfixAttribute.cs" />
     <Compile Include="Instructions\Arithmetic\abs.cs" />
     <Compile Include="Instructions\Arithmetic\add.cs" />
     <Compile Include="Instructions\Arithmetic\bfe.cs" />
@@ -246,6 +236,8 @@
     <Compile Include="Expressions\Sregs\tid.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Common\Comments\Comment.cs" />
+    <Compile Include="Reflection\Sregs.cs" />
+    <Compile Include="Reflection\Types.cs" />
     <Compile Include="Statements\Instruction.cs" />
     <Compile Include="Statements\Label.cs" />
     <Compile Include="Module.cs" />
@@ -255,6 +247,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Expressions\Sregs\Registry\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

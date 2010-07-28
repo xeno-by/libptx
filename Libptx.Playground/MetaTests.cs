@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using Libptx.Common.Types;
+using Libptx.Instructions;
+using Libptx.Reflection;
 using NUnit.Framework;
 using XenoGears.Functional;
 using XenoGears.Logging;
@@ -8,6 +11,7 @@ using XenoGears.Reflection;
 using XenoGears.Reflection.Attributes;
 using XenoGears.Reflection.Generics;
 using XenoGears.Strings;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Playground
 {
@@ -38,6 +42,32 @@ namespace Libptx.Playground
                 messages.OrderDescending().ForEach(message => Log.WriteLine(message));
                 Assert.Fail();
             }
+        }
+
+        [Test]
+        public void EnsurePtxopMetadataIntegrity()
+        {
+            var libptx = typeof(Module).Assembly;
+            var ops = libptx.GetTypes().Where(t => t.BaseType == typeof(ptxop)).ToReadOnly();
+
+            // assert-test #1: all ptxop annotations for given ptxop have the same version and target
+            var weirdos = ops.Where(op => op.Particles().Select(pcl => Tuple.New(pcl.Version, pcl.Target)).Distinct().Count() > 1);
+            weirdos.ForEach(Console.WriteLine);
+
+            // assert-test #2: all type annotations are mandatory
+            ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\.(\w)*type").Success).ForEach(sig => Console.WriteLine(sig));
+            var types = Enum.GetValues(typeof(TypeName)).Cast<TypeName>().Select(tn => (Type)tn).Select(t => t.ToString()).ToReadOnly();
+            types.ForEach(t => ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
+        }
+
+        [Test]
+        public void EnsurePtxopValidationCorrectness()
+        {
+            // todo. implement the following:
+            // 1) compose all possible valid combos of ptxop values and compare them with all possible valid combos of ptxop signatures
+            // 2) check all possible combos of ops: verify that all valid get compiled by ptxas and all invalid do not
+
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Libptx.Common.Annotations.Quanta
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     [DebuggerNonUserCode]
-    public class Mod15Attribute : QuantumAttribute
+    public class Mod15Attribute : ModAttribute
     {
         public Mod15Attribute()
             : this(null, SoftwareIsa.PTX_15, HardwareIsa.SM_10)

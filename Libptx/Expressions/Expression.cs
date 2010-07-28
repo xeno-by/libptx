@@ -1,12 +1,9 @@
 using System.Diagnostics;
-using System.Linq;
 using Libptx.Common;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Expressions.Addresses;
-using Libptx.Expressions.Immediate;
 using Libptx.Expressions.Slots;
-using Libptx.Expressions.Sregs;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 

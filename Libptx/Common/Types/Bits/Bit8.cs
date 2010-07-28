@@ -10,7 +10,7 @@ namespace Libptx.Common.Types.Bits
     [DebuggerNonUserCode]
     public struct Bit8
     {
-        internal byte _fillerForSizeof;
+        public byte Raw { get; set; }
     }
 
     [DebuggerNonUserCode]

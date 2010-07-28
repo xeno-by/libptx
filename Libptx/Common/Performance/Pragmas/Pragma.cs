@@ -1,12 +1,11 @@
 using System;
 using System.IO;
-using Libptx.Statements;
-using Libptx.Common.Annotations;
+using Libptx.Reflection;
 using XenoGears.Assertions;
 
 namespace Libptx.Common.Performance.Pragmas
 {
-    public abstract class Pragma : Atom, Statement
+    public abstract class Pragma : Atom
     {
         public String Signature
         {
@@ -15,7 +14,7 @@ namespace Libptx.Common.Performance.Pragmas
 
         protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
+            writer.WriteLine(".pragma \"{0}\";", Signature);
         }
     }
 }

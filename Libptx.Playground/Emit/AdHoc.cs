@@ -28,12 +28,9 @@ namespace Libptx.Playground.Emit
         {
             Func<String, Reg> reg_u32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.U32}};
             Func<String, Reg> reg_f32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.F32}};
-            Func<int, Reg> rh = i => new Reg{Name = String.Format("%rh{0}", i), Type = new Type{Name = TypeName.S16}};
-            Func<int, Reg> rhu = i => new Reg{Name = String.Format("%rhu{0}", i), Type = new Type{Name = TypeName.U16}};
-            Func<int, Reg> r = i => new Reg{Name = String.Format("%r{0}", i), Type = new Type{Name = TypeName.S32}};
-            Func<int, Reg> ru = i => new Reg{Name = String.Format("%ru{0}", i), Type = new Type{Name = TypeName.U32}};
-            Func<int, Reg> rd = i => new Reg{Name = String.Format("%rd{0}", i), Type = new Type{Name = TypeName.S64}};
-            Func<int, Reg> rdu = i => new Reg{Name = String.Format("%rdu{0}", i), Type = new Type{Name = TypeName.U64}};
+            Func<int, Reg> rh = i => new Reg{Name = String.Format("%rh{0}", i), Type = new Type{Name = TypeName.U16}};
+            Func<int, Reg> r = i => new Reg{Name = String.Format("%r{0}", i), Type = new Type{Name = TypeName.U32}};
+            Func<int, Reg> rd = i => new Reg{Name = String.Format("%rd{0}", i), Type = new Type{Name = TypeName.U64}};
             Func<int, Reg> f = i => new Reg{Name = String.Format("%f{0}", i), Type = new Type{Name = TypeName.F32}};
             Func<int, Reg> fd = i => new Reg{Name = String.Format("%d{0}", i), Type = new Type{Name = TypeName.F64}};
             Func<int, Reg> p = i => new Reg{Name = String.Format("%p{0}", i), Type = new Type{Name = TypeName.Pred}};

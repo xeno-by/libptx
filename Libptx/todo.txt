@@ -2,23 +2,19 @@
 
 9) bidirectional transformation: [plain text] <=> [object model]
 10) stubs for bidirectional transformation: [binary] <=> [object model]
-12) implement tostrings for all
 13) add readme.txt (similarly as for Libcuda)
 14) todo for readme.txt: 2.0 ABI is not implemented
 15) todo for readme.txt: variadic functions are not implemented
 16) todo for readme.txt: indirect calls and jumps are not implemented (same for .branchtargets, .calltargets and .callprototype) => labels/funcs ain't slots and ain't addressable
-19) convenient inits for bX, bX.vY and bX[.vY]+[] constants
+19) convenient inits for bX constants (just gief implicit/explicit casts for scalar and vector versions)
 21) todo for readme.txt: no funcs - no doubts with extern, no necessity to invent pretty AddFunc signatures, no necessity to implement calls and ABIs, no Callable (i.e. no bras to funcs)
 23) todo for readme.txt: bit buckets - too much work finding out what instructions support them
-24) todo for readme.txt: hasn't passed rigorous testing, only basic ALU, mem and flow instructions (misc, textures, video and synchronization weren't touched at all)
-25) check that we validate everything including tiniest particles, e.g. Vars of an Index!!
-26) also always validate type
-27) compose all possible valid combos of ptxop values and compare them with all possible valid combos of ptxop signatures
+24) todo for readme.txt: hasn't passed rigorous testing, only basic ALU, mem and flow instructions (misc, textures, video and synchronization weren't touched at all, same for old versions of SoftwareIsa)
 28) todo for readme.txt: no extern and visible - no doubts since ain't got no time
 29) todo for readme.txt: no scopes - I find this redundant, i.e. vars and labels might event be shared across multiple scopes, tho they will be mapped onto differerent declarations, of course
-30) todo for readme.txt: debugging directives (i.e. @@DWARF and .section) are not supported
-31) don't forget to render locations, pragmas and Atom-level comments!
-32) todo for readme.txt: implement e-DSL and perform #27 and #35
+30) todo for readme.txt: debugging directives (i.e. .file, .loc, @@DWARF and .section) are not supported
+32) todo for readme.txt: implement e-DSL and implement the EnsurePtxopValidationCorrectness test
 33) vector mysteries (see Vector.cs)
 34) modded validation hypothesis (see Modded.cs)
-35) check all possible combos of ops: verify that all valid get compiled by ptxas and all invalid do not
+35) better error reporting, e.g. not crash due to a single error in Entry, but rather collect all errors and then display problematic line numbers
+36) pragmas/tuning for entry. how to specify those?!

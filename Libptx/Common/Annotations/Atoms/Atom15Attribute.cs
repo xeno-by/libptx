@@ -5,7 +5,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Common.Annotations.Atoms
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
     [DebuggerNonUserCode]
     public class Atom15Attribute : ParticleAttribute
     {

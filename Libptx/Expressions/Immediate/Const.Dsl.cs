@@ -1,16 +1,12 @@
 ﻿using Libcuda.DataTypes;
 using Libptx.Common.Types.Bits;
 using Libptx.Common.Types.Opaques;
-using Libptx.Expressions.Slots;
+using Libptx.Expressions.Addresses;
 
 namespace Libptx.Expressions.Immediate
 {
     public partial class Const
     {
-        // addressables
-//        public static implicit operator Const(Addressable value) { return new Const(value); }
-        public static implicit operator Const(Var value) { return new Const(value); }
-
         // predicates
         public static implicit operator Const(bool value) { return new Const(value); }
 
@@ -18,6 +14,9 @@ namespace Libptx.Expressions.Immediate
         public static implicit operator Const(Texref value) { return new Const(value); }
         public static implicit operator Const(Samplerref value) { return new Const(value); }
         public static implicit operator Const(Surfref value) { return new Const(value); }
+
+        // addresses
+        public static implicit operator Const(Address value) { return new Const(value); }
 
         // scalars and their derivatives
         public static implicit operator Const(sbyte value) { return new Const(value); }
@@ -56,11 +55,6 @@ namespace Libptx.Expressions.Immediate
         public static implicit operator Const(ulong value) { return new Const(value); }
         public static implicit operator Const(ulong1 value) { return new Const(value); }
         public static implicit operator Const(ulong2 value) { return new Const(value); }
-        public static implicit operator Const(half value) { return new Const(value); }
-        public static implicit operator Const(half1 value) { return new Const(value); }
-        public static implicit operator Const(half2 value) { return new Const(value); }
-        public static implicit operator Const(half3 value) { return new Const(value); }
-        public static implicit operator Const(half4 value) { return new Const(value); }
         public static implicit operator Const(float value) { return new Const(value); }
         public static implicit operator Const(float1 value) { return new Const(value); }
         public static implicit operator Const(float2 value) { return new Const(value); }
@@ -123,11 +117,6 @@ namespace Libptx.Expressions.Immediate
         public static implicit operator Const(ulong[] value) { return new Const(value); }
         public static implicit operator Const(ulong1[] value) { return new Const(value); }
         public static implicit operator Const(ulong2[] value) { return new Const(value); }
-        public static implicit operator Const(half[] value) { return new Const(value); }
-        public static implicit operator Const(half1[] value) { return new Const(value); }
-        public static implicit operator Const(half2[] value) { return new Const(value); }
-        public static implicit operator Const(half3[] value) { return new Const(value); }
-        public static implicit operator Const(half4[] value) { return new Const(value); }
         public static implicit operator Const(float[] value) { return new Const(value); }
         public static implicit operator Const(float1[] value) { return new Const(value); }
         public static implicit operator Const(float2[] value) { return new Const(value); }

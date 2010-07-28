@@ -5,12 +5,17 @@ using System.IO;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common.Annotations;
+using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Comments;
-using Libptx.Common.Debug;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Performance.Pragmas;
 using Libptx.Common.Types;
 using Libptx.Expressions;
+using Libptx.Reflection;
+using Libptx.Statements;
+using XenoGears;
+using XenoGears.Reflection.Attributes;
+using XenoGears.Reflection.Shortcuts;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -20,11 +25,11 @@ namespace Libptx.Common
     [DebuggerNonUserCode]
     public abstract class Atom : Validatable, Renderable
     {
-        private IList<Location> _locations = new List<Location>();
-        public IList<Location> Locations
+        private IList<Comment> _comments = new List<Comment>();
+        public IList<Comment> Comments
         {
-            get { return _locations; }
-            set { _locations = value ?? new List<Location>(); }
+            get { return _comments; }
+            set { _comments = value ?? new List<Comment>(); }
         }
 
         private IList<Pragma> _pragmas = new List<Pragma>();
@@ -34,20 +39,53 @@ namespace Libptx.Common
             set { _pragmas = value ?? new List<Pragma>(); }
         }
 
-        private IList<Comment> _comments = new List<Comment>();
-        public IList<Comment> Comments
+        public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
+        protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
+        protected SoftwareIsa CoreVersion
         {
-            get { return _comments; }
-            set { _comments = value ?? new List<Comment>(); }
+            get
+            {
+                var t_swisa = this.Version();
+
+                var props = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
+                var ps_swisa = props.Select(p =>
+                {
+                    var v = p.GetValue(this, null);
+                    var v_swisa = v.Version();
+
+                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
+                    var p_swisa = Equals(v, @default) ? 0 : p.Version();
+
+                    return (SoftwareIsa)Math.Max((int)v_swisa, (int)p_swisa);
+                }).MaxOrDefault();
+
+                return (SoftwareIsa)Math.Max((int)t_swisa, (int)ps_swisa);
+            }
         }
 
-        public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
-        protected SoftwareIsa CoreVersion { get { return this.Versions().AssertThat(vv => vv.Distinct().Count() <= 1).MinOrDefault(); } }
-        protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
-
         public HardwareIsa Target { get { return (HardwareIsa)Math.Max((int)CoreTarget, (int)CustomTarget); } }
-        protected HardwareIsa CoreTarget { get { return this.Targets().AssertThat(tt => tt.Distinct().Count() <= 1).MinOrDefault(); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
+        protected HardwareIsa CoreTarget
+        {
+            get
+            {
+                var t_hwisa = this.Target();
+
+                var props = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
+                var ps_hwisa = props.Select(p =>
+                {
+                    var v = p.GetValue(this, null);
+                    var v_hwisa = v.Target();
+
+                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
+                    var p_hwisa = Equals(v, @default) ? 0 : p.Target();
+
+                    return (HardwareIsa)Math.Max((int)v_hwisa, (int)p_hwisa);
+                }).MaxOrDefault();
+
+                return (HardwareIsa)Math.Max((int)t_hwisa, (int)ps_hwisa);
+            }
+        }
 
         protected virtual void CustomValidate(Module ctx) { /* do nothing */ }
         public void Validate(Module ctx)
@@ -55,16 +93,22 @@ namespace Libptx.Common
             (ctx.Version >= Version).AssertTrue();
             (ctx.Target >= Target).AssertTrue();
 
-            Locations.ForEach(l => { l.AssertNotNull(); l.Validate(ctx); });
-            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(ctx); });
             Comments.ForEach(c => { c.AssertNotNull(); c.Validate(ctx); });
+            Pragmas.IsNotEmpty().AssertImplies(this is Instruction || this is Entry);
+            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(ctx); });
 
             CustomValidate(ctx);
         }
 
-        void Renderable.RenderAsPtx(TextWriter writer) { RenderAsPtx(writer); }
-        protected abstract void RenderAsPtx(TextWriter writer);
         public sealed override String ToString() { return this.RenderAsPtx(); }
+        protected abstract void RenderAsPtx(TextWriter writer);
+        void Renderable.RenderAsPtx(TextWriter writer)
+        {
+            Comment.Inline = this is Expression && !(this is Label);
+            Comments.ForEach(c => c.RenderAsPtx(writer));
+
+            RenderAsPtx(writer);
+        }
 
         #region Enumeration values => Static properties
 

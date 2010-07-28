@@ -10,7 +10,7 @@ namespace Libptx.Common.Types.Bits
     [DebuggerNonUserCode]
     public struct Bit64
     {
-        internal long _fillerForSizeof;
+        public ulong Raw { get; set; }
     }
 
     [DebuggerNonUserCode]

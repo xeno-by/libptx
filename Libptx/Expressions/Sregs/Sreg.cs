@@ -6,6 +6,7 @@ using Libptx.Expressions.Sregs.Annotations;
 using XenoGears.Assertions;
 using XenoGears.Reflection.Attributes;
 using Type=Libptx.Common.Types.Type;
+using Libptx.Reflection;
 
 namespace Libptx.Expressions.Sregs
 {
@@ -25,7 +26,7 @@ namespace Libptx.Expressions.Sregs
 
         protected override void RenderAsPtx(TextWriter writer)
         {
-            throw new NotImplementedException();
+            writer.Write(this.Signature());
         }
     }
 }

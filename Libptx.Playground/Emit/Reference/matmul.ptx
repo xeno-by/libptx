@@ -54,7 +54,7 @@
     @%p1 bra            $Exit;
 
     // float Cvalue = 0;
-    mov.f32             cvalue, 0f00000000; // 0
+    mov.f32             cvalue, 0f00000000 /* 0.0f */;
 
     // for (int dim = 0; dim < A.width; ++dim)
     ld.param.u32        a_width, [A+0];

@@ -25,13 +25,6 @@ namespace Libptx
         public bool UnifiedTexturing { get; set; }
         public bool EmulateDoubles { get; set; }
 
-        private IList<Pragma> _pragmas = new List<Pragma>();
-        public IList<Pragma> Pragmas
-        {
-            get { return _pragmas; }
-            set { _pragmas = value ?? new List<Pragma>(); }
-        }
-
         private IList<Comment> _comments = new List<Comment>();
         public IList<Comment> Comments
         {
@@ -39,11 +32,11 @@ namespace Libptx
             set { _comments = value ?? new List<Comment>(); }
         }
 
-        private Tuning _tuning = new Tuning();
-        public Tuning Tuning
+        private IList<Pragma> _pragmas = new List<Pragma>();
+        public IList<Pragma> Pragmas
         {
-            get { return _tuning; }
-            set { _tuning = value ?? new Tuning(); }
+            get { return _pragmas; }
+            set { _pragmas = value ?? new List<Pragma>(); }
         }
 
         private Entries _entries = new Entries();
@@ -98,7 +91,6 @@ namespace Libptx
 
             UnifiedTexturing = true;
             EmulateDoubles = false;
-            Tuning = new Tuning();
         }
 
         public Module(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
@@ -115,9 +107,8 @@ namespace Libptx
             (UnifiedTexturing == false).AssertImplies(Version >= SoftwareIsa.PTX_15);
             (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
-            Tuning.Validate(this);
-            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(this); });
             Comments.ForEach(c => { c.AssertNotNull(); c.Validate(this); });
+            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(this); });
 
             var all_args = new HashSet<Expression>();
             Entries.ForEach(e =>
@@ -125,7 +116,13 @@ namespace Libptx
                 e.AssertNotNull();
                 e.Validate(this);
 
-                (e.Name != null).AssertTrue();
+                if (e.Name == null)
+                {
+                    Func<int, String> gen_name = i => String.Format("%entry{0}", i);
+                    var gend_name = Seq.Nats.Select(gen_name).First(name => Entries.None(e2 => e2.Name == name));
+                    e.Name = gend_name;
+                }
+
                 (Entries.Count(e2 => e2.Name == e.Name) == 1).AssertTrue();
 
                 var args = e.Stmts.OfType<ptxop>().SelectMany(op => op.Operands);
@@ -141,9 +138,24 @@ namespace Libptx
 
         void Renderable.RenderAsPtx(TextWriter writer)
         {
-            // todo. gather all locations and render their files with ".file" directives
+            Comments.ForEach(c => c.RenderAsPtx(writer));
+            if (Comments.IsNotEmpty()) writer.WriteLine();
 
-            throw new NotImplementedException();
+            writer.WriteLine(".version {0}.{1}", (int)Version / 10, (int)Version % 10);
+            writer.Write(".target sm_{0}", (int)Target);
+            if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) writer.Write(", texmode_unified");
+            if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) writer.Write(", texmode_independent");
+            if (EmulateDoubles) writer.Write(", map_f64_to_f32");
+            writer.WriteLine();
+
+            if (Pragmas.IsNotEmpty()) writer.WriteLine();
+            Pragmas.ForEach(p => p.RenderAsPtx(writer));
+
+            foreach (var entry in Entries)
+            {
+                writer.WriteLine();
+                entry.RenderAsPtx(writer);
+            }
         }
     }
 }

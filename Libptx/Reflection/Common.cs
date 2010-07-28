@@ -3,15 +3,16 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 using Libcuda.Versions;
+using Libptx.Common.Annotations;
 using XenoGears.Reflection.Attributes;
 using XenoGears.Reflection.Shortcuts;
 using System.Linq;
 using XenoGears.Functional;
 
-namespace Libptx.Common.Annotations
+namespace Libptx.Reflection
 {
     [DebuggerNonUserCode]
-    public static class ParticleHelpers
+    public static class Common
     {
         public static ParticleAttribute Particle(this Object obj)
         {
@@ -53,8 +54,9 @@ namespace Libptx.Common.Annotations
 
         public static String Signature(this Object obj)
         {
-            var particle = obj.Particle();
-            return particle == null ? null : particle.Signature;
+            var signatures = obj.Signatures();
+            if (signatures == null) return null;
+            return signatures.Distinct().SingleOrDefault();
         }
 
         public static ReadOnlyCollection<String> Signatures(this Object obj)
@@ -65,8 +67,9 @@ namespace Libptx.Common.Annotations
 
         public static SoftwareIsa Version(this Object obj)
         {
-            var particle = obj.Particle();
-            return particle == null ? 0 : particle.Version;
+            var versions = obj.Versions();
+            if (versions == null) return 0;
+            return versions.Distinct().SingleOrDefault();
         }
 
         public static ReadOnlyCollection<SoftwareIsa> Versions(this Object obj)
@@ -77,8 +80,9 @@ namespace Libptx.Common.Annotations
 
         public static HardwareIsa Target(this Object obj)
         {
-            var particle = obj.Particle();
-            return particle == null ? 0 : particle.Target;
+            var targets = obj.Targets();
+            if (targets == null) return 0;
+            return targets.Distinct().SingleOrDefault();
         }
 
         public static ReadOnlyCollection<HardwareIsa> Targets(this Object obj)

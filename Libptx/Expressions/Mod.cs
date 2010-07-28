@@ -6,9 +6,9 @@ namespace Libptx.Expressions
     [Flags]
     public enum Mod
     {
-        [Prefix("!")] Not = 1,
-        [Infix("|")] Couple,
-        [Prefix("-")] Neg,
+        [Affix("!")] Not = 1,
+        [Affix("|")] Couple,
+        [Affix("-")] Neg,
         [Affix("b0")] B0,
         [Affix("b1")] B1,
         [Affix("b2")] B2,
