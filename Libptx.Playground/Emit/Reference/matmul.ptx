@@ -6,18 +6,19 @@
     .param .align 4 .b8 B[12],
     .param .align 4 .b8 C[12])
 {
-    .reg .f32 %f<5>;
-    .reg .pred %p<9>;
-    .reg .u32 %r<37>;
-    .reg .u16 %rh<6>;
+    .reg .f32 %f<3>;
+    .reg .pred %p<8>;
+    .reg .u32 %r<35>;
+    .reg .u16 %rh<4>;
     .reg .u32 a_height;
     .reg .u32 a_offset;
     .reg .u32 a_offset_hi;
     .reg .u32 a_offset_lo;
     .reg .u32 a_raw;
+    .reg .u32 a_width;
     .reg .u32 b_offset;
     .reg .u32 b_offset_lo;
-    .reg .u32 b_offset_stride
+    .reg .u32 b_offset_stride;
     .reg .u32 b_raw;
     .reg .u32 b_width;
     .reg .u32 c_raw;

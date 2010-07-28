@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Libptx.Statements;
 using XenoGears.Functional;
+using XenoGears.Strings;
 
 namespace Libptx.Common.Comments
 {
@@ -30,7 +31,15 @@ namespace Libptx.Common.Comments
 
             if (Text.Trim().IsEmpty())
             {
-                writer.Write(Text);
+                var indented = writer as IndentedTextWriter;
+                if (Text == Environment.NewLine && indented != null)
+                {
+                    indented.WriteNoTabs(Text);
+                }
+                else
+                {
+                    writer.Write(Text);
+                }
             }
             else
             {
