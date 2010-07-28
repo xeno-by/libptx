@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
+using Libptx.Common.Comments;
 using Libptx.Common.Performance;
 using Libptx.Common.Types;
 using Libptx.Expressions;
@@ -272,8 +273,9 @@ namespace Libptx
                 lst.Add(Tuple.New(s, index));
             };
 
-            foreach (var stmt in Stmts)
+            foreach (var unsafe_stmt in Stmts)
             {
+                var stmt = unsafe_stmt;
                 render_stmts.Add(() =>
                 {
                     if (stmt is Label)
@@ -287,6 +289,10 @@ namespace Libptx
                     {
                         stmt.RenderAsPtx(writer);
                         writer.WriteLine(";");
+                    }
+                    else if (stmt is Comment)
+                    {
+                        stmt.RenderAsPtx(writer);
                     }
                     else
                     {
