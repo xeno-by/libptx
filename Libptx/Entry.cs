@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -352,7 +351,7 @@ namespace Libptx
                 var min = decls[k].MinOrDefault(-1);
                 var max = decls[k].MaxOrDefault(-1);
                 if (min < 0 || max < 0) writer.WriteLine(k + ";");
-                else writer.WriteLine(k + "<" + max + ">");
+                else writer.WriteLine(k + "<" + max + ">;");
             });
 
             render_stmts.RunEach();

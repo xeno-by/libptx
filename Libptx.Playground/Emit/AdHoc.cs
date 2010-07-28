@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Libcuda.Versions;
 using Libptx.Common.Comments;
 using Libptx.Common.Enumerations;
@@ -17,14 +18,21 @@ using NUnit.Framework;
 using XenoGears.Playground.Framework;
 using Type=Libptx.Common.Types.Type;
 using Libptx.Common;
+using System.Linq;
+using XenoGears.Functional;
 
 namespace Libptx.Playground.Emit
 {
     [TestFixture]
     public class AdHoc : BaseTests
     {
+        protected override ReadOnlyCollection<String> ReferenceWannabes()
+        {
+            return base.ReferenceWannabes().Select(wb => wb + ".ptx").ToReadOnly();
+        }
+
         [Test, Category("Hot")]
-        public void MatMul()
+        public void matmul()
         {
             Func<String, Reg> reg_u32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.U32}};
             Func<String, Reg> reg_f32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.F32}};

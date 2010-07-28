@@ -8,7 +8,7 @@ namespace Libptx.Playground.Emit
     public class Edsl : BaseTests
     {
         [Test]
-        public void MatMul()
+        public void matmul()
         {
             throw new NotImplementedException();
         }

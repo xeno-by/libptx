@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using Type = Libptx.Common.Types.Type;
@@ -6,6 +7,7 @@ using XenoGears.Strings;
 
 namespace Libptx.Common
 {
+    [DebuggerNonUserCode]
     public static class Validators
     {
         public static void ValidateName(this String name)

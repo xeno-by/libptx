@@ -1,14 +1,14 @@
 using System;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using Libptx.Common;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
-using XenoGears.Functional;
 using XenoGears.Strings;
 
 namespace Libptx.Expressions.Slots
 {
+    [DebuggerNonUserCode]
     public partial class Reg : Atom, Slot, Expression
     {
         public String Name { get; set; }
@@ -46,18 +46,18 @@ namespace Libptx.Expressions.Slots
             this.is_ptr().AssertFalse();
             this.is_bmk().AssertFalse();
 
-            if (Alignment != 0) Alignment.ValidateAlignment(Type);
+            if (_alignment != 0) Alignment.ValidateAlignment(Type);
         }
 
         protected override void RenderAsPtx(TextWriter writer)
         {
             writer.Write(".reg ");
-            if (Alignment != 0) writer.Write(".align " + Alignment + " ");
+            if (_alignment != 0) writer.Write(".align " + Alignment + " ");
 
             var t = Type.RenderAsPtx();
             var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("["));
             var indices = t.IndexOf("[") == -1 ? null : t.Slice(t.IndexOf("["));
-            writer.Write(".{0} {1}{2};", el, Name, indices);
+            writer.Write(".{0} {1}{2}", el, Name, indices);
         }
     }
 }

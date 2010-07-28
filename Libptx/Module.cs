@@ -66,6 +66,7 @@ namespace Libptx
             var entry = new Entry();
             entry.Name = name;
             entry.Params.AddElements(@params ?? Seq.Empty<Var>());
+            Entries.Add(entry);
             return entry;
         }
 

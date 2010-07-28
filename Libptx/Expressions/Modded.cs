@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Libptx.Common;
 using Libptx.Expressions.Slots;
+using Libptx.Expressions.Sregs;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -66,7 +67,7 @@ namespace Libptx.Expressions
 
             (Expr == null).AssertImplies((Mod & Mod.Couple) == Mod.Couple);
             if (Expr != null) Expr.Validate(ctx);
-            if (Expr != null) (Expr is Reg).AssertTrue();
+            if (Expr != null) (Expr is Reg || Expr is Sreg).AssertTrue();
 
             (Embedded.IsNotEmpty()).AssertImplies((Mod & Mod.Couple) == Mod.Couple);
             Embedded.ForEach(e => { e.AssertNotNull(); e.Validate(ctx); });
@@ -213,6 +214,7 @@ namespace Libptx.Expressions
         }
     }
 
+    [DebuggerNonUserCode]
     public static class ModdedExtensions
     {
         public static ReadOnlyCollection<Expression> Flatten(this Modded modded)

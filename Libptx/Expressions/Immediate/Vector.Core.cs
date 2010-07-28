@@ -104,6 +104,7 @@ namespace Libptx.Expressions.Immediate
         }
     }
 
+    [DebuggerNonUserCode]
     public static class VectorExtensions
     {
         public static ReadOnlyCollection<Expression> Flatten(this Vector vector)

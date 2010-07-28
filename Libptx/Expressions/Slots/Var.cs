@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Libptx.Common;
 using Libptx.Common.Enumerations;
+using Libptx.Common.Types;
 using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Addresses;
 using Libptx.Expressions.Immediate;
@@ -37,7 +38,7 @@ namespace Libptx.Expressions.Slots
         // since opaques are themselves pointers, they just have different flavor
         // n0te that for being used with tex/surf instructions, we need to put opaques in brackets
         // which is, as described above, a direct analogue of pointer dereferencing
-        Type Expression.Type { get { return this.is_opaque() ? Type : (Type)typeof(Ptr); } }
+        Type Expression.Type { get { return Type.is_opaque() ? Type : (Type)typeof(Ptr); } }
         public Type Type { get; set; }
 
         public Const Init { get; set; }
@@ -49,8 +50,7 @@ namespace Libptx.Expressions.Slots
             {
                 if (_alignment == 0)
                 {
-                    if (this.is_pred()) return 1;
-                    if (this.is_opaque()) return 16;
+                    if (this.Type.is_opaque()) return 16;
                     return this.SizeOfElement();
                 }
                 else
@@ -72,10 +72,10 @@ namespace Libptx.Expressions.Slots
 
             (Type != null).AssertTrue();
             Type.Validate(ctx);
-            this.is_pred().AssertFalse();
-            this.is_opaque().AssertImplies(Space == param || Space == global);
-            this.is_ptr().AssertFalse();
-            this.is_bmk().AssertFalse();
+            this.Type.is_pred().AssertFalse();
+            this.Type.is_opaque().AssertImplies(Space == param || Space == global);
+            this.Type.is_ptr().AssertFalse();
+            this.Type.is_bmk().AssertFalse();
 
             agree_or_null(Init, Type);
             (Init != null).AssertImplies(Space.is_const() || Space == global);
@@ -85,23 +85,22 @@ namespace Libptx.Expressions.Slots
             var init_var = Init == null ? null : Init.Value as Var;
             if (init_var != null) (init_var.Space.is_const() || init_var.Space == global).AssertTrue();
 
-            if (Alignment != 0) Alignment.ValidateAlignment(Type);
+            if (_alignment != 0) Alignment.ValidateAlignment(Type);
         }
 
         protected override void RenderAsPtx(TextWriter writer)
         {
             writer.Write("." + Space.Signature() + " ");
-            if (Alignment != 0) writer.Write(".align " + Alignment + " ");
+            if (_alignment != 0) writer.Write(".align " + Alignment + " ");
 
             var t = Type.RenderAsPtx();
             var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("["));
             var indices = t.IndexOf("[") == -1 ? null : t.Slice(t.IndexOf("["));
-            if (Init == null) indices = (Type.Dims ?? new int[0]).Count().Times("[]");
+            if (Init != null) indices = (Type.Dims ?? new int[0]).Count().Times("[]");
 
             writer.Write(".{0} {1}{2}", el, Name, indices);
-            if (Init == null) writer.Write(" = ");
-            if (Init == null) Init.RenderAsPtx(writer);
-            writer.Write(";");
+            if (Init != null) writer.Write(" = ");
+            if (Init != null) Init.RenderAsPtx(writer);
         }
     }
 }
