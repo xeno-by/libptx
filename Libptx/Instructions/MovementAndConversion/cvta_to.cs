@@ -35,7 +35,7 @@ namespace Libptx.Instructions.MovementAndConversion
             is_ptr(a).AssertTrue();
             (a.Base == null).AssertTrue();
             (a.Offset.Base is Reg && agree(a.Offset.Base, size)).AssertTrue();
-            (a.Offset.Imm == null).AssertTrue();
+            (a.Offset.Imm == 0).AssertTrue();
         }
     }
 }
