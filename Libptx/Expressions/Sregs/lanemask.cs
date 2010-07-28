@@ -6,7 +6,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Sregs
 {
-    [Special20("%lanemask_{op}", typeof(uint))]
+    [Sreg20("%lanemask_{op}", typeof(uint))]
     [DebuggerNonUserCode]
     public partial class lanemask : Sreg
     {

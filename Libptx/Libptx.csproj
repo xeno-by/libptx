@@ -102,8 +102,8 @@
     <Compile Include="Expressions\Slots\Slot.cs" />
     <Compile Include="Expressions\Modded.cs" />
     <Compile Include="Expressions\Addresses\Offset.cs" />
-    <Compile Include="Expressions\Sregs\Annotations\Special15Attribute.cs" />
-    <Compile Include="Expressions\Sregs\specialtype.cs" />
+    <Compile Include="Expressions\Sregs\Annotations\Sreg15Attribute.cs" />
+    <Compile Include="Expressions\Sregs\sregtype.cs" />
     <Compile Include="Common\Types\Type.Dsl.cs" />
     <Compile Include="Common\Validatable.cs" />
     <Compile Include="Common\Annotations\ParticleAttribute.cs" />
@@ -227,8 +227,8 @@
     <Compile Include="Instructions\Video\vadd.cs" />
     <Compile Include="Expressions\Sregs\Sreg.cs" />
     <Compile Include="Params.cs" />
-    <Compile Include="Expressions\Sregs\Annotations\Special20Attribute.cs" />
-    <Compile Include="Expressions\Sregs\Annotations\SpecialAttribute.cs" />
+    <Compile Include="Expressions\Sregs\Annotations\Sreg20Attribute.cs" />
+    <Compile Include="Expressions\Sregs\Annotations\SregAttribute.cs" />
     <Compile Include="Expressions\Sregs\clock32.cs" />
     <Compile Include="Expressions\Sregs\clock64.cs" />
     <Compile Include="Expressions\Sregs\envreg.cs" />

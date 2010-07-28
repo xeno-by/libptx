@@ -36,7 +36,7 @@ namespace Libptx.Instructions.TextureAndSurface
 
         protected override void custom_validate_operands(Module ctx)
         {
-            is_surfref(a).AssertTrue();
+            (is_surfref(a) || agree(a, u32) || agree(a, u64)).AssertTrue();
             if (geom == d1) (is_alu(b, s32) || is_alu(b, s32.v1)).AssertTrue();
             else if (geom == d2) is_alu(b, s32.v2).AssertTrue();
             else if (geom == d3) is_alu(b, s32.v4).AssertTrue();

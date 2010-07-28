@@ -28,10 +28,9 @@ namespace Libptx.Instructions.MovementAndConversion
         {
             is_reg(d, type).AssertTrue();
 
-            var move_from_alu = is_alu(a, type);
-            var move_from_special = is_special(a, type);
+            var move_from_alu_or_sreg = is_alu_or_sreg(a, type);
             var move_from_opaque_to_ptr = a.is_opaque() && (agree(type, u32) || agree(type, u64));
-            (move_from_alu || move_from_special || move_from_opaque_to_ptr).AssertTrue();
+            (move_from_alu_or_sreg || move_from_opaque_to_ptr).AssertTrue();
         }
     }
 }

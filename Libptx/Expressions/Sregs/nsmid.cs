@@ -3,7 +3,7 @@ using Libptx.Expressions.Sregs.Annotations;
 
 namespace Libptx.Expressions.Sregs
 {
-    [Special20("%nsmid", typeof(uint))]
+    [Sreg20("%nsmid", typeof(uint))]
     [DebuggerNonUserCode]
     public partial class nsmid : Sreg
     {

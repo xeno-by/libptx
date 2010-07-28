@@ -14,7 +14,7 @@ namespace Libptx.Expressions.Sregs
     {
         public Type Type
         {
-            get { return this.GetType().Attr<SpecialAttribute>().Type; }
+            get { return this.GetType().Attr<SregAttribute>().Type; }
         }
 
         protected override void CustomValidate(Module ctx)

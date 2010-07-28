@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common.Annotations;
 using Libptx.Common.Comments;
@@ -41,11 +42,11 @@ namespace Libptx.Common
         }
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
-        protected SoftwareIsa CoreVersion { get { return this.Versions().MinOrDefault(); } }
+        protected SoftwareIsa CoreVersion { get { return this.Versions().AssertThat(vv => vv.Distinct().Count() <= 1).MinOrDefault(); } }
         protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
 
         public HardwareIsa Target { get { return (HardwareIsa)Math.Max((int)CoreTarget, (int)CustomTarget); } }
-        protected HardwareIsa CoreTarget { get { return this.Targets().MinOrDefault(); } }
+        protected HardwareIsa CoreTarget { get { return this.Targets().AssertThat(tt => tt.Distinct().Count() <= 1).MinOrDefault(); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
         protected virtual void CustomValidate(Module ctx) { /* do nothing */ }
@@ -67,6 +68,12 @@ namespace Libptx.Common
 
         #region Enumeration values => Static properties
 
+        protected static Mod not { get { return Mod.Not; } }
+        protected static Mod couple { get { return Mod.Couple; } }
+        protected static Mod neg { get { return Mod.Neg; } }
+        protected static Mod sel { get { return Mod.B0 | Mod.B1 | Mod.B2 | Mod.B3 | Mod.H0 | Mod.H1; } }
+        protected static Mod member { get { return Mod.X | Mod.R | Mod.Y | Mod.G | Mod.Z | Mod.B | Mod.W | Mod.A; } }
+
         protected static Type u8 { get { return new Type { Name = TypeName.U8 }; } }
         protected static Type s8 { get { return new Type { Name = TypeName.S8 }; } }
         protected static Type u16 { get { return new Type { Name = TypeName.U16 }; } }
@@ -83,11 +90,11 @@ namespace Libptx.Common
         protected static Type b32 { get { return new Type { Name = TypeName.B32 }; } }
         protected static Type b64 { get { return new Type { Name = TypeName.B64 }; } }
         protected static Type pred { get { return new Type { Name = TypeName.Pred }; } }
-        // note. use the is_texref method to check whether some expression is of tex type
-        // note. use the is_samplerref method to check whether some expression is of sampler type
-        // note. use the is_surfref method to check whether some expression is of surf type
-        // note. use the is_ptr method to check whether some expression is of pointer type
-        // note. use the is_bmk method to check whether some expression is of bookmark type
+        // note. use the is_texref extension method to check whether some expression is of tex type
+        // note. use the is_samplerref extension method to check whether some expression is of sampler type
+        // note. use the is_surfref extension method to check whether some expression is of surf type
+        // note. use the is_ptr extension method to check whether some expression is of pointer type
+        // note. use the is_bmk extension method to check whether some expression is of bookmark type
 
         protected static barlevel cta { get { return barlevel.cta; } }
         protected static barlevel gl { get { return barlevel.gl; } }
@@ -206,84 +213,46 @@ namespace Libptx.Common
 
         #endregion
 
-        #region Type checking utilities
+        #region Type checking rountines
 
         protected bool agree(Type wannabe, Type t)
         {
-            (wannabe != null && t != null).AssertTrue();
-
-            var w_el = wannabe.el();
-            var t_el = wannabe.el();
-            Func<bool> agree_els = () =>
-            {
-                if (w_el.is_opaque() || t_el.is_opaque()) return w_el == t_el;
-
-                if (w_el.bits() != t_el.bits()) return false;
-                if (w_el.is_float()) return t.is_float() || t.is_bit();
-                if (w_el.is_int()) return t.is_int() || t.is_bit();
-                if (w_el.is_bit()) return true;
-
-                throw AssertionHelper.Fail();
-            };
-
-            var same_mods = wannabe.Mod == t.Mod;
-            var same_dims = Seq.Equals(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
-            return agree_els() && same_mods && same_dims;
+            return wannabe.agree(t);
         }
 
         protected bool agree(Expression expr, Type t)
         {
-            expr.AssertNotNull();
-            return agree(expr.Type, t);
+            return expr.agree(t);
         }
 
         protected bool agree_or_null(Type wannabe, Type t)
         {
-            return wannabe == null || agree(wannabe, t);
+            return wannabe.agree_or_null(t);
         }
 
         protected bool agree_or_null(Expression expr, Type t)
         {
-            return expr == null || agree(expr, t);
+            return expr.agree_or_null(t);
         }
 
         protected bool relaxed_agree(Type wannabe, Type t)
         {
-            (wannabe != null && t != null).AssertTrue();
-
-            var w_el = wannabe.el();
-            var t_el = wannabe.el();
-            Func<bool> relaxed_agree_els = () =>
-            {
-                if (w_el.is_opaque() || t_el.is_opaque()) return w_el == t_el;
-
-                if (w_el.bits() < t_el.bits()) return false;
-                if (w_el.is_float()) return (t.is_float() && wannabe.bits() == t.bits()) || t.is_bit();
-                if (w_el.is_int()) return t.is_int() || t.is_bit();
-                if (w_el.is_bit()) return true;
-
-                throw AssertionHelper.Fail();
-            };
-
-            var same_mods = wannabe.Mod == t.Mod;
-            var same_dims = Seq.Equals(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
-            return relaxed_agree_els() && same_mods && same_dims;
+            return wannabe.relaxed_agree(t);
         }
 
         protected bool relaxed_agree(Expression expr, Type t)
         {
-            expr.AssertNotNull();
-            return relaxed_agree(expr.Type, t);
+            return expr.relaxed_agree(t);
         }
 
         protected bool relaxed_agree_or_null(Type wannabe, Type t)
         {
-            return wannabe == null || relaxed_agree(wannabe, t);
+            return wannabe.relaxed_agree_or_null(t);
         }
 
         protected bool relaxed_agree_or_null(Expression expr, Type t)
         {
-            return expr == null || relaxed_agree(expr, t);
+            return expr.relaxed_agree_or_null(t);
         }
 
         #endregion

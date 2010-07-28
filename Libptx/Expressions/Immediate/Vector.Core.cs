@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
@@ -92,6 +93,14 @@ namespace Libptx.Expressions.Immediate
         protected override void RenderAsPtx(TextWriter writer)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public static class VectorExtensions
+    {
+        public static ReadOnlyCollection<Expression> Flatten(this Vector vector)
+        {
+            return vector.Elements.AssertEach(el => el is Reg).ToReadOnly();
         }
     }
 }

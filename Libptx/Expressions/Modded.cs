@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -178,6 +179,16 @@ namespace Libptx.Expressions
         protected override void RenderAsPtx(TextWriter writer)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public static class ModdedExtensions
+    {
+        public static ReadOnlyCollection<Expression> Flatten(this Modded modded)
+        {
+            var lvl1 = modded.Expr.Concat(modded.Embedded).Where(e => e != null);
+            var lvls_all = lvl1.SelectMany(e => e is Modded ? ((Modded)e).Flatten() : e.MkArray().ToReadOnly()).ToReadOnly();
+            return lvls_all;
         }
     }
 }

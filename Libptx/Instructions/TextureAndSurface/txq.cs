@@ -39,12 +39,12 @@ namespace Libptx.Instructions.TextureAndSurface
         protected override void custom_validate_operands(Module ctx)
         {
             is_reg(d, type).AssertTrue();
-            (is_texref(a) || is_samplerref(a)).AssertTrue();
+            (is_texref(a) || is_samplerref(a) || agree(a, u32) || agree(a, u64)).AssertTrue();
 
             var is_tex_query = (tquery == tex_width || tquery == tex_height || tquery == tex_depth || tquery == tex_channel_datatype || tquery == tex_channel_order || tquery == tex_normalized_coords);
             var is_sampler_query = (tquery == tex_filter_mode || tquery == tex_addr_mode_0 || tquery == tex_addr_mode_1 || tquery == tex_addr_mode_2);
-            is_tex_query.AssertImplies(is_texref(a));
-            is_sampler_query.AssertImplies(is_samplerref(a) || (ctx.UnifiedTexturing && is_texref(a)));
+            is_tex_query.AssertImplies(is_texref(a) || agree(a, u32) || agree(a, u64));
+            is_sampler_query.AssertImplies(is_samplerref(a) || (ctx.UnifiedTexturing && is_texref(a)) || agree(a, u32) || agree(a, u64));
         }
     }
 }

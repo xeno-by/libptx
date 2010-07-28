@@ -6,7 +6,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Sregs
 {
-    [Special("%pm{index}", typeof(uint), SoftwareIsa.PTX_13)]
+    [Sreg("%pm{index}", typeof(uint), SoftwareIsa.PTX_13)]
     [DebuggerNonUserCode]
     public partial class pm : Sreg
     {

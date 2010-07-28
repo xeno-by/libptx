@@ -1,6 +1,13 @@
 using System.Diagnostics;
+using System.Linq;
 using Libptx.Common;
+using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
+using Libptx.Expressions.Addresses;
+using Libptx.Expressions.Immediate;
+using Libptx.Expressions.Slots;
+using Libptx.Expressions.Sregs;
+using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions
@@ -13,9 +20,23 @@ namespace Libptx.Expressions
     [DebuggerNonUserCode]
     public static class ExpressionExtensions
     {
-        public static Modded mod(this Expression expr, Mod mod)
+        public static Modded mod(this Expression expr, Mod mod) { return new Modded{Expr = expr, Mod = mod}; }
+        public static Mod exact(this Mod mod) { return mod | (Mod)65536; }
+        public static bool has_mod(this Expression expr, Mod mod)
         {
-            return new Modded{Expr = expr, Mod = mod};
+            var modded = expr as Modded;
+            if (modded != null)
+            {
+                var is_exact = ((int)mod & 65536) == 65536;
+                mod = (Mod)((int)mod & ~65536);
+
+                if (is_exact) return modded.Mod == mod;
+                else return (modded.Mod & ~mod) == 0;
+            }
+            else
+            {
+                return mod == 0 || mod == exact(0);
+            }
         }
 
         public static bool is_scalar(this Expression expr) { return expr == null ? false : expr.Type.is_scalar(); }
@@ -27,6 +48,30 @@ namespace Libptx.Expressions
 
         public static bool is_pred(this Expression expr) { return expr == null ? false : expr.Type.is_pred(); }
         public static bool is_ptr(this Expression expr) { return expr == null ? false : expr.Type.is_ptr(); }
+        public static bool is_ptr(this Expression expr, space space)
+        {
+            if (!expr.is_ptr()) return false;
+            if (space == 0) return true;
+
+            var e_var = expr as Var;
+            if (e_var != null) return (e_var.Space & ~space) == 0;
+
+            var e_addr = expr as Address;
+            if (e_addr != null)
+            {
+                var ok = true;
+
+                var a_base = e_addr.Base as Var;
+                if (a_base != null) ok &= ((a_base.Space & ~space) == 0);
+
+                var o_base = e_addr.Offset.Base as Var;
+                if (o_base != null) ok &= ((o_base.Space & ~space) == 0);
+
+                return ok;
+            }
+
+            throw AssertionHelper.Fail();
+        }
         public static bool is_bmk(this Expression expr) { return expr == null ? false : expr.Type.is_bmk(); }
 
         public static bool is_opaque(this Expression expr) { return expr == null ? false : expr.Type.is_opaque(); }

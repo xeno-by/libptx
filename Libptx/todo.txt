@@ -18,6 +18,7 @@
 29) todo for readme.txt: no scopes - I find this redundant, i.e. vars and labels might event be shared across multiple scopes, tho they will be mapped onto differerent declarations, of course
 30) todo for readme.txt: debugging directives (i.e. @@DWARF and .section) are not supported
 31) don't forget to render locations, pragmas and Atom-level comments!
-32) todo for readme.txt: implement e-DSL and perform #27
+32) todo for readme.txt: implement e-DSL and perform #27 and #35
 33) vector mysteries (see Vector.cs)
 34) modded validation hypothesis (see Modded.cs)
+35) check all possible combos of ops: verify that all valid get compiled by ptxas and all invalid do not

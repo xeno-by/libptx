@@ -7,7 +7,7 @@ using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Sregs
 {
-    [Special("%envreg{index}", typeof(Bit32), SoftwareIsa.PTX_21, HardwareIsa.SM_10)]
+    [Sreg("%envreg{index}", typeof(Bit32), SoftwareIsa.PTX_21, HardwareIsa.SM_10)]
     [DebuggerNonUserCode]
     public partial class envreg : Sreg
     {

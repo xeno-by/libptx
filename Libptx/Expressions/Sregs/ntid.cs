@@ -4,7 +4,7 @@ using Libptx.Expressions.Sregs.Annotations;
 
 namespace Libptx.Expressions.Sregs
 {
-    [Special("%ntid", typeof(uint4))]
+    [Sreg("%ntid", typeof(uint4))]
     [DebuggerNonUserCode]
     public partial class ntid : Sreg
     {

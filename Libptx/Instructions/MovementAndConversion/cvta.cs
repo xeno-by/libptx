@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Enumerations;
 using Libptx.Expressions.Addresses;
+using Libptx.Expressions.Slots;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
 using Libptx.Expressions;
@@ -30,7 +31,10 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override void custom_validate_operands(Module ctx)
         {
             is_reg(p, size).AssertTrue();
+
             is_ptr(a, space).AssertTrue();
+            (a.Base == null).AssertTrue();
+            if (a.Offset.Base is Reg) agree(a.Offset.Base, size).AssertTrue();
         }
     }
 }
