@@ -87,14 +87,17 @@ namespace Libptx.Instructions
             {
                 var bal = 0;
                 var commas = 0;
+                var significant_whitespaces = 0;
                 sig.ForEach(c =>
                 {
                     if (c == '{') bal++;
                     if (c == '}') bal--;
                     if (bal == 0 && c == ',') commas++;
+                    if (bal == 0 && c == ' ') significant_whitespaces++;
                 });
 
-                return commas == 0 ? 0 : (commas + 1);
+                if (commas == 0) return significant_whitespaces == 0 ? 0 : 1;
+                else return commas + 1;
             }).ToReadOnly();
             arg_cnts.Contains(Operands.Count()).AssertTrue();
 

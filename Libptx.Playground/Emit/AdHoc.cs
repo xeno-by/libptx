@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Libcuda.Versions;
 using Libptx.Common.Comments;
@@ -34,18 +35,18 @@ namespace Libptx.Playground.Emit
         [Test, Category("Hot")]
         public void matmul()
         {
-            Func<String, Reg> reg_u32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.U32}};
-            Func<String, Reg> reg_f32 = name => new Reg{Name = name, Type = new Type{Name = TypeName.F32}};
-            Func<int, Reg> rh = i => new Reg{Name = String.Format("%rh{0}", i), Type = new Type{Name = TypeName.U16}};
-            Func<int, Reg> r = i => new Reg{Name = String.Format("%r{0}", i), Type = new Type{Name = TypeName.U32}};
-            Func<int, Reg> rd = i => new Reg{Name = String.Format("%rd{0}", i), Type = new Type{Name = TypeName.U64}};
-            Func<int, Reg> f = i => new Reg{Name = String.Format("%f{0}", i), Type = new Type{Name = TypeName.F32}};
-            Func<int, Reg> fd = i => new Reg{Name = String.Format("%d{0}", i), Type = new Type{Name = TypeName.F64}};
-            Func<int, Reg> p = i => new Reg{Name = String.Format("%p{0}", i), Type = new Type{Name = TypeName.Pred}};
-            Type u16 = new Type { Name = TypeName.U16 }, s16 = new Type { Name = TypeName.S16 };
-            Type u32 = new Type { Name = TypeName.U32 }, s32 = new Type { Name = TypeName.S32 };
-            Type f32 = new Type { Name = TypeName.F32 }, f64 = new Type { Name = TypeName.F64 };
-            Type pred = new Type { Name = TypeName.Pred };
+            Type u16 = new Type { Name = TypeName.U16 }, u32 = new Type { Name = TypeName.U32 }, u64 = new Type { Name = TypeName.U64 };
+            Type f32 = new Type { Name = TypeName.F32 }, f64 = new Type { Name = TypeName.F64 }, pred = new Type { Name = TypeName.Pred };
+
+            var regs = new Dictionary<String, Reg>();
+            Func<String, Reg> reg_u32 = name => new Reg{Name = name, Type = u32};
+            Func<String, Reg> reg_f32 = name => new Reg{Name = name, Type = f32};
+            Func<int, Reg> rh = i => regs.GetOrCreate(String.Format("%rh{0}", i), name => new Reg{Name = name, Type = u16});
+            Func<int, Reg> r = i => regs.GetOrCreate(String.Format("%rd{0}", i), name => new Reg{Name = name, Type = u32});
+            Func<int, Reg> rd = i => regs.GetOrCreate(String.Format("%rd{0}", i), name => new Reg{Name = name, Type = u64});
+            Func<int, Reg> f = i => regs.GetOrCreate(String.Format("%f{0}", i), name => new Reg{Name = name, Type = f32});
+            Func<int, Reg> fd = i => regs.GetOrCreate(String.Format("%fd{0}", i), name => new Reg{Name = name, Type = f64});
+            Func<int, Reg> p = i => regs.GetOrCreate(String.Format("%p{0}", i), name => new Reg{Name = name, Type = pred});
 
             var module = new Module(SoftwareIsa.PTX_14, HardwareIsa.SM_13);
             Func<String, Var> param_align4_b8_12 = name => new Var{Name = name, Space = space.param, Alignment = 4, Type = new Type{Name = TypeName.B8, Dims = new []{12}}};

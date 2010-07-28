@@ -109,7 +109,8 @@ namespace Libptx.Common.Types
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.Name, Name) && Equals(other.Mod, Mod) && Seq.Equals(other.Dims ?? Seq.Empty<int>(), Dims ?? Seq.Empty<int>());
+            var dim_equal = Seq.Equal(other.Dims ?? Seq.Empty<int>(), Dims ?? Seq.Empty<int>());
+            return Equals(other.Name, Name) && Equals(other.Mod, Mod) && dim_equal;
         }
 
         public override bool Equals(object obj)

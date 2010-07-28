@@ -49,7 +49,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_vec { get { return true; } }
         protected override void custom_validate_opcode(Module ctx)
         {
-            (@volatile == true).AssertEquiv(cop == 0);
+            (@volatile == true).AssertImplies(cop == 0);
             (cop == 0 || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
             type.is_v1().AssertFalse();
         }

@@ -74,7 +74,7 @@ namespace Libptx
             var slots = new HashSet<Slot>(Params.Cast<Slot>());
             var lbl_refs = new HashSet<Label>();
             var lbl_marks = new HashSet<Label>();
-            Stmts.ForEach(stmt =>
+            Stmts.ForEach((stmt, i) =>
             {
                 stmt.AssertNotNull();
                 stmt.Validate(ctx);
@@ -117,7 +117,7 @@ namespace Libptx
                 if (lbl != null)
                 {
                     var dup = lbl_marks.Add(lbl);
-                    dup.AssertFalse();
+                    dup.AssertTrue();
                 }
             });
 
@@ -260,7 +260,7 @@ namespace Libptx
             }
 
             var render_stmts = new List<Action>();
-            var decls = new Dictionary<String, List<int>>();
+            var decls = new Dictionary<String, List<Tuple<Slot, int>>>();
             Action<Slot> mention = s =>
             {
                 var m = s.RenderAsPtx().AssertParse(@"^(?<base>.*?)(?<index>\d*)$");
@@ -268,15 +268,8 @@ namespace Libptx
                 var index = m["index"].IsEmpty() ? -1 : int.Parse(m["index"]);
                 if (m["index"].StartsWith("0") && m["index"] != "0") index = -1;
 
-                if (s is Reg && index != -1)
-                {
-                    var lst = decls.GetOrCreate(@base, () => new List<int>());
-                    lst.Add(index);
-                }
-                else
-                {
-                    decls.Add(s.RenderAsPtx(), new List<int>());
-                }
+                var lst = decls.GetOrCreate(@base, () => new List<Tuple<Slot, int>>());
+                lst.Add(Tuple.New(s, index));
             };
 
             foreach (var stmt in Stmts)
@@ -346,10 +339,11 @@ namespace Libptx
             // todo. also implement this:
             // texrefs and samplerrefs might only be param or global
             // in the latter case they're module-wide
-            decls.Keys.Order().ForEach(k =>
+            decls.OrderBy(kvp => kvp.Value.First().Item1.Name).ForEach(kvp =>
             {
-                var min = decls[k].MinOrDefault(-1);
-                var max = decls[k].MaxOrDefault(-1);
+                var k = kvp.Key;
+                var min = decls[k].Select(t => t.Item2).MinOrDefault(-1);
+                var max = decls[k].Select(t => t.Item2).MaxOrDefault(-1);
                 if (min < 0 || max < 0) writer.WriteLine(k + ";");
                 else writer.WriteLine(k + "<" + max + ">;");
             });

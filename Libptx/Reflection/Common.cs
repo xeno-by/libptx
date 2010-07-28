@@ -44,7 +44,7 @@ namespace Libptx.Reflection
                 var t = obj.GetType();
                 if (t.IsEnum)
                 {
-                    var f = t.GetFields(BF.PublicStatic).SingleOrDefault(f1 => Equals(f1.GetValue(null), obj));
+                    var f = t.GetFields(BF.PublicStatic).FirstOrDefault(f1 => Equals(f1.GetValue(null), obj));
                     return f.Particles();
                 }
 

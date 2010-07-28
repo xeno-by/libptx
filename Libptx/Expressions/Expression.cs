@@ -21,18 +21,19 @@ namespace Libptx.Expressions
         public static Mod exact(this Mod mod) { return mod | (Mod)65536; }
         public static bool has_mod(this Expression expr, Mod mod)
         {
+            var is_exact = ((int)mod & 65536) == 65536;
+            mod = (Mod)((int)mod & ~65536);
+
             var modded = expr as Modded;
             if (modded != null)
             {
-                var is_exact = ((int)mod & 65536) == 65536;
-                mod = (Mod)((int)mod & ~65536);
-
                 if (is_exact) return modded.Mod == mod;
-                else return (modded.Mod & ~mod) == 0;
+                else return mod == 0 || (modded.Mod & ~mod) == 0;
             }
             else
             {
-                return mod == 0 || mod == exact(0);
+                if (is_exact) return mod == 0;
+                else return true;
             }
         }
 

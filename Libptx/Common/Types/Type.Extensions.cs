@@ -230,6 +230,7 @@ namespace Libptx.Common.Types
             Func<bool> agree_els = () =>
             {
                 if (w_el.is_opaque() || t_el.is_opaque()) return w_el == t_el;
+                if (w_el.is_pred() || t_el.is_pred()) return w_el == t_el;
 
                 if (w_el.bits() != t_el.bits()) return false;
                 if (w_el.is_float()) return t.is_float() || t.is_bit();
@@ -240,7 +241,7 @@ namespace Libptx.Common.Types
             };
 
             var same_mods = wannabe.Mod == t.Mod;
-            var same_dims = Seq.Equals(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
+            var same_dims = Seq.Equal(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
             return agree_els() && same_mods && same_dims;
         }
 
@@ -288,6 +289,7 @@ namespace Libptx.Common.Types
             Func<bool> relaxed_agree_els = () =>
             {
                 if (w_el.is_opaque() || t_el.is_opaque()) return w_el == t_el;
+                if (w_el.is_pred() || t_el.is_pred()) return w_el == t_el;
 
                 if (w_el.bits() < t_el.bits()) return false;
                 if (w_el.is_float()) return (t.is_float() && wannabe.bits() == t.bits()) || t.is_bit();
@@ -298,12 +300,31 @@ namespace Libptx.Common.Types
             };
 
             var same_mods = wannabe.Mod == t.Mod;
-            var same_dims = Seq.Equals(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
+            var same_dims = Seq.Equal(wannabe.Dims ?? Seq.Empty<int>(), t.Dims ?? Seq.Empty<int>());
             return relaxed_agree_els() && same_mods && same_dims;
         }
 
         public static bool relaxed_agree(this Expression expr, Type t)
         {
+            var sreg_grid = expr is tid || expr is ctaid || expr is ntid || expr is nctaid;
+            if (sreg_grid)
+            {
+                var u16_v4 = new Type {Name = TypeName.U16, Mod = TypeMod.V4};
+                var u32_v4 = new Type {Name = TypeName.U16, Mod = TypeMod.V4};
+                return relaxed_agree(u16_v4, t) || relaxed_agree(u32_v4, t);
+            }
+
+            var sreg_grid_xyzw = (expr is Modded) &&
+                (((Modded)expr).Expr is tid || ((Modded)expr).Expr is ctaid || ((Modded)expr).Expr is ntid || ((Modded)expr).Expr is nctaid) &&
+                (((Modded)expr).has_mod(Mod.X) || ((Modded)expr).has_mod(Mod.Y) || ((Modded)expr).has_mod(Mod.Z) || ((Modded)expr).has_mod(Mod.W) ||
+                ((Modded)expr).has_mod(Mod.R) || ((Modded)expr).has_mod(Mod.G) || ((Modded)expr).has_mod(Mod.B) || ((Modded)expr).has_mod(Mod.A));
+            if (sreg_grid_xyzw)
+            {
+                var u16 = new Type { Name = TypeName.U16, Mod = TypeMod.Scalar };
+                var u32 = new Type { Name = TypeName.U16, Mod = TypeMod.Scalar };
+                return relaxed_agree(u16, t) || relaxed_agree(u32, t);
+            }
+
             var expr_t = expr == null ? null : expr.Type;
             return relaxed_agree(expr_t, t);
         }
