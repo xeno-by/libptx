@@ -42,7 +42,7 @@ namespace Libptx.Playground.Emit
             Func<String, Reg> reg_u32 = name => new Reg{Name = name, Type = u32};
             Func<String, Reg> reg_f32 = name => new Reg{Name = name, Type = f32};
             Func<int, Reg> rh = i => regs.GetOrCreate(String.Format("%rh{0}", i), name => new Reg{Name = name, Type = u16});
-            Func<int, Reg> r = i => regs.GetOrCreate(String.Format("%rd{0}", i), name => new Reg{Name = name, Type = u32});
+            Func<int, Reg> r = i => regs.GetOrCreate(String.Format("%r{0}", i), name => new Reg{Name = name, Type = u32});
             Func<int, Reg> rd = i => regs.GetOrCreate(String.Format("%rd{0}", i), name => new Reg{Name = name, Type = u64});
             Func<int, Reg> f = i => regs.GetOrCreate(String.Format("%f{0}", i), name => new Reg{Name = name, Type = f32});
             Func<int, Reg> fd = i => regs.GetOrCreate(String.Format("%fd{0}", i), name => new Reg{Name = name, Type = f64});

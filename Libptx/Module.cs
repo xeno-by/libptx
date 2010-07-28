@@ -6,7 +6,6 @@ using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Common.Comments;
-using Libptx.Common.Performance;
 using Libptx.Common.Performance.Pragmas;
 using Libptx.Expressions;
 using Libptx.Expressions.Slots;
@@ -63,7 +62,7 @@ namespace Libptx
 
         public Entry AddEntry(String name, IEnumerable<Var> @params)
         {
-            var entry = new Entry();
+            var entry = new Entry(this);
             entry.Name = name;
             entry.Params.AddElements(@params ?? Seq.Empty<Var>());
             Entries.Add(entry);

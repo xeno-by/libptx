@@ -6,31 +6,26 @@
     .param .align 4 .b8 B[12],
     .param .align 4 .b8 C[12])
 {
-    .reg .u16 %rh<6>;
-    .reg .u32 %r<37>;
     .reg .f32 %f<5>;
     .reg .pred %p<9>;
-    .reg .u32 a_width;
+    .reg .u32 %r<37>;
+    .reg .u16 %rh<6>;
     .reg .u32 a_height;
-    .reg .u32 a_raw;
-    .reg .u32 b_width;
-    .reg .u32 b_height;
-    .reg .u32 b_raw;
-    .reg .u32 c_width;
-    .reg .u32 c_height;
-    .reg .u32 c_raw;
-    .reg .u32 row;
-    .reg .u32 col;
-    .reg .f32 cvalue;
-    .reg .u32 dim;
     .reg .u32 a_offset;
-    .reg .u32 a_offset_lo;
-    .reg .u32 a_offset_stride
     .reg .u32 a_offset_hi;
+    .reg .u32 a_offset_lo;
+    .reg .u32 a_raw;
     .reg .u32 b_offset;
     .reg .u32 b_offset_lo;
     .reg .u32 b_offset_stride
-    .reg .u32 b_offset_hi;
+    .reg .u32 b_raw;
+    .reg .u32 b_width;
+    .reg .u32 c_raw;
+    .reg .u32 c_width;
+    .reg .u32 col;
+    .reg .f32 cvalue;
+    .reg .u32 dim;
+    .reg .u32 row;
 
     // int row = blockIdx.y * blockDim.y + threadIdx.y;
     // int col = blockIdx.x * blockDim.x + threadIdx.x;
