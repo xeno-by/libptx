@@ -251,7 +251,7 @@ namespace Libptx.Common.Types
             if (sreg_grid)
             {
                 var u16_v4 = new Type {Name = TypeName.U16, Mod = TypeMod.V4};
-                var u32_v4 = new Type {Name = TypeName.U16, Mod = TypeMod.V4};
+                var u32_v4 = new Type {Name = TypeName.U32, Mod = TypeMod.V4};
                 return agree(u16_v4, t) || agree(u32_v4, t);
             }
 
@@ -262,7 +262,7 @@ namespace Libptx.Common.Types
             if (sreg_grid_xyzw)
             {
                 var u16 = new Type { Name = TypeName.U16, Mod = TypeMod.Scalar };
-                var u32 = new Type { Name = TypeName.U16, Mod = TypeMod.Scalar };
+                var u32 = new Type { Name = TypeName.U32, Mod = TypeMod.Scalar };
                 return agree(u16, t) || agree(u32, t);
             }
 
@@ -310,7 +310,7 @@ namespace Libptx.Common.Types
             if (sreg_grid)
             {
                 var u16_v4 = new Type {Name = TypeName.U16, Mod = TypeMod.V4};
-                var u32_v4 = new Type {Name = TypeName.U16, Mod = TypeMod.V4};
+                var u32_v4 = new Type {Name = TypeName.U32, Mod = TypeMod.V4};
                 return relaxed_agree(u16_v4, t) || relaxed_agree(u32_v4, t);
             }
 
@@ -321,7 +321,7 @@ namespace Libptx.Common.Types
             if (sreg_grid_xyzw)
             {
                 var u16 = new Type { Name = TypeName.U16, Mod = TypeMod.Scalar };
-                var u32 = new Type { Name = TypeName.U16, Mod = TypeMod.Scalar };
+                var u32 = new Type { Name = TypeName.U32, Mod = TypeMod.Scalar };
                 return relaxed_agree(u16, t) || relaxed_agree(u32, t);
             }
 
