@@ -13,6 +13,7 @@ using XenoGears.Functional;
 using Type = Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Strings;
+using Libptx.Expressions.Slots;
 
 namespace Libptx.Expressions.Slots
 {
@@ -88,9 +89,10 @@ namespace Libptx.Expressions.Slots
             if (_alignment != 0) Alignment.ValidateAlignment(Type);
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        public override String ToString() { return this.RenderDeclarationAsPtx(); }
+        void Slot.RenderDeclarationAsPtx(TextWriter writer)
         {
-            writer.Write("." + Space.Signature() + " ");
+            writer.Write("." + Space.Sig() + " ");
             if (_alignment != 0) writer.Write(".align " + Alignment + " ");
 
             var t = Type.RenderAsPtx();
@@ -101,6 +103,11 @@ namespace Libptx.Expressions.Slots
             writer.Write(".{0} {1}{2}", el, Name, indices);
             if (Init != null) writer.Write(" = ");
             if (Init != null) Init.RenderAsPtx(writer);
+        }
+
+        protected override void RenderAsPtx(TextWriter writer)
+        {
+            writer.Write(Name);
         }
     }
 }

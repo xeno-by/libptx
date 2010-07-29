@@ -12,7 +12,7 @@ using XenoGears.Functional;
 namespace Libptx.Reflection
 {
     [DebuggerNonUserCode]
-    public static class Common
+    public static class ParticleReflector
     {
         public static ParticleAttribute Particle(this Object obj)
         {
@@ -52,14 +52,14 @@ namespace Libptx.Reflection
             }
         }
 
-        public static String Signature(this Object obj)
+        public static String Sig(this Object obj)
         {
-            var signatures = obj.Signatures();
+            var signatures = obj.Sigs();
             if (signatures == null) return null;
             return signatures.Distinct().SingleOrDefault();
         }
 
-        public static ReadOnlyCollection<String> Signatures(this Object obj)
+        public static ReadOnlyCollection<String> Sigs(this Object obj)
         {
             var particles = obj.Particles();
             return particles == null ? null : particles.Select(pcl => pcl.Signature).ToReadOnly();

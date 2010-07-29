@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using XenoGears.Collections;
+using XenoGears.Collections.Lists;
 using XenoGears.Functional;
 
 namespace Libptx

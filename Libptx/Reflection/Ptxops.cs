@@ -2,8 +2,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using Libptx.Instructions;
+using Libptx.Instructions.Annotations;
 using XenoGears.Functional;
+using XenoGears.Reflection.Attributes;
 
 namespace Libptx.Reflection
 {
@@ -23,9 +26,27 @@ namespace Libptx.Reflection
             get { return _cache; }
         }
 
-        public static ReadOnlyCollection<String> Sigs
+        public static ReadOnlyCollection<PtxopSig> PtxopSigs(this Object obj)
         {
-            get { return _cache.SelectMany(t => t.Signatures()).ToReadOnly(); }
+            if (obj == null)
+            {
+                return null;
+            }
+            else
+            {
+                var t = obj as Type;
+                if (t != null)
+                {
+                    return t.Attrs<PtxopAttribute>().Select(a => new PtxopSig(t, a)).ToReadOnly();
+                }
+
+                return obj.GetType().PtxopSigs();
+            }
+        }
+
+        public static PtxopMeta PtxopMeta(this ptxop ptxop)
+        {
+            return ptxop == null ? null : new PtxopMeta(ptxop);
         }
     }
 }

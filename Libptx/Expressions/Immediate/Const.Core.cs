@@ -59,17 +59,16 @@ namespace Libptx.Expressions.Immediate
             // opaques
             else if (Value is Texref || Value is Samplerref || Value is Surfref)
             {
-                var props = Value.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
-                props.ForEach((p, i) =>
+                Value.Quanta().ForEach((kvp, i) =>
                 {
-                    var v = p.GetValue(this, null);
-                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                    if (!Equals(v, @default))
-                    {
-                        if (i != 0) writer.Write(", ");
-                        var s_v = v.Signature() ?? v.ToInvariantString();
-                        writer.Write(s_v);
-                    }
+                    if (i != 0) writer.Write(", ");
+
+                    var k = kvp.Key;
+                    writer.Write(k + " = ");
+
+                    var v = kvp.Value;
+                    var s_v = v.Sig() ?? v.ToInvariantString();
+                    writer.Write(s_v);
                 });
             }
             // addresses

@@ -181,13 +181,13 @@ namespace Libptx.Expressions
         {
             if (this.has_mod(not))
             {
-                writer.Write(not.Signature());
+                writer.Write(not.Sig());
                 writer.Write(Expr);
             }
             else if (this.has_mod(couple))
             {
                 writer.Write(Embedded.First());
-                writer.Write(couple.Signature());
+                writer.Write(couple.Sig());
                 writer.Write(Embedded.Second());
             }
             else if (this.has_mod(neg | sel))
@@ -196,7 +196,7 @@ namespace Libptx.Expressions
                 writer.Write(Expr);
                 if (this.has_mod(sel))
                 {
-                    var postfix = (Mod & sel).Signature();
+                    var postfix = (Mod & sel).Sig();
                     writer.Write("." + postfix);
                 }
             }
@@ -204,7 +204,7 @@ namespace Libptx.Expressions
             {
                 writer.Write(Expr);
 
-                var postfix = (Mod & member).Signature();
+                var postfix = (Mod & member).Sig();
                 writer.Write("." + postfix);
             }
             else

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using Libptx.Common;
-using Libptx.Expressions.Sregs.Annotations;
-using XenoGears.Assertions;
-using XenoGears.Reflection.Attributes;
-using Type=Libptx.Common.Types.Type;
 using Libptx.Reflection;
+using Type = Libptx.Common.Types.Type;
+using XenoGears.Assertions;
 
 namespace Libptx.Expressions.Sregs
 {
@@ -15,7 +12,7 @@ namespace Libptx.Expressions.Sregs
     {
         public Type Type
         {
-            get { return this.GetType().Attr<SregAttribute>().Type; }
+            get { return this.SregSig().AssertNotNull().Type; }
         }
 
         protected override void CustomValidate(Module ctx)
@@ -26,7 +23,7 @@ namespace Libptx.Expressions.Sregs
 
         protected override void RenderAsPtx(TextWriter writer)
         {
-            writer.Write(this.Signature());
+            writer.Write(this.Sig());
         }
     }
 }

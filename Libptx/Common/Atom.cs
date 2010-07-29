@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using Libcuda.Versions;
-using Libptx.Common.Annotations;
-using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Comments;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Performance.Pragmas;
@@ -13,9 +10,6 @@ using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Reflection;
 using Libptx.Statements;
-using XenoGears;
-using XenoGears.Reflection.Attributes;
-using XenoGears.Reflection.Shortcuts;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -41,66 +35,26 @@ namespace Libptx.Common
 
         public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
         protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
-        protected SoftwareIsa CoreVersion
-        {
-            get
-            {
-                var t_swisa = this.Version();
-
-                var props = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
-                var ps_swisa = props.Select(p =>
-                {
-                    var v = p.GetValue(this, null);
-                    var v_swisa = v.Version();
-
-                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                    var p_swisa = Equals(v, @default) ? 0 : p.Version();
-
-                    return (SoftwareIsa)Math.Max((int)v_swisa, (int)p_swisa);
-                }).MaxOrDefault();
-
-                return (SoftwareIsa)Math.Max((int)t_swisa, (int)ps_swisa);
-            }
-        }
+        private SoftwareIsa CoreVersion { get { return this.CoreVersion(); } }
 
         public HardwareIsa Target { get { return (HardwareIsa)Math.Max((int)CoreTarget, (int)CustomTarget); } }
         protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
-        protected HardwareIsa CoreTarget
-        {
-            get
-            {
-                var t_hwisa = this.Target();
+        private HardwareIsa CoreTarget { get { return this.CoreTarget(); } }
 
-                var props = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
-                var ps_hwisa = props.Select(p =>
-                {
-                    var v = p.GetValue(this, null);
-                    var v_hwisa = v.Target();
-
-                    var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                    var p_hwisa = Equals(v, @default) ? 0 : p.Target();
-
-                    return (HardwareIsa)Math.Max((int)v_hwisa, (int)p_hwisa);
-                }).MaxOrDefault();
-
-                return (HardwareIsa)Math.Max((int)t_hwisa, (int)ps_hwisa);
-            }
-        }
-
+        public void Validate(Module ctx) { CoreValidate(ctx); CustomValidate(ctx); }
         protected virtual void CustomValidate(Module ctx) { /* do nothing */ }
-        public void Validate(Module ctx)
+        protected void CoreValidate(Module ctx)
         {
             (ctx.Version >= Version).AssertTrue();
             (ctx.Target >= Target).AssertTrue();
 
             Comments.ForEach(c => { c.AssertNotNull(); c.Validate(ctx); });
+
             Pragmas.IsNotEmpty().AssertImplies(this is Instruction || this is Entry);
             Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(ctx); });
-
-            CustomValidate(ctx);
         }
 
-        public sealed override String ToString() { return this.RenderAsPtx(); }
+        public override String ToString() { return this.RenderAsPtx(); }
         protected abstract void RenderAsPtx(TextWriter writer);
         void Renderable.RenderAsPtx(TextWriter writer)
         {

@@ -56,8 +56,11 @@
     <Compile Include="Common\Annotations\Quanta\Quantum15Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\Quantum20Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\QuantumAttribute.cs" />
+    <Compile Include="Reflection\Atoms.cs" />
+    <Compile Include="Reflection\Quanta.cs" />
+    <Compile Include="Reflection\PtxopMeta.cs" />
     <Compile Include="Reflection\Ptxops.cs" />
-    <Compile Include="Reflection\Common.cs" />
+    <Compile Include="Reflection\Particles.cs" />
     <Compile Include="Common\Annotations\Quanta\Affix15Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\Mod15Attribute.cs" />
     <Compile Include="Common\Enumerations\barlevel.cs" />
@@ -76,7 +79,6 @@
     <Compile Include="Common\Enumerations\test.cs" />
     <Compile Include="Common\Enumerations\tquery.cs" />
     <Compile Include="Common\Enumerations\vshm.cs" />
-    <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Enumerations\cmp.cs" />
     <Compile Include="Common\Performance\Pragmas\Annotations\Pragma15Attribute.cs" />
     <Compile Include="Common\Performance\Pragmas\Annotations\Pragma20Attribute.cs" />
@@ -236,7 +238,9 @@
     <Compile Include="Expressions\Sregs\tid.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Common\Comments\Comment.cs" />
+    <Compile Include="Reflection\PtxopSig.cs" />
     <Compile Include="Reflection\Sregs.cs" />
+    <Compile Include="Reflection\SregSig.cs" />
     <Compile Include="Reflection\Types.cs" />
     <Compile Include="Statements\Instruction.cs" />
     <Compile Include="Statements\Label.cs" />

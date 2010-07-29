@@ -55,9 +55,9 @@ namespace Libptx.Playground
             weirdos.ForEach(Console.WriteLine);
 
             // assert-test #2: all type annotations are mandatory
-            ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\.(\w)*type").Success).ForEach(sig => Console.WriteLine(sig));
+            ops.SelectMany(op => op.Sigs()).Where(sig => sig.Match(@"\{\.(\w)*type").Success).ForEach(sig => Console.WriteLine(sig));
             var types = Enum.GetValues(typeof(TypeName)).Cast<TypeName>().Select(tn => (Type)tn).Select(t => t.ToString()).ToReadOnly();
-            types.ForEach(t => ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
+            types.ForEach(t => ops.SelectMany(op => op.Sigs()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
         }
 
         [Test]

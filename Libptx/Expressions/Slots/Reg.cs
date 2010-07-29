@@ -49,7 +49,8 @@ namespace Libptx.Expressions.Slots
             if (_alignment != 0) Alignment.ValidateAlignment(Type);
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        public override String ToString() { return this.RenderDeclarationAsPtx(); }
+        void Slot.RenderDeclarationAsPtx(TextWriter writer)
         {
             writer.Write(".reg ");
             if (_alignment != 0) writer.Write(".align " + Alignment + " ");
@@ -58,6 +59,11 @@ namespace Libptx.Expressions.Slots
             var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("["));
             var indices = t.IndexOf("[") == -1 ? null : t.Slice(t.IndexOf("["));
             writer.Write(".{0} {1}{2}", el, Name, indices);
+        }
+
+        protected override void RenderAsPtx(TextWriter writer)
+        {
+            writer.Write(Name);
         }
     }
 }

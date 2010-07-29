@@ -36,7 +36,7 @@ namespace Libptx.Common.Types
         {
             var el = this.arr_el() ?? this;
             if (el.is_vec()) writer.Write(".v{0} ", el.vec_rank());
-            writer.Write(Name.Signature().AssertNotNull());
+            writer.Write(Name.Sig().AssertNotNull());
             if (this.is_arr()) writer.Write(" " + (Dims ?? Seq.Empty<int>()).Select(dim => 
                 dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
         }

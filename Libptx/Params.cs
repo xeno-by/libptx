@@ -3,8 +3,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
 using Libptx.Expressions.Slots;
-using XenoGears.Collections;
 using XenoGears.Assertions;
+using XenoGears.Collections.Lists;
 using XenoGears.Functional;
 
 namespace Libptx

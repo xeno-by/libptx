@@ -1,7 +1,10 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Libcuda.Versions;
+using Libptx.Common;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Expressions;
@@ -10,7 +13,7 @@ using Libptx.Expressions.Slots;
 using Libptx.Expressions.Sregs;
 using Libptx.Reflection;
 using Libptx.Statements;
-using XenoGears.Reflection.Shortcuts;
+using XenoGears.Strings;
 using Type = Libptx.Common.Types.Type;
 using XenoGears.Functional;
 using XenoGears.Assertions;
@@ -20,19 +23,6 @@ namespace Libptx.Instructions
     [DebuggerNonUserCode]
     public abstract partial class ptxop : Instruction
     {
-        protected override void RenderAsPtx(TextWriter writer)
-        {
-            // todo. backwards compatibility for textures:
-            // render .global .texref as .tex .u32
-            // render tex instruction without brackets
-
-//            Pragmas.ForEach(p => p.RenderAsPtx(writer));
-//            throw new NotImplementedException();
-
-            // todo. implement this =)
-            writer.Write(this.GetType().Name);
-        }
-
         protected sealed override SoftwareIsa CustomVersion { get { return custom_swisa; } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
 
@@ -60,11 +50,9 @@ namespace Libptx.Instructions
         protected virtual void custom_validate_opcode(Module ctx) { }
         private void validate_opcode(Module ctx)
         {
-            var p_types = this.GetType().GetProperties(BF.PublicInstance | BF.DeclOnly).Where(p => p.PropertyType == typeof(Type)).ToReadOnly();
-            p_types.ForEach(p =>
+            var meta = this.PtxopMeta();
+            meta.Affixes.OfType<Type>().ForEach(t =>
             {
-                var t = (Type)p.GetValue(this, null);
-
                 t.AssertNotNull();
                 t.Validate(ctx);
 
@@ -83,32 +71,33 @@ namespace Libptx.Instructions
         protected virtual void custom_validate_operands(Module ctx) { }
         private void validate_operands(Module ctx)
         {
-            var arg_cnts = this.Signatures().Select(sig =>
-            {
-                var bal = 0;
-                var commas = 0;
-                var significant_whitespaces = 0;
-                sig.ForEach(c =>
-                {
-                    if (c == '{') bal++;
-                    if (c == '}') bal--;
-                    if (bal == 0 && c == ',') commas++;
-                    if (bal == 0 && c == ' ') significant_whitespaces++;
-                });
-
-                if (commas == 0) return significant_whitespaces == 0 ? 0 : 1;
-                else return commas + 1;
-            }).ToReadOnly();
+            var arg_cnts = this.PtxopSigs().Select(sig => sig.Operands.Count());
             arg_cnts.Contains(Operands.Count()).AssertTrue();
 
             Operands.ForEach(arg =>
             {
-                // don't verify nullity - custom validation will uncover it if it's an error
-                if (arg != null)
-                {
-                    arg.Validate(ctx);
-                }
+                // this is commented out because operands may be optional
+                // arg.AssertNotNull();
+
+                if (arg != null) arg.Validate(ctx);
             });
+        }
+
+        protected override void RenderAsPtx(TextWriter writer) { Pragmas.ForEach(p => p.RenderAsPtx(writer)); var ptx = core_render_ptx(); ptx = ptx ?? custom_render_ptx(ptx); writer.Write(ptx); }
+        protected virtual String custom_render_ptx(String core) { return null; }
+        private String core_render_ptx()
+        {
+            var buf = new StringBuilder();
+            var meta = this.PtxopMeta();
+
+            buf.Append(meta.Opcode);
+            buf.Append(meta.Mods.Where(o => o != null).Select(o => o.Sig() ?? o.ToInvariantString()).StringJoin(""));
+            buf.Append(meta.Affixes.Where(o => o != null).Select(o => o.Sig() ?? o.ToInvariantString()).StringJoin(", "));
+
+            if (meta.Operands.IsNotEmpty()) buf.Append(" ");
+            buf.Append(meta.Operands.Where(o => o != null).Select(o => o.RenderAsPtx()).StringJoin(", "));
+
+            return buf.ToString();
         }
 
         #region Location checking utilities

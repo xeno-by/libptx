@@ -11,7 +11,7 @@ namespace Libptx.Common.Performance.Pragmas
     {
         public String Signature
         {
-            get { return this.Signature().AssertNotNull(); }
+            get { return this.Sig().AssertNotNull(); }
         }
 
         protected override void RenderAsPtx(TextWriter writer)

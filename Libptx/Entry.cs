@@ -202,7 +202,7 @@ namespace Libptx
                 }
 
                 (slots.Count(s2 => s2.Name == s.Name) == 1).AssertTrue();
-                Sregs.Sigs.Contains(s.Name).AssertFalse();
+                Sregs.Sigs.AssertNone(sig => sig.Name == s.Name);
             });
 
             lbl_refs.IsSubsetOf(lbl_marks).AssertTrue();
@@ -216,7 +216,7 @@ namespace Libptx
                 }
 
                 (lbl_marks.Count(lbl2 => lbl2.Name == lbl.Name) == 1).AssertTrue();
-                Sregs.Sigs.Contains(lbl.Name).AssertFalse();
+                Sregs.Sigs.AssertNone(sig => sig.Name == lbl.Name);
             });
         }
 
@@ -275,7 +275,11 @@ namespace Libptx
             var decls = new Dictionary<String, List<Tuple<Slot, int>>>();
             Action<Slot> mention = s =>
             {
-                var m = s.RenderAsPtx().AssertParse(@"^(?<base>.*?)(?<index>\d*)$");
+                // todo. backward compatibility for textures:
+                // render .global .texref as .tex .u32
+                var decl = s.RenderDeclarationAsPtx();
+
+                var m = decl.AssertParse(@"^(?<base>.*?)(?<index>\d*)$");
                 var @base = m["base"];
                 var index = m["index"].IsEmpty() ? -1 : int.Parse(m["index"]);
                 if (m["index"].StartsWith("0") && m["index"] != "0") index = -1;
@@ -298,6 +302,8 @@ namespace Libptx
                     }
                     else if (stmt is Instruction)
                     {
+                        // todo. backward compatibility for textures:
+                        // render tex instruction without brackets
                         stmt.RenderAsPtx(writer);
                         writer.WriteLine(";");
                     }
