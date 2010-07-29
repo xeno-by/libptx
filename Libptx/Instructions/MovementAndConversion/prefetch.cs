@@ -17,7 +17,7 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix] public space space { get; set; }
         [Affix] public cachelevel level { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (u == true).AssertEquiv(space == 0 && level == L1);
             (space == 0 || space == local || space == global).AssertTrue();
@@ -27,7 +27,7 @@ namespace Libptx.Instructions.MovementAndConversion
         public prefetch() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
         public Address a { get { return (Address)Operands[0]; } set { Operands[0] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_ptr(a, space).AssertTrue();
         }

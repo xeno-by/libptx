@@ -15,7 +15,7 @@ namespace Libptx.Instructions.Miscellaneous
         public pmevent() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
         public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             var a_const = (a as Const).AssertNotNull();
             var value = a_const.AssertCoerce<int>();

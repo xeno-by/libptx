@@ -18,7 +18,7 @@ namespace Libptx.Instructions.ControlFlow
         public bra() { 1.UpTo(1).ForEach(_ => Operands.Add(null)); }
         public Expression tgt { get { return Operands[0]; } set { Operands[0] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_bmk(tgt).AssertTrue();
         }

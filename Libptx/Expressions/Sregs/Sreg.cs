@@ -15,15 +15,15 @@ namespace Libptx.Expressions.Sregs
             get { return this.SregSig().AssertNotNull().Type; }
         }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (Type != null).AssertTrue();
-            Type.Validate(ctx);
+            Type.Validate();
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
-            writer.Write(this.Sig());
+            writer.Write(this.Signature());
         }
     }
 }

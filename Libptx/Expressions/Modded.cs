@@ -55,7 +55,7 @@ namespace Libptx.Expressions
             }
         }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             // todo. verify the following hypotheses:
             // 1) only Reg expressions can be modded
@@ -63,14 +63,14 @@ namespace Libptx.Expressions
             // 3) members accesses (xyzw, rgba) cannot be modded
 
             (Type != null).AssertTrue();
-            Type.Validate(ctx);
+            Type.Validate();
 
             (Expr == null).AssertImplies((Mod & Mod.Couple) == Mod.Couple);
-            if (Expr != null) Expr.Validate(ctx);
+            if (Expr != null) Expr.Validate();
             if (Expr != null) (Expr is Reg || Expr is Sreg).AssertTrue();
 
             (Embedded.IsNotEmpty()).AssertImplies((Mod & Mod.Couple) == Mod.Couple);
-            Embedded.ForEach(e => { e.AssertNotNull(); e.Validate(ctx); });
+            Embedded.ForEach(e => { e.AssertNotNull(); e.Validate(); });
 
             if ((Mod & Mod.Not) == Mod.Not)
             {
@@ -177,17 +177,17 @@ namespace Libptx.Expressions
             }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             if (this.has_mod(not))
             {
-                writer.Write(not.Sig());
+                writer.Write(not.Signature());
                 writer.Write(Expr);
             }
             else if (this.has_mod(couple))
             {
                 writer.Write(Embedded.First());
-                writer.Write(couple.Sig());
+                writer.Write(couple.Signature());
                 writer.Write(Embedded.Second());
             }
             else if (this.has_mod(neg | sel))
@@ -196,7 +196,7 @@ namespace Libptx.Expressions
                 writer.Write(Expr);
                 if (this.has_mod(sel))
                 {
-                    var postfix = (Mod & sel).Sig();
+                    var postfix = (Mod & sel).Signature();
                     writer.Write("." + postfix);
                 }
             }
@@ -204,7 +204,7 @@ namespace Libptx.Expressions
             {
                 writer.Write(Expr);
 
-                var postfix = (Mod & member).Sig();
+                var postfix = (Mod & member).Signature();
                 writer.Write("." + postfix);
             }
             else

@@ -64,21 +64,21 @@ namespace Libptx.Expressions.Immediate
             }
         }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (Type != null).AssertTrue();
-            Type.Validate(ctx);
+            Type.Validate();
 
             (Elements != null).AssertTrue();
             Elements.ForEach(el =>
             {
                 el.AssertNotNull();
-                el.Validate(ctx);
+                el.Validate();
 
                 // todo. I've witnessed very strange behavior of ptxas:
                 //
-                // 1) can use 0f00000000 in src vectors, tho cannot use 0, 
-                // 2) can use vars in src vectors, but in a strange way: 
+                // 1) I could use 0f00000000 in src vectors, tho cannot use 0, 
+                // 2) I could use vars in src vectors, but in a strange way: 
                 //   "mov.v4.b32 v4_u32, {a, foo, c, d}" works when foo is ".global .u32" 
                 //   and ain't work when foo is ".global .f32".
                 //
@@ -90,14 +90,14 @@ namespace Libptx.Expressions.Immediate
             });
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             writer.Write("{");
 
             Elements.ForEach((el, i) =>
             {
                 if (i != 0) writer.Write(", ");
-                el.RenderAsPtx(writer);
+                el.RenderPtx();
             });
 
             writer.Write("}");

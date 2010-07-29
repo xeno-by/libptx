@@ -1,9 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using Libptx.Expressions;
 using Libptx.Statements;
 using XenoGears.Functional;
-using XenoGears.Strings;
+using XenoGears.Strings.Writers;
 
 namespace Libptx.Common.Comments
 {
@@ -22,16 +23,13 @@ namespace Libptx.Common.Comments
             return text == null ? null : new Comment { Text = text };
         }
 
-        // todo. this is a dirty hack - get rid of it
-        public static bool Inline { get; set; }
-
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             if (Text.IsEmpty()) return;
 
             if (Text.Trim().IsEmpty())
             {
-                var indented = writer as IndentedTextWriter;
+                var indented = writer.InnerWriter as IndentedWriter;
                 if (Text == Environment.NewLine && indented != null)
                 {
                     indented.WriteNoTabs(Text);
@@ -43,8 +41,9 @@ namespace Libptx.Common.Comments
             }
             else
             {
-                if (Inline) writer.Write("/* {0} */ ", Text);
-                else writer.WriteLine("// {0}", Text);
+                var inline = ctx.Parent is Expression && !(ctx.Parent is Label);
+                if (inline) writer.Write("/* {0} */ ", Text);
+                else writer.Write("// {0}", Text);
             }
         }
     }

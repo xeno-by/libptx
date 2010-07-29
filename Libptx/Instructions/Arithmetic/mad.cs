@@ -39,7 +39,7 @@ namespace Libptx.Instructions.Arithmetic
             }
         }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (is24 == true).AssertImplies(type == s32 || type == u32);
             (mode != 0).AssertImplies(type.is_int());
@@ -60,7 +60,7 @@ namespace Libptx.Instructions.Arithmetic
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             if (mode == wide)
             {

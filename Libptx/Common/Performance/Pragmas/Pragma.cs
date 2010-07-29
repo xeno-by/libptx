@@ -11,10 +11,10 @@ namespace Libptx.Common.Performance.Pragmas
     {
         public String Signature
         {
-            get { return this.Sig().AssertNotNull(); }
+            get { return this.Signature().AssertNotNull(); }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             writer.WriteLine(".pragma \"{0}\";", Signature);
         }

@@ -12,7 +12,7 @@ namespace Libptx.Expressions.Sregs
     {
         [Affix("op")] public cmp Mask { get; set; }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (Mask == eq || Mask == gt || Mask == ge || Mask == lt || Mask == le).AssertTrue();
         }

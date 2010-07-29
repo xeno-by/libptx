@@ -18,7 +18,7 @@ namespace Libptx.Instructions.MovementAndConversion
         [Affix] public space space { get; set; }
         [Affix] public Type size { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (space == local || space == shared || space == global).AssertTrue();
             (size == u32 || size == u64).AssertTrue();
@@ -28,7 +28,7 @@ namespace Libptx.Instructions.MovementAndConversion
         public Expression p { get { return Operands[0]; } set { Operands[0] = value; } }
         public Address a { get { return (Address)Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_reg(p, size).AssertTrue();
 

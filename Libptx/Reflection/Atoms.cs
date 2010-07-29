@@ -12,21 +12,21 @@ using XenoGears.Reflection.Shortcuts;
 namespace Libptx.Reflection
 {
     [DebuggerNonUserCode]
-    public static class Atoms
+    internal static class Atoms
     {
-        public static SoftwareIsa CoreVersion(this Atom atom)
+        public static SoftwareIsa CoreEigenVersion(this Atom atom)
         {
             if (atom == null) return 0;
-            var t_swisa = atom.Version();
+            var t_swisa = atom.GetType().EigenVersion();
 
             var props = atom.GetType().GetProperties(BF.PublicInstance).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
             var props_swisa = props.Select(p =>
             {
                 var v = p.GetValue(atom, null);
-                var v_swisa = v.Version();
+                var v_swisa = v.EigenVersion();
 
                 var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                var p_swisa = Equals(v, @default) ? 0 : p.Version();
+                var p_swisa = Equals(v, @default) ? 0 : p.EigenVersion();
 
                 return (SoftwareIsa)Math.Max((int)v_swisa, (int)p_swisa);
             }).MaxOrDefault();
@@ -34,19 +34,19 @@ namespace Libptx.Reflection
             return (SoftwareIsa)Math.Max((int)t_swisa, (int)props_swisa);
         }
 
-        public static HardwareIsa CoreTarget(this Atom atom)
+        public static HardwareIsa CoreEigenTarget(this Atom atom)
         {
             if (atom == null) return 0;
-            var t_hwisa = atom.Target();
+            var t_hwisa = atom.GetType().EigenTarget();
 
             var props = atom.GetType().GetProperties(BF.PublicInstance).Where(p => p.HasAttr<QuantumAttribute>()).ToReadOnly();
             var props_hwisa = props.Select(p =>
             {
                 var v = p.GetValue(atom, null);
-                var v_hwisa = v.Target();
+                var v_hwisa = v.EigenTarget();
 
                 var @default = p.PropertyType.Fluent(t => t.IsValueType ? Activator.CreateInstance(t) : null);
-                var p_hwisa = Equals(v, @default) ? 0 : p.Target();
+                var p_hwisa = Equals(v, @default) ? 0 : p.EigenTarget();
 
                 return (HardwareIsa)Math.Max((int)v_hwisa, (int)p_hwisa);
             }).MaxOrDefault();

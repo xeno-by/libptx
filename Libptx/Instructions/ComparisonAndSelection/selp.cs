@@ -24,7 +24,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_reg(d, type).AssertTrue();
             is_alu(a, type).AssertTrue();

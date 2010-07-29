@@ -22,7 +22,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
         protected override bool allow_bit16 { get { return true; } }
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (boolop == 0 || boolop == and || boolop == or || boolop == xor).AssertTrue();
             (ftz == true).AssertImplies(type == f32);
@@ -34,7 +34,7 @@ namespace Libptx.Instructions.ComparisonAndSelection
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_reg(p, pred, couple).AssertTrue();
             is_alu(a, type).AssertTrue();

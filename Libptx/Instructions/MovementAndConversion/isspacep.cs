@@ -14,7 +14,7 @@ namespace Libptx.Instructions.MovementAndConversion
     {
         [Affix] public space space { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (space == local || space == shared || space == global).AssertTrue();
         }
@@ -23,7 +23,7 @@ namespace Libptx.Instructions.MovementAndConversion
         public Expression p { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_reg(p, pred).AssertTrue();
             (is_alu(a, u32) || is_alu(a, u64)).AssertTrue();

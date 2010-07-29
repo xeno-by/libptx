@@ -1,4 +1,6 @@
+using System;
 using System.Diagnostics;
+using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Instructions.Annotations;
@@ -6,6 +8,8 @@ using Libptx.Common.Enumerations;
 using Libptx.Expressions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
+using XenoGears.Strings;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Instructions.TextureAndSurface
 {
@@ -19,7 +23,7 @@ namespace Libptx.Instructions.TextureAndSurface
         [Affix] public Type btype { get; set; }
 
         protected override bool allow_vec { get { return true; } }
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (geom != 0).AssertTrue();
             (dtype.is32() && dtype.is_v4()).AssertTrue();
@@ -32,7 +36,7 @@ namespace Libptx.Instructions.TextureAndSurface
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_reg(d, dtype).AssertTrue();
             (is_texref(a) || agree(a, u32) || agree(a, u64)).AssertTrue();
@@ -42,6 +46,21 @@ namespace Libptx.Instructions.TextureAndSurface
             else if (geom == d2) (is_alu(c, btype.v2) || is_alu(c, btype.v4)).AssertTrue();
             else if (geom == d3) is_alu(c, btype.v4).AssertTrue();
             else throw AssertionHelper.Fail();
+        }
+
+        protected override String custom_render_ptx(String core)
+        {
+            if (ctx.Version < SoftwareIsa.PTX_15)
+            {
+                return core;
+            }
+            else
+            {
+                var iof = core.IndexOf(",");
+                var before = core.Slice(0, iof);
+                var after = core.Slice(iof + 2, -1);
+                return String.Format("{0}, [{1}];", before, after);
+            }
         }
     }
 }

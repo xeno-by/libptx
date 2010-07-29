@@ -139,7 +139,7 @@ namespace Libptx.Playground.Emit
             ptx.Add(new exit());
 
             module.Validate();
-            var s_ptx = module.RenderAsPtx();
+            var s_ptx = module.RenderPtx();
             VerifyResult(s_ptx);
         }
     }

@@ -47,7 +47,7 @@ namespace Libptx.Instructions.MovementAndConversion
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
         protected override bool allow_vec { get { return true; } }
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (@volatile == true).AssertImplies(cop == 0);
             (cop == 0 || cop == wb || cop == cg || cop == cs || cop == wt).AssertTrue();
@@ -58,7 +58,7 @@ namespace Libptx.Instructions.MovementAndConversion
         public Address a { get { return (Address)Operands[0]; } set { Operands[0] = value; } }
         public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_ptr(a, ss).AssertTrue();
             is_relaxed_alu(b, type).AssertTrue();

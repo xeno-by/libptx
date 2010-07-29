@@ -12,6 +12,7 @@ using XenoGears.Reflection.Attributes;
 using XenoGears.Reflection.Generics;
 using XenoGears.Strings;
 using Type = Libptx.Common.Types.Type;
+using XenoGears.Assertions;
 
 namespace Libptx.Playground
 {
@@ -53,11 +54,12 @@ namespace Libptx.Playground
             // assert-test #1: all ptxop annotations for given ptxop have the same version and target
             var weirdos = ops.Where(op => op.Particles().Select(pcl => Tuple.New(pcl.Version, pcl.Target)).Distinct().Count() > 1);
             weirdos.ForEach(Console.WriteLine);
+            weirdos.AssertEmpty();
 
             // assert-test #2: all type annotations are mandatory
-            ops.SelectMany(op => op.Sigs()).Where(sig => sig.Match(@"\{\.(\w)*type").Success).ForEach(sig => Console.WriteLine(sig));
+            ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\.(\w)*type").Success).ForEach(sig => Console.WriteLine(sig));
             var types = Enum.GetValues(typeof(TypeName)).Cast<TypeName>().Select(tn => (Type)tn).Select(t => t.ToString()).ToReadOnly();
-            types.ForEach(t => ops.SelectMany(op => op.Sigs()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
+            types.ForEach(t => ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
         }
 
         [Test]

@@ -29,10 +29,10 @@ namespace Libptx.Expressions.Immediate
         public Object Value { get; set; }
         public Type Type { get { return Value == null ? null : Value.GetType(); } }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (Type != null).AssertTrue();
-            Type.Validate(ctx);
+            Type.Validate();
 
             (Value != null).AssertTrue();
             if (Value is Address)
@@ -48,7 +48,7 @@ namespace Libptx.Expressions.Immediate
             }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             // predicates
             if (Value is bool)
@@ -67,7 +67,7 @@ namespace Libptx.Expressions.Immediate
                     writer.Write(k + " = ");
 
                     var v = kvp.Value;
-                    var s_v = v.Sig() ?? v.ToInvariantString();
+                    var s_v = v.Signature() ?? v.ToInvariantString();
                     writer.Write(s_v);
                 });
             }
@@ -75,7 +75,7 @@ namespace Libptx.Expressions.Immediate
             else if (Value is Address)
             {
                 var v_addr = (Address)Value;
-                var s_addr = v_addr.RenderAsPtx();
+                var s_addr = v_addr.RunRenderPtx();
                 if (s_addr.StartsWith("[")) s_addr = s_addr.Slice(1);
                 if (s_addr.EndsWith("]")) s_addr = s_addr.Slice(-1);
                 writer.Write(s_addr);

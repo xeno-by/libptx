@@ -19,11 +19,11 @@ namespace Libptx.Statements
             set { _operands = value ?? new List<Expression>(); }
         }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             if (Guard != null)
             {
-                Guard.Validate(ctx);
+                Guard.Validate();
                 Guard.is_pred().AssertTrue();
             }
 
@@ -32,7 +32,7 @@ namespace Libptx.Statements
                 // this is commented out because operands may be optional
                 // arg.AssertNotNull();
 
-                if (arg != null) arg.Validate(ctx);
+                if (arg != null) arg.Validate();
             });
         }
     }

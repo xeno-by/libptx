@@ -14,11 +14,11 @@ namespace Libptx.Expressions.Addresses
         public Expression Base { get; set; }
         public long Imm { get; set; }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             if (Base != null)
             {
-                Base.Validate(ctx);
+                Base.Validate();
                 (Base is Reg || Base is Var).AssertTrue();
 
                 var base_reg = Base as Reg;
@@ -35,13 +35,13 @@ namespace Libptx.Expressions.Addresses
             }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             writer.Write("[");
 
             if (Base != null)
             {
-                Base.RenderAsPtx(writer);
+                Base.RenderPtx();
                 if (Imm != 0) writer.Write(" + ");
             }
 
@@ -50,12 +50,12 @@ namespace Libptx.Expressions.Addresses
                 if (int.MinValue <= Imm && Imm <= int.MaxValue)
                 {
                     var proxy = new Const((int)Imm);
-                    proxy.RenderAsPtx(writer);
+                    proxy.RenderPtx();
                 }
                 else
                 {
                     var proxy = new Const((long)Imm);
-                    proxy.RenderAsPtx(writer);
+                    proxy.RenderPtx();
                 }
             }
 

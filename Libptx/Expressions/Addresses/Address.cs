@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.IO;
 using Libptx.Common;
 using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Slots;
@@ -27,10 +26,10 @@ namespace Libptx.Expressions.Addresses
             get { return typeof(Ptr); }
         }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
-            if (Base != null) Base.Validate(ctx);
-            if (Offset != null) Offset.Validate(ctx);
+            if (Base != null) Base.Validate();
+            if (Offset != null) Offset.Validate();
             else throw AssertionHelper.Fail();
 
             if (Base != null)
@@ -40,7 +39,7 @@ namespace Libptx.Expressions.Addresses
             }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             if (Base != null) writer.Write(Base);
             if (Offset != null) writer.Write(Offset);

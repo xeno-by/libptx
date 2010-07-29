@@ -28,7 +28,7 @@ namespace Libptx.Common.Types
         [Affix("b32")] B32,
         [Affix("b64")] B64,
         [Affix("pred")] Pred,
-        [Affix15("texref")] Texref,
+        [Affix("texref")] Texref,
         [Affix15("samplerref")] Samplerref,
         [Affix15("surfref")] Surfref,
         [Affix("ptr")] Ptr,

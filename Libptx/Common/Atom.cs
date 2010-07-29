@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using Libcuda.Versions;
 using Libptx.Common.Comments;
+using Libptx.Common.Contexts;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Performance.Pragmas;
 using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Reflection;
 using Libptx.Statements;
+using XenoGears.Strings.Writers;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -19,6 +20,10 @@ namespace Libptx.Common
     [DebuggerNonUserCode]
     public abstract class Atom : Validatable, Renderable
     {
+        protected Context ctx { get { throw new NotImplementedException(); } }
+        protected DelayedWriter writer { get { throw new NotImplementedException(); } }
+        protected IndentedWriter indented { get { return writer == null ? null : writer.InnerWriter.AssertCast<IndentedWriter>(); } }
+
         private IList<Comment> _comments = new List<Comment>();
         public IList<Comment> Comments
         {
@@ -33,35 +38,43 @@ namespace Libptx.Common
             set { _pragmas = value ?? new List<Pragma>(); }
         }
 
-        public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)CoreVersion, (int)CustomVersion); } }
-        protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
-        private SoftwareIsa CoreVersion { get { return this.CoreVersion(); } }
+        public SoftwareIsa EigenVersion { get { return (SoftwareIsa)Math.Max((int)this.CoreEigenVersion(), (int)CustomEigenVersion); } }
+        protected virtual SoftwareIsa CustomEigenVersion { get { return SoftwareIsa.PTX_10; } }
 
-        public HardwareIsa Target { get { return (HardwareIsa)Math.Max((int)CoreTarget, (int)CustomTarget); } }
-        protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
-        private HardwareIsa CoreTarget { get { return this.CoreTarget(); } }
+        public HardwareIsa EigenTarget { get { return (HardwareIsa)Math.Max((int)this.CoreEigenTarget(), (int)CustomEigenTarget); } }
+        protected virtual HardwareIsa CustomEigenTarget { get { return HardwareIsa.SM_10; } }
 
-        public void Validate(Module ctx) { CoreValidate(ctx); CustomValidate(ctx); }
-        protected virtual void CustomValidate(Module ctx) { /* do nothing */ }
-        protected void CoreValidate(Module ctx)
+        void Validatable.Validate() { using (ctx.Push(this)) { CoreValidate(); CustomValidate(); } }
+        protected virtual void CustomValidate() { /* do nothing */ }
+        protected void CoreValidate()
         {
-            (ctx.Version >= Version).AssertTrue();
-            (ctx.Target >= Target).AssertTrue();
+            (ctx.Version >= EigenVersion).AssertTrue();
+            (ctx.Target >= EigenTarget).AssertTrue();
 
-            Comments.ForEach(c => { c.AssertNotNull(); c.Validate(ctx); });
-
+            Comments.ForEach(c => { c.AssertNotNull(); c.Validate(); });
             Pragmas.IsNotEmpty().AssertImplies(this is Instruction || this is Entry);
-            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(ctx); });
+            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(); });
         }
 
-        public override String ToString() { return this.RenderAsPtx(); }
-        protected abstract void RenderAsPtx(TextWriter writer);
-        void Renderable.RenderAsPtx(TextWriter writer)
+        protected abstract void RenderPtx();
+        void Renderable.RenderPtx()
         {
-            Comment.Inline = this is Expression && !(this is Label);
-            Comments.ForEach(c => c.RenderAsPtx(writer));
+            using (ctx.Push(this))
+            {
+                Comments.ForEach(c => c.RenderPtx());
+                RenderPtx();
+            }
+        }
 
-            RenderAsPtx(writer);
+        public override String ToString()
+        {
+            var overriden = new RenderPtxContext(null);
+            using (RenderPtxContext.Push(overriden))
+            {
+                this.RenderPtx();
+                var ptx = overriden.Buf.ToString();
+                return ptx;
+            }
         }
 
         #region Enumeration values => Static properties

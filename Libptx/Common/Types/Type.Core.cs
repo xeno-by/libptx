@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Libcuda.DataTypes;
@@ -21,7 +20,7 @@ namespace Libptx.Common.Types
         public TypeMod Mod { get; set; }
         public int[] Dims { get; set; }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (SizeOfElement <= 128).AssertTrue();
 
@@ -32,11 +31,11 @@ namespace Libptx.Common.Types
             (Dims ?? new int[0]).AssertEach(dim => dim > 0);
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             var el = this.arr_el() ?? this;
             if (el.is_vec()) writer.Write(".v{0} ", el.vec_rank());
-            writer.Write(Name.Sig().AssertNotNull());
+            writer.Write(Name.Signature().AssertNotNull());
             if (this.is_arr()) writer.Write(" " + (Dims ?? Seq.Empty<int>()).Select(dim => 
                 dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
         }

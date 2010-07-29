@@ -17,7 +17,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         [Affix] public Type type { get; set; }
         [Affix] public op op { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (type == pred).AssertTrue();
             (op == and || op == or).AssertTrue();
@@ -29,7 +29,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_reg(p, type).AssertTrue();
             is_alu(a, u32).AssertTrue();

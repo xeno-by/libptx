@@ -13,7 +13,7 @@ namespace Libptx.Expressions.Immediate
             get { return typeof(uint); }
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             writer.Write("WARP_SZ");
         }

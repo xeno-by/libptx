@@ -1,36 +1,76 @@
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
+using Libptx.Common.Contexts;
 
 namespace Libptx.Common
 {
     public interface Renderable
     {
-        void RenderAsPtx(TextWriter writer);
+        void RenderPtx();
     }
 
     [DebuggerNonUserCode]
     public static class RenderableExtensions
     {
-        public static String RenderAsPtx(this Renderable renderable)
+        public static void RenderPtx(this Renderable renderable)
         {
-            if (renderable == null)
+            RenderPtx(renderable, RenderPtxContext.Current);
+        }
+
+        public static void RenderPtx(this Renderable renderable, Module ctx)
+        {
+            var curr = RenderPtxContext.Current;
+            if (curr != null && curr.Module == ctx)
             {
-                return null;
+                RenderPtx(renderable);
             }
             else
             {
-                var buf = new StringBuilder();
-                renderable.RenderAsPtx(new StringWriter(buf));
-                return buf.ToString();
+                RenderPtx(renderable, new RenderPtxContext(ctx));
             }
         }
 
-        public static void RenderAsPtx(this Renderable renderable, TextWriter writer)
+        public static void RenderPtx(this Renderable renderable, RenderPtxContext ctx)
         {
             if (renderable == null) return;
-            ((Renderable)renderable).RenderAsPtx(writer);
+            if (ctx == null) RenderPtx(renderable);
+
+            using (RenderPtxContext.Push(ctx))
+            {
+                renderable.RenderPtx();
+            }
+        }
+
+        public static String RunRenderPtx(this Renderable renderable)
+        {
+            return RunRenderPtx(renderable, RenderPtxContext.Current);
+        }
+
+        public static String RunRenderPtx(this Renderable renderable, Module ctx)
+        {
+            var curr = RenderPtxContext.Current;
+            if (curr != null && curr.Module == ctx)
+            {
+                return RunRenderPtx(renderable);
+            }
+            else
+            {
+                return RunRenderPtx(renderable, new RenderPtxContext(ctx));
+            }
+        }
+
+        public static String RunRenderPtx(this Renderable renderable, RenderPtxContext ctx)
+        {
+            if (renderable == null) return null;
+            if (ctx == null) return RunRenderPtx(renderable);
+
+            var skip = ctx.Buf.Length;
+            using (RenderPtxContext.Push(ctx))
+            {
+                renderable.RenderPtx(ctx);
+                var ptx = ctx.Buf.ToString(skip, ctx.Buf.Length - skip);
+                return ptx;
+            }
         }
     }
 }

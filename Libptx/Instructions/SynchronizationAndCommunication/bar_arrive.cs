@@ -15,7 +15,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         public Expression a { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_alu(a, u32).AssertTrue();
             is_alu(b, u32).AssertTrue();

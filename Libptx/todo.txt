@@ -18,3 +18,4 @@
 34) modded validation hypothesis (see Modded.cs)
 35) better error reporting, e.g. not crash due to a single error in Entry, but rather collect all errors and then display problematic line numbers
 36) pragmas/tuning for entry. how to specify those?!
+37) performance since lots of stuff here relies on reflection

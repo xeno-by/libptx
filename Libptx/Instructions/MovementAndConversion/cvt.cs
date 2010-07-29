@@ -23,7 +23,7 @@ namespace Libptx.Instructions.MovementAndConversion
 
         protected override bool allow_int8 { get { return true; } }
         protected override bool allow_float16 { get { return true; } }
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             var i2i = atype.is_int() && dtype.is_int();
             var i2f = atype.is_int() && dtype.is_float();
@@ -40,7 +40,7 @@ namespace Libptx.Instructions.MovementAndConversion
         public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_relaxed_reg(d, dtype).AssertTrue();
             is_relaxed_alu_or_sreg(a, atype).AssertTrue();

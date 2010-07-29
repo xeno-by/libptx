@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Common.Comments;
+using Libptx.Common.Contexts;
 using Libptx.Common.Performance.Pragmas;
+using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Expressions.Slots;
-using Libptx.Instructions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
+using Type = Libptx.Common.Types.Type;
 
 namespace Libptx
 {
     [DebuggerNonUserCode]
-    public class Module : Validatable, Renderable
+    public class Module
     {
         public SoftwareIsa Version { get; set; }
         public HardwareIsa Target { get; set; }
@@ -62,7 +63,7 @@ namespace Libptx
 
         public Entry AddEntry(String name, IEnumerable<Var> @params)
         {
-            var entry = new Entry(this);
+            var entry = new Entry();
             entry.Name = name;
             entry.Params.AddElements(@params ?? Seq.Empty<Var>());
             Entries.Add(entry);
@@ -98,64 +99,66 @@ namespace Libptx
         {
         }
 
-        void Validatable.Validate(Module ctx) { (ctx == this).AssertTrue(); Validate(); }
         public void Validate()
         {
-            // this is commented out because there's no problem with UnifiedTexturing
-            // if the version is prior to PTX_15, corresponding directive just won't be rendered
-//            (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
-            (UnifiedTexturing == false).AssertImplies(Version >= SoftwareIsa.PTX_15);
-            (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
-
-            Comments.ForEach(c => { c.AssertNotNull(); c.Validate(this); });
-            Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(this); });
-
-            var all_args = new HashSet<Expression>();
-            Entries.ForEach(e =>
+            var ctx = new ValidationContext(this);
+            using (ValidationContext.Push(ctx))
             {
-                e.AssertNotNull();
-                e.Validate(this);
+                // this is commented out because there's no problem with UnifiedTexturing
+                // if the version is prior to PTX_15, corresponding directive just won't be rendered
+//                (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
+                (UnifiedTexturing == false).AssertImplies(Version >= SoftwareIsa.PTX_15);
+                (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
-                if (e.Name == null)
-                {
-                    Func<int, String> gen_name = i => String.Format("%entry{0}", i);
-                    var gend_name = Seq.Nats.Select(gen_name).First(name => Entries.None(e2 => e2.Name == name));
-                    e.Name = gend_name;
-                }
+                Comments.ForEach(c => { c.AssertNotNull(); c.Validate(); });
+                Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(); });
+                Entries.ForEach(e => { e.AssertNotNull(); e.Validate(); });
+                (Entries.Count() == Entries.Select(e => e.Name).Distinct().Count()).AssertTrue();
 
-                (Entries.Count(e2 => e2.Name == e.Name) == 1).AssertTrue();
-
-                var args = e.Stmts.OfType<ptxop>().SelectMany(op => op.Operands);
-                args.ForEach(arg => all_args.Add(arg));
-            });
-
-            if (Target < HardwareIsa.SM_13 && !EmulateDoubles) all_args.AssertNone(arg => arg.is_float() && arg.bits() == 64);
-            if (Version < SoftwareIsa.PTX_15) all_args.AssertNone(arg => arg.is_samplerref() || arg.is_surfref());
-            (all_args.Where(arg => arg.is_texref()).Count() <= 128).AssertTrue();
-            (all_args.Where(arg => arg.is_samplerref()).Count() <= (UnifiedTexturing ? 128 : 16)).AssertTrue();
-            // todo. what's the max amount of surfaces?
+                Func<TypeName, bool> mentioned_type = t => ctx.Visited.Contains((Type)t);
+                if (Target < HardwareIsa.SM_13 && !EmulateDoubles) mentioned_type(TypeName.F64).AssertFalse();
+                if (Version < SoftwareIsa.PTX_15) (mentioned_type(TypeName.Samplerref) || mentioned_type(TypeName.Surfref)).AssertFalse();
+                (ctx.VisitedExprs.Where(arg => arg.is_texref()).Count() <= 128).AssertTrue();
+                (ctx.VisitedExprs.Where(arg => arg.is_samplerref()).Count() <= (UnifiedTexturing ? 128 : 16)).AssertTrue();
+                // todo. what's the max amount of surfaces?
+            }
         }
 
-        void Renderable.RenderAsPtx(TextWriter writer)
+        public String RenderPtx()
         {
-            Comments.ForEach(c => c.RenderAsPtx(writer));
-            if (Comments.IsNotEmpty()) writer.WriteLine();
-
-            writer.WriteLine(".version {0}.{1}", (int)Version / 10, (int)Version % 10);
-            writer.Write(".target sm_{0}", (int)Target);
-            if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) writer.Write(", texmode_unified");
-            if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) writer.Write(", texmode_independent");
-            if (EmulateDoubles) writer.Write(", map_f64_to_f32");
-            writer.WriteLine();
-
-            if (Pragmas.IsNotEmpty()) writer.WriteLine();
-            Pragmas.ForEach(p => p.RenderAsPtx(writer));
-
-            foreach (var entry in Entries)
+            var ctx = new RenderPtxContext(this);
+            using (RenderPtxContext.Push(ctx))
             {
+                var writer = ctx.Writer;
+                Comments.ForEach(c => c.RenderPtx());
+                if (Comments.IsNotEmpty()) writer.WriteLine();
+
+                writer.WriteLine(".version {0}.{1}", (int)Version / 10, (int)Version % 10);
+                writer.Write(".target sm_{0}", (int)Target);
+                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) writer.Write(", texmode_unified");
+                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) writer.Write(", texmode_independent");
+                if (EmulateDoubles) writer.Write(", map_f64_to_f32");
                 writer.WriteLine();
-                entry.RenderAsPtx(writer);
+
+                if (Pragmas.IsNotEmpty()) writer.WriteLine();
+                Pragmas.ForEach(p => p.RenderPtx());
+
+                writer.Delay(() =>
+                {
+                    var opaques = ctx.VisitedExprs.OfType<Var>().Where(v => v.is_opaque()).ToReadOnly();
+                    if (opaques.IsNotEmpty()) writer.WriteLine();
+                    opaques.ForEach(v => v.RenderPtx());
+                });
+
+                foreach (var entry in Entries)
+                {
+                    writer.WriteLine();
+                    entry.RenderPtx();
+                }
             }
+
+            ctx.Writer.Commit();
+            return ctx.Buf.ToString();
         }
     }
 }

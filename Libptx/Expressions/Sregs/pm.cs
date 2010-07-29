@@ -12,7 +12,7 @@ namespace Libptx.Expressions.Sregs
     {
         [Affix("index")] public int Index { get; set; }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (0 <= Index && Index <= 3).AssertTrue();
         }

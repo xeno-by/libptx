@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 using Libcuda.Versions;
+using Libptx.Common;
 using Libptx.Common.Annotations;
 using XenoGears.Reflection.Attributes;
 using XenoGears.Reflection.Shortcuts;
@@ -52,43 +53,57 @@ namespace Libptx.Reflection
             }
         }
 
-        public static String Sig(this Object obj)
+        public static String Signature(this Object obj)
         {
-            var signatures = obj.Sigs();
+            var signatures = obj.Signatures();
             if (signatures == null) return null;
             return signatures.Distinct().SingleOrDefault();
         }
 
-        public static ReadOnlyCollection<String> Sigs(this Object obj)
+        public static ReadOnlyCollection<String> Signatures(this Object obj)
         {
             var particles = obj.Particles();
             return particles == null ? null : particles.Select(pcl => pcl.Signature).ToReadOnly();
         }
 
-        public static SoftwareIsa Version(this Object obj)
+        public static SoftwareIsa EigenVersion(this Object obj)
         {
-            var versions = obj.Versions();
-            if (versions == null) return 0;
-            return versions.Distinct().SingleOrDefault();
+            var atom = obj as Atom;
+            if (atom != null)
+            {
+                return atom.EigenVersion;
+            }
+            else
+            {
+                var particles = obj.Particles();
+                if (particles == null) return 0;
+                return particles.Select(pcl => pcl.Version).Distinct().SingleOrDefault();
+            }
         }
 
-        public static ReadOnlyCollection<SoftwareIsa> Versions(this Object obj)
+        public static SoftwareIsa VersionRecursive(this Object obj)
         {
-            var particles = obj.Particles();
-            return particles == null ? null : particles.Select(pcl => pcl.Version).ToReadOnly();
+            throw new NotImplementedException();
         }
 
-        public static HardwareIsa Target(this Object obj)
+        public static HardwareIsa EigenTarget(this Object obj)
         {
-            var targets = obj.Targets();
-            if (targets == null) return 0;
-            return targets.Distinct().SingleOrDefault();
+            var atom = obj as Atom;
+            if (atom != null)
+            {
+                return atom.EigenTarget;
+            }
+            else
+            {
+                var particles = obj.Particles();
+                if (particles == null) return 0;
+                return particles.Select(pcl => pcl.Target).Distinct().SingleOrDefault();
+            }
         }
 
-        public static ReadOnlyCollection<HardwareIsa> Targets(this Object obj)
+        public static SoftwareIsa TargetRecursive(this Object obj)
         {
-            var particles = obj.Particles();
-            return particles == null ? null : particles.Select(pcl => pcl.Target).ToReadOnly();
+            throw new NotImplementedException();
         }
     }
 }

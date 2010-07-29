@@ -35,7 +35,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
         protected override bool allow_bit32 { get { return true; } }
         protected override bool allow_bit64 { get { return true; } }
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (space == 0 || space == global || space == shared).AssertTrue();
             (op == and || op == or || op == xor || op == add || op == inc || op == dec).AssertTrue();
@@ -50,7 +50,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         public Address a { get { return (Address)Operands[0]; } set { Operands[0] = value; } }
         public Expression b { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_ptr(a, space != 0 ? space : (global | shared)).AssertTrue();
             is_alu(b, type).AssertTrue();

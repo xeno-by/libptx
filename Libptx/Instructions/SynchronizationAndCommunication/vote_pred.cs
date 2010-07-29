@@ -15,7 +15,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
     {
         [Affix] public redm mode { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (mode != 0).AssertTrue();
         }
@@ -24,7 +24,7 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
         public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_alu(d, pred).AssertTrue();
             is_alu(a, pred, not).AssertTrue();

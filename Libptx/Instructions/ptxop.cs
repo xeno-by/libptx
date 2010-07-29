@@ -23,19 +23,19 @@ namespace Libptx.Instructions
     [DebuggerNonUserCode]
     public abstract partial class ptxop : Instruction
     {
-        protected sealed override SoftwareIsa CustomVersion { get { return custom_swisa; } }
+        protected sealed override SoftwareIsa CustomEigenVersion { get { return custom_swisa; } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
 
-        protected sealed override HardwareIsa CustomTarget { get { return custom_hwisa; } }
+        protected sealed override HardwareIsa CustomEigenTarget { get { return custom_hwisa; } }
         protected virtual HardwareIsa custom_hwisa { get { return HardwareIsa.SM_10; } }
 
-        protected sealed override void CustomValidate(Module ctx)
+        protected sealed override void CustomValidate()
         {
-            base.CustomValidate(ctx);
-            validate_opcode(ctx);
-            custom_validate_opcode(ctx);
-            validate_operands(ctx);
-            custom_validate_operands(ctx);
+            base.CustomValidate();
+            validate_opcode();
+            custom_validate_opcode();
+            validate_operands();
+            custom_validate_operands();
         }
 
         protected virtual bool allow_int8 { get { return false; } }
@@ -47,14 +47,14 @@ namespace Libptx.Instructions
         protected virtual bool allow_pred { get { return false; } }
         protected virtual bool allow_vec { get { return false; } }
         protected virtual bool allow_array { get { return false; } }
-        protected virtual void custom_validate_opcode(Module ctx) { }
-        private void validate_opcode(Module ctx)
+        protected virtual void custom_validate_opcode() { }
+        private void validate_opcode()
         {
             var meta = this.PtxopMeta();
             meta.Affixes.OfType<Type>().ForEach(t =>
             {
                 t.AssertNotNull();
-                t.Validate(ctx);
+                t.Validate();
 
                 (t.is_int() && t.bits() == 8).AssertImplies(allow_int8);
                 (t.is_float() && t.bits() == 16).AssertImplies(allow_float16);
@@ -68,8 +68,8 @@ namespace Libptx.Instructions
             });
         }
 
-        protected virtual void custom_validate_operands(Module ctx) { }
-        private void validate_operands(Module ctx)
+        protected virtual void custom_validate_operands() { }
+        private void validate_operands()
         {
             var arg_cnts = this.PtxopSigs().Select(sig => sig.Operands.Count());
             arg_cnts.Contains(Operands.Count()).AssertTrue();
@@ -79,11 +79,11 @@ namespace Libptx.Instructions
                 // this is commented out because operands may be optional
                 // arg.AssertNotNull();
 
-                if (arg != null) arg.Validate(ctx);
+                if (arg != null) arg.Validate();
             });
         }
 
-        protected override void RenderAsPtx(TextWriter writer) { Pragmas.ForEach(p => p.RenderAsPtx(writer)); var ptx = core_render_ptx(); ptx = ptx ?? custom_render_ptx(ptx); writer.Write(ptx); }
+        protected override void RenderPtx() { Pragmas.ForEach(p => p.RenderPtx()); var ptx = core_render_ptx(); ptx = ptx ?? custom_render_ptx(ptx); writer.Write(ptx); }
         protected virtual String custom_render_ptx(String core) { return null; }
         private String core_render_ptx()
         {
@@ -91,11 +91,11 @@ namespace Libptx.Instructions
             var meta = this.PtxopMeta();
 
             buf.Append(meta.Opcode);
-            buf.Append(meta.Mods.Where(o => o != null).Select(o => o.Sig() ?? o.ToInvariantString()).StringJoin(""));
-            buf.Append(meta.Affixes.Where(o => o != null).Select(o => o.Sig() ?? o.ToInvariantString()).StringJoin(", "));
+            buf.Append(meta.Mods.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(""));
+            buf.Append(meta.Affixes.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(", "));
 
             if (meta.Operands.IsNotEmpty()) buf.Append(" ");
-            buf.Append(meta.Operands.Where(o => o != null).Select(o => o.RenderAsPtx()).StringJoin(", "));
+            buf.Append(meta.Operands.Where(o => o != null).Select(o => o.RunRenderPtx()).StringJoin(", "));
 
             return buf.ToString();
         }

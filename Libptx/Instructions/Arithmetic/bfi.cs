@@ -14,7 +14,7 @@ namespace Libptx.Instructions.Arithmetic
     {
         [Affix] public Type type { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (type.is_bit() && type.bits() >= 32).AssertTrue();
         }
@@ -26,7 +26,7 @@ namespace Libptx.Instructions.Arithmetic
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
         public Expression d { get { return Operands[4]; } set { Operands[4] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             is_alu(f, type).AssertTrue();
             is_alu(a, type).AssertTrue();

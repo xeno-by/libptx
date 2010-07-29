@@ -16,14 +16,14 @@ namespace Libptx.Common.Performance
         [Affix("minnctapersm", SoftwareIsa.PTX_20)] public int Minnctapersm { get; set; }
         [Affix("maxnctapersm", SoftwareIsa.PTX_13)] public int Maxnctapersm { get; set; }
 
-        protected override void CustomValidate(Module ctx)
+        protected override void CustomValidate()
         {
             (Maxnreg >= 0).AssertTrue();
             (Minnctapersm >= 0).AssertTrue();
             (Maxnctapersm >= 0).AssertTrue();
         }
 
-        protected override void RenderAsPtx(TextWriter writer)
+        protected override void RenderPtx()
         {
             if (Maxnreg != 0) writer.WriteLine(".maxnreg {0}", Maxnreg);
             if (Maxntid != new dim3()) writer.WriteLine(".maxntid {0}, {1}, {2}", Maxntid.X, Maxntid.Y, Maxntid.Z);

@@ -21,7 +21,7 @@ namespace Libptx.Instructions.Video
         [Affix] public bool sat { get; set; }
         [Affix] public op op2 { get; set; }
 
-        protected override void custom_validate_opcode(Module ctx)
+        protected override void custom_validate_opcode()
         {
             (dtype == s32 || dtype == u32).AssertTrue();
             (atype == s32 || atype == u32).AssertTrue();
@@ -35,7 +35,7 @@ namespace Libptx.Instructions.Video
         public Expression b { get { return Operands[2]; } set { Operands[2] = value; } }
         public Expression c { get { return Operands[3]; } set { Operands[3] = value; } }
 
-        protected override void custom_validate_operands(Module ctx)
+        protected override void custom_validate_operands()
         {
             var datamerge = op2 == 0 && c != null;
             if (datamerge)
