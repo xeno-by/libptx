@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using Libptx.Expressions;
 using Libptx.Statements;
 using XenoGears.Functional;
@@ -45,6 +44,11 @@ namespace Libptx.Common.Comments
                 if (inline) writer.Write("/* {0} */ ", Text);
                 else writer.Write("// {0}", Text);
             }
+        }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
         }
     }
 }

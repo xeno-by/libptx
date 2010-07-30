@@ -204,11 +204,14 @@ namespace Libptx.Functions
             writer.WriteLine("}");
         }
 
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
+
         public override String ToString()
         {
-            return String.Format(".entry {0} ({1})",
-                Name.IsNullOrEmpty() ? "<auto>" : Name,
-                Params.Select(p => p.RunRenderPtx()).StringJoin());
+            return String.Format(".entry {0} ({1})", Name, Params.Select(p => p.RunRenderPtx()).StringJoin());
         }
     }
 }

@@ -17,5 +17,10 @@ namespace Libptx.Common.Performance.Pragmas
         {
             writer.WriteLine(".pragma \"{0}\";", Signature);
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

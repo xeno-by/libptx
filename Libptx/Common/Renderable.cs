@@ -1,12 +1,14 @@
 using System;
 using System.Diagnostics;
 using Libptx.Common.Contexts;
+using XenoGears.Assertions;
 
 namespace Libptx.Common
 {
     public interface Renderable
     {
         void RenderPtx();
+        void RenderCubin();
     }
 
     [DebuggerNonUserCode]
@@ -70,6 +72,73 @@ namespace Libptx.Common
                 renderable.RenderPtx(ctx);
                 var ptx = ctx.Buf.ToString(skip, ctx.Buf.Length - skip);
                 return ptx;
+            }
+        }
+
+        public static void RenderCubin(this Renderable renderable)
+        {
+            RenderCubin(renderable, RenderCubinContext.Current);
+        }
+
+        public static void RenderCubin(this Renderable renderable, Module ctx)
+        {
+            var curr = RenderCubinContext.Current;
+            if (curr != null && curr.Module == ctx)
+            {
+                RenderCubin(renderable);
+            }
+            else
+            {
+                RenderCubin(renderable, new RenderCubinContext(ctx));
+            }
+        }
+
+        public static void RenderCubin(this Renderable renderable, RenderCubinContext ctx)
+        {
+            if (renderable == null) return;
+            if (ctx == null) RenderCubin(renderable);
+
+            using (RenderCubinContext.Push(ctx))
+            {
+                renderable.RenderCubin();
+            }
+        }
+
+        public static byte[] RunRenderCubin(this Renderable renderable)
+        {
+            return RunRenderCubin(renderable, RenderCubinContext.Current);
+        }
+
+        public static byte[] RunRenderCubin(this Renderable renderable, Module ctx)
+        {
+            var curr = RenderCubinContext.Current;
+            if (curr != null && curr.Module == ctx)
+            {
+                return RunRenderCubin(renderable);
+            }
+            else
+            {
+                return RunRenderCubin(renderable, new RenderCubinContext(ctx));
+            }
+        }
+
+        public static byte[] RunRenderCubin(this Renderable renderable, RenderCubinContext ctx)
+        {
+            if (renderable == null) return null;
+            if (ctx == null) return RunRenderCubin(renderable);
+
+            var skip = (int)ctx.Buf.Length;
+            var pos = ctx.Buf.Position;
+            using (RenderCubinContext.Push(ctx))
+            {
+                renderable.RenderCubin(ctx);
+
+                var cnt = ctx.Buf.Position;
+                var cubin = new byte[cnt - pos];
+                var read = ctx.Buf.Read(cubin, skip, cubin.Length);
+                (read == cubin.Length).AssertTrue();
+
+                return cubin;
             }
         }
     }

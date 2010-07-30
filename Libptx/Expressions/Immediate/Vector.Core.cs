@@ -123,6 +123,11 @@ namespace Libptx.Expressions.Immediate
 
             writer.Write("}");
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [DebuggerNonUserCode]

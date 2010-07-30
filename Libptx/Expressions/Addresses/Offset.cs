@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using Libptx.Common;
 using Libptx.Expressions.Immediate;
 using Libptx.Expressions.Slots;
@@ -60,6 +59,11 @@ namespace Libptx.Expressions.Addresses
             }
 
             writer.Write("]");
+        }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
         }
     }
 }

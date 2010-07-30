@@ -207,5 +207,10 @@ namespace Libptx.Expressions.Immediate
                 render(Value);
             }
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

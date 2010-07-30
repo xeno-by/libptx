@@ -57,9 +57,12 @@
     <Compile Include="Common\Annotations\Quanta\Quantum20Attribute.cs" />
     <Compile Include="Common\Annotations\Quanta\QuantumAttribute.cs" />
     <Compile Include="Common\Contexts\Context.cs" />
+    <Compile Include="Common\Contexts\RenderCubinContext.cs" />
     <Compile Include="Common\Contexts\RenderPtxContext.cs" />
     <Compile Include="Common\Contexts\ValidationContext.cs" />
     <Compile Include="Common\Names\Namer.cs" />
+    <Compile Include="Format.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Reflection\Atoms.cs" />
     <Compile Include="Reflection\PtxopAffix.cs" />
     <Compile Include="Reflection\PtxopMod.cs" />

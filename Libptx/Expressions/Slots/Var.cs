@@ -127,5 +127,10 @@ namespace Libptx.Expressions.Slots
                 }
             }
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -77,5 +77,10 @@ namespace Libptx.Expressions.Slots
                 writer.Write(".{0} {1}{2}", el, Name, indices);
             }
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

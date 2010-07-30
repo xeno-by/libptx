@@ -29,5 +29,10 @@ namespace Libptx.Expressions.Sregs
         {
             writer.Write(this.Signature());
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

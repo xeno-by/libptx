@@ -59,6 +59,11 @@ namespace Libptx.Common.Types
                 dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
         }
 
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
+
         public int SizeInMemory { get { return SizeOfElement * (Dims ?? new int[0]).Product(); } }
         public int SizeOfElement
         {

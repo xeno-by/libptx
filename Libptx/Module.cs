@@ -161,5 +161,10 @@ namespace Libptx
             ctx.Writer.Commit();
             return ctx.Buf.ToString();
         }
+
+        public byte[] RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

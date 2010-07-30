@@ -23,5 +23,10 @@ namespace Libptx.Statements
         {
             writer.Write(Name);
         }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

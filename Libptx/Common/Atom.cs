@@ -67,6 +67,16 @@ namespace Libptx.Common
             }
         }
 
+        protected abstract void RenderCubin();
+        void Renderable.RenderCubin()
+        {
+            using (ctx.Push(this))
+            {
+                Comments.ForEach(c => c.RenderCubin());
+                RenderCubin();
+            }
+        }
+
         public override String ToString()
         {
             var overriden = new RenderPtxContext(null);

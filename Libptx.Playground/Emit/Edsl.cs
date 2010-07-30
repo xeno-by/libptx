@@ -1,14 +1,10 @@
 using System;
-using NUnit.Framework;
-using XenoGears.Playground.Framework;
 
 namespace Libptx.Playground.Emit
 {
-    [TestFixture]
-    public class Edsl : BaseTests
+    public static class Edsl
     {
-        [Test]
-        public void matmul()
+        public static Module matmul()
         {
             throw new NotImplementedException();
         }

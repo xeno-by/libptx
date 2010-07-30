@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Libptx.Common;
 using Libptx.Common.Types.Pointers;
@@ -43,6 +44,11 @@ namespace Libptx.Expressions.Addresses
         {
             if (Base != null) writer.Write(Base);
             if (Offset != null) writer.Write(Offset);
+        }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
         }
     }
 }

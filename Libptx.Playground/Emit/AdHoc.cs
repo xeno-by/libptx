@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Libcuda.Versions;
 using Libptx.Common.Comments;
 using Libptx.Common.Enumerations;
@@ -15,25 +14,14 @@ using Libptx.Instructions.ControlFlow;
 using Libptx.Instructions.LogicAndShift;
 using Libptx.Instructions.MovementAndConversion;
 using Libptx.Statements;
-using NUnit.Framework;
-using XenoGears.Playground.Framework;
 using Type=Libptx.Common.Types.Type;
-using Libptx.Common;
-using System.Linq;
 using XenoGears.Functional;
 
 namespace Libptx.Playground.Emit
 {
-    [TestFixture]
-    public class AdHoc : BaseTests
+    public static class AdHoc
     {
-        protected override ReadOnlyCollection<String> ReferenceWannabes()
-        {
-            return base.ReferenceWannabes().Select(wb => wb + ".ptx").ToReadOnly();
-        }
-
-        [Test, Category("Hot")]
-        public void matmul()
+        public static Module matmul()
         {
             Type u16 = new Type { Name = TypeName.U16 }, u32 = new Type { Name = TypeName.U32 }, u64 = new Type { Name = TypeName.U64 };
             Type f32 = new Type { Name = TypeName.F32 }, f64 = new Type { Name = TypeName.F64 }, pred = new Type { Name = TypeName.Pred };
@@ -138,9 +126,7 @@ namespace Libptx.Playground.Emit
             ptx.Add(exit);
             ptx.Add(new exit());
 
-            module.Validate();
-            var s_ptx = module.RenderPtx();
-            VerifyResult(s_ptx);
+            return module;
         }
     }
 }

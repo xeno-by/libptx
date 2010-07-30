@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Libcuda.Versions;
@@ -100,6 +99,11 @@ namespace Libptx.Instructions
             buf.Append(meta.Operands.Where(o => o != null).Select(o => o.RunRenderPtx()).StringJoin(", "));
 
             return buf.ToString();
+        }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
         }
 
         #region Location checking utilities

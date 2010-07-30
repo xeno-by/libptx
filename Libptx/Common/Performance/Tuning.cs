@@ -1,5 +1,5 @@
+using System;
 using System.Diagnostics;
-using System.IO;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
@@ -30,6 +30,11 @@ namespace Libptx.Common.Performance
             if (Reqntid != new dim3()) writer.WriteLine(".reqntid {0}, {1}, {2}", Reqntid.X, Reqntid.Y, Reqntid.Z);
             if (Minnctapersm != 0) writer.WriteLine(".minnctapersm {0}", Minnctapersm);
             if (Maxnctapersm != 0) writer.WriteLine(".maxnctapersm {0}", Maxnctapersm);
+        }
+
+        protected override void RenderCubin()
+        {
+            throw new NotImplementedException();
         }
     }
 }
