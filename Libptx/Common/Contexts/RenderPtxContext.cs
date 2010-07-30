@@ -39,6 +39,7 @@ namespace Libptx.Common.Contexts
         public RenderPtxContext(Module module)
             : base(module)
         {
+            Buf = new StringBuilder();
             var core = new StringWriter(Buf);
             Writer = core.Indented().Delayed();
         }

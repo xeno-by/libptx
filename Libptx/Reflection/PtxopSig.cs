@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Libcuda.Versions;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions;
-using Libptx.Instructions;
 using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
 using XenoGears.Functional;
@@ -16,7 +14,7 @@ using XenoGears.Reflection.Shortcuts;
 
 namespace Libptx.Reflection
 {
-    [DebuggerNonUserCode]
+//    [DebuggerNonUserCode]
     public class PtxopSig
     {
         public Type Decl { get; private set; }

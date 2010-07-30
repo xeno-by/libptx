@@ -60,6 +60,9 @@ namespace Libptx.Playground
             ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\.(\w)*type").Success).ForEach(sig => Console.WriteLine(sig));
             var types = Enum.GetValues(typeof(TypeName)).Cast<TypeName>().Select(tn => (Type)tn).Select(t => t.ToString()).ToReadOnly();
             types.ForEach(t => ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
+
+            // assert-test #3: verify that ptxop sigs get parsed correctly
+            throw new NotImplementedException();
         }
 
         [Test]
