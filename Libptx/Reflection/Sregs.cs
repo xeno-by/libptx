@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Libptx.Expressions.Sregs;
 using System.Linq;
 using Libptx.Expressions.Sregs.Annotations;
+using XenoGears.Collections.Dictionaries;
 using XenoGears.Functional;
 using XenoGears.Reflection.Attributes;
 
@@ -12,22 +13,24 @@ namespace Libptx.Reflection
     [DebuggerNonUserCode]
     public static class Sregs
     {
-        private static readonly ReadOnlyCollection<Type> _cache;
+        private static readonly ReadOnlyCollection<Type> _sregs;
+        private static readonly ReadOnlyDictionary<Type, SregSig> _sigs;
 
         static Sregs()
         {
             var libptx = typeof(Sreg).Assembly;
-            _cache = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).ToReadOnly();
+            _sregs = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).ToReadOnly();
+            _sigs = _sregs.ToDictionary(t => t, t => new SregSig(t, t.Attr<SregAttribute>())).ToReadOnly();
         }
 
         public static ReadOnlyCollection<Type> All
         {
-            get { return _cache; }
+            get { return _sregs; }
         }
 
         public static ReadOnlyCollection<SregSig> Sigs
         {
-            get { return _cache.Select(t => t.SregSig()).ToReadOnly(); }
+            get { return _sigs.Values.ToReadOnly(); }
         }
 
         public static SregSig SregSig(this Object obj)
@@ -38,14 +41,8 @@ namespace Libptx.Reflection
             }
             else
             {
-                var t = obj as Type;
-                if (t != null)
-                {
-                    var a = t.AttrOrNull<SregAttribute>();
-                    return a != null ? new SregSig(t, a) : null;
-                }
-
-                return obj.GetType().SregSig();
+                var t = obj as Type ?? obj.GetType();
+                return _sigs.GetOrDefault(t);
             }
         }
     }

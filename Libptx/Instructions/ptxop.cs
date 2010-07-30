@@ -25,11 +25,11 @@ namespace Libptx.Instructions
     {
         protected sealed override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)core_swisa, (int)custom_swisa); } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
-        private SoftwareIsa core_swisa { get { return this.PtxopMeta().Affixes.OfType<Type>().MaxOrDefault(t => t.Version); } }
+        private SoftwareIsa core_swisa { get { return this.PtxopState().Affixes.OfType<Type>().MaxOrDefault(t => t.Version); } }
 
         protected sealed override HardwareIsa CustomTarget { get { return (HardwareIsa)Math.Max((int)core_hwisa, (int)custom_hwisa); } }
         protected virtual HardwareIsa custom_hwisa { get { return HardwareIsa.SM_10; } }
-        private HardwareIsa core_hwisa { get { return this.PtxopMeta().Affixes.OfType<Type>().MaxOrDefault(t => t.Target); } }
+        private HardwareIsa core_hwisa { get { return this.PtxopState().Affixes.OfType<Type>().MaxOrDefault(t => t.Target); } }
 
         protected sealed override void CustomValidate()
         {
@@ -52,8 +52,8 @@ namespace Libptx.Instructions
         protected virtual void custom_validate_opcode() { }
         private void validate_opcode()
         {
-            var meta = this.PtxopMeta();
-            meta.Affixes.OfType<Type>().ForEach(t =>
+            var state = this.PtxopState();
+            state.Affixes.OfType<Type>().ForEach(t =>
             {
                 t.AssertNotNull();
                 t.Validate();
@@ -90,7 +90,7 @@ namespace Libptx.Instructions
         private String core_render_ptx()
         {
             var buf = new StringBuilder();
-            var meta = this.PtxopMeta();
+            var meta = this.PtxopState();
 
             buf.Append(meta.Opcode);
             buf.Append(meta.Mods.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(""));

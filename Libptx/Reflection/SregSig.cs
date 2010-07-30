@@ -11,9 +11,10 @@ namespace Libptx.Reflection
         public Type Decl { get; private set; }
         public SregAttribute Meta { get; private set; }
 
+        public SoftwareIsa Version { get { return Meta.Version; } }
+        public HardwareIsa Target { get { return Meta.Target; } }
+
         public String Name { get; private set; }
-        public SoftwareIsa Version { get; private set; }
-        public HardwareIsa Target { get; private set; }
         public Type Type { get; private set; }
 
         internal SregSig(Type decl, SregAttribute meta)
@@ -22,8 +23,6 @@ namespace Libptx.Reflection
             Meta = meta;
 
             Name = meta.Signature;
-            Version = meta.Version;
-            Target = meta.Target;
             Type = meta.Type;
         }
     }

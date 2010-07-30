@@ -61,8 +61,11 @@
     <Compile Include="Common\Contexts\ValidationContext.cs" />
     <Compile Include="Common\Names\Namer.cs" />
     <Compile Include="Reflection\Atoms.cs" />
+    <Compile Include="Reflection\PtxopAffix.cs" />
+    <Compile Include="Reflection\PtxopMod.cs" />
+    <Compile Include="Reflection\PtxopOperand.cs" />
     <Compile Include="Reflection\Quanta.cs" />
-    <Compile Include="Reflection\PtxopMeta.cs" />
+    <Compile Include="Reflection\PtxopState.cs" />
     <Compile Include="Reflection\Ptxops.cs" />
     <Compile Include="Reflection\Particles.cs" />
     <Compile Include="Common\Annotations\Quanta\Affix15Attribute.cs" />
