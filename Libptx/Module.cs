@@ -10,6 +10,7 @@ using Libptx.Common.Performance.Pragmas;
 using Libptx.Common.Types;
 using Libptx.Expressions;
 using Libptx.Expressions.Slots;
+using Libptx.Functions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using Type = Libptx.Common.Types.Type;
@@ -23,7 +24,7 @@ namespace Libptx
         public HardwareIsa Target { get; set; }
 
         public bool UnifiedTexturing { get; set; }
-        public bool EmulateDoubles { get; set; }
+        public bool DowngradeDoubles { get; set; }
 
         private IList<Comment> _comments = new List<Comment>();
         public IList<Comment> Comments
@@ -91,7 +92,7 @@ namespace Libptx
             Target = hardwareIsa;
 
             UnifiedTexturing = true;
-            EmulateDoubles = false;
+            DowngradeDoubles = false;
         }
 
         public Module(HardwareIsa hardwareIsa, SoftwareIsa softwareIsa)
@@ -108,7 +109,7 @@ namespace Libptx
                 // if the version is prior to PTX_15, corresponding directive just won't be rendered
 //                (UnifiedTexturing == true).AssertImplies(Version >= SoftwareIsa.PTX_15);
                 (UnifiedTexturing == false).AssertImplies(Version >= SoftwareIsa.PTX_15);
-                (EmulateDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
+                (DowngradeDoubles == true).AssertImplies(Target < HardwareIsa.SM_13);
 
                 Comments.ForEach(c => { c.AssertNotNull(); c.Validate(); });
                 Pragmas.ForEach(p => { p.AssertNotNull(); p.Validate(); });
@@ -116,7 +117,7 @@ namespace Libptx
                 (Entries.Count() == Entries.Select(e => e.Name).Distinct().Count()).AssertTrue();
 
                 Func<TypeName, bool> mentioned_type = t => ctx.Visited.Contains((Type)t);
-                if (Target < HardwareIsa.SM_13 && !EmulateDoubles) mentioned_type(TypeName.F64).AssertFalse();
+                if (Target < HardwareIsa.SM_13 && !DowngradeDoubles) mentioned_type(TypeName.F64).AssertFalse();
                 if (Version < SoftwareIsa.PTX_15) (mentioned_type(TypeName.Samplerref) || mentioned_type(TypeName.Surfref)).AssertFalse();
                 (ctx.VisitedExprs.Where(arg => arg.is_texref()).Count() <= 128).AssertTrue();
                 (ctx.VisitedExprs.Where(arg => arg.is_samplerref()).Count() <= (UnifiedTexturing ? 128 : 16)).AssertTrue();
@@ -137,7 +138,7 @@ namespace Libptx
                 writer.Write(".target sm_{0}", (int)Target);
                 if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) writer.Write(", texmode_unified");
                 if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) writer.Write(", texmode_independent");
-                if (EmulateDoubles) writer.Write(", map_f64_to_f32");
+                if (DowngradeDoubles) writer.Write(", map_f64_to_f32");
                 writer.WriteLine();
 
                 if (Pragmas.IsNotEmpty()) writer.WriteLine();

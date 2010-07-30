@@ -23,11 +23,13 @@ namespace Libptx.Instructions
     [DebuggerNonUserCode]
     public abstract partial class ptxop : Instruction
     {
-        protected sealed override SoftwareIsa CustomEigenVersion { get { return custom_swisa; } }
+        protected sealed override SoftwareIsa CustomVersion { get { return (SoftwareIsa)Math.Max((int)core_swisa, (int)custom_swisa); } }
         protected virtual SoftwareIsa custom_swisa { get { return SoftwareIsa.PTX_10; } }
+        private SoftwareIsa core_swisa { get { return this.PtxopMeta().Affixes.OfType<Type>().MaxOrDefault(t => t.Version); } }
 
-        protected sealed override HardwareIsa CustomEigenTarget { get { return custom_hwisa; } }
+        protected sealed override HardwareIsa CustomTarget { get { return (HardwareIsa)Math.Max((int)core_hwisa, (int)custom_hwisa); } }
         protected virtual HardwareIsa custom_hwisa { get { return HardwareIsa.SM_10; } }
+        private HardwareIsa core_hwisa { get { return this.PtxopMeta().Affixes.OfType<Type>().MaxOrDefault(t => t.Target); } }
 
         protected sealed override void CustomValidate()
         {

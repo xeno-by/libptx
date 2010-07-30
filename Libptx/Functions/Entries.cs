@@ -3,7 +3,7 @@ using System.Diagnostics;
 using XenoGears.Collections.Lists;
 using XenoGears.Functional;
 
-namespace Libptx
+namespace Libptx.Functions
 {
     [DebuggerNonUserCode]
     public class Entries : BaseList<Entry>

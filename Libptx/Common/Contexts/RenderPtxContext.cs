@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using XenoGears;
 using XenoGears.Strings.Writers;
 using XenoGears.Traits.Disposable;
 using XenoGears.Assertions;
@@ -14,22 +13,22 @@ namespace Libptx.Common.Contexts
     [DebuggerNonUserCode]
     public class RenderPtxContext : Context
     {
-        public static RenderPtxContext Current { get { return "libptx-rctx".TlsGetOrCreate(() => new Stack<RenderPtxContext>()).FirstOrDefault(); } }
+        [ThreadStatic] private static Stack<RenderPtxContext> _stack = new Stack<RenderPtxContext>();
+        public static RenderPtxContext Current { get { return _stack.FirstOrDefault(); } }
         public static IDisposable Push(RenderPtxContext ctx)
         {
-            var stk = "libptx-rctx".TlsGetOrCreate(() => new Stack<RenderPtxContext>());
             if (Current == ctx)
             {
                 return new DisposableAction(() => {});
             }
             else
             {
-                stk.Push(ctx);
+                _stack.Push(ctx);
 
                 return new DisposableAction(() =>
                 {
                     (Current == ctx).AssertTrue();
-                    stk.Pop();
+                    _stack.Pop();
                 });
             }
         }

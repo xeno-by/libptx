@@ -13,7 +13,7 @@ using XenoGears.Assertions;
 using XenoGears.Functional;
 using Libptx.Common.Names;
 
-namespace Libptx
+namespace Libptx.Functions
 {
     [DebuggerNonUserCode]
     public class Entry : Atom
@@ -84,7 +84,7 @@ namespace Libptx
         {
             writer.Write(".entry {0}", Name);
 
-            var nontrivial_tuning = Tuning.EigenVersion > SoftwareIsa.PTX_10;
+            var nontrivial_tuning = Tuning.Version > SoftwareIsa.PTX_10;
             var nonempty_pragmas = Pragmas.IsNotEmpty();
             if (Params.IsEmpty())
             {

@@ -97,7 +97,7 @@
     <Compile Include="Common\Types\Pointers\Bmk.cs" />
     <Compile Include="Common\Types\Pointers\Ptr.cs" />
     <Compile Include="Common\Validators.cs" />
-    <Compile Include="Entries.cs" />
+    <Compile Include="Functions\Entries.cs" />
     <Compile Include="Expressions\Addresses\Address.Dsl.cs" />
     <Compile Include="Expressions\Addresses\Addressable.cs" />
     <Compile Include="Expressions\Immediate\Vector.Dsl.cs" />
@@ -222,7 +222,7 @@
     <Compile Include="Instructions\Video\vmax.cs" />
     <Compile Include="Instructions\Video\vadd.cs" />
     <Compile Include="Expressions\Sregs\Sreg.cs" />
-    <Compile Include="Params.cs" />
+    <Compile Include="Functions\Params.cs" />
     <Compile Include="Expressions\Sregs\Annotations\Sreg20Attribute.cs" />
     <Compile Include="Expressions\Sregs\Annotations\SregAttribute.cs" />
     <Compile Include="Expressions\Sregs\clock32.cs" />
@@ -240,7 +240,7 @@
     <Compile Include="Expressions\Sregs\ctaid.cs" />
     <Compile Include="Expressions\Sregs\ntid.cs" />
     <Compile Include="Expressions\Sregs\tid.cs" />
-    <Compile Include="Entry.cs" />
+    <Compile Include="Functions\Entry.cs" />
     <Compile Include="Common\Comments\Comment.cs" />
     <Compile Include="Reflection\PtxopSig.cs" />
     <Compile Include="Reflection\Sregs.cs" />

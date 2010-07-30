@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Expressions.Slots;
 using Libptx.Expressions.Sregs;
@@ -52,6 +54,26 @@ namespace Libptx.Expressions
                 {
                     throw AssertionHelper.Fail();
                 }
+            }
+        }
+
+        protected override SoftwareIsa CustomVersion
+        {
+            get
+            {
+                var expr_version = Expr.Version();
+                var embedded_version = Embedded.MaxOrDefault(el => el.Version());
+                return (SoftwareIsa)Math.Max((int)expr_version, (int)embedded_version);
+            }
+        }
+
+        protected override HardwareIsa CustomTarget
+        {
+            get
+            {
+                var expr_target = Expr.Version();
+                var embedded_target = Embedded.MaxOrDefault(el => el.Target());
+                return (HardwareIsa)Math.Max((int)expr_target, (int)embedded_target);
             }
         }
 

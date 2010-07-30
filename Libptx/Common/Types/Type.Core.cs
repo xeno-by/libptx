@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Libcuda.DataTypes;
+using Libcuda.Versions;
 using Libptx.Common.Types.Bits;
 using Libptx.Reflection;
 using XenoGears.Assertions;
@@ -19,6 +20,24 @@ namespace Libptx.Common.Types
         public TypeName Name { get; set; }
         public TypeMod Mod { get; set; }
         public int[] Dims { get; set; }
+
+        protected override SoftwareIsa CustomVersion { get { return Name.Version(); } }
+        protected override HardwareIsa CustomTarget
+        {
+            get
+            {
+                if (Name == f64)
+                {
+                    var incapable_target = ctx.Target < HardwareIsa.SM_13;
+                    var downgrade_doubles = ctx.DowngradeDoubles;
+                    return incapable_target && !downgrade_doubles ? HardwareIsa.SM_13 : HardwareIsa.SM_10;
+                }
+                else
+                {
+                    return Name.Target();
+                }
+            }
+        }
 
         protected override void CustomValidate()
         {

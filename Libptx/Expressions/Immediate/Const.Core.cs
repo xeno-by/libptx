@@ -1,20 +1,15 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
+using Libcuda.Versions;
 using Libptx.Common;
-using Libptx.Common.Annotations.Quanta;
 using Libptx.Common.Types;
 using Libptx.Common.Types.Bits;
 using Libptx.Common.Types.Opaques;
 using Libptx.Expressions.Addresses;
 using Libptx.Reflection;
-using XenoGears;
 using XenoGears.Assertions;
 using XenoGears.Functional;
-using XenoGears.Reflection.Attributes;
-using XenoGears.Reflection.Shortcuts;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Strings;
 
@@ -28,6 +23,9 @@ namespace Libptx.Expressions.Immediate
 
         public Object Value { get; set; }
         public Type Type { get { return Value == null ? null : Value.GetType(); } }
+
+        protected override SoftwareIsa CustomVersion { get { return Value.Version(); } }
+        protected override HardwareIsa CustomTarget { get { return Value.Target(); } }
 
         protected override void CustomValidate()
         {

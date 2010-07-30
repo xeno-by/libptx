@@ -8,6 +8,7 @@ using Libptx.Common.Enumerations;
 using Libptx.Common.Performance.Pragmas;
 using Libptx.Common.Types;
 using Libptx.Expressions;
+using Libptx.Functions;
 using Libptx.Reflection;
 using Libptx.Statements;
 using XenoGears.Strings.Writers;
@@ -20,8 +21,8 @@ namespace Libptx.Common
     [DebuggerNonUserCode]
     public abstract class Atom : Validatable, Renderable
     {
-        protected Context ctx { get { throw new NotImplementedException(); } }
-        protected DelayedWriter writer { get { throw new NotImplementedException(); } }
+        protected Context ctx { get { return (Context)ValidationContext.Current ?? (Context)RenderPtxContext.Current; } }
+        protected DelayedWriter writer { get { return RenderPtxContext.Current == null ? null : RenderPtxContext.Current.Writer; } }
         protected IndentedWriter indented { get { return writer == null ? null : writer.InnerWriter.AssertCast<IndentedWriter>(); } }
 
         private IList<Comment> _comments = new List<Comment>();
@@ -38,18 +39,18 @@ namespace Libptx.Common
             set { _pragmas = value ?? new List<Pragma>(); }
         }
 
-        public SoftwareIsa EigenVersion { get { return (SoftwareIsa)Math.Max((int)this.CoreEigenVersion(), (int)CustomEigenVersion); } }
-        protected virtual SoftwareIsa CustomEigenVersion { get { return SoftwareIsa.PTX_10; } }
+        public SoftwareIsa Version { get { return (SoftwareIsa)Math.Max((int)this.EigenVersion(), (int)CustomVersion); } }
+        protected virtual SoftwareIsa CustomVersion { get { return SoftwareIsa.PTX_10; } }
 
-        public HardwareIsa EigenTarget { get { return (HardwareIsa)Math.Max((int)this.CoreEigenTarget(), (int)CustomEigenTarget); } }
-        protected virtual HardwareIsa CustomEigenTarget { get { return HardwareIsa.SM_10; } }
+        public HardwareIsa Target { get { return (HardwareIsa)Math.Max((int)this.EigenTarget(), (int)CustomTarget); } }
+        protected virtual HardwareIsa CustomTarget { get { return HardwareIsa.SM_10; } }
 
         void Validatable.Validate() { using (ctx.Push(this)) { CoreValidate(); CustomValidate(); } }
         protected virtual void CustomValidate() { /* do nothing */ }
         protected void CoreValidate()
         {
-            (ctx.Version >= EigenVersion).AssertTrue();
-            (ctx.Target >= EigenTarget).AssertTrue();
+            (ctx.Version >= Version).AssertTrue();
+            (ctx.Target >= Target).AssertTrue();
 
             Comments.ForEach(c => { c.AssertNotNull(); c.Validate(); });
             Pragmas.IsNotEmpty().AssertImplies(this is Instruction || this is Entry);

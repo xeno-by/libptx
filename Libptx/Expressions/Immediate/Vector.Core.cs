@@ -3,13 +3,14 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
-using System.IO;
+using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Common.Types;
 using Libptx.Expressions.Slots;
 using XenoGears.Assertions;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Functional;
+using Libptx.Reflection;
 
 namespace Libptx.Expressions.Immediate
 {
@@ -61,6 +62,26 @@ namespace Libptx.Expressions.Immediate
                 }
 
                 return vec_type;
+            }
+        }
+
+        protected override SoftwareIsa CustomVersion
+        {
+            get
+            {
+                var elt_version = ElementType.Version();
+                var els_version = Elements.MaxOrDefault(el => el.Version());
+                return (SoftwareIsa)Math.Max((int)elt_version, (int)els_version);
+            }
+        }
+
+        protected override HardwareIsa CustomTarget
+        {
+            get
+            {
+                var elt_target = ElementType.Version();
+                var els_target = Elements.MaxOrDefault(el => el.Target());
+                return (HardwareIsa)Math.Max((int)elt_target, (int)els_target);
             }
         }
 

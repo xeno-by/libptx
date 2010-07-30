@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Expressions;
+using Libptx.Functions;
 using Libptx.Instructions;
 using Libptx.Statements;
 using XenoGears.Traits.Disposable;
@@ -19,7 +20,7 @@ namespace Libptx.Common.Contexts
         public SoftwareIsa Version { get { return Module == null ? SoftwareIsa.PTX_21 : Module.Version; } }
         public HardwareIsa Target { get { return Module == null ? HardwareIsa.SM_10 : Module.Target; } }
         public bool UnifiedTexturing { get { return Module == null ? true : Module.UnifiedTexturing; } }
-        public bool EmulateDoubles { get { return Module == null ? false : Module.EmulateDoubles; } }
+        public bool DowngradeDoubles { get { return Module == null ? false : Module.DowngradeDoubles; } }
 
         public Stack<Atom> Stack { get; private set; }
         public Atom Parent { get { return Stack.SecondOrDefault(); } }

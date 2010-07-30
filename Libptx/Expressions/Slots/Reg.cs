@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Common.Names;
 using Type=Libptx.Common.Types.Type;
@@ -39,6 +40,9 @@ namespace Libptx.Expressions.Slots
 
             set { _alignment = value; }
         }
+
+        protected override SoftwareIsa CustomVersion { get { return Type.Version; } }
+        protected override HardwareIsa CustomTarget { get { return Type.Target; } }
 
         protected override void CustomValidate()
         {

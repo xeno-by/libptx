@@ -7,7 +7,7 @@ using XenoGears.Assertions;
 using XenoGears.Collections.Lists;
 using XenoGears.Functional;
 
-namespace Libptx
+namespace Libptx.Functions
 {
     [DebuggerNonUserCode]
     public class Params : BaseList<Var>

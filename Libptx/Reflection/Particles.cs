@@ -66,12 +66,12 @@ namespace Libptx.Reflection
             return particles == null ? null : particles.Select(pcl => pcl.Signature).ToReadOnly();
         }
 
-        public static SoftwareIsa EigenVersion(this Object obj)
+        public static SoftwareIsa Version(this Object obj)
         {
             var atom = obj as Atom;
             if (atom != null)
             {
-                return atom.EigenVersion;
+                return atom.Version;
             }
             else
             {
@@ -81,17 +81,12 @@ namespace Libptx.Reflection
             }
         }
 
-        public static SoftwareIsa VersionRecursive(this Object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static HardwareIsa EigenTarget(this Object obj)
+        public static HardwareIsa Target(this Object obj)
         {
             var atom = obj as Atom;
             if (atom != null)
             {
-                return atom.EigenTarget;
+                return atom.Target;
             }
             else
             {
@@ -99,11 +94,6 @@ namespace Libptx.Reflection
                 if (particles == null) return 0;
                 return particles.Select(pcl => pcl.Target).Distinct().SingleOrDefault();
             }
-        }
-
-        public static SoftwareIsa TargetRecursive(this Object obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }
