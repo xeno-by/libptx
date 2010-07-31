@@ -33,15 +33,32 @@ namespace Libptx.Common.Contexts
             }
         }
 
-        public StringBuilder Buf { get; private set; }
-        public DelayedWriter Writer { get; private set; }
-
         public RenderPtxContext(Module module)
             : base(module)
         {
             Buf = new StringBuilder();
             var core = new StringWriter(Buf);
             Writer = core.Indented().Delayed();
+        }
+
+        private StringBuilder Buf { get; set; }
+        public String Result { get { Writer.IsDelayed.AssertFalse(); return Buf.ToString(); } }
+        public DelayedWriter Writer { get; private set; }
+
+        public IDisposable OverrideBuf(StringBuilder new_buf)
+        {
+            var old_buf = Buf;
+            var old_writer = Writer;
+
+            Buf = new_buf;
+            var new_writer = new StringWriter(Buf);
+            Writer = new_writer.Indented().Delayed();
+
+            return new DisposableAction(() =>
+            {
+                Buf = old_buf;
+                Writer = old_writer;
+            });
         }
     }
 }

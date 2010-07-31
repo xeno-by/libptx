@@ -82,31 +82,15 @@ namespace Libptx.Functions
 
         protected override void RenderPtx()
         {
+            Params.ForEach(p => p.PeekRenderPtx());
             writer.Write(".entry {0}", Name);
-
-            var nontrivial_tuning = Tuning.Version > SoftwareIsa.PTX_10;
-            var nonempty_pragmas = Pragmas.IsNotEmpty();
-            if (Params.IsEmpty())
-            {
-                if (nontrivial_tuning) writer.WriteLine();
-                Tuning.RenderPtx();
-
-                if (nonempty_pragmas) writer.WriteLine();
-                Pragmas.ForEach(pragma => pragma.RenderPtx());
-            }
-            else
-            {
-                // todo. now I've got no idea how to specify pragmas/tuning directives when params ain't empty
-                if (nontrivial_tuning || nonempty_pragmas) throw AssertionHelper.Fail();
-            }
 
             // For PTX ISA version 1.4 and later, parameter variables are declared in the kernel
             // parameter list. For PTX ISA versions 1.0 through 1.3, parameter variables are
             // declared in the kernel body.
             if (ctx.Version >= SoftwareIsa.PTX_14)
             {
-                if (Params.IsEmpty()) writer.WriteLine("()");
-                else
+                if (Params.IsNotEmpty())
                 {
                     writer.WriteLine(" (");
                     indented.Indent++;
@@ -126,6 +110,14 @@ namespace Libptx.Functions
                 writer.WriteLine();
             }
 
+            var nontrivial_tuning = Tuning.Version > SoftwareIsa.PTX_10;
+            if (nontrivial_tuning) writer.WriteLine();
+            Tuning.RenderPtx();
+
+            var nonempty_pragmas = Pragmas.IsNotEmpty();
+            if (nonempty_pragmas) writer.WriteLine();
+            Pragmas.ForEach(pragma => pragma.RenderPtx());
+
             writer.Delay(() =>
             {
                 String curr_prefix = null; int curr_cnt = 0, curr_max = -1;
@@ -139,7 +131,7 @@ namespace Libptx.Functions
                 var regs = ctx.VisitedExprs.OfType<Reg>().OrderBy(reg => reg.Name).ToReadOnly();
                 regs.ForEach(reg =>
                 {
-                    var decl = reg.RunRenderPtx();
+                    var decl = reg.PeekRenderPtx();
                     var m = decl.AssertParse(@"^(?<prefix>.*?)(?<index>\d*)$");
                     var prefix = m["prefix"];
                     var index = m["index"].IsEmpty() ? -1 : int.Parse(m["index"]);
@@ -211,7 +203,7 @@ namespace Libptx.Functions
 
         public override String ToString()
         {
-            return String.Format(".entry {0} ({1})", Name, Params.Select(p => p.RunRenderPtx()).StringJoin());
+            return String.Format(".entry {0} ({1})", Name, Params.Select(p => p.PeekRenderPtx()).StringJoin());
         }
     }
 }

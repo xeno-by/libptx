@@ -71,7 +71,7 @@ namespace Libptx.Expressions.Slots
                 writer.Write(".reg ");
                 if (_alignment != 0) writer.Write(".align " + Alignment + " ");
 
-                var t = Type.RunRenderPtx();
+                var t = Type.PeekRenderPtx();
                 var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("["));
                 var indices = t.IndexOf("[") == -1 ? null : t.Slice(t.IndexOf("["));
                 writer.Write(".{0} {1}{2}", el, Name, indices);

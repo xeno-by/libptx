@@ -79,13 +79,7 @@ namespace Libptx.Common
 
         public override String ToString()
         {
-            var overriden = new RenderPtxContext(null);
-            using (RenderPtxContext.Push(overriden))
-            {
-                this.RenderPtx();
-                var ptx = overriden.Buf.ToString();
-                return ptx;
-            }
+            return this.PeekRenderPtx();
         }
 
         #region Enumeration values => Static properties

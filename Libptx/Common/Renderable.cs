@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
 using Libptx.Common.Contexts;
 using XenoGears.Assertions;
 
@@ -43,35 +45,38 @@ namespace Libptx.Common
             }
         }
 
-        public static String RunRenderPtx(this Renderable renderable)
+        public static String PeekRenderPtx(this Renderable renderable)
         {
-            return RunRenderPtx(renderable, RenderPtxContext.Current);
+            return PeekRenderPtx(renderable, RenderPtxContext.Current);
         }
 
-        public static String RunRenderPtx(this Renderable renderable, Module ctx)
+        public static String PeekRenderPtx(this Renderable renderable, Module ctx)
         {
             var curr = RenderPtxContext.Current;
             if (curr != null && curr.Module == ctx)
             {
-                return RunRenderPtx(renderable);
+                return PeekRenderPtx(renderable);
             }
             else
             {
-                return RunRenderPtx(renderable, new RenderPtxContext(ctx));
+                return PeekRenderPtx(renderable, new RenderPtxContext(ctx));
             }
         }
 
-        public static String RunRenderPtx(this Renderable renderable, RenderPtxContext ctx)
+        public static String PeekRenderPtx(this Renderable renderable, RenderPtxContext ctx)
         {
             if (renderable == null) return null;
-            if (ctx == null) return RunRenderPtx(renderable);
+            if (ctx == null) return PeekRenderPtx(renderable);
 
-            var skip = ctx.Buf.Length;
             using (RenderPtxContext.Push(ctx))
             {
-                renderable.RenderPtx(ctx);
-                var ptx = ctx.Buf.ToString(skip, ctx.Buf.Length - skip);
-                return ptx;
+                var buf = new StringBuilder();
+                using (ctx.OverrideBuf(buf))
+                {
+                    renderable.RenderPtx(ctx);
+                    var ptx = ctx.Result;
+                    return ptx;
+                }
             }
         }
 
@@ -104,41 +109,38 @@ namespace Libptx.Common
             }
         }
 
-        public static byte[] RunRenderCubin(this Renderable renderable)
+        public static byte[] PeekRenderCubin(this Renderable renderable)
         {
-            return RunRenderCubin(renderable, RenderCubinContext.Current);
+            return PeekRenderCubin(renderable, RenderCubinContext.Current);
         }
 
-        public static byte[] RunRenderCubin(this Renderable renderable, Module ctx)
+        public static byte[] PeekRenderCubin(this Renderable renderable, Module ctx)
         {
             var curr = RenderCubinContext.Current;
             if (curr != null && curr.Module == ctx)
             {
-                return RunRenderCubin(renderable);
+                return PeekRenderCubin(renderable);
             }
             else
             {
-                return RunRenderCubin(renderable, new RenderCubinContext(ctx));
+                return PeekRenderCubin(renderable, new RenderCubinContext(ctx));
             }
         }
 
-        public static byte[] RunRenderCubin(this Renderable renderable, RenderCubinContext ctx)
+        public static byte[] PeekRenderCubin(this Renderable renderable, RenderCubinContext ctx)
         {
             if (renderable == null) return null;
-            if (ctx == null) return RunRenderCubin(renderable);
+            if (ctx == null) return PeekRenderCubin(renderable);
 
-            var skip = (int)ctx.Buf.Length;
-            var pos = ctx.Buf.Position;
             using (RenderCubinContext.Push(ctx))
             {
-                renderable.RenderCubin(ctx);
-
-                var cnt = ctx.Buf.Position;
-                var cubin = new byte[cnt - pos];
-                var read = ctx.Buf.Read(cubin, skip, cubin.Length);
-                (read == cubin.Length).AssertTrue();
-
-                return cubin;
+                var buf = new MemoryStream();
+                using (ctx.OverrideBuf(buf))
+                {
+                    renderable.RenderCubin(ctx);
+                    var cubin = ctx.Result;
+                    return cubin;
+                }
             }
         }
     }

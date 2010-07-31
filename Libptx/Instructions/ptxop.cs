@@ -96,7 +96,7 @@ namespace Libptx.Instructions
             buf.Append(meta.Affixes.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(", "));
 
             if (meta.Operands.IsNotEmpty()) buf.Append(" ");
-            buf.Append(meta.Operands.Where(o => o != null).Select(o => o.RunRenderPtx()).StringJoin(", "));
+            buf.Append(meta.Operands.Where(o => o != null).Select(o => o.PeekRenderPtx()).StringJoin(", "));
 
             return buf.ToString();
         }

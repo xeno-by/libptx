@@ -31,14 +31,30 @@ namespace Libptx.Common.Contexts
             }
         }
 
-        public MemoryStream Buf { get; private set; }
-        public BinaryWriter Writer { get; private set; }
-
         public RenderCubinContext(Module module)
             : base(module)
         {
             Buf = new MemoryStream();
             Writer = new BinaryWriter(Buf);
+        }
+
+        private MemoryStream Buf { get; set; }
+        public byte[] Result { get { return Buf.ToArray(); } }
+        public BinaryWriter Writer { get; private set; }
+
+        public IDisposable OverrideBuf(MemoryStream new_buf)
+        {
+            var old_buf = Buf;
+            var old_writer = Writer;
+
+            Buf = new_buf;
+            Writer = new BinaryWriter(Buf);
+
+            return new DisposableAction(() =>
+            {
+                Buf = old_buf;
+                Writer = old_writer;
+            });
         }
     }
 }

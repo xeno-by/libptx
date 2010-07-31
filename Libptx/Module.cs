@@ -159,7 +159,7 @@ namespace Libptx
             }
 
             ctx.Writer.Commit();
-            return ctx.Buf.ToString();
+            return ctx.Result;
         }
 
         public byte[] RenderCubin()

@@ -116,7 +116,7 @@ namespace Libptx.Expressions.Slots
                     writer.Write("." + Space.Signature() + " ");
                     if (_alignment != 0) writer.Write(".align " + Alignment + " ");
 
-                    var t = Type.RunRenderPtx();
+                    var t = Type.PeekRenderPtx();
                     var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("[") - 1);
                     var indices = t.IndexOf("[") == -1 ? null : t.Slice(t.IndexOf("["));
                     if (Init != null) indices = (Type.Dims ?? new int[0]).Count().Times("[]");

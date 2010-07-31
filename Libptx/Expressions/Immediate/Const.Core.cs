@@ -73,7 +73,7 @@ namespace Libptx.Expressions.Immediate
             else if (Value is Address)
             {
                 var v_addr = (Address)Value;
-                var s_addr = v_addr.RunRenderPtx();
+                var s_addr = v_addr.PeekRenderPtx();
                 if (s_addr.StartsWith("[")) s_addr = s_addr.Slice(1);
                 if (s_addr.EndsWith("]")) s_addr = s_addr.Slice(-1);
                 writer.Write(s_addr);
