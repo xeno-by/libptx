@@ -202,9 +202,8 @@
     <Compile Include="Instructions\ptxoptype.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\bar_arrive.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\atom.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red_u32.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\bar_sync.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red_pred.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\bar_red.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\vote_pred.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\red.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\membar.cs" />

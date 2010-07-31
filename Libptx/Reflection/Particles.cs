@@ -38,7 +38,16 @@ namespace Libptx.Reflection
                 var cap = obj as ICustomAttributeProvider;
                 if (cap != null)
                 {
-                    var pcls = cap.Attrs<ParticleAttribute>();
+                    var pcls = cap.Attrs<ParticleAttribute>().ToReadOnly();
+                    pcls = pcls ?? Seq.Empty<ParticleAttribute>().ToReadOnly();
+                    
+                    pcls.ForEach(pcl =>
+                    {
+                        var mi = obj as MemberInfo;
+                        var name = mi == null ? null : mi.Name;
+                        pcl.Signature = pcl.Signature ?? name;
+                    });
+
                     return pcls.ToReadOnly();
                 }
 

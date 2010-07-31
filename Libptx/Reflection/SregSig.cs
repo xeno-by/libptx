@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Expressions.Sregs.Annotations;
+using XenoGears.Strings;
 
 namespace Libptx.Reflection
 {
@@ -22,8 +23,13 @@ namespace Libptx.Reflection
             Decl = decl;
             Meta = meta;
 
-            Name = meta.Signature;
+            Name = meta.Signature ?? decl.Name;
             Type = meta.Type;
+        }
+
+        public override String ToString()
+        {
+            return String.Format("{0} of type {1}", Name, Type.GetCSharpRef(ToCSharpOptions.Terse));
         }
     }
 }

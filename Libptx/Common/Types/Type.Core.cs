@@ -80,7 +80,7 @@ namespace Libptx.Common.Types
         }
 
         // public static implicit operator TypeName(Type t) { return t == null ? 0 : t.is_scalar() ? t.Name : 0; }
-        public static implicit operator Type(TypeName t) { return new Type { Name = t, Mod = TypeMod.Scalar }; }
+        public static implicit operator Type(TypeName t) { return t == 0 ? null : new Type { Name = t, Mod = TypeMod.Scalar }; }
 
         public ClrType ClrType { get { return (ClrType)this; } }
         public static implicit operator ClrType(Type t)

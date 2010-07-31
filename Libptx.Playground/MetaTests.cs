@@ -62,6 +62,7 @@ namespace Libptx.Playground
             types.ForEach(t => ops.SelectMany(op => op.Signatures()).Where(sig => sig.Match(@"\{\." + t).Success).ForEach(sig => Console.WriteLine(sig)));
 
             // assert-test #3: verify that ptxop sigs get parsed correctly
+            var sigs = ops.ToDictionary(op => op, op => op.PtxopSigs());
             throw new NotImplementedException();
         }
 

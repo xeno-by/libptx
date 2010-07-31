@@ -9,7 +9,8 @@ using XenoGears.Functional;
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    [Ptxop("bar.sync a{, b};")]
+    [Ptxop("bar.sync a;")]
+    [Ptxop("bar.sync a, b;")]
     [DebuggerNonUserCode]
     public partial class bar_sync : ptxop
     {

@@ -7,7 +7,7 @@ namespace Libptx.Instructions
         and,
         atom,
         bar_arrive,
-        bar_red_pred,
+        bar_red,
         bar_red_u32,
         bar_sync,
         bfe,
@@ -134,17 +134,9 @@ namespace Libptx.Instructions.SynchronizationAndCommunication
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    public partial class bar_red_pred
+    public partial class bar_red
     {
-        public override ptxoptype discr { get { return ptxoptype.bar_red_pred; } }
-    }
-}
-
-namespace Libptx.Instructions.SynchronizationAndCommunication
-{
-    public partial class bar_red_u32
-    {
-        public override ptxoptype discr { get { return ptxoptype.bar_red_u32; } }
+        public override ptxoptype discr { get { return ptxoptype.bar_red; } }
     }
 }
 

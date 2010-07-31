@@ -14,5 +14,6 @@ namespace Libptx.Common.Enumerations
         [Affix("exch")] exch,
         [Affix("inc")] inc,
         [Affix("dec")] dec,
+        [Affix("popc")] popc,
     }
 }

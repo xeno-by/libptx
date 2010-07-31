@@ -184,6 +184,7 @@ namespace Libptx.Common
         protected static op exch { get { return op.exch; } }
         protected static op inc { get { return op.inc; } }
         protected static op dec { get { return op.dec; } }
+        protected static op popc { get { return op.popc; } }
 
         protected static prmtm f4e { get { return prmtm.f4e; } }
         protected static prmtm b4e { get { return prmtm.b4e; } }
