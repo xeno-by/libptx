@@ -18,7 +18,8 @@ namespace Libptx.Common
     {
         public static void RenderPtx(this Renderable renderable)
         {
-            RenderPtx(renderable, RenderPtxContext.Current);
+            var ctx = RenderPtxContext.Current ?? new RenderPtxContext(null);
+            RenderPtx(renderable, ctx);
         }
 
         public static void RenderPtx(this Renderable renderable, Module ctx)
@@ -47,7 +48,8 @@ namespace Libptx.Common
 
         public static String PeekRenderPtx(this Renderable renderable)
         {
-            return PeekRenderPtx(renderable, RenderPtxContext.Current);
+            var ctx = RenderPtxContext.Current ?? new RenderPtxContext(null);
+            return PeekRenderPtx(renderable, ctx);
         }
 
         public static String PeekRenderPtx(this Renderable renderable, Module ctx)
@@ -82,7 +84,8 @@ namespace Libptx.Common
 
         public static void RenderCubin(this Renderable renderable)
         {
-            RenderCubin(renderable, RenderCubinContext.Current);
+            var ctx = RenderCubinContext.Current ?? new RenderCubinContext(null);
+            RenderCubin(renderable, ctx);
         }
 
         public static void RenderCubin(this Renderable renderable, Module ctx)
@@ -111,7 +114,8 @@ namespace Libptx.Common
 
         public static byte[] PeekRenderCubin(this Renderable renderable)
         {
-            return PeekRenderCubin(renderable, RenderCubinContext.Current);
+            var ctx = RenderCubinContext.Current ?? new RenderCubinContext(null);
+            return PeekRenderCubin(renderable, ctx);
         }
 
         public static byte[] PeekRenderCubin(this Renderable renderable, Module ctx)

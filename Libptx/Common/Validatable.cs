@@ -13,7 +13,8 @@ namespace Libptx.Common
     {
         public static void Validate(this Validatable validatable)
         {
-            Validate(validatable, ValidationContext.Current);
+            var ctx = ValidationContext.Current ?? new ValidationContext(null);
+            Validate(validatable, ctx);
         }
 
         public static void Validate(this Validatable validatable, Module ctx)
