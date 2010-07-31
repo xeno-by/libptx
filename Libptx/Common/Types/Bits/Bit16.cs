@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 
 namespace Libptx.Common.Types.Bits
 {
+    // todo. convenient inits for bX constants (just gief implicit/explicit casts for scalar and vector versions)
+
     [DebuggerNonUserCode]
     public struct Bit16
     {

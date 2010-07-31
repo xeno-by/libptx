@@ -259,9 +259,6 @@
     <Compile Include="Common\Performance\Tuning.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Expressions\Sregs\Registry\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
