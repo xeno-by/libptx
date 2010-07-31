@@ -8,7 +8,22 @@ using XenoGears.Strings;
 namespace Libptx.Playground
 {
     [TestFixture]
-    public class BasePtxTests : XenoGears.Playground.Framework.BaseTests
+    public abstract class BaseTests : XenoGears.Playground.Framework.BaseTests
+    {
+        [Test, Category("Hot")]
+        public void matmul()
+        {
+            matmul1();
+            matmul2();
+        }
+
+        private void matmul1() { matmul_impl(); }
+        private void matmul2() { matmul_impl(); }
+        protected abstract void matmul_impl();
+    }
+
+    [TestFixture]
+    public abstract class BasePtxTests : BaseTests
     {
         protected override String ReferenceNamespace()
         {
@@ -50,7 +65,7 @@ namespace Libptx.Playground
     }
 
     [TestFixture]
-    public class BaseCubinTests : XenoGears.Playground.Framework.BaseTests
+    public abstract class BaseCubinTests : BaseTests
     {
         protected override String ReferenceNamespace()
         {

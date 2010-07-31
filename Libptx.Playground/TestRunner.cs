@@ -9,7 +9,7 @@ namespace Libptx.Playground
         {
             // see more details at http://www.nunit.org/index.php?p=consoleCommandLine&r=2.5.5
             var nunitArgs = new List<String>();
-            nunitArgs.Add("/run:Libptx.Playground");
+            nunitArgs.Add("/run:Libptx.Playground.Render.Ptx");
             nunitArgs.Add("/include:Hot");
             nunitArgs.Add("/domain:None");
             nunitArgs.Add("/noshadow");
