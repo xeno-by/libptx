@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Reflection;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions;
 using Libptx.Instructions;
@@ -30,11 +31,18 @@ namespace Libptx.Reflection
             // todo. implement Sig (i.e. find out the exact Sig that corresponds to current state of ptxop)
             Opcode = ptxop.PtxopSigs().AssertFirst().Opcode;
 
+            Func<Object, PropertyInfo, Object> get_value = (o, p) =>
+            {
+                var v = p.GetValue(o, null);
+                var is_default = Equals(v, p.PropertyType.IsValueType ? Activator.CreateInstance(p.PropertyType) : null);
+                return is_default ? null : v;
+            };
+
             // todo. when Sig is implemented, use only such properties and in such order that are mentioned in Sig
             var props = ptxop.GetType().GetProperties(BF.PublicInstance);
-            Mods = props.Where(p => p.HasAttr<ModAttribute>()).Select(p => p.GetValue(ptxop, null)).ToReadOnly();
-            Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).Select(p => p.GetValue(ptxop, null)).ToReadOnly();
-            Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).Select(p => p.GetValue(ptxop, null).AssertCast<Expression>()).ToReadOnly();
+            Mods = props.Where(p => p.HasAttr<ModAttribute>()).Select(p => get_value(ptxop, p)).ToReadOnly();
+            Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).Select(p => get_value(ptxop, p)).ToReadOnly();
+            Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).Select(p => get_value(ptxop, p).AssertCast<Expression>()).ToReadOnly();
         }
     }
 }
