@@ -16,11 +16,44 @@ namespace Libptx.Common.Performance
         [Affix("minnctapersm", SoftwareIsa.PTX_20)] public int Minnctapersm { get; set; }
         [Affix("maxnctapersm", SoftwareIsa.PTX_13)] public int Maxnctapersm { get; set; }
 
+        public Tuning()
+        {
+            Maxnreg = 0;
+            Maxntid = new dim3(0, 0, 0);
+            Reqntid = new dim3(0, 0, 0);
+            Minnctapersm = 0;
+            Maxnctapersm = 0;
+        }
+
+        public bool IsTrivial
+        {
+            get
+            {
+                var os_trivial = true;
+                os_trivial &= Maxnreg == 0;
+                os_trivial &= Maxntid == new dim3(0, 0, 0);
+                os_trivial &= Reqntid == new dim3(0, 0, 0);
+                os_trivial &= Minnctapersm == 0;
+                os_trivial &= Maxnctapersm == 0;
+                return os_trivial;
+            }
+        }
+
+        public bool IsNotTrivial
+        {
+            get { return !IsTrivial; }
+        }
+
         protected override void CustomValidate()
         {
             (Maxnreg >= 0).AssertTrue();
+            (Maxntid == new dim3(0, 0, 0) || Maxntid >= new dim3(1, 1, 1)).AssertTrue();
+            (Reqntid == new dim3(0, 0, 0) || Reqntid >= new dim3(1, 1, 1)).AssertTrue();
             (Minnctapersm >= 0).AssertTrue();
             (Maxnctapersm >= 0).AssertTrue();
+
+            (Maxntid != new dim3(0, 0, 0) && Reqntid != new dim3(0, 0, 0)).AssertFalse();
+            (Minnctapersm != 0 && Maxnctapersm != 0).AssertImplies(Minnctapersm <= Maxnctapersm);
         }
 
         protected override void RenderPtx()
