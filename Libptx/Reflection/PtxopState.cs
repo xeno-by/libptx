@@ -6,6 +6,7 @@ using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions;
 using Libptx.Instructions;
 using XenoGears.Assertions;
+using XenoGears.Collections.Dictionaries;
 using XenoGears.Reflection.Shortcuts;
 using System.Linq;
 using XenoGears.Reflection.Attributes;
@@ -21,9 +22,9 @@ namespace Libptx.Reflection
 
         public Expression Guard { get; private set; }
         public String Opcode { get; private set; }
-        public ReadOnlyCollection<Object> Mods { get; private set; }
-        public ReadOnlyCollection<Object> Affixes { get; private set; }
-        public ReadOnlyCollection<Expression> Operands { get; private set; }
+        public OrderedDictionary<PropertyInfo, Object> Mods { get; private set; }
+        public OrderedDictionary<PropertyInfo, Object> Affixes { get; private set; }
+        public OrderedDictionary<PropertyInfo, Expression> Operands { get; private set; }
 
         internal PtxopState(ptxop ptxop)
         {
@@ -42,9 +43,9 @@ namespace Libptx.Reflection
 
             // todo. when Sig is implemented, use only such properties and in such order that are mentioned in Sig
             var props = ptxop.GetType().GetProperties(BF.PublicInstance).Where(p => p.Name != "Guard");
-            Mods = props.Where(p => p.HasAttr<ModAttribute>()).Select(p => get_value(ptxop, p)).ToReadOnly();
-            Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).Select(p => get_value(ptxop, p)).ToReadOnly();
-            Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).Select(p => get_value(ptxop, p).AssertCast<Expression>()).ToReadOnly();
+            Mods = props.Where(p => p.HasAttr<ModAttribute>()).ToOrderedDictionary(p => p, p => get_value(ptxop, p));
+            Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).ToOrderedDictionary(p => p, p => get_value(ptxop, p));
+            Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).ToOrderedDictionary(p => p, p => get_value(ptxop, p).AssertCast<Expression>());
         }
     }
 }

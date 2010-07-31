@@ -148,7 +148,7 @@ namespace Libptx.Functions
                     }
                     else
                     {
-                        if (curr_max != -1) flush_curr();
+                        if (curr_prefix != null) flush_curr();
                         curr_prefix = prefix;
                         curr_cnt = 1;
                         curr_max = index;

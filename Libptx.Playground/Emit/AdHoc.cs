@@ -71,7 +71,7 @@ namespace Libptx.Playground.Emit
             ptx.Add(new ld{ss = space.param, type = u32, d = a_height, a = a + 4});
             ptx.Add(new setp{cmpop = cmp.le, type = u32, p = p(6), a = a_height, b = row});
             ptx.Add(new setp{cmpop = cmp.le, type = u32, p = p(7), a = b_width, b = col});
-            ptx.Add(new or{type = pred, d = p(1), a = p(6), b = p(8)});
+            ptx.Add(new or{type = pred, d = p(1), a = p(6), b = p(7)});
             ptx.Add(new bra{Guard = p(1), tgt = exit});
 
             ptx.Add(new Comment{Text = Environment.NewLine});
@@ -86,7 +86,7 @@ namespace Libptx.Playground.Emit
             ptx.Add(new bra{Guard = p(8).mod(Mod.Not), tgt = after_loop});
 
             ptx.Add(new Comment{Text = Environment.NewLine});
-            ptx.Add(new Comment{Text = "Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col])"});
+            ptx.Add(new Comment{Text = "Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];"});
             ptx.Add(new ld{ss = space.param, type = u32, d = a_raw, a = a + 8});
             ptx.Add(new mul{mode = mulm.lo, type = u32, d = r(18), a = a_width, b = row});
             ptx.Add(new mul{mode = mulm.lo, type = u32, d = a_offset_lo, a = r(18), b = (Const)4});
@@ -100,7 +100,7 @@ namespace Libptx.Playground.Emit
             ptx.Add(new mul{mode = mulm.lo, type = u32, d = b_offset_stride, a = b_width, b = (Const)4});
 
             ptx.Add(new Comment{Text = Environment.NewLine});
-            ptx.Add(new Comment{Text = "Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col]"});
+            ptx.Add(new Comment{Text = "Cvalue += A.elements[row * A.width + dim] * B.elements[dim * B.width + col];"});
             ptx.Add(loop_body);
             ptx.Add(new ld{ss = space.global, type = f32, d = f(2), a = a_offset});
             ptx.Add(new ld{ss = space.global, type = f32, d = f(3), a = b_offset});

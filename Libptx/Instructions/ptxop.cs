@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Libcuda.Versions;
 using Libptx.Common;
@@ -93,12 +94,28 @@ namespace Libptx.Instructions
 
             if (state.Guard != null) buf.AppendFormat("@{0} ", state.Guard.PeekRenderPtx());
             buf.Append(state.Opcode);
-            buf.Append(state.Mods.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(""));
-            buf.Append(state.Affixes.Where(o => o != null).Select(o => "." + (o.Signature() ?? o.ToInvariantString())).StringJoin(""));
+
+            Func<PropertyInfo, Object, String> render = (p, v) =>
+            {
+                if (v == null) return null;
+                if (p.PropertyType == typeof(bool))
+                {
+                    var v_bool = v.AssertCast<bool>();
+                    return v_bool ? p.Signature() : null;
+                }
+                else
+                {
+                    var v_sig = v.Signature();
+                    return v_sig ?? v.ToInvariantString();
+                }
+            };
+
+            buf.Append(state.Mods.Select(kvp => render(kvp.Key, kvp.Value)).Where(s => s != null).StringJoin(""));
+            buf.Append(state.Affixes.Select(kvp => "." + render(kvp.Key, kvp.Value)).Where(s => s != ".").StringJoin(""));
             buf.Replace("..", "."); // hack that's necessary to correctly work with type affixes
 
             if (state.Operands.IsNotEmpty()) buf.Append(" ");
-            buf.Append(state.Operands.Where(o => o != null).Select(o => o.PeekRenderPtx()).StringJoin(", "));
+            buf.Append(state.Operands.Values.Where(o => o != null).Select(o => o.PeekRenderPtx()).StringJoin(", "));
 
             return buf.ToString();
         }

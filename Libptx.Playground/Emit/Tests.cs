@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using XenoGears.Playground.Framework;
+using XenoGears.Functional;
 
 namespace Libptx.Playground.Emit
 {
@@ -9,15 +10,18 @@ namespace Libptx.Playground.Emit
         [Test]
         public void matmul()
         {
-            var adhoc = AdHoc.matmul();
-            adhoc.Validate();
-            var s_adhoc = adhoc.RenderPtx();
+            2.TimesDo(() =>
+            {
+                var adhoc = AdHoc.matmul();
+                adhoc.Validate();
+                var s_adhoc = adhoc.RenderPtx();
 
-            var edsl = Edsl.matmul();
-            edsl.Validate();
-            var s_edsl = adhoc.RenderPtx();
+                var edsl = Edsl.matmul();
+                edsl.Validate();
+                var s_edsl = adhoc.RenderPtx();
 
-            VerifyResult(s_adhoc, s_edsl);
+                VerifyResult(s_adhoc, s_edsl);
+            });
         }
     }
 }

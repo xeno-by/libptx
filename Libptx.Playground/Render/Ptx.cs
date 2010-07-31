@@ -1,5 +1,6 @@
 ﻿using Libptx.Playground.Emit;
 using NUnit.Framework;
+using XenoGears.Functional;
 
 namespace Libptx.Playground.Render
 {
@@ -9,10 +10,13 @@ namespace Libptx.Playground.Render
         [Test, Category("Hot")]
         public void matmul()
         {
-            var module = AdHoc.matmul();
-            module.Validate();
-            var ptx = module.RenderPtx();
-            VerifyResult(ptx);
+            2.TimesDo(() =>
+            {
+                var module = AdHoc.matmul();
+                module.Validate();
+                var ptx = module.RenderPtx();
+                VerifyResult(ptx);
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using XenoGears.Functional;
 
 namespace Libptx.Playground.Parse
 {
@@ -8,11 +9,14 @@ namespace Libptx.Playground.Parse
         [Test]
         public void matmul()
         {
-            var expected = ReferenceText();
-            var module = expected.ParsePtx();
-            module.Validate();
-            var actual = module.RenderPtx();
-            VerifyResult(expected, actual);
+            2.TimesDo(() =>
+            {
+                var expected = ReferenceText();
+                var module = expected.ParsePtx();
+                module.Validate();
+                var actual = module.RenderPtx();
+                VerifyResult(expected, actual);
+            });
         }
     }
 }
