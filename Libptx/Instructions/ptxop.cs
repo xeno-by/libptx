@@ -89,14 +89,16 @@ namespace Libptx.Instructions
         private String core_render_ptx()
         {
             var buf = new StringBuilder();
-            var meta = this.PtxopState();
+            var state = this.PtxopState();
 
-            buf.Append(meta.Opcode);
-            buf.Append(meta.Mods.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(""));
-            buf.Append(meta.Affixes.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(", "));
+            if (state.Guard != null) buf.AppendFormat("@{0} ", state.Guard.PeekRenderPtx());
+            buf.Append(state.Opcode);
+            buf.Append(state.Mods.Where(o => o != null).Select(o => o.Signature() ?? o.ToInvariantString()).StringJoin(""));
+            buf.Append(state.Affixes.Where(o => o != null).Select(o => "." + (o.Signature() ?? o.ToInvariantString())).StringJoin(""));
+            buf.Replace("..", "."); // hack that's necessary to correctly work with type affixes
 
-            if (meta.Operands.IsNotEmpty()) buf.Append(" ");
-            buf.Append(meta.Operands.Where(o => o != null).Select(o => o.PeekRenderPtx()).StringJoin(", "));
+            if (state.Operands.IsNotEmpty()) buf.Append(" ");
+            buf.Append(state.Operands.Where(o => o != null).Select(o => o.PeekRenderPtx()).StringJoin(", "));
 
             return buf.ToString();
         }

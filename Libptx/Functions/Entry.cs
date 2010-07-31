@@ -82,7 +82,6 @@ namespace Libptx.Functions
 
         protected override void RenderPtx()
         {
-            Params.ForEach(p => p.PeekRenderPtx());
             writer.Write(".entry {0}", Name);
 
             // For PTX ISA version 1.4 and later, parameter variables are declared in the kernel
@@ -93,7 +92,7 @@ namespace Libptx.Functions
                 if (Params.IsNotEmpty())
                 {
                     writer.WriteLine(" (");
-                    indented.Indent++;
+                    writer.Indent++;
 
                     Params.ForEach((p, i) =>
                     {
@@ -101,7 +100,7 @@ namespace Libptx.Functions
                         p.RenderPtx();
                     });
 
-                    indented.Indent--;
+                    writer.Indent--;
                     writer.WriteLine(")");
                 }
             }
@@ -118,8 +117,13 @@ namespace Libptx.Functions
             if (nonempty_pragmas) writer.WriteLine();
             Pragmas.ForEach(pragma => pragma.RenderPtx());
 
-            writer.Delay(() =>
+            writer.WriteLine("{");
+            writer.Indent++;
+
+            delay_render(() =>
             {
+                writer.Indent++;
+
                 String curr_prefix = null; int curr_cnt = 0, curr_max = -1;
                 Action flush_curr = () =>
                 {
@@ -162,19 +166,18 @@ namespace Libptx.Functions
                     @var.RenderPtx();
                     writer.WriteLine(";");
                 });
-            });
 
-            writer.WriteLine("{");
-            indented.Indent++;
+                writer.Indent--;
+            });
 
             foreach (var stmt in Stmts)
             {
                 if (stmt is Label)
                 {
-                    indented.Indent--;
+                    writer.Indent--;
                     stmt.RenderPtx();
                     writer.WriteLine(":");
-                    indented.Indent++;
+                    writer.Indent++;
                 }
                 else if (stmt is Instruction)
                 {
@@ -184,7 +187,13 @@ namespace Libptx.Functions
                 else if (stmt is Comment)
                 {
                     stmt.RenderPtx();
-                    writer.WriteLine();
+
+                    var cmt = (Comment)stmt;
+                    var txt = cmt.Text ?? String.Empty;
+                    if (!txt.EndsWith(Environment.NewLine))
+                    {
+                        writer.WriteLine();
+                    }
                 }
                 else
                 {
@@ -192,7 +201,7 @@ namespace Libptx.Functions
                 }
             }
 
-            indented.Indent--;
+            writer.Indent--;
             writer.WriteLine("}");
         }
 

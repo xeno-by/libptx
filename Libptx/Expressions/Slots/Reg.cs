@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Libcuda.Versions;
 using Libptx.Common;
 using Libptx.Common.Names;
+using Libptx.Statements;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Assertions;
 using XenoGears.Strings;
@@ -61,7 +62,7 @@ namespace Libptx.Expressions.Slots
         protected override void RenderPtx()
         {
             // this is a hack, tho a convenient one
-            var render_name = ctx.Parent is Expression;
+            var render_name = ctx.Parent is Expression || ctx.Parent is Instruction;
             if (render_name)
             {
                 writer.Write(Name);

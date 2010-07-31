@@ -22,8 +22,9 @@ namespace Libptx.Common
     public abstract class Atom : Validatable, Renderable
     {
         protected Context ctx { get { return (Context)ValidationContext.Current ?? (Context)RenderPtxContext.Current; } }
-        protected DelayedWriter writer { get { return RenderPtxContext.Current == null ? null : RenderPtxContext.Current.Writer; } }
-        protected IndentedWriter indented { get { return writer == null ? null : writer.InnerWriter.AssertCast<IndentedWriter>(); } }
+        protected IndentedWriter writer { get { return RenderPtxContext.Current == null ? null : RenderPtxContext.Current.Writer; } }
+        protected void delay_render(Action action) { RenderPtxContext.Current.DelayRender(action); }
+        protected void commit_render() { RenderPtxContext.Current.CommitRender(); }
 
         private IList<Comment> _comments = new List<Comment>();
         public IList<Comment> Comments

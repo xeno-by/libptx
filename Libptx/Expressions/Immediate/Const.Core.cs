@@ -87,62 +87,62 @@ namespace Libptx.Expressions.Immediate
                     if (v is sbyte)
                     {
                         var v_sbyte = (sbyte)v;
-                        writer.Write("{0} /* {1} */", v_sbyte.ToString("x2"), v_sbyte);
+                        writer.Write("0x{0}{1}", v_sbyte.ToString("x2"), v_sbyte < 16 ? "" : String.Format(" /* {0} */", v_sbyte));
                     }
                     else if (v is byte)
                     {
                         var v_byte = (byte)v;
-                        writer.Write("{0}U /* {1} */", v_byte.ToString("x2"), v_byte);
+                        writer.Write("0x{0}U{1}", v_byte.ToString("x2"), v_byte < 16 ? "" : String.Format(" /* {0} */", v_byte));
                     }
                     else if (v is short)
                     {
                         var v_short = (short)v;
-                        writer.Write("{0} /* {1} */", v_short.ToString("x4"), v_short);
+                        writer.Write("0x{0}{1}", v_short.ToString("x4"), v_short < 16 ? "" : String.Format(" /* {0} */", v_short));
                     }
                     else if (v is ushort)
                     {
                         var v_ushort = (ushort)v;
-                        writer.Write("{0}U /* {1} */", v_ushort.ToString("x4"), v_ushort);
+                        writer.Write("0x{0}U{1}", v_ushort.ToString("x4"), v_ushort < 16 ? "" : String.Format(" /* {0} */", v_ushort));
                     }
                     else if (v is int)
                     {
                         var v_int = (int)v;
-                        writer.Write("{0} /* {1} */", v_int.ToString("x8"), v_int);
+                        writer.Write("0x{0}{1}", v_int.ToString("x8"), v_int < 16 ? "" : String.Format(" /* {0} */", v_int));
                     }
                     else if (v is uint)
                     {
                         var v_uint = (uint)v;
-                        writer.Write("{0}U /* {1} */", v_uint.ToString("x8"), v_uint);
+                        writer.Write("0x{0}U{1}", v_uint.ToString("x8"), v_uint < 16 ? "" : String.Format(" /* {0} */", v_uint));
                     }
                     else if (v is long)
                     {
                         var v_long = (long)v;
-                        writer.Write("{0} /* {1} */", v_long.ToString("x16"), v_long);
+                        writer.Write("0x{0}{1}", v_long.ToString("x16"), v_long < 16 ? "" : String.Format(" /* {0} */", v_long));
                     }
                     else if (v is ulong)
                     {
                         var v_ulong = (ulong)v;
-                        writer.Write("{0}U /* {1} */", v_ulong.ToString("x16"), v_ulong);
+                        writer.Write("0x{0}U{1}", v_ulong.ToString("x16"), v_ulong < 16 ? "" : String.Format(" /* {0} */", v_ulong));
                     }
                     else if (v is Bit8)
                     {
                         var v_bit8 = (Bit8)v;
-                        writer.Write("{0}U", v_bit8.Raw.ToString("x2"), v_bit8);
+                        writer.Write("0x{0}U", v_bit8.Raw.ToString("x2"), v_bit8);
                     }
                     else if (v is Bit16)
                     {
                         var v_bit16 = (Bit16)v;
-                        writer.Write("{0}U", v_bit16.Raw.ToString("x4"), v_bit16);
+                        writer.Write("0x{0}U", v_bit16.Raw.ToString("x4"), v_bit16);
                     }
                     else if (v is Bit32)
                     {
                         var v_bit32 = (Bit32)v;
-                        writer.Write("{0}U", v_bit32.Raw.ToString("x8"), v_bit32);
+                        writer.Write("0x{0}U", v_bit32.Raw.ToString("x8"), v_bit32);
                     }
                     else if (v is Bit64)
                     {
                         var v_bit64 = (Bit64)v;
-                        writer.Write("{0}U", v_bit64.Raw.ToString("x16"), v_bit64);
+                        writer.Write("0x{0}U", v_bit64.Raw.ToString("x16"), v_bit64);
                     }
                     else if (v is float)
                     {

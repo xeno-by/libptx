@@ -19,6 +19,7 @@ namespace Libptx.Reflection
         public ptxop Ptxop { get; private set; }
         public PtxopSig Sig { get { throw new NotImplementedException(); } }
 
+        public Expression Guard { get; private set; }
         public String Opcode { get; private set; }
         public ReadOnlyCollection<Object> Mods { get; private set; }
         public ReadOnlyCollection<Object> Affixes { get; private set; }
@@ -27,6 +28,7 @@ namespace Libptx.Reflection
         internal PtxopState(ptxop ptxop)
         {
             Ptxop = ptxop;
+            Guard = ptxop.Guard;
 
             // todo. implement Sig (i.e. find out the exact Sig that corresponds to current state of ptxop)
             Opcode = ptxop.PtxopSigs().AssertFirst().Opcode;
@@ -39,7 +41,7 @@ namespace Libptx.Reflection
             };
 
             // todo. when Sig is implemented, use only such properties and in such order that are mentioned in Sig
-            var props = ptxop.GetType().GetProperties(BF.PublicInstance);
+            var props = ptxop.GetType().GetProperties(BF.PublicInstance).Where(p => p.Name != "Guard");
             Mods = props.Where(p => p.HasAttr<ModAttribute>()).Select(p => get_value(ptxop, p)).ToReadOnly();
             Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).Select(p => get_value(ptxop, p)).ToReadOnly();
             Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).Select(p => get_value(ptxop, p).AssertCast<Expression>()).ToReadOnly();

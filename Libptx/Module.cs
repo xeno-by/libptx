@@ -13,6 +13,7 @@ using Libptx.Expressions.Slots;
 using Libptx.Functions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
+using XenoGears.Strings.Writers;
 using Type = Libptx.Common.Types.Type;
 
 namespace Libptx
@@ -130,36 +131,35 @@ namespace Libptx
             var ctx = new RenderPtxContext(this);
             using (RenderPtxContext.Push(ctx))
             {
-                var writer = ctx.Writer;
                 Comments.ForEach(c => c.RenderPtx());
-                if (Comments.IsNotEmpty()) writer.WriteLine();
+                if (Comments.IsNotEmpty()) ctx.Writer.WriteLine();
 
-                writer.WriteLine(".version {0}.{1}", (int)Version / 10, (int)Version % 10);
-                writer.Write(".target sm_{0}", (int)Target);
-                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) writer.Write(", texmode_unified");
-                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) writer.Write(", texmode_independent");
-                if (DowngradeDoubles) writer.Write(", map_f64_to_f32");
-                writer.WriteLine();
+                ctx.Writer.WriteLine(".version {0}.{1}", (int)Version / 10, (int)Version % 10);
+                ctx.Writer.Write(".target sm_{0}", (int)Target);
+                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) ctx.Writer.Write(", texmode_unified");
+                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) ctx.Writer.Write(", texmode_independent");
+                if (DowngradeDoubles) ctx.Writer.Write(", map_f64_to_f32");
+                ctx.Writer.WriteLine();
 
-                if (Pragmas.IsNotEmpty()) writer.WriteLine();
+                if (Pragmas.IsNotEmpty()) ctx.Writer.WriteLine();
                 Pragmas.ForEach(p => p.RenderPtx());
 
-                writer.Delay(() =>
+                ctx.DelayRender(() =>
                 {
                     var opaques = ctx.VisitedExprs.OfType<Var>().Where(v => v.is_opaque()).ToReadOnly();
-                    if (opaques.IsNotEmpty()) writer.WriteLine();
+                    if (opaques.IsNotEmpty()) ctx.Writer.WriteLine();
                     opaques.ForEach(v => v.RenderPtx());
                 });
 
                 foreach (var entry in Entries)
                 {
-                    writer.WriteLine();
+                    ctx.Writer.WriteLine();
                     entry.RenderPtx();
                 }
-            }
 
-            ctx.Writer.Commit();
-            return ctx.Result;
+                ctx.CommitRender();
+                return ctx.Result;
+            }
         }
 
         public byte[] RenderCubin()

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using XenoGears.Strings.Writers;
@@ -37,26 +36,39 @@ namespace Libptx.Common.Contexts
             : base(module)
         {
             Buf = new StringBuilder();
-            var core = new StringWriter(Buf);
-            Writer = core.Indented().Delayed();
+            Delayed = Buf.Delayed();
+            Writer = Delayed.Indented();
         }
 
         private StringBuilder Buf { get; set; }
-        public String Result { get { Writer.IsDelayed.AssertFalse(); return Buf.ToString(); } }
-        public DelayedWriter Writer { get; private set; }
+        private DelayedWriter Delayed { get; set; }
+        public IndentedWriter Writer { get; private set; }
+        public String Result { get { Delayed.IsDelayed.AssertFalse(); return Buf.ToString(); } }
+
+        public void DelayRender(Action action)
+        {
+            Delayed.Delay(action);
+        }
+
+        public void CommitRender()
+        {
+            Delayed.Commit();
+        }
 
         public IDisposable OverrideBuf(StringBuilder new_buf)
         {
             var old_buf = Buf;
+            var old_delayed = Delayed;
             var old_writer = Writer;
 
             Buf = new_buf;
-            var new_writer = new StringWriter(Buf);
-            Writer = new_writer.Indented().Delayed();
+            Delayed = Buf.Delayed();
+            Writer = Delayed.Indented();
 
             return new DisposableAction(() =>
             {
                 Buf = old_buf;
+                Delayed = old_delayed;
                 Writer = old_writer;
             });
         }

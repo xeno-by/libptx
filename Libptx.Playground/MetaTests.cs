@@ -34,6 +34,8 @@ namespace Libptx.Playground
                 .Where(t => !t.IsEnum)
                 .Where(t => !t.IsDelegate())
                 // exceptions for meaty logic
+                // todo. think about how to set [DebuggerNonUserCode] on all methods 
+                // todo. except those in PtxopSig, PtxopState and concrete implementations of Validate and Render
                 .ToReadOnly();
 
             if (failed_types.IsNotEmpty())

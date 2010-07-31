@@ -1,17 +1,24 @@
 using System;
 using System.Diagnostics;
 using Libptx.Common;
+using Libptx.Common.Types.Pointers;
 using Libptx.Expressions.Immediate;
 using Libptx.Expressions.Slots;
 using XenoGears.Assertions;
+using Type=Libptx.Common.Types.Type;
 
 namespace Libptx.Expressions.Addresses
 {
     [DebuggerNonUserCode]
-    public partial class Offset : Atom
+    public partial class Offset : Atom, Expression
     {
         public Expression Base { get; set; }
         public long Imm { get; set; }
+
+        public Type Type
+        {
+            get { return typeof(Ptr); }
+        }
 
         protected override void CustomValidate()
         {

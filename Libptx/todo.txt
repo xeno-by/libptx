@@ -15,3 +15,4 @@
 35) better error reporting, e.g. not crash due to a single error in Entry, but rather collect all errors and then display problematic line numbers
 37) todo for readme.txt: performance since lots of stuff here relies on reflection
 38) todo for readme.txt: only emission of ptx is implemented, other 3 transformations are NYI
+39) think about how to set [DebuggerNonUserCode] on all methods except those in PtxopSig, PtxopState and concrete implementations of Validate and Render
