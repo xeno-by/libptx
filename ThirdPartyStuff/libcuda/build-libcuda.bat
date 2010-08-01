@@ -27,7 +27,7 @@ cd Sources
 
 echo.
 echo ^>^>^>^>^> Downloading Libcuda sources from https://libcuda.googlecode.com/hg/
-hg clone https://libcuda.googlecode.com/hg/ Libcuda -r a2b102585c47
+hg clone https://libcuda.googlecode.com/hg/ Libcuda -r c85c5eeefa3c
 if not exist Libcuda (
     echo [Fatal error] Failed to get Libcuda sources.
     pause
@@ -46,5 +46,22 @@ if not exist bin\%BUILDCONFIG%\Libcuda.dll (
     exit /B 1
 )
 
-cd ..\..\..
+
+echo.
+echo ^>^>^>^>^> Provisioning Libcuda...
+cd ..\..\..\
+if not exist Binaries mkdir Binaries
+cd Binaries
+if exist %BUILDCONFIG% rmdir %BUILDCONFIG% /s /q
+mkdir %BUILDCONFIG%
+cd %BUILDCONFIG%
+copy ..\..\Sources\Libcuda\Libcuda\bin\%BUILDCONFIG%\Libcuda.* Libcuda.* /Y
+if not exist Libcuda.dll (
+    echo [Fatal error] Failed to provision Libcuda.
+    pause
+    cd ..\..
+    exit /B 1
+)
+
+cd ..\..
 rmdir Sources /s /q
