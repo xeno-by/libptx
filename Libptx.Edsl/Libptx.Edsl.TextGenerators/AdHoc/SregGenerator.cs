@@ -20,22 +20,22 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
         public static void DoGenerate()
         {
             var edsl_base = @"..\..\..\..\Libptx.Edsl\Libptx.Edsl\";
-            var dir_specials = edsl_base + @"Expressions\Sregs\";
+            var dir_sregs = edsl_base + @"Expressions\Sregs\";
             Func<String, String> dir2ns = dir => dir.Replace(@"..\..\..\..\Libptx.Edsl\", String.Empty).Replace(@"\", ".").Slice(0, -1);
 
             var libptx = typeof(Sreg).Assembly;
-            var specials = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).ToReadOnly();
-            foreach (var t in specials)
+            var sregs = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).ToReadOnly();
+            foreach (var t in sregs)
             {
                 var buf = new StringBuilder();
                 var w = new StringWriter(buf).Indented();
                 w.WriteLine("using Libptx.Edsl.Common.Types.Scalar;");
                 w.WriteLine("using Libptx.Edsl.Common.Types.Vector;");
                 w.WriteLineNoTabs(String.Empty);
-                w.WriteLine("namespace {0}", dir2ns(dir_specials));
+                w.WriteLine("namespace {0}", dir2ns(dir_sregs));
                 w.WriteLine("{");
                 w.Indent++;
-                w.WriteLine("public class {0} : {1}, special", t.Name, t.FullName);
+                w.WriteLine("public class {0} : {1}, sreg", t.Name, t.FullName);
                 w.WriteLine("{");
                 w.Indent++;
 
@@ -67,7 +67,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 w.Indent--;
                 w.WriteLine("}");
 
-                var fname = dir_specials + t.Name + ".cs";
+                var fname = dir_sregs + t.Name + ".cs";
                 File.WriteAllText(fname, buf.ToString());
             }
         }

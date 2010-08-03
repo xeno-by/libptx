@@ -240,13 +240,13 @@
     <Compile Include="Expressions\Immediate\warpsz.cs" />
     <Compile Include="Expressions\Slots\reg.cs" />
     <Compile Include="Expressions\Slots\var.cs" />
+    <Compile Include="Expressions\Sregs\sreg.cs" />
     <Compile Include="Functions\Entries.cs" />
     <Compile Include="Functions\Entry.cs" />
     <Compile Include="Module.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Expressions\Immediate\Vectors\" />
-    <Folder Include="Expressions\Sregs\" />
     <Folder Include="Instructions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

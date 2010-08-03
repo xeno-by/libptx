@@ -19,7 +19,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 .Where(t => t != typeof(sregtype))
                 .OrderBy(t => t.Name);
 
-            var dir_specials = libptx_base + @"Expressions\Specials\";
+            var dir_sregs = libptx_base + @"Expressions\Sregs\";
             Func<String, String> dir2ns = dir => dir.Replace(@"..\..\..\..\", String.Empty).Replace(@"\", ".").Slice(0, -1);
 
             var buf = new StringBuilder();
@@ -68,7 +68,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 w.WriteLine("}");
             });
 
-            var type_fname = dir_specials + "sregtype.cs";
+            var type_fname = dir_sregs + "sregtype.cs";
             File.WriteAllText(type_fname, buf.ToString());
         }
     }
