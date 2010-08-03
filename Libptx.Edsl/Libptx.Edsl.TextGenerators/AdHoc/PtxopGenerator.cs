@@ -2,11 +2,12 @@ using System;
 using System.IO;
 using System.Text;
 using Libptx.Instructions;
+using Libptx.Reflection;
 using System.Linq;
 using XenoGears.Functional;
 using XenoGears.Reflection.Shortcuts;
-using Libptx.Common.Annotations;
 using XenoGears.Strings;
+using XenoGears.Strings.Writers;
 using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Edsl.TextGenerators.AdHoc

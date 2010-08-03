@@ -5,6 +5,7 @@ using Libptx.Common.Comments;
 using Libptx.Common.Enumerations;
 using Libptx.Common.Types;
 using Libptx.Expressions;
+using Libptx.Expressions.Addresses;
 using Libptx.Expressions.Immediate;
 using Libptx.Expressions.Slots;
 using Libptx.Expressions.Sregs;
@@ -13,7 +14,6 @@ using Libptx.Instructions.ComparisonAndSelection;
 using Libptx.Instructions.ControlFlow;
 using Libptx.Instructions.LogicAndShift;
 using Libptx.Instructions.MovementAndConversion;
-using Libptx.Statements;
 using Type=Libptx.Common.Types.Type;
 using XenoGears.Functional;
 

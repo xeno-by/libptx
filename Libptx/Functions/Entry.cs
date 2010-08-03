@@ -7,6 +7,7 @@ using Libptx.Common;
 using Libptx.Common.Comments;
 using Libptx.Common.Performance;
 using Libptx.Expressions;
+using Libptx.Expressions.Addresses;
 using Libptx.Expressions.Slots;
 using Libptx.Statements;
 using XenoGears.Assertions;

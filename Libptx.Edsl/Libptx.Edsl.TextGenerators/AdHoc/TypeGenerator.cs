@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Libptx.Edsl.TextGenerators.Common;
 using Libptx.Expressions;
+using Libptx.Reflection;
 using XenoGears.Assertions;
 using XenoGears.Strings;
 using XenoGears.Functional;
 using Libptx.Common.Types;
-using Libptx.Common.Annotations;
+using XenoGears.Strings.Writers;
 
 namespace Libptx.Edsl.TextGenerators.AdHoc
 {
@@ -36,7 +36,39 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 w.WriteLine("namespace {0}", dir2ns(dir_opaques));
                 w.WriteLine("{");
                 w.Indent++;
-                w.WriteLine("public class {0} : typed_expr", t);
+                w.WriteLine("public partial class {0} : typed_expr", t);
+                w.WriteLine("{");
+                w.Indent++;
+                w.WriteLine("public {0}(Expression expr)", t);
+                w.Indent++;
+                w.WriteLine(": base(expr)");
+                w.Indent--;
+                w.WriteLine("{");
+                w.Indent++;
+                w.Indent--;
+                w.WriteLine("}");
+                w.Indent--;
+                w.WriteLine("}");
+                w.Indent--;
+                w.WriteLine("}");
+
+                var fname = dir_opaques + t + ".cs";
+                if (!Directory.Exists(dir_opaques)) Directory.CreateDirectory(dir_opaques);
+                File.WriteAllText(fname, buf.ToString());
+            });
+
+            Types.Other.ForEach(t =>
+            {
+                var dir_opaques = dir_types + @"Other\";
+
+                var buf = new StringBuilder();
+                var w = new StringWriter(buf).Indented();
+                w.WriteLine("using {0};", typeof(Expression).Namespace);
+                w.WriteLineNoTabs(String.Empty);
+                w.WriteLine("namespace {0}", dir2ns(dir_opaques));
+                w.WriteLine("{");
+                w.Indent++;
+                w.WriteLine("public partial class {0} : typed_expr", t);
                 w.WriteLine("{");
                 w.Indent++;
                 w.WriteLine("public {0}(Expression expr)", t);
@@ -76,7 +108,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 w.WriteLine("namespace {0}", dir2ns(dir));
                 w.WriteLine("{");
                 w.Indent++;
-                w.WriteLine("public class {0} : typed_expr", name);
+                w.WriteLine("public partial class {0} : typed_expr", name);
                 w.WriteLine("{");
                 w.Indent++;
                 w.WriteLine("public {0}(Expression expr)", name);
@@ -116,7 +148,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 w.WriteLine("namespace {0}", dir2ns(dir));
                 w.WriteLine("{");
                 w.Indent++;
-                w.WriteLine("public class {0} : typed_expr", name);
+                w.WriteLine("public partial class {0} : typed_expr", name);
                 w.WriteLine("{");
                 w.Indent++;
                 w.WriteLine("public {0}(Expression expr)", name);

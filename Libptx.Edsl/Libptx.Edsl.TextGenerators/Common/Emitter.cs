@@ -4,19 +4,19 @@ using System.Linq;
 using Libptx.Common.Types;
 using XenoGears.Assertions;
 using XenoGears.Functional;
-using XenoGears.Strings;
+using XenoGears.Strings.Writers;
 using Type = Libptx.Common.Types.Type;
 
 namespace Libptx.Edsl.TextGenerators.Common
 {
     internal static class Emitter
     {
-        public static void EmitTypeSpec(this IndentedTextWriter w, String code_type, Type assumed_type, Space assumed_space)
+        public static void EmitTypeSpec(this IndentedWriter w, String code_type, Type assumed_type, Space assumed_space)
         {
             w.EmitTypeSpec(code_type, assumed_type, assumed_space, false);
         }
 
-        public static void EmitTypeSpec(this IndentedTextWriter w, String code_type, Type assumed_type, Space assumed_space, bool full_name)
+        public static void EmitTypeSpec(this IndentedWriter w, String code_type, Type assumed_type, Space assumed_space, bool full_name)
         {
             assumed_type.AssertNotNull();
             if (assumed_type.is_arr()) return;

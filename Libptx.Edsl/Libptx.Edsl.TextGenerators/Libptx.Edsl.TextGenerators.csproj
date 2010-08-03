@@ -60,14 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdHoc\PtxopGenerator.cs" />
-    <Compile Include="AdHoc\SpecialGenerator.cs" />
-    <Compile Include="AdHoc\SpecialtypeGenerator.cs" />
+    <Compile Include="AdHoc\SregGenerator.cs" />
+    <Compile Include="AdHoc\SregtypeGenerator.cs" />
     <Compile Include="AdHoc\PtxoptypeGenerator.cs" />
     <Compile Include="AdHoc\TypeGenerator.cs" />
     <Compile Include="AdHoc\VectorGenerator.cs" />
     <Compile Include="Common\Emitter.cs" />
     <Compile Include="Common\Space.cs" />
-    <Compile Include="Common\Types.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

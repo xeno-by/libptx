@@ -27,14 +27,14 @@ namespace Libptx.Common
         protected void commit_render() { RenderPtxContext.Current.CommitRender(); }
 
         private IList<Comment> _comments = new List<Comment>();
-        public IList<Comment> Comments
+        public virtual IList<Comment> Comments
         {
             get { return _comments; }
             set { _comments = value ?? new List<Comment>(); }
         }
 
         private IList<Pragma> _pragmas = new List<Pragma>();
-        public IList<Pragma> Pragmas
+        public virtual IList<Pragma> Pragmas
         {
             get { return _pragmas; }
             set { _pragmas = value ?? new List<Pragma>(); }

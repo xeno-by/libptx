@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Libcuda.Versions;
 using Libptx.Expressions;
+using Libptx.Expressions.Addresses;
 using Libptx.Functions;
 using Libptx.Instructions;
 using Libptx.Statements;

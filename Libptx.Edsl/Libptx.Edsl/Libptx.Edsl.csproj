@@ -55,7 +55,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Types\Opaque\pred.cs" />
+    <Compile Include="Common\Types\Other\bmk.cs" />
+    <Compile Include="Common\Types\Other\pred.cs" />
     <Compile Include="Common\Types\Opaque\samplerref.cs" />
     <Compile Include="Common\Types\Opaque\surfref.cs" />
     <Compile Include="Common\Types\Opaque\texref.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Common\Types\Scalar\u32.cs" />
     <Compile Include="Common\Types\Scalar\u64.cs" />
     <Compile Include="Common\Types\Scalar\u8.cs" />
+    <Compile Include="Common\Types\Other\ptr.cs" />
     <Compile Include="Common\Types\typed_expr.cs" />
     <Compile Include="Common\Types\Vector\reg_v1_b16.cs" />
     <Compile Include="Common\Types\Vector\reg_v1_b32.cs" />
@@ -228,71 +230,23 @@
     <Compile Include="Common\Types\Vector\v4_u16.cs" />
     <Compile Include="Common\Types\Vector\v4_u32.cs" />
     <Compile Include="Common\Types\Vector\v4_u8.cs" />
-    <Compile Include="Expressions\Specials\clock32.cs" />
-    <Compile Include="Expressions\Specials\clock64.cs" />
-    <Compile Include="Expressions\Specials\ctaid.cs" />
-    <Compile Include="Expressions\Specials\envreg.cs" />
-    <Compile Include="Expressions\Specials\gridid.cs" />
-    <Compile Include="Expressions\Specials\laneid.cs" />
-    <Compile Include="Expressions\Specials\lanemask.cs" />
-    <Compile Include="Expressions\Specials\nctaid.cs" />
-    <Compile Include="Expressions\Specials\nsmid.cs" />
-    <Compile Include="Expressions\Specials\ntid.cs" />
-    <Compile Include="Expressions\Specials\nwarpid.cs" />
-    <Compile Include="Expressions\Specials\pm.cs" />
-    <Compile Include="Expressions\Specials\smid.cs" />
-    <Compile Include="Expressions\Specials\special.cs" />
-    <Compile Include="Expressions\Specials\tid.cs" />
-    <Compile Include="Expressions\Specials\warpid.cs" />
-    <Compile Include="Expressions\Vectors\v1_b16.cs" />
-    <Compile Include="Expressions\Vectors\v1_b32.cs" />
-    <Compile Include="Expressions\Vectors\v1_b64.cs" />
-    <Compile Include="Expressions\Vectors\v1_b8.cs" />
-    <Compile Include="Expressions\Vectors\v1_f16.cs" />
-    <Compile Include="Expressions\Vectors\v1_f32.cs" />
-    <Compile Include="Expressions\Vectors\v1_f64.cs" />
-    <Compile Include="Expressions\Vectors\v1_s16.cs" />
-    <Compile Include="Expressions\Vectors\v1_s32.cs" />
-    <Compile Include="Expressions\Vectors\v1_s64.cs" />
-    <Compile Include="Expressions\Vectors\v1_s8.cs" />
-    <Compile Include="Expressions\Vectors\v1_u16.cs" />
-    <Compile Include="Expressions\Vectors\v1_u32.cs" />
-    <Compile Include="Expressions\Vectors\v1_u64.cs" />
-    <Compile Include="Expressions\Vectors\v1_u8.cs" />
-    <Compile Include="Expressions\Vectors\v2_b16.cs" />
-    <Compile Include="Expressions\Vectors\v2_b32.cs" />
-    <Compile Include="Expressions\Vectors\v2_b64.cs" />
-    <Compile Include="Expressions\Vectors\v2_b8.cs" />
-    <Compile Include="Expressions\Vectors\v2_f16.cs" />
-    <Compile Include="Expressions\Vectors\v2_f32.cs" />
-    <Compile Include="Expressions\Vectors\v2_f64.cs" />
-    <Compile Include="Expressions\Vectors\v2_s16.cs" />
-    <Compile Include="Expressions\Vectors\v2_s32.cs" />
-    <Compile Include="Expressions\Vectors\v2_s64.cs" />
-    <Compile Include="Expressions\Vectors\v2_s8.cs" />
-    <Compile Include="Expressions\Vectors\v2_u16.cs" />
-    <Compile Include="Expressions\Vectors\v2_u32.cs" />
-    <Compile Include="Expressions\Vectors\v2_u64.cs" />
-    <Compile Include="Expressions\Vectors\v2_u8.cs" />
-    <Compile Include="Expressions\Vectors\v4_b16.cs" />
-    <Compile Include="Expressions\Vectors\v4_b32.cs" />
-    <Compile Include="Expressions\Vectors\v4_b8.cs" />
-    <Compile Include="Expressions\Vectors\v4_f16.cs" />
-    <Compile Include="Expressions\Vectors\v4_f32.cs" />
-    <Compile Include="Expressions\Vectors\v4_s16.cs" />
-    <Compile Include="Expressions\Vectors\v4_s32.cs" />
-    <Compile Include="Expressions\Vectors\v4_s8.cs" />
-    <Compile Include="Expressions\Vectors\v4_u16.cs" />
-    <Compile Include="Expressions\Vectors\v4_u32.cs" />
-    <Compile Include="Expressions\Vectors\v4_u8.cs" />
-    <Compile Include="Expressions\Vectors\vector.cs" />
-    <Compile Include="Statements\Block.cs" />
-    <Compile Include="Entries.cs" />
-    <Compile Include="Entry.cs" />
+    <Compile Include="Expressions\Addresses\address.cs" />
+    <Compile Include="Expressions\Addresses\label.cs" />
+    <Compile Include="Expressions\Addresses\offset.cs" />
+    <Compile Include="Expressions\Immediate\const.cs" />
+    <Compile Include="Expressions\Immediate\vector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Expressions\Immediate\warpsz.cs" />
+    <Compile Include="Expressions\Slots\reg.cs" />
+    <Compile Include="Expressions\Slots\var.cs" />
+    <Compile Include="Functions\Entries.cs" />
+    <Compile Include="Functions\Entry.cs" />
     <Compile Include="Module.cs" />
-    <Compile Include="Expressions\Vars\var.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Expressions\Immediate\Vectors\" />
+    <Folder Include="Expressions\Sregs\" />
     <Folder Include="Instructions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

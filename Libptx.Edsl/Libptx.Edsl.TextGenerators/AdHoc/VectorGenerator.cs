@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Libptx.Edsl.TextGenerators.Common;
-using Libptx.Expressions;
+using Libptx.Expressions.Immediate;
+using Libptx.Reflection;
 using XenoGears.Functional;
 using XenoGears.Strings;
 using Libptx.Common.Types;
-using Libptx.Common.Annotations;
 using XenoGears.Assertions;
+using XenoGears.Strings.Writers;
 
 namespace Libptx.Edsl.TextGenerators.AdHoc
 {
@@ -18,7 +19,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
         public static void DoGenerate()
         {
             var edsl_base = @"..\..\..\..\Libptx.Edsl\Libptx.Edsl\";
-            var dir_vectors = edsl_base + @"Expressions\Vectors\";
+            var dir_vectors = edsl_base + @"Expressions\Immediate\";
             Func<String, String> dir2ns = dir =>
             {
                 var rel = dir.Replace(@"..\..\..\..\Libptx.Edsl\", String.Empty);
@@ -37,7 +38,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
                 var buf_vec = new StringBuilder();
                 var w_vec = new StringWriter(buf_vec).Indented();
                 w_vec.WriteLine("using {0};", typeof(AssertionHelper).Namespace);
-                w_vec.WriteLine("using {0};", typeof(Libptx.Edsl.Expressions.Vars.var).Namespace);
+                w_vec.WriteLine("using {0};", typeof(Libptx.Edsl.Expressions.Slots.var).Namespace);
                 w_vec.WriteLine("using Libptx.Edsl.Common.Types.Scalar;");
                 w_vec.WriteLineNoTabs(String.Empty);
                 w_vec.WriteLine("namespace {0}", dir2ns(dir_vectors));

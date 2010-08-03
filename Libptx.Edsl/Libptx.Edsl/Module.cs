@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Libcuda.Versions;
-using Libptx.Expressions;
+using Libptx.Expressions.Slots;
+using Libptx.Functions;
 using XenoGears.Functional;
 
 namespace Libptx.Edsl
 {
-    public static partial class Ptx21
+    public static class Ptx21
     {
-        public static partial class Sm20
+        public static class Sm20
         {
             public static Module NewModule()
             {
