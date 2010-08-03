@@ -25,7 +25,7 @@ namespace Libptx.Instructions.MovementAndConversion
         }
 
         public cvta() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
-        public Expression p { get { return Operands[0]; } set { Operands[0] = value; } }
+        [Destination] public Expression p { get { return Operands[0]; } set { Operands[0] = value; } }
         public Address a { get { return (Address)Operands[1]; } set { Operands[1] = value; } }
 
         protected override void custom_validate_operands()

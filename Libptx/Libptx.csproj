@@ -62,6 +62,7 @@
     <Compile Include="Common\Contexts\ValidationContext.cs" />
     <Compile Include="Common\Names\Namer.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="Instructions\Annotations\DestinationAttribute.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Reflection\Atoms.cs" />
     <Compile Include="Reflection\PtxopAffix.cs" />

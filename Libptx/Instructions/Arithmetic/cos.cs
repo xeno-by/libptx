@@ -27,7 +27,7 @@ namespace Libptx.Instructions.Arithmetic
         }
 
         public cos() { 1.UpTo(2).ForEach(_ => Operands.Add(null)); }
-        public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
+        [Destination] public Expression d { get { return Operands[0]; } set { Operands[0] = value; } }
         public Expression a { get { return Operands[1]; } set { Operands[1] = value; } }
 
         protected override void custom_validate_operands()
