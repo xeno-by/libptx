@@ -11,6 +11,7 @@ using XenoGears.Assertions;
 using XenoGears.Functional;
 using XenoGears.Strings;
 using ClrType = System.Type;
+using XenoGears;
 
 namespace Libptx.Common.Types
 {
@@ -41,7 +42,7 @@ namespace Libptx.Common.Types
 
         protected override void CustomValidate()
         {
-            (SizeOfElement <= 128).AssertTrue();
+            (SizeOfElement <= 128 / 8).AssertTrue();
 
             this.is_vec().AssertImplies(this.el().is_scalar());
             this.vec_rank().AssertThat(rank => rank == 0 || rank == 2 || rank == 4);
@@ -74,8 +75,9 @@ namespace Libptx.Common.Types
                 if (this.is_ptr()) return 0;
                 if (this.is_bmk()) return 0;
 
-                var el = this.Unfold(t => t.arr_el(), t => t != null).Last();
-                return Marshal.SizeOf((ClrType)(Type)el.Name);
+                var atom = this.el();
+                var cnt = Math.Min(this.arr_el().vec_rank(), 1);
+                return cnt * Marshal.SizeOf((ClrType)atom);
             }
         }
 
