@@ -104,6 +104,10 @@ namespace Libptx.Functions
                     writer.Indent--;
                     writer.WriteLine(")");
                 }
+                else
+                {
+                    writer.WriteLine();
+                }
             }
             else
             {
