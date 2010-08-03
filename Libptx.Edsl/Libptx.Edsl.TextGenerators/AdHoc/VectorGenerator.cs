@@ -19,7 +19,8 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
         public static void DoGenerate()
         {
             var edsl_base = @"..\..\..\..\Libptx.Edsl\Libptx.Edsl\";
-            var dir_vectors = edsl_base + @"Expressions\Immediate\";
+            var dir_vector = edsl_base + @"Expressions\Immediate\";
+            var dir_vectors = edsl_base + @"Expressions\Immediate\Vectors\";
             Func<String, String> dir2ns = dir =>
             {
                 var rel = dir.Replace(@"..\..\..\..\Libptx.Edsl\", String.Empty);
@@ -81,7 +82,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             w.WriteLine("using {0};", typeof(Vector).Namespace);
             w.WriteLine("using Libptx.Edsl.Common.Types.Scalar;");
             w.WriteLineNoTabs(String.Empty);
-            w.WriteLine("namespace {0}", dir2ns(dir_vectors));
+            w.WriteLine("namespace {0}", dir2ns(dir_vector));
             w.WriteLine("{");
             w.Indent++;
             w.WriteLine("public class vector : Vector");
@@ -97,8 +98,8 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             w.Indent--;
             w.WriteLine("}");
 
-            var fname = dir_vectors + "vector.cs";
-            if (!Directory.Exists(dir_vectors)) Directory.CreateDirectory(dir_vectors);
+            var fname = dir_vector + "vector.cs";
+            if (!Directory.Exists(dir_vector)) Directory.CreateDirectory(dir_vector);
             File.WriteAllText(fname, buf.ToString());
         }
     }
