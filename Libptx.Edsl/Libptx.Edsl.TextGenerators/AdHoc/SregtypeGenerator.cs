@@ -16,7 +16,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             var libptx_base = @"..\..\..\..\Libptx\";
             var libptx = typeof(Module).Assembly;
             var ops = libptx.GetTypes().Where(t => t.Namespace == typeof(tid).Namespace)
-                .Where(t => t != typeof(sregtype))
+                .Where(t => t != typeof(sregtype) && t != typeof(Sreg))
                 .OrderBy(t => t.Name);
 
             var dir_sregs = libptx_base + @"Expressions\Sregs\";
@@ -24,8 +24,6 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
 
             var buf = new StringBuilder();
             var w = new StringWriter(buf).Indented();
-            w.WriteLine("using {0};", typeof(sregtype).Namespace);
-            w.WriteLineNoTabs(String.Empty);
 
             w.WriteLine("namespace {0}", typeof(sregtype).Namespace);
             w.WriteLine("{");
