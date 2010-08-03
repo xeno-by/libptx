@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Libptx.Expressions.Sregs;
+using Libptx.Reflection;
 using XenoGears.Strings;
 using XenoGears.Functional;
 using XenoGears.Strings.Writers;
@@ -15,9 +15,6 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
         {
             var libptx_base = @"..\..\..\..\Libptx\";
             var libptx = typeof(Module).Assembly;
-            var ops = libptx.GetTypes().Where(t => t.Namespace == typeof(tid).Namespace)
-                .Where(t => t != typeof(sregtype) && t != typeof(Sreg))
-                .OrderBy(t => t.Name);
 
             var dir_sregs = libptx_base + @"Expressions\Sregs\";
             Func<String, String> dir2ns = dir => dir.Replace(@"..\..\..\..\", String.Empty).Replace(@"\", ".").Slice(0, -1);
@@ -31,7 +28,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             w.WriteLine("public enum {0}", typeof(sregtype).Name);
             w.WriteLine("{");
             w.Indent++;
-            ops.ForEach((op, i) => w.WriteLine(op.Name + (i == 0 ? " = 1" : "") + ","));
+            Sregs.All.ForEach((op, i) => w.WriteLine(op.Name + (i == 0 ? " = 1" : "") + ","));
             w.Indent--;
             w.WriteLine("}");
             w.Indent--;
@@ -50,7 +47,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             w.Indent--;
             w.WriteLine("}");
 
-            ops.ForEach(op =>
+            Sregs.All.ForEach(op =>
             {
                 w.WriteLine("");
                 w.WriteLine("namespace {0}", op.Namespace);

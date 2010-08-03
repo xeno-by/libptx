@@ -16,9 +16,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
     {
         public static void DoGenerate()
         {
-            var libptx = typeof(ptxop).Assembly;
-            var ops = libptx.GetTypes().Where(t => t.BaseType == typeof(ptxop)).ToReadOnly();
-            foreach (var op in ops)
+            foreach (var op in Ptxops.All)
             {
                 var dir = @"..\..\..\..\" + op.Namespace.Replace(".", @"\") + @"\";
                 var file = dir + op.Name + ".cs";

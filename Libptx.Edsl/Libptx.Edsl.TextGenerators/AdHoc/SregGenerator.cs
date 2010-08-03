@@ -3,11 +3,9 @@ using System.IO;
 using System.Text;
 using Libcuda.Versions;
 using Libptx.Common.Types;
-using Libptx.Expressions.Sregs;
 using Libptx.Expressions.Sregs.Annotations;
-using XenoGears.Functional;
+using Libptx.Reflection;
 using XenoGears.Strings;
-using System.Linq;
 using Libptx.Edsl.TextGenerators.Common;
 using XenoGears.Reflection.Attributes;
 using XenoGears.Strings.Writers;
@@ -23,9 +21,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             var dir_sregs = edsl_base + @"Expressions\Sregs\";
             Func<String, String> dir2ns = dir => dir.Replace(@"..\..\..\..\Libptx.Edsl\", String.Empty).Replace(@"\", ".").Slice(0, -1);
 
-            var libptx = typeof(Sreg).Assembly;
-            var sregs = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).ToReadOnly();
-            foreach (var t in sregs)
+            foreach (var t in Sregs.All)
             {
                 var buf = new StringBuilder();
                 var w = new StringWriter(buf).Indented();
