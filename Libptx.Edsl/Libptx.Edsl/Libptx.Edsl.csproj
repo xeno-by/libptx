@@ -237,6 +237,47 @@
     <Compile Include="Expressions\Immediate\vector.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Expressions\Immediate\Vectors\v1_b16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_b32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_b64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_b8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_f16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_f32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_f64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_s16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_s32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_s64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_s8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_u16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_u32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_u64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v1_u8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_b16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_b32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_b64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_b8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_f16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_f32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_f64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_s16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_s32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_s64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_s8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_u16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_u32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_u64.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v2_u8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_b16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_b32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_b8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_f16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_f32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_s16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_s32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_s8.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_u16.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_u32.cs" />
+    <Compile Include="Expressions\Immediate\Vectors\v4_u8.cs" />
     <Compile Include="Expressions\Immediate\warpsz.cs" />
     <Compile Include="Expressions\Slots\reg.cs" />
     <Compile Include="Expressions\Slots\var.cs" />
@@ -261,7 +302,6 @@
     <Compile Include="Module.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Expressions\Immediate\Vectors\" />
     <Folder Include="Instructions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

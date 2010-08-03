@@ -76,7 +76,7 @@ namespace Libptx.Common.Types
                 if (this.is_bmk()) return 0;
 
                 var atom = this.el();
-                var cnt = Math.Max(this.arr_el().vec_rank(), 1);
+                var cnt = Math.Max((this.arr_el() ?? this).vec_rank(), 1);
                 return cnt * Marshal.SizeOf((ClrType)atom);
             }
         }
