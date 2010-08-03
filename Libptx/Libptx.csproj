@@ -83,7 +83,7 @@
     <Compile Include="Common\Enumerations\mulm.cs" />
     <Compile Include="Common\Enumerations\op.cs" />
     <Compile Include="Common\Enumerations\prmtm.cs" />
-    <Compile Include="Common\Enumerations\redm.cs" />
+    <Compile Include="Common\Enumerations\votem.cs" />
     <Compile Include="Common\Enumerations\scale.cs" />
     <Compile Include="Common\Enumerations\squery.cs" />
     <Compile Include="Common\Enumerations\test.cs" />
@@ -204,10 +204,9 @@
     <Compile Include="Instructions\SynchronizationAndCommunication\atom.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\bar_sync.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\bar_red.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\vote_pred.cs" />
+    <Compile Include="Instructions\SynchronizationAndCommunication\vote.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\red.cs" />
     <Compile Include="Instructions\SynchronizationAndCommunication\membar.cs" />
-    <Compile Include="Instructions\SynchronizationAndCommunication\vote_ballot.cs" />
     <Compile Include="Instructions\TextureAndSurface\sured_b.cs" />
     <Compile Include="Instructions\TextureAndSurface\sust_b.cs" />
     <Compile Include="Instructions\TextureAndSurface\suld_b.cs" />

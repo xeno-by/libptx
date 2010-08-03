@@ -188,10 +188,6 @@ namespace Libptx.Common
         protected static prmtm ecr { get { return prmtm.ecr; } }
         protected static prmtm rc16 { get { return prmtm.rc16; } }
 
-        protected static redm all { get { return redm.all; } }
-        protected static redm any { get { return redm.any; } }
-        protected static redm uni { get { return redm.uni; } }
-
         protected static scale shr7 { get { return scale.shr7; } }
         protected static scale shr15 { get { return scale.shr15; } }
 
@@ -225,6 +221,11 @@ namespace Libptx.Common
         protected static tquery tex_addr_mode_0 { get { return tquery.addr_mode_0; } }
         protected static tquery tex_addr_mode_1 { get { return tquery.addr_mode_1; } }
         protected static tquery tex_addr_mode_2 { get { return tquery.addr_mode_2; } }
+
+        protected static votem ballot { get { return votem.ballot; } }
+        protected static votem all { get { return votem.all; } }
+        protected static votem any { get { return votem.any; } }
+        protected static votem uni { get { return votem.uni; } }
 
         protected static vshm vshm_clamp { get { return vshm.clamp; } }
         protected static vshm vshm_wrap { get { return vshm.wrap; } }

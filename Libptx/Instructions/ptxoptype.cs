@@ -8,7 +8,6 @@ namespace Libptx.Instructions
         atom,
         bar_arrive,
         bar_red,
-        bar_red_u32,
         bar_sync,
         bfe,
         bfi,
@@ -74,8 +73,7 @@ namespace Libptx.Instructions
         vmad,
         vmax,
         vmin,
-        vote_ballot,
-        vote_pred,
+        vote,
         vset,
         vshl,
         vshr,
@@ -662,17 +660,9 @@ namespace Libptx.Instructions.Video
 
 namespace Libptx.Instructions.SynchronizationAndCommunication
 {
-    public partial class vote_ballot
+    public partial class vote
     {
-        public override ptxoptype discr { get { return ptxoptype.vote_ballot; } }
-    }
-}
-
-namespace Libptx.Instructions.SynchronizationAndCommunication
-{
-    public partial class vote_pred
-    {
-        public override ptxoptype discr { get { return ptxoptype.vote_pred; } }
+        public override ptxoptype discr { get { return ptxoptype.vote; } }
     }
 }
 

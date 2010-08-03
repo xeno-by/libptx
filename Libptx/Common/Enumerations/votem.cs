@@ -2,9 +2,10 @@ using Libptx.Common.Annotations.Quanta;
 
 namespace Libptx.Common.Enumerations
 {
-    public enum redm
+    public enum votem
     {
-        [Affix("all")] all = 1,
+        [Affix("all")] ballot = 1,
+        [Affix("all")] all,
         [Affix("any")] any,
         [Affix("uni")] uni,
     }
