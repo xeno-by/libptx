@@ -1,10 +1,10 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 using Libptx.Common.Annotations.Quanta;
 using Libptx.Expressions;
 using Libptx.Instructions;
+using Libptx.Instructions.Annotations;
 using XenoGears.Assertions;
 using XenoGears.Collections.Dictionaries;
 using XenoGears.Reflection.Shortcuts;
@@ -25,6 +25,7 @@ namespace Libptx.Reflection
         public OrderedDictionary<PropertyInfo, Object> Mods { get; private set; }
         public OrderedDictionary<PropertyInfo, Object> Affixes { get; private set; }
         public OrderedDictionary<PropertyInfo, Expression> Operands { get; private set; }
+        public Tuple<PropertyInfo, Expression> Destination { get; private set; }
 
         internal PtxopState(ptxop ptxop)
         {
@@ -32,7 +33,7 @@ namespace Libptx.Reflection
             Guard = ptxop.Guard;
 
             // todo. implement Sig (i.e. find out the exact Sig that corresponds to current state of ptxop)
-            Opcode = ptxop.PtxopSigs().AssertFirst().Opcode;
+            Opcode = ptxop.Ptxopcode();
 
             Func<Object, PropertyInfo, Object> get_value = (o, p) =>
             {
@@ -46,6 +47,8 @@ namespace Libptx.Reflection
             Mods = props.Where(p => p.HasAttr<ModAttribute>()).ToOrderedDictionary(p => p, p => get_value(ptxop, p));
             Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).ToOrderedDictionary(p => p, p => get_value(ptxop, p));
             Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).ToOrderedDictionary(p => p, p => get_value(ptxop, p).AssertCast<Expression>());
+            var destination = Operands.SingleOrDefault(kvp => kvp.Key.HasAttr<DestinationAttribute>());
+            if (destination.Key != null) Destination = Tuple.New(destination.Key, destination.Value);
         }
     }
 }

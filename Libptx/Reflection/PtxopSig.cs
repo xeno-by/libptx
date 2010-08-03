@@ -33,6 +33,7 @@ namespace Libptx.Reflection
         public ReadOnlyCollection<PtxopMod> Mods { get; private set; }
         public ReadOnlyCollection<PtxopAffix> Affixes { get; private set; }
         public ReadOnlyCollection<PtxopOperand> Operands { get; private set; }
+        public PtxopOperand Destination { get; private set; }
 
         internal PtxopSig(Type decl, PtxopAttribute meta)
         {
@@ -328,6 +329,7 @@ namespace Libptx.Reflection
             Mods = mods.ToReadOnly();
             Affixes = affixes.ToReadOnly();
             Operands = operands.ToReadOnly();
+            Destination = Operands.SingleOrDefault(op => op.Decl.HasAttr<DestinationAttribute>());
         }
 
         public override String ToString()

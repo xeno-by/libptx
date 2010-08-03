@@ -7,6 +7,7 @@ using Libptx.Instructions.Annotations;
 using XenoGears.Collections.Dictionaries;
 using XenoGears.Functional;
 using XenoGears.Reflection.Attributes;
+using XenoGears.Assertions;
 
 namespace Libptx.Reflection
 {
@@ -26,6 +27,12 @@ namespace Libptx.Reflection
         public static ReadOnlyCollection<Type> All
         {
             get { return _ptxops; }
+        }
+
+        public static String Ptxopcode(this Object obj)
+        {
+            var sigs = obj.PtxopSigs();
+            return sigs == null ? null : sigs.AssertFirst().Opcode;
         }
 
         public static ReadOnlyCollection<PtxopSig> PtxopSigs(this Object obj)
