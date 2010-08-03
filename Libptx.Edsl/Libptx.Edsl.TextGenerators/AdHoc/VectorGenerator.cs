@@ -81,6 +81,7 @@ namespace Libptx.Edsl.TextGenerators.AdHoc
             var w = new StringWriter(buf).Indented();
             w.WriteLine("using {0};", typeof(Vector).Namespace);
             w.WriteLine("using Libptx.Edsl.Common.Types.Scalar;");
+            w.WriteLine("using {0};", dir2ns(dir_vectors));
             w.WriteLineNoTabs(String.Empty);
             w.WriteLine("namespace {0}", dir2ns(dir_vector));
             w.WriteLine("{");
