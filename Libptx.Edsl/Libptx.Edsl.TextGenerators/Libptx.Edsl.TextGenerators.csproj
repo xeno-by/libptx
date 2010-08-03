@@ -59,6 +59,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdHoc\ConstGenerator.cs" />
     <Compile Include="AdHoc\PtxopGenerator.cs" />
     <Compile Include="AdHoc\SregGenerator.cs" />
     <Compile Include="AdHoc\SregtypeGenerator.cs" />
