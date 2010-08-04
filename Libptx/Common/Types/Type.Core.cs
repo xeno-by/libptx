@@ -6,7 +6,9 @@ using System.Runtime.InteropServices;
 using Libcuda.DataTypes;
 using Libcuda.Versions;
 using Libptx.Common.Types.Bits;
+using Libptx.Expressions.Slots;
 using Libptx.Reflection;
+using Libptx.Statements;
 using XenoGears.Assertions;
 using XenoGears.Functional;
 using XenoGears.Strings;
@@ -54,9 +56,16 @@ namespace Libptx.Common.Types
         protected override void RenderPtx()
         {
             var el = this.arr_el() ?? this;
-            if (el.is_vec()) writer.Write(".v{0}", el.vec_rank());
+            if (el.is_vec())
+            {
+                writer.Write(".v{0}", el.vec_rank());
+
+                var aint_need_whitespace = ctx.Parent is Instruction;
+                if (!aint_need_whitespace) writer.Write(" ");
+            }
+
             writer.Write("." + Name.Signature().AssertNotNull());
-            if (this.is_arr()) writer.Write((Dims ?? Seq.Empty<int>()).Select(dim => 
+            if (this.is_arr()) writer.Write(" " + (Dims ?? Seq.Empty<int>()).Select(dim => 
                 dim == 0 ? "[]" : String.Format("[{0}]", dim)).StringJoin(String.Empty));
         }
 
