@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using Libptx.Common.Types;
 using Libptx.Expressions;
@@ -7,14 +9,14 @@ using Libptx.Expressions.Addresses;
 using Libptx.Expressions.Slots;
 using Libptx.Functions;
 using XenoGears.Assertions;
+using XenoGears.Functional;
 
 namespace Libptx.Common.Names
 {
     [DebuggerNonUserCode]
     internal static class Namer
     {
-        // access is synchronized via methods of Interlocked
-        private static int cnt = 0;
+        private static HashSet<String> _names = new HashSet<String>();
 
         public static String GenName(this Slot s)
         {
@@ -81,17 +83,20 @@ namespace Libptx.Common.Names
                 throw AssertionHelper.Fail();
             };
 
-            return String.Format("%{0}{1}", prefix(), Interlocked.Increment(ref cnt));
+            Func<int, String> gen = i => String.Format("%{0}{1}", prefix(), i);
+            return Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
         }
 
         public static String GenName(this Label lbl)
         {
-            return String.Format("%lbl{0}", Interlocked.Increment(ref cnt));
+            Func<int, String> gen = i => String.Format("%{0}{1}", "lbl", i);
+            return Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
         }
 
         public static String GenName(this Entry entry)
         {
-            return String.Format("%entry{0}", Interlocked.Increment(ref cnt));
+            Func<int, String> gen = i => String.Format("%{0}{1}", "entry", i);
+            return Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
         }
     }
 }

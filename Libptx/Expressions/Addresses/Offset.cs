@@ -50,7 +50,7 @@ namespace Libptx.Expressions.Addresses
                 Base.RenderPtx();
             }
 
-            var omit_imm = Base == null || (Base is Reg && Imm == 0);
+            var omit_imm = Base == null;
             if (!omit_imm)
             {
                 writer.Write(" + ");

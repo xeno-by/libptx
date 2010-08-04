@@ -13,7 +13,6 @@ using Libptx.Expressions.Slots;
 using Libptx.Functions;
 using XenoGears.Assertions;
 using XenoGears.Functional;
-using XenoGears.Strings.Writers;
 using Type = Libptx.Common.Types.Type;
 
 namespace Libptx
@@ -136,7 +135,7 @@ namespace Libptx
 
                 ctx.Writer.WriteLine(".version {0}.{1}", (int)Version / 10, (int)Version % 10);
                 ctx.Writer.Write(".target sm_{0}", (int)Target);
-                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) ctx.Writer.Write(", texmode_unified");
+//                if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == true) ctx.Writer.Write(", texmode_unified");
                 if (Version >= SoftwareIsa.PTX_15 && UnifiedTexturing == false) ctx.Writer.Write(", texmode_independent");
                 if (DowngradeDoubles) ctx.Writer.Write(", map_f64_to_f32");
                 ctx.Writer.WriteLine();

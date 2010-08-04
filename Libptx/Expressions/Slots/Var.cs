@@ -117,11 +117,11 @@ namespace Libptx.Expressions.Slots
                     if (_alignment != 0) writer.Write(".align " + Alignment + " ");
 
                     var t = Type.PeekRenderPtx();
-                    var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("[") - 1);
+                    var el = t.IndexOf("[") == -1 ? t : t.Slice(0, t.IndexOf("["));
                     var indices = t.IndexOf("[") == -1 ? null : t.Slice(t.IndexOf("["));
                     if (Init != null) indices = (Type.Dims ?? new int[0]).Count().Times("[]");
 
-                    writer.Write(".{0} {1}{2}", el, Name, indices);
+                    writer.Write("{0} {1}{2}", el, Name, indices);
                     if (Init != null) writer.Write(" = ");
                     if (Init != null) Init.RenderPtx();
                 }
