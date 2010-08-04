@@ -72,7 +72,7 @@ namespace Libptx.Common.Names
                     else throw AssertionHelper.Fail();
 
                     s_reg.is_arr().AssertFalse();
-                    return vec + basis;
+                    return vec + basis();
                 }
 
                 var s_var = s as Var;
