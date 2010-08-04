@@ -84,19 +84,25 @@ namespace Libptx.Common.Names
             };
 
             Func<int, String> gen = i => String.Format("%{0}{1}", prefix(), i);
-            return Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
+            var gend_name = Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
+            _names.Add(gend_name);
+            return gend_name;
         }
 
         public static String GenName(this Label lbl)
         {
             Func<int, String> gen = i => String.Format("%{0}{1}", "lbl", i);
-            return Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
+            var gend_name = Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
+            _names.Add(gend_name);
+            return gend_name;
         }
 
         public static String GenName(this Entry entry)
         {
             Func<int, String> gen = i => String.Format("%{0}{1}", "entry", i);
-            return Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
+            var gend_name = Seq.Nats.Skip(1).Select(gen).First(name => !_names.Contains(name));
+            _names.Add(gend_name);
+            return gend_name;
         }
     }
 }
