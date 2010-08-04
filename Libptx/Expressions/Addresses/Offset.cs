@@ -48,18 +48,23 @@ namespace Libptx.Expressions.Addresses
             if (Base != null)
             {
                 Base.RenderPtx();
-                writer.Write(" + ");
             }
 
-            if (int.MinValue <= Imm && Imm <= int.MaxValue)
+            var omit_imm = Base == null || (Base is Reg && Imm == 0);
+            if (!omit_imm)
             {
-                var proxy = new Const((int)Imm);
-                proxy.RenderPtx();
-            }
-            else
-            {
-                var proxy = new Const((long)Imm);
-                proxy.RenderPtx();
+                writer.Write(" + ");
+
+                if (int.MinValue <= Imm && Imm <= int.MaxValue)
+                {
+                    var proxy = new Const((int)Imm);
+                    proxy.RenderPtx();
+                }
+                else
+                {
+                    var proxy = new Const((long)Imm);
+                    proxy.RenderPtx();
+                }
             }
 
             writer.Write("]");

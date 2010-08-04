@@ -20,7 +20,7 @@ namespace Libptx.Reflection
         static Ptxops()
         {
             var libptx = typeof(ptxop).Assembly;
-            _ptxops = libptx.GetTypes().Where(t => t.BaseType == typeof(ptxop)).ToReadOnly();
+            _ptxops = libptx.GetTypes().Where(t => t.BaseType == typeof(ptxop)).OrderBy(t => t.Name).ToReadOnly();
             _sigs = _ptxops.ToDictionary(t => t, t => t.Attrs<PtxopAttribute>().Select(a => new PtxopSig(t, a)).ToReadOnly()).ToReadOnly();
         }
 

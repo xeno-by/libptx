@@ -19,7 +19,7 @@ namespace Libptx.Reflection
         static Sregs()
         {
             var libptx = typeof(Sreg).Assembly;
-            _sregs = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).ToReadOnly();
+            _sregs = libptx.GetTypes().Where(t => t.BaseType == typeof(Sreg)).OrderBy(t => t.Name).ToReadOnly();
             _sigs = _sregs.ToDictionary(t => t, t => new SregSig(t, t.Attr<SregAttribute>())).ToReadOnly();
         }
 
