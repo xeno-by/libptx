@@ -15,7 +15,7 @@ using XenoGears.Versioning;
 // [assembly: InternalsVisibleTo("")]
 
 [assembly: Guid("424DB145-36D6-410E-B7FE-CF25B3814117")]
-[assembly: AssemblyVersion("0.0.*")]
+[assembly: AssemblyVersion("0.0.0.0")]
 [assembly: AssemblyBuiltFrom(Repository = "$"CODEBASE"$", Revision = "$REVISION$", CodebaseHash = "$CODEHASH$")]
 [assembly: AssemblyBuiltAt(Timestamp = "$TIMESTAMP$")]
 [assembly: AssemblyBuiltBy(UserHash = "$USERHASH$")]

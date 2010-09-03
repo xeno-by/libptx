@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx.Edsl.Playground", "Libptx.Edsl.Playground\Libptx.Edsl.Playground.csproj", "{424DB145-36D6-410E-B7FE-CF25B3814117}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx.Edsl.TextGenerators", "Libptx.Edsl.TextGenerators\Libptx.Edsl.TextGenerators.csproj", "{023CB293-A9AF-49FF-9E5A-8C547630B1DA}"
@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx.Edsl", "Libptx.Edsl\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx", "..\Libptx\Libptx.csproj", "{6272D158-34F7-4DE1-907F-AFFD8E1E28F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears", "..\..\XenoGears\XenoGears\XenoGears.csproj", "{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears", "%XENOGEARS%\XenoGears\XenoGears.csproj", "{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears.Playground", "..\..\XenoGears\XenoGears.Playground\XenoGears.Playground.csproj", "{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenoGears.Playground", "%XENOGEARS%\XenoGears.Playground\XenoGears.Playground.csproj", "{7AE318A4-F8F5-4B18-B738-0E34B43C99D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libptx.Playground", "..\Libptx.Playground\Libptx.Playground.csproj", "{A724BB24-59B8-4B1F-966C-96ECA39899BD}"
 EndProject

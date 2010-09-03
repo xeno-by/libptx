@@ -12,10 +12,10 @@ using XenoGears.Versioning;
 [assembly: AssemblyCopyright("Copyright © 2010 xeno.by")]
 
 [assembly: ComVisible(false)]
-[assembly: InternalsVisibleTo("Libptx.Playground")]
+[assembly: InternalsVisibleTo("Libptx.Edsl.Playground, PublicKey=0024000004800000940000000602000000240000525341310004000001000100b1fdd70abf40c9b88a940b031c5cbdd6c6356b7a8e19276b569f9d48d817088cc9bd571b4fbff2da26c209315ec52588f0538eced6b917621bd037a0cb5d6779a43eb8ccba03fa4ffa83f09acad52ecbdb8349e228dcc0fdec56d59046e643ea326f8c491127ad2bb4a8afbdf4c227fba34f808ba6e00d9e479a74e7ee92b5ed")]
 
 [assembly: Guid("144A5193-0D5F-4561-96E2-313AB2A9FC25")]
-[assembly: AssemblyVersion("2.1.*")]
+[assembly: AssemblyVersion("2.1.0.0")]
 [assembly: AssemblyBuiltFrom(Repository = "$"CODEBASE"$", Revision = "$REVISION$", CodebaseHash = "$CODEHASH$")]
 [assembly: AssemblyBuiltAt(Timestamp = "$TIMESTAMP$")]
 [assembly: AssemblyBuiltBy(UserHash = "$USERHASH$")]
