@@ -27,7 +27,7 @@ cd Sources
 
 echo.
 echo ^>^>^>^>^> Downloading Libcuda sources from https://libcuda.googlecode.com/hg/
-hg clone https://libcuda.googlecode.com/hg/ Libcuda -r c85c5eeefa3c
+hg clone https://libcuda.googlecode.com/hg/ Libcuda -r 871c46d8400d
 if not exist Libcuda (
     echo [Fatal error] Failed to get Libcuda sources.
     pause
@@ -38,7 +38,7 @@ if not exist Libcuda (
 echo.
 echo ^>^>^>^>^> Building Libcuda...
 cd Libcuda\Libcuda
-"%WINDIR%\Microsoft.NET\Framework\v3.5\msbuild" /t:Rebuild /p:Configuration=%BUILDCONFIG%
+"%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild" /t:Rebuild /p:Configuration=%BUILDCONFIG%
 if not exist bin\%BUILDCONFIG%\Libcuda.dll (
     echo [Fatal error] Failed to build Libcuda.
     pause
