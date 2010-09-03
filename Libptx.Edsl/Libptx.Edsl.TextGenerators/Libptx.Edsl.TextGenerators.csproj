@@ -73,7 +73,7 @@
     <None Include="Properties\AssemblyInfo.template" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\XenoGears\XenoGears\XenoGears.csproj">
+    <ProjectReference Include="$(XENOGEARS)\XenoGears\XenoGears.csproj">
       <Project>{9435C2AB-D46A-481C-B485-BD74EFAE7D3E}</Project>
       <Name>XenoGears</Name>
     </ProjectReference>
