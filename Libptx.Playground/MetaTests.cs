@@ -54,8 +54,8 @@ namespace Libptx.Playground
             var ops = libptx.GetTypes().Where(t => t.BaseType == typeof(ptxop)).ToReadOnly();
 
             // assert-test #1: all ptxop annotations for given ptxop have the same version and target
-            var weirdos = ops.Where(op => op.Particles().Select(pcl => Tuple.New(pcl.Version, pcl.Target)).Distinct().Count() > 1);
-            weirdos.ForEach(Console.WriteLine);
+            var weirdos = ops.Where(op => op.Particles().Select(pcl => Tuple.Create(pcl.Version, pcl.Target)).Distinct().Count() > 1);
+            weirdos.ForEach(t => Console.WriteLine(t));
             weirdos.AssertEmpty();
 
             // assert-test #2: all type annotations are mandatory

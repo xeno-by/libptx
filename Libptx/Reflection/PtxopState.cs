@@ -48,7 +48,7 @@ namespace Libptx.Reflection
             Affixes = props.Where(p => p.HasAttr<AffixAttribute>()).ToOrderedDictionary(p => p, p => get_value(ptxop, p));
             Operands = props.Where(p => typeof(Expression).IsAssignableFrom(p.PropertyType)).ToOrderedDictionary(p => p, p => get_value(ptxop, p).AssertCast<Expression>());
             var destination = Operands.SingleOrDefault(kvp => kvp.Key.HasAttr<DestinationAttribute>());
-            if (destination.Key != null) Destination = Tuple.New(destination.Key, destination.Value);
+            if (destination.Key != null) Destination = Tuple.Create(destination.Key, destination.Value);
         }
     }
 }

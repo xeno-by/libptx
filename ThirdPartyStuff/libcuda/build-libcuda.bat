@@ -27,7 +27,7 @@ cd Sources
 
 echo.
 echo ^>^>^>^>^> Downloading Libcuda sources from https://libcuda.googlecode.com/hg/
-hg clone https://libcuda.googlecode.com/hg/ Libcuda -r 6fb7d04de2dc
+hg clone https://libcuda.googlecode.com/hg/ Libcuda -r ad775b034cc4
 if not exist Libcuda (
     echo [Fatal error] Failed to get Libcuda sources.
     pause
